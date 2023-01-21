@@ -2981,7 +2981,7 @@ enable_annotations
 
 **type**: ``boolean`` **default**: ``true``
 
-If this option is enabled, serialization groups can be defined using annotations or attributes.
+Enables support for annotations or attributes in the serializer component.
 
 .. deprecated:: 6.4
 
@@ -2993,11 +2993,11 @@ enable_attributes
 
 **type**: ``boolean`` **default**: ``true``
 
-If this option is enabled, serialization groups can be defined using `PHP attributes`_.
+Enables support for `PHP attributes`_ in the serializer component.
 
 .. seealso::
 
-    For more information, see :ref:`serializer-using-serialization-groups-attributes`.
+    See :ref:`the reference <reference-attributes-serializer>` for a list of supported annotations.
 
 .. _reference-serializer-name_converter:
 
@@ -3013,8 +3013,7 @@ value.
 
 .. seealso::
 
-    For more information, see
-    :ref:`component-serializer-converting-property-names-when-serializing-and-deserializing`.
+    For more information, see :ref:`serializer-name-conversion`.
 
 .. _reference-serializer-circular_reference_handler:
 
