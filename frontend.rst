@@ -34,10 +34,10 @@ Supports `Stimulus/UX`_           yes                                 yes
 Supports Sass/Tailwind            :ref:`yes <asset-mapper-tailwind>`  yes
 Supports React, Vue, Svelte?      yes :ref:`[1] <ux-note-1>`          yes
 Supports TypeScript               :ref:`yes <asset-mapper-ts>`        yes
-Removes comments from JavaScript  no                                  yes
-Removes comments from CSS         no                                  no
+Removes comments from JavaScript  no :ref:`[2] <ux-note-2>`           yes
+Removes comments from CSS         no :ref:`[2] <ux-note-2>`           no
 Versioned assets                  always                              optional
-Can update 3rd party packages     yes                                 no :ref:`[2] <ux-note-2>`
+Can update 3rd party packages     yes                                 no :ref:`[3] <ux-note-2>`
 ================================  ==================================  ==========
 
 .. _ux-note-1:
@@ -49,7 +49,12 @@ be executed by a browser.
 
 .. _ux-note-2:
 
-**[2]** If you use ``npm``, there are update checkers available (e.g. ``npm-check``).
+**[2]** You can install the `SensioLabs Minify Bundle`_ to minify CSS/JS code
+(and remove all comments) when compiling assets with AssetMapper.
+
+.. _ux-note-3:
+
+**[3]** If you use ``npm``, there are update checkers available (e.g. ``npm-check``).
 
 .. _frontend-asset-mapper:
 
@@ -137,3 +142,4 @@ Other Front-End Articles
 .. _`Turbo`: https://turbo.hotwired.dev/
 .. _`Symfony UX`: https://ux.symfony.com
 .. _`API Platform`: https://api-platform.com/
+.. _`SensioLabs Minify Bundle`: https://github.com/sensiolabs/minify-bundle
