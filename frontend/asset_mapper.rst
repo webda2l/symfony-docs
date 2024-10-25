@@ -722,9 +722,16 @@ See :ref:`Optimization <optimization>` for more details.
 Does the AssetMapper Component Minify Assets?
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
-Nope! Minifying or compressing assets *is* important, but can be
-done by your web server. See :ref:`Optimization <optimization>` for
-more details.
+Nope! In most cases, this is perfectly fine. The web asset compression performed
+by web servers before sending them is usually sufficient. However, if you think
+you could benefit from minifying assets (in addition to later compressing them),
+you can use the `SensioLabs Minify Bundle`_.
+
+This bundle integrates seamlessly with AssetMapper and minifies all web assets
+automatically when running the ``asset-map:compile`` command (as explained in
+the :ref:`serving assets in production <asset-mapper-compile-assets>` section).
+
+See :ref:`Optimization <optimization>` for more details.
 
 Is the AssetMapper Component Production Ready? Is it Performant?
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
@@ -1166,3 +1173,4 @@ command as part of your CI to be warned anytime a new vulnerability is found.
 .. _Content Security Policy: https://developer.mozilla.org/en-US/docs/Web/HTTP/CSP
 .. _NelmioSecurityBundle: https://symfony.com/bundles/NelmioSecurityBundle/current/index.html#nonce-for-inline-script-handling
 .. _kocal/biome-js-bundle: https://github.com/Kocal/BiomeJsBundle
+.. _`SensioLabs Minify Bundle`: https://github.com/sensiolabs/minify-bundle
