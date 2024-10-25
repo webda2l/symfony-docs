@@ -29,7 +29,7 @@ a few good reasons to start creating your own framework:
 * To refactor an old/existing application that needs a good dose of recent web
   development best practices;
 
-* To prove the world that you can actually create a framework on your own (...
+* To prove to the world that you can actually create a framework on your own (...
   but with little effort).
 
 This tutorial will gently guide you through the creation of a web framework,
