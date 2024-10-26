@@ -37,7 +37,7 @@ Supports TypeScript               :ref:`yes <asset-mapper-ts>`        yes
 Removes comments from JavaScript  no :ref:`[2] <ux-note-2>`           yes
 Removes comments from CSS         no :ref:`[2] <ux-note-2>`           no
 Versioned assets                  always                              optional
-Can update 3rd party packages     yes                                 no :ref:`[3] <ux-note-2>`
+Can update 3rd party packages     yes                                 no :ref:`[3] <ux-note-3>`
 ================================  ==================================  ==========
 
 .. _ux-note-1:
