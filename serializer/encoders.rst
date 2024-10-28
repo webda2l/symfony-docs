@@ -205,11 +205,16 @@ These are the options available on the :ref:`serializer context <serializer-cont
 ``cdata_wrapping_pattern`` (default: ````/[<>&]/````)
     A regular expression pattern to determine if a value should be wrapped
     in a CDATA section.
+``ignore_empty_attributes`` (default: ``false``)
+    If set to true, ignores all attributes with empty values in the generated XML
 
 .. versionadded:: 7.1
 
     The ``cdata_wrapping_pattern`` option was introduced in Symfony 7.1.
 
+.. versionadded:: 7.3
+
+    The ``ignore_empty_attributes`` option was introduced in Symfony 7.3.
 
 Example with a custom ``context``::
 
