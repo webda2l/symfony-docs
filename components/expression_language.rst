@@ -93,7 +93,8 @@ The :method:`Symfony\\Component\\ExpressionLanguage\\ExpressionLanguage::parse`
 method returns a :class:`Symfony\\Component\\ExpressionLanguage\\ParsedExpression`
 instance that can be used to inspect and manipulate the expression. The
 :method:`Symfony\\Component\\ExpressionLanguage\\ExpressionLanguage::lint`, on the
-other hand, throws a :class:`Symfony\\Component\\ExpressionLanguage\\SyntaxError` if the expression is not valid::
+other hand, throws a :class:`Symfony\\Component\\ExpressionLanguage\\SyntaxError`
+if the expression is not valid::
 
     use Symfony\Component\ExpressionLanguage\ExpressionLanguage;
 
