@@ -93,7 +93,8 @@ The :method:`Symfony\\Component\\ExpressionLanguage\\ExpressionLanguage::parse`
 method returns a :class:`Symfony\\Component\\ExpressionLanguage\\ParsedExpression`
 instance that can be used to inspect and manipulate the expression. The
 :method:`Symfony\\Component\\ExpressionLanguage\\ExpressionLanguage::lint`, on the
-other hand, returns a boolean indicating if the expression is valid or not::
+other hand, throws a :class:`Symfony\\Component\\ExpressionLanguage\\SyntaxError`
+if the expression is not valid::
 
     use Symfony\Component\ExpressionLanguage\ExpressionLanguage;
 
@@ -103,7 +104,7 @@ other hand, returns a boolean indicating if the expression is valid or not::
     // displays the AST nodes of the expression which can be
     // inspected and manipulated
 
-    var_dump($expressionLanguage->lint('1 + 2', [])); // displays true
+    $expressionLanguage->lint('1 + 2', []); // doesn't throw anything
 
 The behavior of these methods can be configured with some flags defined in the
 :class:`Symfony\\Component\\ExpressionLanguage\\Parser` class:
