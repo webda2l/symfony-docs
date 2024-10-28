@@ -106,6 +106,10 @@ if the expression is not valid::
 
     $expressionLanguage->lint('1 + 2', []); // doesn't throw anything
 
+    $expressionLanguage->lint('1 + a', []);
+    // Throw SyntaxError Exception
+    // "Variable "a" is not valid around position 5 for expression `1 + a`."
+
 The behavior of these methods can be configured with some flags defined in the
 :class:`Symfony\\Component\\ExpressionLanguage\\Parser` class:
 
@@ -121,8 +125,8 @@ This is how you can use these flags::
 
     $expressionLanguage = new ExpressionLanguage();
 
-    // this returns true because the unknown variables and functions are ignored
-    var_dump($expressionLanguage->lint('unknown_var + unknown_function()', Parser::IGNORE_UNKNOWN_VARIABLES | Parser::IGNORE_UNKNOWN_FUNCTIONS));
+    // Does not throw a SyntaxError because the unknown variables and functions are ignored
+    $expressionLanguage->lint('unknown_var + unknown_function()', [], Parser::IGNORE_UNKNOWN_VARIABLES | Parser::IGNORE_UNKNOWN_FUNCTIONS);
 
 .. versionadded:: 7.1
 
