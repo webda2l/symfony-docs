@@ -467,24 +467,23 @@ The ``translation:extract`` command looks for missing translations in:
 
         $ composer require nikic/php-parser
 
-By default, the ``translation:extract`` command extracts new messages in
-*message/translation* pairs, with the translation populated with the same
-text as the message, prefixed by ``__``. You can customize this prefix using
-the ``--prefix`` option.
-
-If you want to leave new translations empty, use the ``--no-fill`` option.
-When enabled, only messages are created, and the translation strings are left
-empty. This is particularly useful when using external translation tools, as
-it ensures untranslated strings are easily identifiable without any pre-filled
-content. Note that when ``--no-fill`` is used, the ``--prefix`` option has
-no effect.
+By default, when the ``translation:extract`` command creates new entries in the
+trnaslation file, it uses the same content as both the source and the pending
+translation. The only difference is that the pending translation is prefixed by
+``__``. You can customize this prefix using the ``--prefix`` option:
 
 .. code-block:: terminal
 
-    # changes default prefix
     $ php bin/console translation:extract --force --prefix="NEW_" fr
 
-    # leaves new translations empty
+Alternatively, you can use the ``--no-fill`` option to leave the pending translation
+completely empty when creating new entries in the translation catalog. This is
+particularly useful when using external translation tools, as it makes it easier
+to spot untranslated strings:
+
+.. code-block:: terminal
+
+    # when using the --no-fill option, the --prefix option is ignored
     $ php bin/console translation:extract --force --no-fill fr
 
 .. versionadded:: 7.2
@@ -492,7 +491,6 @@ no effect.
     The ``--no-fill`` option was introduced in Symfony 7.2.
 
 .. _translation-resource-locations:
-
 
 Translation Resource/File Names and Locations
 ---------------------------------------------
