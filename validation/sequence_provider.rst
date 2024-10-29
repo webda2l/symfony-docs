@@ -360,15 +360,15 @@ entity, and even register the group provider as a service.
 
 Here's how you can achieve this:
 
- 1) **Define a Separate Group Provider Class:** create a class that implements
-    the :class:`Symfony\\Component\\Validator\\GroupProviderInterface`
-    and handles the dynamic group sequence logic;
- 2) **Configure the User with the Provider:** use the ``provider`` option within
-    the :class:`Symfony\\Component\\Validator\\Constraints\\GroupSequenceProvider`
-    attribute to link the entity with the provider class;
- 3) **Autowiring or Manual Tagging:** if :doc:` autowiring </service_container/autowiring>`
-    is enabled, your custom provider will be automatically linked. Otherwise, you must
-    :doc:`tag your service </service_container/tags>` manually with the ``validator.group_provider`` tag.
+#. **Define a Separate Group Provider Class:** create a class that implements
+   the :class:`Symfony\\Component\\Validator\\GroupProviderInterface`
+   and handles the dynamic group sequence logic;
+#. **Configure the User with the Provider:** use the ``provider`` option within
+   the :class:`Symfony\\Component\\Validator\\Constraints\\GroupSequenceProvider`
+   attribute to link the entity with the provider class;
+#. **Autowiring or Manual Tagging:** if :doc:` autowiring </service_container/autowiring>`
+   is enabled, your custom provider will be automatically linked. Otherwise, you must
+   :doc:`tag your service </service_container/tags>` manually with the ``validator.group_provider`` tag.
 
 .. configuration-block::
 
