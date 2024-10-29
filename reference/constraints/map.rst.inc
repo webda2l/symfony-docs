@@ -4,53 +4,60 @@ Basic Constraints
 These are the basic constraints: use them to assert very basic things about
 the value of properties or the return value of methods on your object.
 
-* :doc:`NotBlank </reference/constraints/NotBlank>`
+.. class:: ui-list-two-columns
+
 * :doc:`Blank </reference/constraints/Blank>`
-* :doc:`NotNull </reference/constraints/NotNull>`
+* :doc:`IsFalse </reference/constraints/IsFalse>`
 * :doc:`IsNull </reference/constraints/IsNull>`
 * :doc:`IsTrue </reference/constraints/IsTrue>`
-* :doc:`IsFalse </reference/constraints/IsFalse>`
+* :doc:`NotBlank </reference/constraints/NotBlank>`
+* :doc:`NotNull </reference/constraints/NotNull>`
 * :doc:`Type </reference/constraints/Type>`
 
 String Constraints
 ~~~~~~~~~~~~~~~~~~
 
+.. class:: ui-list-three-columns
+
+* :doc:`Cidr </reference/constraints/Cidr>`
+* :doc:`CssColor </reference/constraints/CssColor>`
 * :doc:`Email </reference/constraints/Email>`
 * :doc:`ExpressionLanguageSyntax </reference/constraints/ExpressionLanguageSyntax>`
-* :doc:`Length </reference/constraints/Length>`
-* :doc:`Url </reference/constraints/Url>`
-* :doc:`Regex </reference/constraints/Regex>`
 * :doc:`Hostname </reference/constraints/Hostname>`
 * :doc:`Ip </reference/constraints/Ip>`
-* :doc:`Cidr </reference/constraints/Cidr>`
 * :doc:`Json </reference/constraints/Json>`
-* :doc:`Uuid </reference/constraints/Uuid>`
-* :doc:`Ulid </reference/constraints/Ulid>`
-* :doc:`UserPassword </reference/constraints/UserPassword>`
+* :doc:`Length </reference/constraints/Length>`
 * :doc:`NotCompromisedPassword </reference/constraints/NotCompromisedPassword>`
-* :doc:`CssColor </reference/constraints/CssColor>`
+* :doc:`Regex </reference/constraints/Regex>`
+* :doc:`Ulid </reference/constraints/Ulid>`
+* :doc:`Url </reference/constraints/Url>`
+* :doc:`UserPassword </reference/constraints/UserPassword>`
+* :doc:`Uuid </reference/constraints/Uuid>`
 
 Comparison Constraints
 ~~~~~~~~~~~~~~~~~~~~~~
 
+.. class:: ui-list-three-columns
+
+* :doc:`DivisibleBy </reference/constraints/DivisibleBy>`
 * :doc:`EqualTo </reference/constraints/EqualTo>`
-* :doc:`NotEqualTo </reference/constraints/NotEqualTo>`
-* :doc:`IdenticalTo </reference/constraints/IdenticalTo>`
-* :doc:`NotIdenticalTo </reference/constraints/NotIdenticalTo>`
-* :doc:`LessThan </reference/constraints/LessThan>`
-* :doc:`LessThanOrEqual </reference/constraints/LessThanOrEqual>`
 * :doc:`GreaterThan </reference/constraints/GreaterThan>`
 * :doc:`GreaterThanOrEqual </reference/constraints/GreaterThanOrEqual>`
+* :doc:`IdenticalTo </reference/constraints/IdenticalTo>`
+* :doc:`LessThan </reference/constraints/LessThan>`
+* :doc:`LessThanOrEqual </reference/constraints/LessThanOrEqual>`
+* :doc:`NotEqualTo </reference/constraints/NotEqualTo>`
+* :doc:`NotIdenticalTo </reference/constraints/NotIdenticalTo>`
 * :doc:`Range </reference/constraints/Range>`
-* :doc:`DivisibleBy </reference/constraints/DivisibleBy>`
 * :doc:`Unique </reference/constraints/Unique>`
 
 Number Constraints
 ~~~~~~~~~~~~~~~~~~
-* :doc:`Positive </reference/constraints/Positive>`
-* :doc:`PositiveOrZero </reference/constraints/PositiveOrZero>`
+
 * :doc:`Negative </reference/constraints/Negative>`
 * :doc:`NegativeOrZero </reference/constraints/NegativeOrZero>`
+* :doc:`Positive </reference/constraints/Positive>`
+* :doc:`PositiveOrZero </reference/constraints/PositiveOrZero>`
 
 Date Constraints
 ~~~~~~~~~~~~~~~~
@@ -64,9 +71,9 @@ Choice Constraints
 ~~~~~~~~~~~~~~~~~~
 
 * :doc:`Choice </reference/constraints/Choice>`
+* :doc:`Country </reference/constraints/Country>`
 * :doc:`Language </reference/constraints/Language>`
 * :doc:`Locale </reference/constraints/Locale>`
-* :doc:`Country </reference/constraints/Country>`
 
 File Constraints
 ~~~~~~~~~~~~~~~~
@@ -77,33 +84,38 @@ File Constraints
 Financial and other Number Constraints
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
+.. class:: ui-list-two-columns
+
 * :doc:`Bic </reference/constraints/Bic>`
 * :doc:`CardScheme </reference/constraints/CardScheme>`
 * :doc:`Currency </reference/constraints/Currency>`
-* :doc:`Luhn </reference/constraints/Luhn>`
 * :doc:`Iban </reference/constraints/Iban>`
 * :doc:`Isbn </reference/constraints/Isbn>`
-* :doc:`Issn </reference/constraints/Issn>`
 * :doc:`Isin </reference/constraints/Isin>`
+* :doc:`Issn </reference/constraints/Issn>`
+* :doc:`Luhn </reference/constraints/Luhn>`
 
 Doctrine Constraints
 ~~~~~~~~~~~~~~~~~~~~
 
-* :doc:`UniqueEntity </reference/constraints/UniqueEntity>`
-* :doc:`EnableAutoMapping </reference/constraints/EnableAutoMapping>`
 * :doc:`DisableAutoMapping </reference/constraints/DisableAutoMapping>`
+* :doc:`EnableAutoMapping </reference/constraints/EnableAutoMapping>`
+* :doc:`UniqueEntity </reference/constraints/UniqueEntity>`
 
 Other Constraints
 ~~~~~~~~~~~~~~~~~
 
-* :doc:`AtLeastOneOf </reference/constraints/AtLeastOneOf>`
-* :doc:`Sequentially </reference/constraints/Sequentially>`
-* :doc:`Compound </reference/constraints/Compound>`
-* :doc:`Callback </reference/constraints/Callback>`
-* :doc:`Expression </reference/constraints/Expression>`
+.. class:: ui-list-three-columns
+
 * :doc:`All </reference/constraints/All>`
-* :doc:`Valid </reference/constraints/Valid>`
+* :doc:`AtLeastOneOf </reference/constraints/AtLeastOneOf>`
+* :doc:`Callback </reference/constraints/Callback>`
 * :doc:`Cascade </reference/constraints/Cascade>`
-* :doc:`Traverse </reference/constraints/Traverse>`
 * :doc:`Collection </reference/constraints/Collection>`
+* :doc:`Compound </reference/constraints/Compound>`
 * :doc:`Count </reference/constraints/Count>`
+* :doc:`Expression </reference/constraints/Expression>`
+* :doc:`GroupSequence </validation/sequence_provider>`
+* :doc:`Sequentially </reference/constraints/Sequentially>`
+* :doc:`Traverse </reference/constraints/Traverse>`
+* :doc:`Valid </reference/constraints/Valid>`
