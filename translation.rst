@@ -468,7 +468,7 @@ The ``translation:extract`` command looks for missing translations in:
         $ composer require nikic/php-parser
 
 By default, when the ``translation:extract`` command creates new entries in the
-trnaslation file, it uses the same content as both the source and the pending
+translation file, it uses the same content as both the source and the pending
 translation. The only difference is that the pending translation is prefixed by
 ``__``. You can customize this prefix using the ``--prefix`` option:
 
