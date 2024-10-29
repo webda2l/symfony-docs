@@ -9,7 +9,7 @@ this safely by running:
 
     $ composer update
 
-.. caution::
+.. warning::
 
     Beware, if you have some unspecific `version constraints`_ in your
     ``composer.json`` (e.g. ``dev-master``), this could upgrade some

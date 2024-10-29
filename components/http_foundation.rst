@@ -367,11 +367,13 @@ of the ``anonymize()`` method to specify the number of bytes that should be
 anonymized depending on the IP address format::
 
     $ipv4 = '123.234.235.236';
-    $anonymousIpv4 = IpUtils::anonymize($ipv4, v4Bytes: 3);
+    $anonymousIpv4 = IpUtils::anonymize($ipv4, 3);
     // $anonymousIpv4 = '123.0.0.0'
 
     $ipv6 = '2a01:198:603:10:396e:4789:8e99:890f';
-    $anonymousIpv6 = IpUtils::anonymize($ipv6, v6Bytes: 10);
+    // (you must define the second argument (bytes to anonymize in IPv4 addresses)
+    // even when you are only anonymizing IPv6 addresses)
+    $anonymousIpv6 = IpUtils::anonymize($ipv6, 3, 10);
     // $anonymousIpv6 = '2a01:198:603::'
 
 .. versionadded:: 7.2
@@ -679,8 +681,19 @@ Streaming a Response
 ~~~~~~~~~~~~~~~~~~~~
 
 The :class:`Symfony\\Component\\HttpFoundation\\StreamedResponse` class allows
-you to stream the Response back to the client. The response content is
-represented by a PHP callable instead of a string::
+you to stream the Response back to the client. The response content can be
+represented by a string iterable::
+
+    use Symfony\Component\HttpFoundation\StreamedResponse;
+
+    $chunks = ['Hello', ' World'];
+
+    $response = new StreamedResponse();
+    $response->setChunks($chunks);
+    $response->send();
+
+For most complex use cases, the response content can be instead represented by
+a PHP callable::
 
     use Symfony\Component\HttpFoundation\StreamedResponse;
 
@@ -707,6 +720,10 @@ represented by a PHP callable instead of a string::
 
         // disables FastCGI buffering in nginx only for this response
         $response->headers->set('X-Accel-Buffering', 'no');
+
+.. versionadded:: 7.3
+
+    Support for using string iterables was introduced in Symfony 7.3.
 
 Streaming a JSON Response
 ~~~~~~~~~~~~~~~~~~~~~~~~~

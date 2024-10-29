@@ -335,7 +335,7 @@ controller.argument_value_resolver
 Value resolvers implement the
 :class:`Symfony\\Component\\HttpKernel\\Controller\\ValueResolverInterface`
 and are used to resolve argument values for controllers as described here:
-:doc:`/controller/argument_value_resolver`.
+:doc:`/controller/value_resolver`.
 
 data_collector
 --------------
@@ -560,7 +560,7 @@ can also register it manually:
     that defaults to ``0``. The higher the number, the earlier that warmers are
     executed.
 
-.. caution::
+.. warning::
 
     If your cache warmer fails its execution because of any exception, Symfony
     won't try to execute it again for the next requests. Therefore, your

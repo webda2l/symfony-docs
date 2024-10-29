@@ -41,7 +41,7 @@ The ``$file`` variable is an instance of
 :class:`Symfony\\Component\\Finder\\SplFileInfo` which extends PHP's own
 :phpclass:`SplFileInfo` to provide methods to work with relative paths.
 
-.. caution::
+.. warning::
 
     The ``Finder`` object doesn't reset its internal state automatically.
     This means that you need to create a new instance if you do not want

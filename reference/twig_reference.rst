@@ -130,8 +130,10 @@ asset_version
 
 .. code-block:: twig
 
-    {{ asset_version(packageName = null) }}
+    {{ asset_version(path, packageName = null) }}
 
+``path``
+    **type**: ``string``
 ``packageName`` *(optional)*
     **type**: ``string`` | ``null`` **default**: ``null``
 
@@ -158,16 +160,37 @@ is_granted
 
 .. code-block:: twig
 
-    {{ is_granted(role, object = null, field = null) }}
+    {{ is_granted(role, object = null) }}
 
 ``role``
     **type**: ``string``
 ``object`` *(optional)*
     **type**: ``object``
-``field`` *(optional)*
-    **type**: ``string``
 
 Returns ``true`` if the current user has the given role.
+
+Optionally, an object can be passed to be used by the voter. More information
+can be found in :ref:`security-template`.
+
+is_granted_for_user
+~~~~~~~~~~~~~~~~~~~
+
+.. versionadded:: 7.3
+
+    The ``is_granted_for_user()`` function was introduced in Symfony 7.3.
+
+.. code-block:: twig
+
+    {{ is_granted_for_user(user, attribute, subject = null) }}
+
+``user``
+    **type**: ``object``
+``attribute``
+    **type**: ``string``
+``subject`` *(optional)*
+    **type**: ``object``
+
+Returns ``true`` if the user is authorized for the specified attribute.
 
 Optionally, an object can be passed to be used by the voter. More information
 can be found in :ref:`security-template`.
@@ -700,6 +723,8 @@ project's root directory:
 
 If the given file path is out of the project directory, a ``null`` value
 will be returned.
+
+.. _reference-twig-filter-serialize:
 
 serialize
 ~~~~~~~~~

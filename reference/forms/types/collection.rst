@@ -99,7 +99,7 @@ can be used - with JavaScript - to create new form items dynamically on
 the client side. For more information, see the above example and
 :ref:`form-collections-new-prototype`.
 
-.. caution::
+.. warning::
 
     If you're embedding entire other forms to reflect a one-to-many database
     relationship, you may need to manually ensure that the foreign key of
@@ -119,7 +119,7 @@ submitted data will mean that it's removed from the final array.
 
 For more information, see :ref:`form-collections-remove`.
 
-.. caution::
+.. warning::
 
     Be careful when using this option when you're embedding a collection
     of objects. In this case, if any embedded forms are removed, they *will*
@@ -139,7 +139,7 @@ form you have to set this option to ``true``. However, existing collection entri
 will only be deleted if you have the allow_delete_ option enabled. Otherwise
 the empty values will be kept.
 
-.. caution::
+.. warning::
 
     The ``delete_empty`` option only removes items when the normalized value is
     ``null``. If the nested `entry_type`_ is a compound form type, you must

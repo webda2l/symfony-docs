@@ -129,18 +129,18 @@ is expired or not, by modifying the clock's time::
             $validUntil = new DateTimeImmutable('2022-11-16 15:25:00');
 
             // $validUntil is in the future, so it is not expired
-            static::assertFalse($expirationChecker->isExpired($validUntil));
+            $this->assertFalse($expirationChecker->isExpired($validUntil));
 
             // Clock sleeps for 10 minutes, so now is '2022-11-16 15:30:00'
             $clock->sleep(600); // Instantly changes time as if we waited for 10 minutes (600 seconds)
 
             // modify the clock, accepts all formats supported by DateTimeImmutable::modify()
-            static::assertTrue($expirationChecker->isExpired($validUntil));
+            $this->assertTrue($expirationChecker->isExpired($validUntil));
 
             $clock->modify('2022-11-16 15:00:00');
 
             // $validUntil is in the future again, so it is no longer expired
-            static::assertFalse($expirationChecker->isExpired($validUntil));
+            $this->assertFalse($expirationChecker->isExpired($validUntil));
         }
     }
 

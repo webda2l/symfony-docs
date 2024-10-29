@@ -121,7 +121,7 @@ but here's a short example::
     submitted data is validated using the ``Symfony\Component\Validator\Constraints\Valid``
     constraint, unless you :doc:`disable validation </form/disabling_validation>`.
 
-.. caution::
+.. warning::
 
     When a form is only partially submitted (for example, in an HTTP PATCH
     request), only the constraints from the submitted form fields will be

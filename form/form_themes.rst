@@ -177,7 +177,7 @@ of form themes:
 
     {# ... #}
 
-.. caution::
+.. warning::
 
     When using the ``only`` keyword, none of Symfony's built-in form themes
     (``form_div_layout.html.twig``, etc.) will be applied. In order to render

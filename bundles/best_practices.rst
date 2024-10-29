@@ -246,7 +246,7 @@ with Symfony Flex to install a specific Symfony version:
     # recommended to have a better output and faster download time)
     composer update --prefer-dist --no-progress
 
-.. caution::
+.. warning::
 
     If you want to cache your Composer dependencies, **do not** cache the
     ``vendor/`` directory as this has side-effects. Instead cache

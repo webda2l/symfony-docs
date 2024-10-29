@@ -33,8 +33,14 @@ The notifier component supports the following channels:
   services like Slack and Telegram;
 * :ref:`Email channel <notifier-email-channel>` integrates the :doc:`Symfony Mailer </mailer>`;
 * Browser channel uses :ref:`flash messages <flash-messages>`.
-* :ref:`Push channel <notifier-push-channel>` sends notifications to phones and browsers via push notifications.
-* :ref:`Desktop channel <notifier-desktop-channel>` displays desktop notifications on the same host machine.
+* :ref:`Push channel <notifier-push-channel>` sends notifications to phones and
+  browsers via push notifications.
+* :ref:`Desktop channel <notifier-desktop-channel>` displays desktop notifications
+  on the same host machine.
+
+.. versionadded:: 7.2
+
+    The ``Desktop`` channel was introduced in Symfony 7.2.
 
 .. _notifier-sms-channel:
 
@@ -46,7 +52,7 @@ to send SMS messages to mobile phones. This feature requires subscribing to
 a third-party service that sends SMS messages. Symfony provides integration
 with a couple popular SMS services:
 
-.. caution::
+.. warning::
 
     If any of the DSN values contains any character considered special in a
     URI (such as ``: / ? # [ ] @ ! $ & ' ( ) * + , ; =``), you must
@@ -70,7 +76,7 @@ Service
                     **Webhook support**: No
 `Brevo`_            **Install**: ``composer require symfony/brevo-notifier`` \
                     **DSN**: ``brevo://API_KEY@default?sender=SENDER`` \
-                    **Webhook support**: No
+                    **Webhook support**: Yes
 `Clickatell`_       **Install**: ``composer require symfony/clickatell-notifier`` \
                     **DSN**: ``clickatell://ACCESS_TOKEN@default?from=FROM`` \
                     **Webhook support**: No
@@ -230,6 +236,10 @@ Service
 
     The ``Primotexto``, ``Sipgate`` and ``Sweego`` integrations were introduced in Symfony 7.2.
 
+.. versionadded:: 7.3
+
+    Webhook support for the ``Brevo`` integration was introduced in Symfony 7.3.
+
 .. deprecated:: 7.1
 
     The `Sms77`_ integration is deprecated since
@@ -333,7 +343,7 @@ information such as the message ID and the original message contents.
 Chat Channel
 ~~~~~~~~~~~~
 
-.. caution::
+.. warning::
 
     If any of the DSN values contains any character considered special in a
     URI (such as ``: / ? # [ ] @ ! $ & ' ( ) * + , ; =``), you must
@@ -382,7 +392,7 @@ Service                                  Package                               D
     The ``Gitter`` integration was removed in Symfony 7.2 because that service
     no longer provides an API.
 
-.. caution::
+.. warning::
 
     By default, if you have the :doc:`Messenger component </messenger>` installed,
     the notifications will be sent through the MessageBus. If you don't have a
@@ -552,7 +562,7 @@ notification emails:
 Push Channel
 ~~~~~~~~~~~~
 
-.. caution::
+.. warning::
 
     If any of the DSN values contains any character considered special in a
     URI (such as ``: / ? # [ ] @ ! $ & ' ( ) * + , ; =``), you must
@@ -635,9 +645,9 @@ configure the ``texter_transports``:
 Desktop Channel
 ~~~~~~~~~~~~~~~
 
-The desktop channel is used to display desktop notifications on the same host machine using
-:class:`Symfony\\Component\\Notifier\\Texter` classes. Currently, Symfony
-is integrated with the following providers:
+The desktop channel is used to display local desktop notifications on the same
+host machine using :class:`Symfony\\Component\\Notifier\\Texter` classes. Currently,
+Symfony is integrated with the following providers:
 
 ===============  ====================================  ==============================================================================
 Provider         Package                               DSN
@@ -645,17 +655,22 @@ Provider         Package                               DSN
 `JoliNotif`_     ``symfony/joli-notif-notifier``       ``jolinotif://default``
 ===============  ====================================  ==============================================================================
 
-.. versionadded: 7.2
+.. versionadded:: 7.2
 
     The JoliNotif bridge was introduced in Symfony 7.2.
 
-To enable a texter, add the correct DSN in your ``.env`` file and
-configure the ``texter_transports``:
+If you are using :ref:`Symfony Flex <symfony-flex>`, installing that package will
+also create the necessary environment variable and configuration. Otherwise, you'll
+need to add the following manually:
+
+1) Add the correct DSN in your ``.env`` file:
 
 .. code-block:: bash
 
     # .env
     JOLINOTIF=jolinotif://default
+
+2) Update the Notifier configuration to add a new texter transport:
 
 .. configuration-block::
 
@@ -699,9 +714,49 @@ configure the ``texter_transports``:
             ;
         };
 
-.. versionadded:: 7.2
+Now you can send notifications to your desktop as follows::
 
-    The ``Desktop`` channel was introduced in Symfony 7.2.
+    // src/Notifier/SomeService.php
+    use Symfony\Component\Notifier\Message\DesktopMessage;
+    use Symfony\Component\Notifier\TexterInterface;
+    // ...
+
+    class SomeService
+    {
+        public function __construct(
+            private TexterInterface $texter,
+        ) {
+        }
+
+        public function notifyNewSubscriber(User $user): void
+        {
+            $message = new DesktopMessage(
+                'New subscription! 🎉',
+                sprintf('%s is a new subscriber', $user->getFullName())
+            );
+
+            $texter->send($message);
+        }
+    }
+
+These notifications can be customized further, and depending on your operating system,
+they may support features like custom sounds, icons, and more::
+
+    use Symfony\Component\Notifier\Bridge\JoliNotif\JoliNotifOptions;
+    // ...
+
+    $options = (new JoliNotifOptions())
+        ->setIconPath('/path/to/icons/error.png')
+        ->setExtraOption('sound', 'sosumi')
+        ->setExtraOption('url', 'https://example.com');
+
+    $message = new DesktopMessage('Production is down', <<<CONTENT
+        ❌ Server prod-1 down
+        ❌ Server prod-2 down
+        ✅ Network is up
+        CONTENT, $options);
+
+    $texter->send($message);
 
 Configure to use Failover or Round-Robin Transports
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~

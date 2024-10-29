@@ -61,7 +61,7 @@ over SMTP by configuring the DSN in your ``.env`` file (the ``user``,
             $framework->mailer()->dsn(env('MAILER_DSN'));
         };
 
-.. caution::
+.. warning::
 
     If the username, password or host contain any character considered special in a
     URI (such as ``: / ? # [ ] @ ! $ & ' ( ) * + , ; =``), you must
@@ -82,7 +82,7 @@ native        ``native://default``                      Mailer uses the sendmail
                                                         ``php.ini`` settings when ``sendmail_path`` is not configured.
 ============  ========================================  ==============================================================
 
-.. caution::
+.. warning::
 
     When using ``native://default``, if ``php.ini`` uses the ``sendmail -t``
     command, you won't have error reporting and ``Bcc`` headers won't be removed.
@@ -100,6 +100,7 @@ via a third-party provider:
 ===================== =============================================== ===============
 Service               Install with                                    Webhook support
 ===================== =============================================== ===============
+`AhaSend`_            ``composer require symfony/aha-send-mailer``    yes
 `Amazon SES`_         ``composer require symfony/amazon-mailer``
 `Azure`_              ``composer require symfony/azure-mailer``
 `Brevo`_              ``composer require symfony/brevo-mailer``       yes
@@ -108,7 +109,7 @@ Service               Install with                                    Webhook su
 `Mailjet`_            ``composer require symfony/mailjet-mailer``     yes
 `Mailomat`_           ``composer require symfony/mailomat-mailer``    yes
 `MailPace`_           ``composer require symfony/mail-pace-mailer``
-`MailerSend`_         ``composer require symfony/mailer-send-mailer``
+`MailerSend`_         ``composer require symfony/mailer-send-mailer`` yes
 `Mailtrap`_           ``composer require symfony/mailtrap-mailer``    yes
 `Mandrill`_           ``composer require symfony/mailchimp-mailer``   yes
 `Postal`_             ``composer require symfony/postal-mailer``
@@ -126,6 +127,10 @@ Service               Install with                                    Webhook su
 .. versionadded:: 7.2
 
     The Mailomat, Mailtrap, Postal and Sweego integrations were introduced in Symfony 7.2.
+
+.. versionadded:: 7.3
+
+    The AhaSend integration was introduced in Symfony 7.3.
 
 .. note::
 
@@ -175,6 +180,10 @@ party provider:
 +------------------------+---------------------------------------------------------+
 | Provider               | Formats                                                 |
 +========================+=========================================================+
+| `AhaSend`_             | - API ``ahasend+api://KEY@default``                     |
+|                        | - HTTP n/a                                              |
+|                        | - SMTP ``ahasend+smtp://USERNAME:PASSWORD@default``     |
++------------------------+---------------------------------------------------------+
 | `Amazon SES`_          | - SMTP ``ses+smtp://USERNAME:PASSWORD@default``         |
 |                        | - HTTP ``ses+https://ACCESS_KEY:SECRET_KEY@default``    |
 |                        | - API ``ses+api://ACCESS_KEY:SECRET_KEY@default``       |
@@ -246,20 +255,20 @@ party provider:
 |                        | - API ``sweego+api://API_KEY@default``                  |
 +------------------------+---------------------------------------------------------+
 
-.. caution::
+.. warning::
 
     If your credentials contain special characters, you must URL-encode them.
     For example, the DSN ``ses+smtp://ABC1234:abc+12/345@default`` should be
     configured as ``ses+smtp://ABC1234:abc%2B12%2F345@default``
 
-.. caution::
+.. warning::
 
     If you want to use the ``ses+smtp`` transport together with :doc:`Messenger </messenger>`
     to :ref:`send messages in background <mailer-sending-messages-async>`,
     you need to add the ``ping_threshold`` parameter to your ``MAILER_DSN`` with
     a value lower than ``10``: ``ses+smtp://USERNAME:PASSWORD@default?ping_threshold=9``
 
-.. caution::
+.. warning::
 
     If you send custom headers when using the `Amazon SES`_ transport (to receive
     them later via a webhook), make sure to use the ``ses+https`` provider because
@@ -331,6 +340,17 @@ The failover-transport starts using the first transport and if it fails, it
 will retry the same delivery with the next transports until one of them succeeds
 (or until all of them fail).
 
+By default, delivery is retried 60 seconds after a failed attempt. You can adjust
+the retry period by setting the ``retry_period`` option in the DSN:
+
+.. code-block:: env
+
+    MAILER_DSN="failover(postmark+api://ID@default sendgrid+smtp://KEY@default)?retry_period=15"
+
+.. versionadded:: 7.3
+
+    The ``retry_period`` option was introduced in Symfony 7.3.
+
 Load Balancing
 ~~~~~~~~~~~~~~
 
@@ -350,6 +370,17 @@ then switches to the next available transport for each subsequent email.
 As with the failover transport, round-robin retries deliveries until
 a transport succeeds (or all fail). In contrast to the failover transport,
 it *spreads* the load across all its transports.
+
+By default, delivery is retried 60 seconds after a failed attempt. You can adjust
+the retry period by setting the ``retry_period`` option in the DSN:
+
+.. code-block:: env
+
+    MAILER_DSN="roundrobin(postmark+api://ID@default sendgrid+smtp://KEY@default)?retry_period=15"
+
+.. versionadded:: 7.3
+
+    The ``retry_period`` option was introduced in Symfony 7.3.
 
 TLS Peer Verification
 ~~~~~~~~~~~~~~~~~~~~~
@@ -385,7 +416,7 @@ setting the ``auto_tls`` option to ``false`` in the DSN::
 
     $dsn = 'smtp://user:pass@10.0.0.25?auto_tls=false';
 
-.. caution::
+.. warning::
 
     It's not recommended to disable TLS while connecting to an SMTP server over
     the Internet, but it can be useful when both the application and the SMTP
@@ -560,16 +591,16 @@ both strings or address objects::
         // ...
     ;
 
-.. versionadded:: 7.2
-
-    Support for non-ASCII email addresses (e.g. ``jânë.dœ@ëxãmplę.com``)
-    was introduced in Symfony 7.2.
-
 .. tip::
 
     Instead of calling ``->from()`` *every* time you create a new email, you can
     :ref:`configure emails globally <mailer-configure-email-globally>` to set the
     same ``From`` email to all messages.
+
+.. versionadded:: 7.2
+
+    Support for non-ASCII email addresses (e.g. ``jânë.dœ@ëxãmplę.com``)
+    was introduced in Symfony 7.2.
 
 .. note::
 
@@ -795,7 +826,7 @@ and headers.
             $mailer->header('X-Custom-Header')->value('foobar');
         };
 
-.. caution::
+.. warning::
 
     Some third-party providers don't support the usage of keywords like ``from``
     in the ``headers``. Check out your provider's documentation before setting
@@ -1218,7 +1249,7 @@ Before signing/encrypting messages, make sure to have:
     When using OpenSSL to generate certificates, make sure to add the
     ``-addtrust emailProtection`` command option.
 
-.. caution::
+.. warning::
 
     Signing and encrypting messages require their contents to be fully rendered.
     For example, the content of :ref:`templated emails <mailer-twig>` is rendered
@@ -1243,7 +1274,7 @@ using for example OpenSSL or obtained at an official Certificate Authority (CA).
 The email recipient must have the CA certificate in the list of trusted issuers
 in order to verify the signature.
 
-.. caution::
+.. warning::
 
     If you use message signature, sending to ``Bcc`` will be removed from the
     message. If you need to send a message to multiple recipients, you need
@@ -1991,6 +2022,7 @@ the :class:`Symfony\\Bundle\\FrameworkBundle\\Test\\MailerAssertionsTrait`::
    following the redirection and the message will be lost from the mailer event
    handler.
 
+.. _`AhaSend`: https://github.com/symfony/symfony/blob/{version}/src/Symfony/Component/Mailer/Bridge/AhaSend/README.md
 .. _`Amazon SES`: https://github.com/symfony/symfony/blob/{version}/src/Symfony/Component/Mailer/Bridge/Amazon/README.md
 .. _`Azure`: https://github.com/symfony/symfony/blob/{version}/src/Symfony/Component/Mailer/Bridge/Azure/README.md
 .. _`App Password`: https://support.google.com/accounts/answer/185833

@@ -443,6 +443,26 @@ HTTP status to return if the validation fails::
 
 The default status code returned if the validation fails is 404.
 
+If you want to map your object to a nested array in your query using a specific key,
+set the ``key`` option in the ``#[MapQueryString]`` attribute::
+
+    use App\Model\SearchDto;
+    use Symfony\Component\HttpFoundation\Response;
+    use Symfony\Component\HttpKernel\Attribute\MapQueryString;
+
+    // ...
+
+    public function dashboard(
+        #[MapQueryString(key: 'search')] SearchDto $searchDto
+    ): Response
+    {
+        // ...
+    }
+
+.. versionadded:: 7.3
+
+    The ``key`` option of ``#[MapQueryString]`` was introduced in Symfony 7.3.
+
 If you need a valid DTO even when the request query string is empty, set a
 default value for your controller arguments::
 
@@ -788,6 +808,14 @@ response types.  Some of these are mentioned below. To learn more about the
 ``Request`` and ``Response`` (and different ``Response`` classes), see the
 :ref:`HttpFoundation component documentation <component-http-foundation-request>`.
 
+.. note::
+
+    Technically, a controller can return a value other than a ``Response``.
+    However, your application is responsible for transforming that value into a
+    ``Response`` object. This is handled using :doc:`events </event_dispatcher>`
+    (specifically the :ref:`kernel.view event <component-http-kernel-kernel-view>`),
+    an advanced feature you'll learn about later.
+
 Accessing Configuration Values
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
@@ -890,7 +918,7 @@ method::
         {
             $response = $this->sendEarlyHints([
                 new Link(rel: 'preconnect', href: 'https://fonts.google.com'),
-                (new Link(href: '/style.css'))->withAttribute('as', 'stylesheet'),
+                (new Link(href: '/style.css'))->withAttribute('as', 'style'),
                 (new Link(href: '/script.js'))->withAttribute('as', 'script'),
             ]);
 
@@ -946,6 +974,6 @@ Learn more about Controllers
 .. _`Early hints`: https://developer.mozilla.org/en-US/docs/Web/HTTP/Status/103
 .. _`SAPI`: https://www.php.net/manual/en/function.php-sapi-name.php
 .. _`FrankenPHP`: https://frankenphp.dev
-.. _`Validate Filters`: https://www.php.net/manual/en/filter.filters.validate.php
+.. _`Validate Filters`: https://www.php.net/manual/en/filter.constants.php
 .. _`phpstan/phpdoc-parser`: https://packagist.org/packages/phpstan/phpdoc-parser
 .. _`phpdocumentor/type-resolver`: https://packagist.org/packages/phpdocumentor/type-resolver

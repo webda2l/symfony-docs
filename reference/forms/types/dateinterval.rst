@@ -221,7 +221,7 @@ following:
 Whether or not to include days in the input. This will result in an additional
 input to capture days.
 
-.. caution::
+.. warning::
 
     This can not be used when `with_weeks`_ is enabled.
 
@@ -274,7 +274,7 @@ input to capture seconds.
 Whether or not to include weeks in the input. This will result in an additional
 input to capture weeks.
 
-.. caution::
+.. warning::
 
     This can not be used when `with_days`_ is enabled.
 

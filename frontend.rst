@@ -61,6 +61,10 @@ be executed by a browser.
 AssetMapper (Recommended)
 ~~~~~~~~~~~~~~~~~~~~~~~~~
 
+.. screencast::
+
+    Do you prefer video tutorials? Check out the `AssetMapper screencast series`_.
+
 AssetMapper is the recommended system for handling your assets. It runs entirely
 in PHP with no complex build step or dependencies. It does this by leveraging
 the ``importmap`` feature of your browser, which is available in all browsers thanks
@@ -118,6 +122,10 @@ the `StimulusBundle Documentation`_
 Using a Front-end Framework (React, Vue, Svelte, etc)
 -----------------------------------------------------
 
+.. screencast::
+
+    Do you prefer video tutorials? Check out the `API Platform screencast series`_.
+
 If you want to use a front-end framework (Next.js, React, Vue, Svelte, etc),
 we recommend using their native tools and using Symfony as a pure API. A wonderful
 tool to do that is `API Platform`_. Their standard distribution comes with a
@@ -143,3 +151,5 @@ Other Front-End Articles
 .. _`Symfony UX`: https://ux.symfony.com
 .. _`API Platform`: https://api-platform.com/
 .. _`SensioLabs Minify Bundle`: https://github.com/sensiolabs/minify-bundle
+.. _`AssetMapper screencast series`: https://symfonycasts.com/screencast/asset-mapper
+.. _`API Platform screencast series`: https://symfonycasts.com/screencast/api-platform

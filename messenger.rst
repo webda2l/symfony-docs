@@ -783,7 +783,7 @@ times:
 Change the ``async`` argument to use the name of your transport (or transports)
 and ``user`` to the Unix user on your server.
 
-.. caution::
+.. warning::
 
     During a deployment, something might be unavailable (e.g. the
     database) causing the consumer to fail to start. In this situation,
@@ -958,7 +958,7 @@ Rate Limited Transport
 ~~~~~~~~~~~~~~~~~~~~~~
 
 Sometimes you might need to rate limit your message worker. You can configure a
-rate limiter on a transport (requires the :doc:`RateLimiter component </rate-limiter>`)
+rate limiter on a transport (requires the :doc:`RateLimiter component </rate_limiter>`)
 by setting its ``rate_limiter`` option:
 
 .. configuration-block::
@@ -1005,7 +1005,7 @@ by setting its ``rate_limiter`` option:
             ;
         };
 
-.. caution::
+.. warning::
 
     When a rate limiter is configured on a transport, it will block the whole
     worker when the limit is hit. You should make sure you configure a dedicated
@@ -1133,6 +1133,15 @@ Sometimes handling a message must fail in a way that you *know* is temporary
 and must be retried. If you throw
 :class:`Symfony\\Component\\Messenger\\Exception\\RecoverableMessageHandlingException`,
 the message will always be retried infinitely and ``max_retries`` setting will be ignored.
+
+You can define a custom retry delay (e.g., to use the value from the ``Retry-After``
+header in an HTTP response) by setting the ``retryDelay`` argument in the
+constructor of the ``RecoverableMessageHandlingException``.
+
+.. versionadded:: 7.2
+
+    The ``retryDelay`` argument and the ``getRetryDelay()`` method were introduced
+    in Symfony 7.2.
 
 .. _messenger-failure-transport:
 
@@ -1513,7 +1522,7 @@ The transport has a number of options:
     (no description available)
 
 ``sasl_method``
-
+    (no description available)
 
 ``connection_name``
     For custom connection names (requires at least version 1.10 of the PHP AMQP
@@ -1576,7 +1585,7 @@ your Envelope::
         new AmqpStamp('custom-routing-key', AMQP_NOPARAM, $attributes),
     ]);
 
-.. caution::
+.. warning::
 
     The consumers do not show up in an admin panel as this transport does not rely on
     ``\AmqpQueue::consume()`` which is blocking. Having a blocking receiver makes
@@ -1626,12 +1635,6 @@ DSN by using the ``table_name`` option:
 
 Or, to create the table yourself, set the ``auto_setup`` option to ``false`` and
 :ref:`generate a migration <doctrine-creating-the-database-tables-schema>`.
-
-.. caution::
-
-    The datetime property of the messages stored in the database uses the
-    timezone of the current system. This may cause issues if multiple machines
-    with different timezone configuration use the same storage.
 
 The transport has a number of options:
 
@@ -1821,7 +1824,7 @@ under the transport in ``messenger.yaml``:
                                 verify_peer: true
                                 verify_peer_name: true
 
-.. caution::
+.. warning::
 
     There should never be more than one ``messenger:consume`` command running with the same
     combination of ``stream``, ``group`` and ``consumer``, or messages could end up being
@@ -2687,7 +2690,7 @@ That's it! You can now consume each transport:
 
     $ php bin/console messenger:consume async_priority_normal -vv
 
-.. caution::
+.. warning::
 
     If a handler does *not* have ``from_transport`` config, it will be executed
     on *every* transport that the message is received from.

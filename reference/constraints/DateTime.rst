@@ -99,11 +99,16 @@ This message is shown if the underlying data is not a valid datetime.
 
 You can use the following parameters in this message:
 
-===============  ==============================================================
-Parameter        Description
-===============  ==============================================================
-``{{ value }}``  The current (invalid) value
-``{{ label }}``  Corresponding form field label
-===============  ==============================================================
+================  ==============================================================
+Parameter         Description
+================  ==============================================================
+``{{ value }}``   The current (invalid) value
+``{{ label }}``   Corresponding form field label
+``{{ format }}``  The date format defined in ``format``
+================  ==============================================================
+
+.. versionadded:: 7.3
+
+    The ``{{ format }}`` parameter was introduced in Symfony 7.3.
 
 .. include:: /reference/constraints/_payload-option.rst.inc

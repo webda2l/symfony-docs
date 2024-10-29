@@ -101,7 +101,7 @@ This can be tricky: if the date picker is misconfigured, Symfony won't understan
 the format and will throw a validation error. You can also configure the format
 that Symfony should expect via the `format`_ option.
 
-.. caution::
+.. warning::
 
     The string used by a JavaScript date picker to describe its format (e.g. ``yyyy-mm-dd``)
     may not match the string that Symfony uses (e.g. ``yyyy-MM-dd``). This is because
@@ -156,11 +156,12 @@ values for the year, month and day fields::
 ``calendar``
 ~~~~~~~~~~~~
 
-**type**: ``\IntlCalendar`` **default**: ``null``
+**type**: ``integer`` or ``\IntlCalendar`` **default**: ``null``
 
 The calendar to use for formatting and parsing the date. The value should be
-an instance of the :phpclass:`IntlCalendar` to use. By default, the Gregorian
-calendar with the application default locale is used.
+an ``integer`` from :phpclass:`IntlDateFormatter` calendar constants or an instance
+of the :phpclass:`IntlCalendar` to use. By default, the Gregorian calendar
+with the application default locale is used.
 
 .. versionadded:: 7.2
 

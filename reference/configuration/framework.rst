@@ -175,7 +175,7 @@ named ``kernel.http_method_override``.
     :ref:`Changing the Action and HTTP Method <forms-change-action-method>` of
     Symfony forms.
 
-.. caution::
+.. warning::
 
     If you're using the :ref:`HttpCache Reverse Proxy <symfony2-reverse-proxy>`
     with this option, the kernel will ignore the ``_method`` parameter,
@@ -192,8 +192,6 @@ named ``kernel.http_method_override``.
         Request::enableHttpMethodParameterOverride(); // <-- add this line
         $request = Request::createFromGlobals();
         // ...
-
-.. _configuration-framework-http_method_override:
 
 trust_x_sendfile_type_header
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~
@@ -2941,11 +2939,11 @@ enable_attributes
 
 **type**: ``boolean`` **default**: ``true``
 
-If this option is enabled, serialization groups can be defined using `PHP attributes`_.
+Enables support for `PHP attributes`_ in the serializer component.
 
 .. seealso::
 
-    For more information, see :ref:`serializer-using-serialization-groups-attributes`.
+    See :ref:`the reference <reference-attributes-serializer>` for a list of supported annotations.
 
 .. _reference-serializer-name_converter:
 
@@ -2961,8 +2959,7 @@ value.
 
 .. seealso::
 
-    For more information, see
-    :ref:`component-serializer-converting-property-names-when-serializing-and-deserializing`.
+    For more information, see :ref:`serializer-name-conversion`.
 
 .. _reference-serializer-circular_reference_handler:
 

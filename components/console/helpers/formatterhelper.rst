@@ -129,10 +129,16 @@ Sometimes you want to format seconds to time. This is possible with the
 The first argument is the seconds to format and the second argument is the
 precision (default ``1``) of the result::
 
-    Helper::formatTime(42);        // 42 secs
-    Helper::formatTime(125);       // 2 mins
-    Helper::formatTime(125, 2);    // 2 mins, 5 secs
-    Helper::formatTime(172799, 4); // 1 day, 23 hrs, 59 mins, 59 secs
+    Helper::formatTime(0.001);         // 1 ms
+    Helper::formatTime(42);            // 42 s
+    Helper::formatTime(125);           // 2 min
+    Helper::formatTime(125, 2);        // 2 min, 5 s
+    Helper::formatTime(172799, 4);     // 1 d, 23 h, 59 min, 59 s
+    Helper::formatTime(172799.056, 5); // 1 d, 23 h, 59 min, 59 s, 56 ms
+
+.. versionadded:: 7.3
+
+    Support for formatting up to milliseconds was introduced in Symfony 7.3.
 
 Formatting Memory
 -----------------

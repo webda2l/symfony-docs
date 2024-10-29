@@ -712,7 +712,7 @@ many other authenticators:
 
     If your application logs users in via a third-party service such as
     Google, Facebook or Twitter (social login), check out the `HWIOAuthBundle`_
-    community bundle.
+    community bundle or `Oauth2-client`_ package.
 
 .. _security-form-login:
 
@@ -890,7 +890,7 @@ Finally, create or update the template:
         </form>
     {% endblock %}
 
-.. caution::
+.. warning::
 
     The ``error`` variable passed into the template is an instance
     of :class:`Symfony\\Component\\Security\\Core\\Exception\\AuthenticationException`.
@@ -1016,7 +1016,7 @@ be ``authenticate``:
     <form action="{{ path('app_login') }}" method="post">
         {# ... the login fields #}
 
-        <input type="hidden" name="_csrf_token" value="{{ csrf_token('authenticate') }}">
+        <input type="hidden" name="_csrf_token" data-controller="csrf-protection" value="{{ csrf_token('authenticate') }}">
 
         <button type="submit">login</button>
     </form>
@@ -1744,7 +1744,7 @@ You can log in a user programmatically using the ``login()`` method of the
 :class:`Symfony\\Bundle\\SecurityBundle\\Security` helper::
 
     // src/Controller/SecurityController.php
-    namespace App\Controller\SecurityController;
+    namespace App\Controller;
 
     use App\Security\Authenticator\ExampleAuthenticator;
     use Symfony\Bundle\SecurityBundle\Security;
@@ -2254,7 +2254,7 @@ Users with ``ROLE_SUPER_ADMIN``, will automatically have ``ROLE_ADMIN``,
 ``ROLE_ALLOWED_TO_SWITCH`` and ``ROLE_USER`` (inherited from
 ``ROLE_ADMIN``).
 
-.. caution::
+.. warning::
 
     For role hierarchy to work, do not use ``$user->getRoles()`` manually.
     For example, in a controller extending from the :ref:`base controller <the-base-controller-class-services>`::
@@ -2549,6 +2549,17 @@ the built-in ``is_granted()`` helper function in any Twig template:
 
 .. _security-isgranted:
 
+Similarly, if you want to check if a specific user has a certain role, you can use
+the built-in ``is_granted_for_user()`` helper function:
+
+.. code-block:: html+twig
+
+    {% if is_granted_for_user(user, 'ROLE_ADMIN') %}
+        <a href="...">Delete</a>
+    {% endif %}
+
+.. _security-isgrantedforuser:
+
 Securing other Services
 .......................
 
@@ -2584,6 +2595,19 @@ want to include extra details only for users that have a ``ROLE_SALES_ADMIN`` ro
 
           // ...
       }
+
+
+.. tip::
+
+    The ``isGranted()`` method checks authorization for the currently logged-in user.
+    If you need to check authorization for a different user or when the user session
+    is unavailable (e.g., in a CLI context such as a message queue or cron job), you
+    can use the ``isGrantedForUser()`` method to explicitly set the target user.
+
+    .. versionadded:: 7.3
+
+        The :method:`Symfony\\Bundle\\SecurityBundle\\Security::isGrantedForUser`
+        method was introduced in Symfony 7.3.
 
 If you're using the :ref:`default services.yaml configuration <service-container-services-load-example>`,
 Symfony will automatically pass the ``security.helper`` to your service
@@ -2782,6 +2806,8 @@ implement :class:`Symfony\\Component\\Security\\Core\\User\\EquatableInterface`.
 Then, your ``isEqualTo()`` method will be called when comparing users instead
 of the core logic.
 
+.. _security-security-events:
+
 Security Events
 ---------------
 
@@ -2972,3 +2998,4 @@ Authorization (Denying Access)
 .. _`HTTP Basic authentication`: https://en.wikipedia.org/wiki/Basic_access_authentication
 .. _`Login CSRF attacks`: https://en.wikipedia.org/wiki/Cross-site_request_forgery#Forging_login_requests
 .. _`PHP date relative formats`: https://www.php.net/manual/en/datetime.formats.php#datetime.formats.relative
+.. _`Oauth2-client`: https://github.com/thephpleague/oauth2-client

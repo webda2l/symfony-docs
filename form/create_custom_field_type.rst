@@ -449,7 +449,7 @@ are some examples of Twig block names for the postal address type:
 ``postal_address_zipCode_label``
     The label block of the ZIP Code field.
 
-.. caution::
+.. warning::
 
     When the name of your form class matches any of the built-in field types,
     your form might not be rendered correctly. A form type named

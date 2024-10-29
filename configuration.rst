@@ -267,7 +267,7 @@ reusable configuration value. By convention, parameters are defined under the
 
         // ...
 
-.. caution::
+.. warning::
 
     By default and when using XML configuration, the values between ``<parameter>``
     tags are not trimmed. This means that the value of the following parameter will be
@@ -379,7 +379,7 @@ a new ``locale`` parameter is added to the ``config/services.yaml`` file).
 
     By convention, parameters whose names start with a dot ``.`` (for example,
     ``.mailer.transport``), are available only during the container compilation.
-    They are useful when working with :ref:`Compiler Passes </service_container/compiler_passes>`
+    They are useful when working with :doc:`Compiler Passes </service_container/compiler_passes>`
     to declare some temporary parameters that won't be available later in the application.
 
 Configuration parameters are usually validation-free, but you can ensure that
@@ -809,7 +809,7 @@ Use environment variables in values by prefixing variables with ``$``:
     DB_USER=root
     DB_PASS=${DB_USER}pass # include the user as a password prefix
 
-.. caution::
+.. warning::
 
     The order is important when some env var depends on the value of other env
     vars. In the above example, ``DB_PASS`` must be defined after ``DB_USER``.
@@ -830,7 +830,7 @@ Embed commands via ``$()`` (not supported on Windows):
 
     START_TIME=$(date)
 
-.. caution::
+.. warning::
 
     Using ``$()`` might not work depending on your shell.
 

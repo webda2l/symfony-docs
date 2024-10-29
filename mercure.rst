@@ -48,13 +48,28 @@ Run this command to install the Mercure support:
 
     $ composer require mercure
 
+Running a Mercure Hub
+~~~~~~~~~~~~~~~~~~~~~
+
 To manage persistent connections, Mercure relies on a Hub: a dedicated server
 that handles persistent SSE connections with the clients.
 The Symfony app publishes the updates to the hub, that will broadcast them to
 clients.
 
+.. raw:: html
+
+    <object data="_images/mercure/hub.svg" type="image/svg+xml"
+        alt="Flow diagram showing a Symfony app communicating with the Mercure Hub using a POST request, and the Mercure Hub using SSE to communicate to the clients."
+    ></object>
+
+In production, you have to install a Mercure hub by yourself.
+An official and open source (AGPL) hub based on the Caddy web server
+can be downloaded as a static binary from `Mercure.rocks`_.
+A Docker image, a Helm chart for Kubernetes
+and a managed, High Availability Hub are also provided.
+
 Thanks to :doc:`the Docker integration of Symfony </setup/docker>`,
-:ref:`Flex <symfony-flex>` proposes to install a Mercure hub.
+:ref:`Flex <symfony-flex>` proposes to install a Mercure hub for development.
 Run ``docker-compose up`` to start the hub if you have chosen this option.
 
 If you use the :doc:`Symfony Local Web Server </setup/symfony_server>`,
@@ -64,23 +79,7 @@ you must start it with the ``--no-tls`` option.
 
     $ symfony server:start --no-tls -d
 
-Running a Mercure Hub
-~~~~~~~~~~~~~~~~~~~~~
-
-.. raw:: html
-
-    <object data="_images/mercure/hub.svg" type="image/svg+xml"
-        alt="Flow diagram showing a Symfony app communicating with the Mercure Hub using a POST request, and the Mercure Hub using SSE to communicate to the clients."
-    ></object>
-
-If you use the Docker integration, a hub is already up and running,
-and you can go straight to the next section.
-
-Otherwise, and in production, you have to install a hub by yourself.
-An official and open source (AGPL) Hub based on the Caddy web server
-can be downloaded as a static binary from `Mercure.rocks`_.
-A Docker image, a Helm chart for Kubernetes
-and a managed, High Availability Hub are also provided.
+If you use the Docker integration, a hub is already up and running.
 
 Configuration
 -------------
@@ -131,11 +130,12 @@ MercureBundle provides a more advanced configuration:
         mercure:
             hubs:
                 default:
-                    url: https://mercure-hub.example.com/.well-known/mercure
+                    url: '%env(string:MERCURE_URL)%'
+                    public_url: '%env(string:MERCURE_PUBLIC_URL)%'
                     jwt:
-                        secret: '!ChangeThisMercureHubJWTSecretKey!'
-                        publish: ['foo', 'https://example.com/foo']
-                        subscribe: ['bar', 'https://example.com/bar']
+                        secret: '%env(string:MERCURE_JWT_SECRET)%'
+                        publish: ['https://example.com/foo1', 'https://example.com/foo2']
+                        subscribe: ['https://example.com/bar1', 'https://example.com/bar2']
                         algorithm: 'hmac.sha256'
                         provider: 'My\Provider'
                         factory: 'My\Factory'
@@ -148,19 +148,20 @@ MercureBundle provides a more advanced configuration:
         <config>
             <hub
                 name="default"
-                url="https://mercure-hub.example.com/.well-known/mercure"
-            >
+                url="%env(string:MERCURE_URL)%"
+                public_url="%env(string:MERCURE_PUBLIC_URL)%"
+            > <!-- public_url defaults to url -->
                 <jwt
-                    secret="!ChangeThisMercureHubJWTSecretKey!"
+                    secret="%env(string:MERCURE_JWT_SECRET)%"
                     algorithm="hmac.sha256"
                     provider="My\Provider"
                     factory="My\Factory"
                     value="my.jwt"
                 >
-                    <publish>foo</publish>
-                    <publish>https://example.com/foo</publish>
-                    <subscribe>bar</subscribe>
-                    <subscribe>https://example.com/bar</subscribe>
+                    <publish>https://example.com/foo1</publish>
+                    <publish>https://example.com/foo2</publish>
+                    <subscribe>https://example.com/bar1</subscribe>
+                    <subscribe>https://example.com/bar2</subscribe>
                 </jwt>
             </hub>
         </config>
@@ -171,11 +172,12 @@ MercureBundle provides a more advanced configuration:
         $container->loadFromExtension('mercure', [
             'hubs' => [
                 'default' => [
-                    'url' => 'https://mercure-hub.example.com/.well-known/mercure',
+                    'url' => '%env(string:MERCURE_URL)%',
+                    'public_url' => '%env(string:MERCURE_PUBLIC_URL)%',
                     'jwt' => [
-                        'secret' => '!ChangeThisMercureHubJWTSecretKey!',
-                        'publish' => ['foo', 'https://example.com/foo'],
-                        'subscribe' => ['bar', 'https://example.com/bar'],
+                        'secret' => '%env(string:MERCURE_JWT_SECRET)%',
+                        'publish' => ['https://example.com/foo1', 'https://example.com/foo2'],
+                        'subscribe' => ['https://example.com/bar1', 'https://example.com/bar2'],
                         'algorithm' => 'hmac.sha256',
                         'provider' => 'My\Provider',
                         'factory' => 'My\Factory',
@@ -309,22 +311,16 @@ as patterns:
 
 .. tip::
 
-    Google Chrome DevTools natively integrate a `practical UI`_ displaying in live
-    the received events:
+    Test if a URI Template matches a URL using `the online debugger`_
+
+.. tip::
+
+    Google Chrome features a practical UI to display the received events:
 
     .. image:: /_images/mercure/chrome.png
         :alt: The Chrome DevTools showing the EventStream tab containing information about each SSE event.
 
-    To use it:
-
-    * open the DevTools
-    * select the "Network" tab
-    * click on the request to the Mercure hub
-    * click on the "EventStream" sub-tab.
-
-.. tip::
-
-    Test if a URI Template match a URL using `the online debugger`_
+    In DevTools, select the "Network" tab, then click on the request to the Mercure hub, then on the "EventStream" sub-tab.
 
 Discovery
 ---------
@@ -446,7 +442,7 @@ Using cookies is the most secure and preferred way when the client is a web
 browser. If the client is not a web browser, then using an authorization header
 is the way to go.
 
-.. caution::
+.. warning::
 
     To use the cookie authentication method, the Symfony app and the Hub
     must be served from the same domain (can be different sub-domains).
@@ -677,7 +673,7 @@ sent:
         mercure.hub.default:
             class: App\Tests\Functional\Stub\HubStub
 
-As MercureBundle support multiple hubs, you may have to replace
+As MercureBundle supports multiple hubs, you may have to replace
 the other service definitions accordingly.
 
 .. tip::
@@ -690,8 +686,6 @@ Debugging
 .. versionadded:: 0.2
 
     The WebProfiler panel was introduced in MercureBundle 0.2.
-
-Enable the panel in your configuration, as follows:
 
 MercureBundle is shipped with a debug panel. Install the Debug pack to
 enable it::
@@ -767,7 +761,6 @@ Going further
 .. _`JSON Web Token`: https://tools.ietf.org/html/rfc7519
 .. _`example JWT`: https://jwt.io/#debugger-io?token=eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJtZXJjdXJlIjp7InB1Ymxpc2giOlsiKiJdfX0.iHLdpAEjX4BqCsHJEegxRmO-Y6sMxXwNATrQyRNt3GY
 .. _`IRI`: https://tools.ietf.org/html/rfc3987
-.. _`practical UI`: https://twitter.com/ChromeDevTools/status/562324683194785792
 .. _`the dedicated API Platform documentation`: https://api-platform.com/docs/core/mercure/
 .. _`the online debugger`: https://uri-template-tester.mercure.rocks
 .. _`a feature to test applications using Mercure`: https://github.com/symfony/panther#creating-isolated-browsers-to-test-apps-using-mercure-or-websocket

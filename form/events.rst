@@ -192,7 +192,7 @@ Form view data        Same as in ``FormEvents::POST_SET_DATA``
     See all form events at a glance in the
     :ref:`Form Events Information Table <component-form-event-table>`.
 
-.. caution::
+.. warning::
 
     At this point, you cannot add or remove fields to the form.
 
@@ -225,7 +225,7 @@ Form view data        Normalized data transformed using a view transformer
     See all form events at a glance in the
     :ref:`Form Events Information Table <component-form-event-table>`.
 
-.. caution::
+.. warning::
 
     At this point, you cannot add or remove fields to the current form and its
     children.

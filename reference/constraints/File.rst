@@ -242,7 +242,7 @@ Parameter         Description
 
 **type**: ``array`` or ``string``
 
-.. caution::
+.. warning::
 
     You should always use the ``extensions`` option instead of ``mimeTypes``
     except if you explicitly don't want to check that the extension of the file
@@ -298,7 +298,12 @@ Parameter                       Description
 The message displayed if the extension of the file is not a valid extension
 per the `extensions`_ option.
 
-.. include:: /reference/constraints/_parameters-mime-types-message-option.rst.inc
+====================  ==============================================================
+Parameter             Description
+====================  ==============================================================
+``{{ extension }}``   The extension of the given file
+``{{ extensions }}``  The list of allowed file extensions
+====================  ==============================================================
 
 ``mimeTypesMessage``
 ~~~~~~~~~~~~~~~~~~~~

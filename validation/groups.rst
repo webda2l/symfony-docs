@@ -140,7 +140,7 @@ Constraints in the ``Default`` group of a class are the constraints that have
 either no explicit group configured or that are configured to a group equal to
 the class name or the string ``Default``.
 
-.. caution::
+.. warning::
 
     When validating *just* the User object, there is no difference between the
     ``Default`` group and the ``User`` group. But, there is a difference if

@@ -50,20 +50,14 @@ Imagine that your application includes a web page like this:
     </body>
     </html>
 
-Following the traditional HTTP workflow, when this page is served browsers will
-make one request for the HTML page and another request for the linked CSS file.
-However, thanks to HTTP/2 your application can start sending the CSS file
-contents even before browsers request them.
+In a traditional HTTP workflow, when this page is loaded, browsers make one
+request for the HTML document and another for the linked CSS file. However,
+with HTTP/2, your application can send the CSS file's contents to the browser
+before it requests them.
 
-To do that, first install the WebLink component:
-
-.. code-block:: terminal
-
-    $ composer require symfony/web-link
-
-Now, update the template to use the ``preload()`` Twig function provided by
-WebLink. The `"as" attribute`_ is mandatory because browsers need it to apply
-correct prioritization and the content security policy:
+To achieve this, update your template to use the ``preload()`` Twig function
+provided by WebLink. Note that the `"as" attribute`_ is required, as browsers use
+it to prioritize resources correctly and comply with the content security policy:
 
 .. code-block:: html+twig
 

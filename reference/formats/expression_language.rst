@@ -26,7 +26,7 @@ The component supports:
 
     The support for comments inside expressions was introduced in Symfony 7.2.
 
-.. caution::
+.. warning::
 
     A backslash (``\``) must be escaped by 3 backslashes (``\\\\``) in a string
     and 7 backslashes (``\\\\\\\\``) in a regex::

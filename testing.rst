@@ -235,7 +235,7 @@ in them, files lower in the list override previous items):
 #. ``.env.test``: overriding/setting specific test values or vars;
 #. ``.env.test.local``: overriding settings specific for this machine.
 
-.. caution::
+.. warning::
 
     The ``.env.local`` file is **not** used in the test environment, to
     make each test set-up as consistent as possible.
@@ -750,7 +750,7 @@ You can also override HTTP headers on a per request basis::
         'HTTP_USER_AGENT' => 'MySuperBrowser/1.0',
     ]);
 
-.. caution::
+.. warning::
 
     The name of your custom headers must follow the syntax defined in the
     `section 4.1.18 of RFC 3875`_: replace ``-`` by ``_``, transform it into
@@ -961,11 +961,11 @@ However, Symfony provides useful shortcut methods for the most common cases:
 Response Assertions
 ...................
 
-``assertResponseIsSuccessful(string $message = '')``
+``assertResponseIsSuccessful(string $message = '', bool $verbose = true)``
     Asserts that the response was successful (HTTP status is 2xx).
-``assertResponseStatusCodeSame(int $expectedCode, string $message = '')``
+``assertResponseStatusCodeSame(int $expectedCode, string $message = '', bool $verbose = true)``
     Asserts a specific HTTP status code.
-``assertResponseRedirects(?string $expectedLocation = null, ?int $expectedCode = null, string $message = '')``
+``assertResponseRedirects(?string $expectedLocation = null, ?int $expectedCode = null, string $message = '', bool $verbose = true)``
     Asserts the response is a redirect response (optionally, you can check
     the target location and status code). The excepted location can be either
     an absolute or a relative path.
@@ -983,8 +983,12 @@ Response Assertions
     Asserts the response format returned by the
     :method:`Symfony\\Component\\HttpFoundation\\Response::getFormat` method
     is the same as the expected value.
-``assertResponseIsUnprocessable(string $message = '')``
+``assertResponseIsUnprocessable(string $message = '', bool $verbose = true)``
     Asserts the response is unprocessable (HTTP status is 422)
+
+.. versionadded:: 7.1
+
+    The ``$verbose`` parameters were introduced in Symfony 7.1.
 
 Request Assertions
 ..................

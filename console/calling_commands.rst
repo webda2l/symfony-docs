@@ -36,6 +36,9 @@ method)::
                 '--yell'  => true,
             ]);
 
+            // disable interactive behavior for the greet command
+            $greetInput->setInteractive(false);
+
             $returnCode = $this->getApplication()->doRun($greetInput, $output);
 
             // ...
@@ -57,7 +60,7 @@ method)::
     ``$this->getApplication()->find('demo:greet')->run()`` will allow proper
     events to be dispatched for that inner command as well.
 
-.. caution::
+.. warning::
 
     Note that all the commands will run in the same process and some of Symfony's
     built-in commands may not work well this way. For instance, the ``cache:clear``

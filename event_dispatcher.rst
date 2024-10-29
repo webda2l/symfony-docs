@@ -41,6 +41,9 @@ The most common way to listen to an event is to register an **event listener**::
             // Customize your response object to display the exception details
             $response = new Response();
             $response->setContent($message);
+            // the exception message can contain unfiltered user input;
+            // set the content-type to text to avoid XSS issues
+            $response->headers->set('Content-Type', 'text/plain; charset=utf-8');
 
             // HttpExceptionInterface is a special type of exception that
             // holds status code and header details
@@ -798,3 +801,11 @@ could listen to the ``mailer.post_send`` event and change the method's return va
 
 That's it! Your subscriber should be called automatically (or read more about
 :ref:`event subscriber configuration <ref-event-subscriber-configuration>`).
+
+Learn More
+----------
+
+- :ref:`The Request-Response Lifecycle <the-workflow-of-a-request>`
+- :doc:`/reference/events`
+- :ref:`Security-related Events <security-security-events>`
+- :doc:`/components/event_dispatcher`

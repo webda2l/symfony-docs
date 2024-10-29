@@ -245,7 +245,7 @@ constructor of the Callback constraint::
         }
     }
 
-.. caution::
+.. warning::
 
     Using a ``Closure`` together with attribute configuration will disable the
     attribute cache for that class/property/method because ``Closure`` cannot
@@ -271,14 +271,16 @@ callback method:
 * A closure.
 
 Concrete callbacks receive an :class:`Symfony\\Component\\Validator\\Context\\ExecutionContextInterface`
-instance as the first argument and the :ref:`payload option <reference-constraints-payload>`
+instance as the first argument and the :ref:`payload option <reference-constraints-callback-payload>`
 as the second argument.
 
 Static or closure callbacks receive the validated object as the first argument,
 the :class:`Symfony\\Component\\Validator\\Context\\ExecutionContextInterface`
-instance as the second argument and the :ref:`payload option <reference-constraints-payload>`
+instance as the second argument and the :ref:`payload option <reference-constraints-callback-payload>`
 as the third argument.
 
 .. include:: /reference/constraints/_groups-option.rst.inc
+
+.. _reference-constraints-callback-payload:
 
 .. include:: /reference/constraints/_payload-option.rst.inc

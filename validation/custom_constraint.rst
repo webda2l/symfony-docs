@@ -62,6 +62,47 @@ You can use ``#[HasNamedArguments]`` to make some constraint options required::
         }
     }
 
+Constraint with Private Properties
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+
+Constraints are cached for performance reasons. To achieve this, the base
+``Constraint`` class uses PHP's :phpfunction:`get_object_vars` function, which
+excludes private properties of child classes.
+
+If your constraint defines private properties, you must explicitly include them
+in the ``__sleep()`` method to ensure they are serialized correctly::
+
+    // src/Validator/ContainsAlphanumeric.php
+    namespace App\Validator;
+
+    use Symfony\Component\Validator\Attribute\HasNamedArguments;
+    use Symfony\Component\Validator\Constraint;
+
+    #[\Attribute]
+    class ContainsAlphanumeric extends Constraint
+    {
+        public string $message = 'The string "{{ string }}" contains an illegal character: it can only contain letters or numbers.';
+
+        #[HasNamedArguments]
+        public function __construct(
+            private string $mode,
+            ?array $groups = null,
+            mixed $payload = null,
+        ) {
+            parent::__construct([], $groups, $payload);
+        }
+
+        public function __sleep(): array
+        {
+            return array_merge(
+                parent::__sleep(),
+                [
+                    'mode'
+                ]
+            );
+        }
+    }
+
 Creating the Validator itself
 -----------------------------
 

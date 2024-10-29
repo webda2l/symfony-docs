@@ -469,7 +469,18 @@ information from annotations of properties and methods, such as ``@var``,
     use App\Domain\Foo;
 
     $phpStanExtractor = new PhpStanExtractor();
+
+    // Type information.
     $phpStanExtractor->getTypesFromConstructor(Foo::class, 'bar');
+    // Description information.
+    $phpStanExtractor->getShortDescription($class, 'bar');
+    $phpStanExtractor->getLongDescription($class, 'bar');
+
+.. versionadded:: 7.3
+
+    The :method:`Symfony\\Component\\PropertyInfo\\Extractor\\PhpStanExtractor::getShortDescription`
+    and :method:`Symfony\\Component\\PropertyInfo\\Extractor\\PhpStanExtractor::getLongDescription`
+    methods were introduced in Symfony 7.3.
 
 SerializerExtractor
 ~~~~~~~~~~~~~~~~~~~
@@ -478,9 +489,9 @@ SerializerExtractor
 
     This extractor depends on the `symfony/serializer`_ library.
 
-Using :ref:`groups metadata <serializer-using-serialization-groups-attributes>`
-from the :doc:`Serializer component </components/serializer>`,
-the :class:`Symfony\\Component\\PropertyInfo\\Extractor\\SerializerExtractor`
+Using :ref:`groups metadata <serializer-groups-attribute>` from the
+:doc:`Serializer component </serializer>`, the
+:class:`Symfony\\Component\\PropertyInfo\\Extractor\\SerializerExtractor`
 provides list information. This extractor is *not* registered automatically
 with the ``property_info`` service in the Symfony Framework::
 

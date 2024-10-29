@@ -1064,7 +1064,7 @@ To disable HTTP compression, send an ``Accept-Encoding: identity`` HTTP header.
 Chunked transfer encoding is enabled automatically if both your PHP runtime and
 the remote server support it.
 
-.. caution::
+.. warning::
 
     If you set ``Accept-Encoding`` to e.g. ``gzip``, you will need to handle the
     decompression yourself.
@@ -2332,15 +2332,15 @@ test it in a real application::
             $responseData = $service->createArticle($requestData);
 
             // Assert
-            self::assertSame('POST', $mockResponse->getRequestMethod());
-            self::assertSame('https://example.com/api/article', $mockResponse->getRequestUrl());
-            self::assertContains(
+            $this->assertSame('POST', $mockResponse->getRequestMethod());
+            $this->assertSame('https://example.com/api/article', $mockResponse->getRequestUrl());
+            $this->assertContains(
                 'Content-Type: application/json',
                 $mockResponse->getRequestOptions()['headers']
             );
-            self::assertSame($expectedRequestData, $mockResponse->getRequestOptions()['body']);
+            $this->assertSame($expectedRequestData, $mockResponse->getRequestOptions()['body']);
 
-            self::assertSame($responseData, $expectedResponseData);
+            $this->assertSame($expectedResponseData, $responseData);
         }
     }
 
@@ -2355,11 +2355,11 @@ First, use a browser or HTTP client to perform the HTTP request(s) you want to
 test. Then, save that information as a ``.har`` file somewhere in your application::
 
     // ExternalArticleServiceTest.php
-    use PHPUnit\Framework\TestCase;
+    use Symfony\Bundle\FrameworkBundle\Test\KernelTestCase;
     use Symfony\Component\HttpClient\MockHttpClient;
     use Symfony\Component\HttpClient\Response\MockResponse;
 
-    final class ExternalArticleServiceTest extends TestCase
+    final class ExternalArticleServiceTest extends KernelTestCase
     {
         public function testSubmitData(): void
         {
@@ -2373,7 +2373,7 @@ test. Then, save that information as a ``.har`` file somewhere in your applicati
             $responseData = $service->createArticle($requestData);
 
             // Assert
-            self::assertSame($responseData, 'the expected response');
+            $this->assertSame('the expected response', $responseData);
         }
     }
 

@@ -64,7 +64,7 @@ The basic usage of the MessageFormat allows you to use placeholders (called
             'say_hello' => "Hello {name}!",
         ];
 
-.. caution::
+.. warning::
 
     In the previous translation format, placeholders were often wrapped in ``%``
     (e.g. ``%name%``). This ``%`` character is no longer valid with the ICU

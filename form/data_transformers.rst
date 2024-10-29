@@ -8,7 +8,7 @@ can be rendered as a ``yyyy-MM-dd``-formatted input text box. Internally, a data
 converts the ``DateTime`` value of the field to a ``yyyy-MM-dd`` formatted string
 when rendering the form, and then back to a ``DateTime`` object on submit.
 
-.. caution::
+.. warning::
 
     When a form field has the ``inherit_data`` option set to ``true``, data transformers
     are not applied to that field.
@@ -340,7 +340,7 @@ that, after a successful submission, the Form component will pass a real
 If the issue isn't found, a form error will be created for that field and
 its error message can be controlled with the ``invalid_message`` field option.
 
-.. caution::
+.. warning::
 
     Be careful when adding your transformers. For example, the following is **wrong**,
     as the transformer would be applied to the entire form, instead of just this
@@ -472,7 +472,7 @@ Which transformer you need depends on your situation.
 
 To use the view transformer, call ``addViewTransformer()``.
 
-.. caution::
+.. warning::
 
     Be careful with model transformers and
     :doc:`Collection </reference/forms/types/collection>` field types.

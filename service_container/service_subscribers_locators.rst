@@ -962,7 +962,7 @@ and compose your services with them::
         }
     }
 
-.. caution::
+.. warning::
 
     When creating these helper traits, the service id cannot be ``__METHOD__``
     as this will include the trait name, not the class name. Instead, use
