@@ -402,6 +402,8 @@ from inside ``app.js``:
     // things on "window" become global variables
     window.$ = $;
 
+.. _asset-mapper-handling-css:
+
 Handling CSS
 ------------
 
@@ -1103,6 +1105,24 @@ it in the CSP header, and then pass the same nonce to the Twig function:
     {# the csp_nonce() function is defined by the NelmioSecurityBundle #}
     {{ importmap('app', {'nonce': csp_nonce('script')}) }}
 
+Content Security Policy and CSS Files
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+
+If your importmap includes CSS files, AssetMapper uses a trick to load those by
+adding ``data:application/javascript`` to the rendered importmap (see
+:ref:`Handling CSS <asset-mapper-handling-css>`).
+This can cause browsers to report CSP violations and block the CSS files from
+being loaded.
+To prevent this, you can add `strict-dynamic`_ to the ``script-src`` directive
+of your Content Security Policy, to tell the browser that the importmap is
+allowed to load other resources.
+
+.. note::
+
+    When using ``strict-dynamic``, the browser will ignore any other sources in
+    ``script-src`` such as ``'self'`` or ``'unsafe-inline'``, so any other
+    ``<script>`` tags will also need to be trusted via a nonce.
+
 The AssetMapper Component Caching System in dev
 -----------------------------------------------
 
@@ -1186,5 +1206,6 @@ command as part of your CI to be warned anytime a new vulnerability is found.
 .. _`package.json configuration file`: https://docs.npmjs.com/creating-a-package-json-file
 .. _Content Security Policy: https://developer.mozilla.org/en-US/docs/Web/HTTP/CSP
 .. _NelmioSecurityBundle: https://symfony.com/bundles/NelmioSecurityBundle/current/index.html#nonce-for-inline-script-handling
+.. _strict-dynamic: https://developer.mozilla.org/en-US/docs/Web/HTTP/Headers/Content-Security-Policy/script-src#strict-dynamic
 .. _kocal/biome-js-bundle: https://github.com/Kocal/BiomeJsBundle
 .. _`SensioLabs Minify Bundle`: https://github.com/sensiolabs/minify-bundle
