@@ -476,6 +476,15 @@ The ``translation:extract`` command looks for missing translations in:
 
         The AST parser support was introduced in Symfony 6.2.
 
+By default, when the ``translation:extract`` command creates new entries in the
+translation file, it uses the same content as both the source and the pending
+translation. The only difference is that the pending translation is prefixed by
+``__``. You can customize this prefix using the ``--prefix`` option:
+
+.. code-block:: terminal
+
+    $ php bin/console translation:extract --force --prefix="NEW_" fr
+
 .. _translation-resource-locations:
 
 Translation Resource/File Names and Locations
