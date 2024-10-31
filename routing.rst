@@ -1439,7 +1439,7 @@ when importing the routes.
 
         # config/routes/attributes.yaml
         controllers:
-            resource: '../../src/Controller/**/*'
+            resource: '../../src/Controller/'
             type: attribute
             # this is added to the beginning of all imported route URLs
             prefix: '/blog'
@@ -1455,9 +1455,6 @@ when importing the routes.
 
             # you can optionally exclude some files/subdirectories when loading attributes
             # (the value must be a string or an array of PHP glob patterns)
-            # NOTE: For now, this will only work if you are using the string, glob notation for the
-            #       resource value.  The array notation containing `path` & `namespace` will not work,
-            #       and neither will using a non-glob string like `'../src/Controller'`.
             # exclude: '../../src/Controller/{Debug*Controller.php}'
 
     .. code-block:: xml
@@ -1522,6 +1519,12 @@ when importing the routes.
                 ->requirements(['_locale' => 'en|es|fr'])
             ;
         };
+
+.. caution::
+
+    The ``exclude`` option only works when the ``resource`` value is a glob string.
+    If you use a regular string (e.g. ``'../src/Controller'``) the ``exclude``
+    value will be ignored.
 
 In this example, the route of the ``index()`` action will be called ``blog_index``
 and its URL will be ``/blog/{_locale}``. The route of the ``show()`` action will be called
