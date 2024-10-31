@@ -2844,6 +2844,8 @@ implement :class:`Symfony\\Component\\Security\\Core\\User\\EquatableInterface`.
 Then, your ``isEqualTo()`` method will be called when comparing users instead
 of the core logic.
 
+.. _security-security-events:
+
 Security Events
 ---------------
 
