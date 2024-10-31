@@ -818,7 +818,6 @@ could listen to the ``mailer.post_send`` event and change the method's return va
 That's it! Your subscriber should be called automatically (or read more about
 :ref:`event subscriber configuration <ref-event-subscriber-configuration>`).
 
-
 Learn More
 ----------
 
