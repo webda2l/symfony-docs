@@ -822,16 +822,7 @@ That's it! Your subscriber should be called automatically (or read more about
 Learn More
 ----------
 
-Security
-~~~~~~~~
-
-- :ref:`Security Events <security-security-events>`
-- :ref:`Authentication Events <security-authentication-events>`
-- :ref:`Other Events <security-other-events>`
-
-Other
-~~~~~
-
-- :doc:`/reference/events`
-- :doc:`/components/event_dispatcher`
 - :ref:`The Request-Response Lifecycle <the-workflow-of-a-request>`
+- :doc:`/reference/events`
+- :ref:`Security-related Events <security-security-events>`
+- :doc:`/components/event_dispatcher`
