@@ -1111,11 +1111,11 @@ Content Security Policy and CSS Files
 If your importmap includes CSS files, AssetMapper uses a trick to load those by
 adding ``data:application/javascript`` to the rendered importmap (see
 :ref:`Handling CSS <asset-mapper-handling-css>`).
+
 This can cause browsers to report CSP violations and block the CSS files from
-being loaded.
-To prevent this, you can add `strict-dynamic`_ to the ``script-src`` directive
-of your Content Security Policy, to tell the browser that the importmap is
-allowed to load other resources.
+being loaded. To prevent this, you can add `strict-dynamic`_ to the ``script-src``
+directive of your Content Security Policy, to tell the browser that the importmap
+is allowed to load other resources.
 
 .. note::
 
