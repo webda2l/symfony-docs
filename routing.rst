@@ -1489,6 +1489,12 @@ when importing the routes.
             ;
         };
 
+.. caution::
+
+    The ``exclude`` option only works when the ``resource`` value is a glob string.
+    If you use a regular string (e.g. ``'../src/Controller'``) the ``exclude``
+    value will be ignored.
+
 In this example, the route of the ``index()`` action will be called ``blog_index``
 and its URL will be ``/blog/{_locale}``. The route of the ``show()`` action will be called
 ``blog_show`` and its URL will be ``/blog/{_locale}/posts/{slug}``. Both routes
