@@ -620,7 +620,7 @@ Three different behaviors are available:
             class Bar
             {
                 public function __construct(
-                    private #[AutowireDecorated] $inner,
+                    #[AutowireDecorated] private $inner,
                 ) {
                 }
 
