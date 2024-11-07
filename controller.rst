@@ -946,6 +946,6 @@ Learn more about Controllers
 .. _`Early hints`: https://developer.mozilla.org/en-US/docs/Web/HTTP/Status/103
 .. _`SAPI`: https://www.php.net/manual/en/function.php-sapi-name.php
 .. _`FrankenPHP`: https://frankenphp.dev
-.. _`Validate Filters`: https://www.php.net/manual/en/filter.filters.validate.php
+.. _`Validate Filters`: https://www.php.net/manual/en/filter.constants.php
 .. _`phpstan/phpdoc-parser`: https://packagist.org/packages/phpstan/phpdoc-parser
 .. _`phpdocumentor/type-resolver`: https://packagist.org/packages/phpdocumentor/type-resolver
