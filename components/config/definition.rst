@@ -83,6 +83,12 @@ reflect the real structure of the configuration values::
             ->scalarNode('default_connection')
                 ->defaultValue('mysql')
             ->end()
+            ->stringNode('username')
+                ->defaultValue('root')
+            ->end()
+            ->stringNode('password')
+                ->defaultValue('root')
+            ->end()
         ->end()
     ;
 
@@ -100,6 +106,7 @@ node definition. Node types are available for:
 * scalar (generic type that includes booleans, strings, integers, floats
   and ``null``)
 * boolean
+* string
 * integer
 * float
 * enum (similar to scalar, but it only allows a finite set of values)
