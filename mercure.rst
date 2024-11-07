@@ -48,13 +48,28 @@ Run this command to install the Mercure support:
 
     $ composer require mercure
 
+Running a Mercure Hub
+~~~~~~~~~~~~~~~~~~~~~
+
 To manage persistent connections, Mercure relies on a Hub: a dedicated server
 that handles persistent SSE connections with the clients.
 The Symfony app publishes the updates to the hub, that will broadcast them to
 clients.
 
+.. raw:: html
+
+    <object data="_images/mercure/hub.svg" type="image/svg+xml"
+        alt="Flow diagram showing a Symfony app communicating with the Mercure Hub using a POST request, and the Mercure Hub using SSE to communicate to the clients."
+    ></object>
+
+In production, you have to install a Mercure hub by yourself.
+An official and open source (AGPL) hub based on the Caddy web server
+can be downloaded as a static binary from `Mercure.rocks`_.
+A Docker image, a Helm chart for Kubernetes
+and a managed, High Availability Hub are also provided.
+
 Thanks to :doc:`the Docker integration of Symfony </setup/docker>`,
-:ref:`Flex <symfony-flex>` proposes to install a Mercure hub.
+:ref:`Flex <symfony-flex>` proposes to install a Mercure hub for development.
 Run ``docker-compose up`` to start the hub if you have chosen this option.
 
 If you use the :doc:`Symfony Local Web Server </setup/symfony_server>`,
@@ -64,23 +79,7 @@ you must start it with the ``--no-tls`` option.
 
     $ symfony server:start --no-tls -d
 
-Running a Mercure Hub
-~~~~~~~~~~~~~~~~~~~~~
-
-.. raw:: html
-
-    <object data="_images/mercure/hub.svg" type="image/svg+xml"
-        alt="Flow diagram showing a Symfony app communicating with the Mercure Hub using a POST request, and the Mercure Hub using SSE to communicate to the clients."
-    ></object>
-
-If you use the Docker integration, a hub is already up and running,
-and you can go straight to the next section.
-
-Otherwise, and in production, you have to install a hub by yourself.
-An official and open source (AGPL) Hub based on the Caddy web server
-can be downloaded as a static binary from `Mercure.rocks`_.
-A Docker image, a Helm chart for Kubernetes
-and a managed, High Availability Hub are also provided.
+If you use the Docker integration, a hub is already up and running.
 
 Configuration
 -------------
