@@ -92,6 +92,10 @@ reflect the real structure of the configuration values::
         ->end()
     ;
 
+.. versionadded:: 7.2
+
+    The ``stringNode()`` method was introduced in Symfony 7.2.
+
 The root node itself is an array node, and has children, like the boolean
 node ``auto_connect`` and the scalar node ``default_connection``. In general:
 after defining a node, a call to ``end()`` takes you one step up in the
@@ -115,6 +119,10 @@ node definition. Node types are available for:
 
 and are created with ``node($name, $type)`` or their associated shortcut
 ``xxxxNode($name)`` method.
+
+.. versionadded::
+
+    Support for ``string`` types was introduced in Symfony 7.2.
 
 Numeric Node Constraints
 ~~~~~~~~~~~~~~~~~~~~~~~~
