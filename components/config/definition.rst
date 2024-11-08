@@ -120,9 +120,9 @@ node definition. Node types are available for:
 and are created with ``node($name, $type)`` or their associated shortcut
 ``xxxxNode($name)`` method.
 
-.. versionadded::
+.. versionadded:: 7.2
 
-    Support for ``string`` types was introduced in Symfony 7.2.
+    Support for the ``string`` type was introduced in Symfony 7.2.
 
 Numeric Node Constraints
 ~~~~~~~~~~~~~~~~~~~~~~~~
