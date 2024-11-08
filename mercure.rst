@@ -308,6 +308,10 @@ as patterns:
 
 .. tip::
 
+    Test if a URI Template matches a URL using `the online debugger`_
+
+.. tip::
+
     Google Chrome DevTools natively integrate a `practical UI`_ displaying in live
     the received events:
 
@@ -320,10 +324,6 @@ as patterns:
     * select the "Network" tab
     * click on the request to the Mercure hub
     * click on the "EventStream" sub-tab.
-
-.. tip::
-
-    Test if a URI Template match a URL using `the online debugger`_
 
 Discovery
 ---------
