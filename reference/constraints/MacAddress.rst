@@ -132,6 +132,7 @@ Parameter                         Allowed MAC addresses
 ``multicast_no_broadcast``        Only multicast except broadcast
 ``unicast_all``                   Only unicast
 ``universal_all``                 Only universal
+``universal_unicast``             Only universal and unicast
 ``universal_multicast``           Only universal and multicast
 ================================  =========================================
 
