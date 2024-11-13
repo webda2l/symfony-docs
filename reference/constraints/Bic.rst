@@ -124,13 +124,13 @@ Parameter        Description
 ``mode``
 ~~~~~~~~
 
-**type**: ``string`` **default**: ``BIC::VALIDATION_MODE_STRICT``
+**type**: ``string`` **default**: ``Bic::VALIDATION_MODE_STRICT``
 
-This option defines how the BIC is validated. Available constants are defined
-in the :class:`Symfony\\Component\\Validator\\Constraints\\BIC` class.
+This option defines how the BIC is validated. The possible values are available
+as constants in the :class:`Symfony\\Component\\Validator\\Constraints\\Bic` class:
 
-* ``BIC::VALIDATION_MODE_STRICT`` validates the given value without any modification;
-* ``BIC::VALIDATION_MODE_CASE_INSENSITIVE`` converts the given value to uppercase before validating it.
+* ``Bic::VALIDATION_MODE_STRICT`` validates the given value without any modification;
+* ``Bic::VALIDATION_MODE_CASE_INSENSITIVE`` converts the given value to uppercase before validating it.
 
 .. versionadded:: 7.2
 
