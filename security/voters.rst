@@ -222,25 +222,25 @@ Checking for Roles inside a Voter
 ---------------------------------
 
 What if you want to call ``isGranted()`` from *inside* your voter - e.g. you want
-to see if the current user has ``ROLE_SUPER_ADMIN``. That's possible by injecting
-the :class:`Symfony\\Component\\Security\\Core\\Security`
-into your voter. You can use this to, for example, *always* allow access to a user
+to see if the current user has ``ROLE_SUPER_ADMIN``. That's possible by using an
+:class:`access decision manager <Symfony\\Component\\Security\\Core\\Authorization\\AccessDecisionManagerInterface>`
+inside your voter. You can use this to, for example, *always* allow access to a user
 with ``ROLE_SUPER_ADMIN``::
 
     // src/Security/PostVoter.php
 
     // ...
-    use Symfony\Component\Security\Core\Security;
+    use Symfony\Component\Security\Core\Authorization\AccessDecisionManagerInterface;
 
     class PostVoter extends Voter
     {
         // ...
 
-        private $security;
+        private $accessDecisionManager;
 
-        public function __construct(Security $security)
+        public function __construct(AccessDecisionManagerInterface $accessDecisionManager)
         {
-            $this->security = $security;
+            $this->accessDecisionManager = $accessDecisionManager;
         }
 
         protected function voteOnAttribute($attribute, $subject, TokenInterface $token): bool
@@ -248,7 +248,7 @@ with ``ROLE_SUPER_ADMIN``::
             // ...
 
             // ROLE_SUPER_ADMIN can do anything! The power!
-            if ($this->security->isGranted('ROLE_SUPER_ADMIN')) {
+            if ($this->accessDecisionManager->isGranted($token, ['ROLE_SUPER_ADMIN'])) {
                 return true;
             }
 
