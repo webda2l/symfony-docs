@@ -11,11 +11,6 @@ This component provides:
 * A way to get types from PHP elements such as properties, method arguments,
   return types, and raw strings.
 
-.. caution::
-
-    This component is :doc:`experimental </contributing/code/experimental>` and
-    could be changed at any time without prior notice.
-
 Installation
 ------------
 
