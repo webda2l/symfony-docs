@@ -58,12 +58,6 @@ based on reflection or a simple string::
 
     // Type instances have several helper methods
 
-    // returns the main type (e.g. in this example it returns an "array" Type instance);
-    // for nullable types (e.g. string|null) it returns the non-null type (e.g. string)
-    // and for compound types (e.g. int|string) it throws an exception because both types
-    // can be considered the main one, so there's no way to pick one
-    $baseType = $type->getBaseType();
-
     // for collections, it returns the type of the item used as the key;
     // in this example, the collection is a list, so it returns an "int" Type instance
     $keyType = $type->getCollectionKeyType();
