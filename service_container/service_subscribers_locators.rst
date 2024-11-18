@@ -381,19 +381,48 @@ attribute::
     :class:`Symfony\\Component\\DependencyInjection\\Attribute\\AutowireLocator`
     attribute was introduced in Symfony 6.4.
 
-.. note::
+The AutowireIterator Attribute
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+Variant of the ``AutowireLocator`` that specifically provides an iterable of services
+based on a tag. This allows you to collect all services with a particular tag into
+an iterable, which can be useful when you need to iterate over a set of services
+rather than retrieving them individually.
 
-    To receive an iterable instead of a service locator, you can switch the
-    :class:`Symfony\\Component\\DependencyInjection\\Attribute\\AutowireLocator`
-    attribute to
+For example, if you want to collect all the handlers for different command types,
+you can use the ``AutowireIterator`` attribute to automatically inject all services
+tagged with a specific tag::
+
+    // src/CommandBus.php
+    namespace App;
+
+    use App\CommandHandler\BarHandler;
+    use App\CommandHandler\FooHandler;
+    use Psr\Container\ContainerInterface;
+    use Symfony\Component\DependencyInjection\Attribute\AutowireIterator;
+
+    class CommandBus
+    {
+        public function __construct(
+            #[AutowireIterator('command_handler')]
+            private iterable $handlers, // Collects all services tagged with 'command_handler'
+        ) {
+        }
+
+        public function handle(Command $command): mixed
+        {
+            foreach ($this->handlers as $handler) {
+                if ($handler->supports($command)) {
+                    return $handler->handle($command);
+                }
+            }
+        }
+    }
+
+.. versionadded:: 6.4
+
+    The
     :class:`Symfony\\Component\\DependencyInjection\\Attribute\\AutowireIterator`
-    attribute.
-
-    .. versionadded:: 6.4
-
-        The
-        :class:`Symfony\\Component\\DependencyInjection\\Attribute\\AutowireIterator`
-        attribute was introduced in Symfony 6.4.
+    attribute was introduced in Symfony 6.4.
 
 .. _service-subscribers-locators_defining-service-locator:
 
