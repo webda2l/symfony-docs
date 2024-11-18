@@ -38,7 +38,11 @@ as the second and third parameters::
         // the default lifetime (in seconds) for cache items that do not define their
         // own lifetime, with a value 0 causing items to be stored indefinitely (i.e.
         // until RedisAdapter::clear() is invoked or the server(s) are purged)
-        $defaultLifetime = 0
+        $defaultLifetime = 0,
+        // $marshaller (optional) MarshallerInterface instance to control serialization
+        // and deserialization of cache items. By default, it uses native PHP serialization.
+        // Useful to compress data, use custom serialization, or optimize the size and performance of cached items.
+        ?MarshallerInterface $marshaller = null
     );
 
 .. versionadded:: 6.3
@@ -265,6 +269,75 @@ performance when using tag-based invalidation::
     in the Redis ``maxmemory-policy`` eviction policy.
 
 Read more about this topic in the official `Redis LRU Cache Documentation`_.
+
+Working with Marshaller
+-----------------------
+
+TagAwareMarshaller for Tag-Based Caching
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+Optimizes caching for tag-based retrieval, allowing efficient management of related items::
+
+    $marshaller = new TagAwareMarshaller();
+
+    $cache = new RedisAdapter($redis, 'tagged_namespace', 3600, $marshaller);
+
+    $item = $cache->getItem('tagged_key');
+    $item->set(['value' => 'some_data', 'tags' => ['tag1', 'tag2']]);
+    $cache->save($item);
+
+SodiumMarshaller for Encrypted Caching
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+Encrypts cached data with Sodium for added security::
+
+    $encryptionKeys = [sodium_crypto_box_keypair()];
+    $marshaller = new SodiumMarshaller($encryptionKeys);
+
+    $cache = new RedisAdapter($redis, 'secure_namespace', 3600, $marshaller);
+
+    $item = $cache->getItem('secure_key');
+    $item->set('confidential_data');
+    $cache->save($item);
+
+DefaultMarshaller with igbinary Serialization
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+Uses igbinary for faster, more efficient serialization when available::
+
+    $marshaller = new DefaultMarshaller(true);
+
+    $cache = new RedisAdapter($redis, 'optimized_namespace', 3600, $marshaller);
+
+    $item = $cache->getItem('optimized_key');
+    $item->set(['data' => 'optimized_data']);
+    $cache->save($item);
+
+DefaultMarshaller with Exception on Failure
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+Throws an exception if serialization fails, aiding in error handling::
+
+    $marshaller = new DefaultMarshaller(false, true);
+
+    $cache = new RedisAdapter($redis, 'error_namespace', 3600, $marshaller);
+
+    try {
+        $item = $cache->getItem('error_key');
+        $item->set('data');
+        $cache->save($item);
+    } catch (\ValueError $e) {
+        echo 'Serialization failed: ' . $e->getMessage();
+    }
+
+SodiumMarshaller with Key Rotation
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+Supports key rotation, allowing secure decryption with both old and new keys::
+
+    $keys = [sodium_crypto_box_keypair(), sodium_crypto_box_keypair()];
+    $marshaller = new SodiumMarshaller($keys);
+
+    $cache = new RedisAdapter($redis, 'rotated_namespace', 3600, $marshaller);
+
+    $item = $cache->getItem('rotated_key');
+    $item->set('data_to_encrypt');
+    $cache->save($item);
 
 .. _`Data Source Name (DSN)`: https://en.wikipedia.org/wiki/Data_source_name
 .. _`Redis server`: https://redis.io/
