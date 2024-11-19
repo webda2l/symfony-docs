@@ -394,12 +394,12 @@ logic you want::
             }
 
             // you can still check for ROLE_ALLOWED_TO_SWITCH
-            if ($this->accessDecisionManager->isGranted($token, ['ROLE_ALLOWED_TO_SWITCH'])) {
+            if ($this->accessDecisionManager->decide($token, ['ROLE_ALLOWED_TO_SWITCH'])) {
                 return true;
             }
 
             // check for any roles you want
-            if ($this->accessDecisionManager->isGranted($token, ['ROLE_TECH_SUPPORT'])) {
+            if ($this->accessDecisionManager->decide($token, ['ROLE_TECH_SUPPORT'])) {
                 return true;
             }
 
