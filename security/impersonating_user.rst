@@ -368,13 +368,14 @@ logic you want::
 
     use Symfony\Bundle\SecurityBundle\Security;
     use Symfony\Component\Security\Core\Authentication\Token\TokenInterface;
+    use Symfony\Component\Security\Core\Authorization\AccessDecisionManagerInterface;
     use Symfony\Component\Security\Core\Authorization\Voter\Voter;
     use Symfony\Component\Security\Core\User\UserInterface;
 
     class SwitchToCustomerVoter extends Voter
     {
         public function __construct(
-            private Security $security,
+            private AccessDecisionManager $accessDecisionManager,
         ) {
         }
 
@@ -393,12 +394,12 @@ logic you want::
             }
 
             // you can still check for ROLE_ALLOWED_TO_SWITCH
-            if ($this->security->isGranted('ROLE_ALLOWED_TO_SWITCH')) {
+            if ($this->accessDecisionManager->isGranted($token, ['ROLE_ALLOWED_TO_SWITCH'])) {
                 return true;
             }
 
             // check for any roles you want
-            if ($this->security->isGranted('ROLE_TECH_SUPPORT')) {
+            if ($this->accessDecisionManager->isGranted($token, ['ROLE_TECH_SUPPORT'])) {
                 return true;
             }
 
