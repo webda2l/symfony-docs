@@ -248,7 +248,7 @@ with ``ROLE_SUPER_ADMIN``::
             // ...
 
             // ROLE_SUPER_ADMIN can do anything! The power!
-            if ($this->accessDecisionManager->isGranted($token, ['ROLE_SUPER_ADMIN'])) {
+            if ($this->accessDecisionManager->decide($token, ['ROLE_SUPER_ADMIN'])) {
                 return true;
             }
 
