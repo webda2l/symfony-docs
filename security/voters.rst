@@ -256,6 +256,25 @@ with ``ROLE_SUPER_ADMIN``::
         }
     }
 
+.. caution::
+
+    In the previous example, avoid using the following code to check if a role
+    is granted permission::
+
+        // DON'T DO THIS
+        use Symfony\Component\Security\Core\Security;
+        // ...
+
+        if ($this->security->isGranted('ROLE_SUPER_ADMIN')) {
+            // ...
+        }
+
+        The ``Security::isGranted()`` method inside a voter has a significant
+        drawback: it does not guarantee that the checks are performed on the same
+        token as the one in your voter. The token in the token storage might have
+        changed or could change in the meantime. Always use the ``AccessDecisionManager``
+        instead.
+
 If you're using the :ref:`default services.yaml configuration <service-container-services-load-example>`,
 you're done! Symfony will automatically pass the ``security.helper``
 service when instantiating your voter (thanks to autowiring).
