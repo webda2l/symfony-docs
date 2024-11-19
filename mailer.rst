@@ -108,7 +108,7 @@ Service               Install with                                    Webhook su
 `Mailjet`_            ``composer require symfony/mailjet-mailer``     yes
 `Mailomat`_           ``composer require symfony/mailomat-mailer``    yes
 `MailPace`_           ``composer require symfony/mail-pace-mailer``
-`MailerSend`_         ``composer require symfony/mailer-send-mailer``
+`MailerSend`_         ``composer require symfony/mailer-send-mailer`` yes
 `Mailtrap`_           ``composer require symfony/mailtrap-mailer``    yes
 `Mandrill`_           ``composer require symfony/mailchimp-mailer``   yes
 `Postal`_             ``composer require symfony/postal-mailer``
