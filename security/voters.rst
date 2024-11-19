@@ -237,22 +237,22 @@ Checking for Roles inside a Voter
 ---------------------------------
 
 What if you want to call ``isGranted()`` from *inside* your voter - e.g. you want
-to see if the current user has ``ROLE_SUPER_ADMIN``. That's possible by injecting
-the :class:`Symfony\\Bundle\\SecurityBundle\\Security`
-into your voter. You can use this to, for example, *always* allow access to a user
+to see if the current user has ``ROLE_SUPER_ADMIN``. That's possible by using an
+:class:`access decision manager <Symfony\\Component\\Security\\Core\\Authorization\\AccessDecisionManagerInterface>`
+inside your voter. You can use this to, for example, *always* allow access to a user
 with ``ROLE_SUPER_ADMIN``::
 
     // src/Security/PostVoter.php
 
     // ...
-    use Symfony\Bundle\SecurityBundle\Security;
+    use Symfony\Component\Security\Core\Authorization\AccessDecisionManagerInterface;
 
     class PostVoter extends Voter
     {
         // ...
 
         public function __construct(
-            private Security $security,
+            private AccessDecisionManagerInterface $accessDecisionManager,
         ) {
         }
 
@@ -261,13 +261,32 @@ with ``ROLE_SUPER_ADMIN``::
             // ...
 
             // ROLE_SUPER_ADMIN can do anything! The power!
-            if ($this->security->isGranted('ROLE_SUPER_ADMIN')) {
+            if ($this->accessDecisionManager->isGranted($token, ['ROLE_SUPER_ADMIN'])) {
                 return true;
             }
 
             // ... all the normal voter logic
         }
     }
+
+.. caution::
+
+    In the previous example, avoid using the following code to check if a role
+    is granted permission::
+
+        // DON'T DO THIS
+        use Symfony\Component\Security\Core\Security;
+        // ...
+
+        if ($this->security->isGranted('ROLE_SUPER_ADMIN')) {
+            // ...
+        }
+
+        The ``Security::isGranted()`` method inside a voter has a significant
+        drawback: it does not guarantee that the checks are performed on the same
+        token as the one in your voter. The token in the token storage might have
+        changed or could change in the meantime. Always use the ``AccessDecisionManager``
+        instead.
 
 If you're using the :ref:`default services.yaml configuration <service-container-services-load-example>`,
 you're done! Symfony will automatically pass the ``security.helper``
