@@ -76,6 +76,7 @@ If you're not using ``autoconfigure``, you have to tag the service with
 .. configuration-block::
 
     .. code-block:: yaml
+
         # config/services.yaml
         services:
             # ...
