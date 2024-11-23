@@ -106,16 +106,18 @@ Security
 * :ref:`IsCsrfTokenValid <csrf-controller-attributes>`
 * :ref:`IsGranted <security-securing-controller-attributes>`
 
+.. _reference-attributes-serializer:
+
 Serializer
 ~~~~~~~~~~
 
-* :ref:`Context <serializer_serializer-context>`
+* :ref:`Context <serializer-context>`
 * :ref:`DiscriminatorMap <serializer_interfaces-and-abstract-classes>`
-* :ref:`Groups <component-serializer-attributes-groups-attributes>`
+* :ref:`Groups <serializer-groups-attribute>`
 * :ref:`Ignore <serializer_ignoring-attributes>`
 * :ref:`MaxDepth <serializer_handling-serialization-depth>`
-* :ref:`SerializedName <serializer_name-conversion>`
-* :ref:`SerializedPath <serializer-enabling-metadata-cache>`
+* :ref:`SerializedName <serializer-name-conversion>`
+* :ref:`SerializedPath <serializer-nested-structures>`
 
 Twig
 ~~~~
