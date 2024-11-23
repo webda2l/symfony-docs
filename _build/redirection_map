@@ -525,8 +525,7 @@
 /testing/functional_tests_assertions /testing#testing-application-assertions
 /components https://symfony.com/components
 /components/index https://symfony.com/components
-/serializer/normalizers /components/serializer#normalizers
-/components/serializer#component-serializer-attributes-groups-annotations /components/serializer#component-serializer-attributes-groups-attributes
+/serializer/normalizers /serializer#serializer-built-in-normalizers
 /logging/monolog_regex_based_excludes /logging/monolog_exclude_http_codes
 /security/named_encoders /security/named_hashers
 /components/inflector /string#inflector
@@ -572,3 +571,5 @@
 /doctrine/registration_form /security#security-make-registration-form
 /form/form_dependencies /form/create_custom_field_type
 /doctrine/reverse_engineering /doctrine#doctrine-adding-mapping
+/components/serializer /serializer
+/serializer/custom_encoder /serializer/encoders#serializer-custom-encoder
