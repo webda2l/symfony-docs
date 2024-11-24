@@ -666,6 +666,51 @@ URL                       Route          Parameters
     contains a collection of commonly used regular-expression constants such as
     digits, dates and UUIDs which can be used as route parameter requirements.
 
+    .. configuration-block::
+
+        .. code-block:: php-attributes
+
+            // src/Controller/BlogController.php
+            namespace App\Controller;
+
+            use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
+            use Symfony\Component\HttpFoundation\Response;
+            use Symfony\Component\Routing\Attribute\Route;
+            use Symfony\Component\Routing\Requirement\Requirement;
+
+            class BlogController extends AbstractController
+            {
+                #[Route('/blog/{page}', name: 'blog_list', requirements: ['page' => Requirement::DIGITS])]
+                public function list(int $page): Response
+                {
+                    // ...
+                }
+            }
+
+        .. code-block:: yaml
+
+            # config/routes.yaml
+            blog_list:
+                path:       /blog/{page}
+                controller: App\Controller\BlogController::list
+                requirements:
+                    page: !php/const Symfony\Component\Routing\Requirement\Requirement::DIGITS
+
+        .. code-block:: php
+
+            // config/routes.php
+            use App\Controller\BlogController;
+            use Symfony\Component\Routing\Loader\Configurator\RoutingConfigurator;
+            use Symfony\Component\Routing\Requirement\Requirement;
+
+            return static function (RoutingConfigurator $routes): void {
+                $routes->add('blog_list', '/blog/{page}')
+                    ->controller([BlogController::class, 'list'])
+                    ->requirements(['page' => Requirement::DIGITS])
+                ;
+                // ...
+            };
+
     .. versionadded:: 6.1
 
         The ``Requirement`` enum was introduced in Symfony 6.1.
