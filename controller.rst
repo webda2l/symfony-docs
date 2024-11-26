@@ -788,6 +788,14 @@ response types.  Some of these are mentioned below. To learn more about the
 ``Request`` and ``Response`` (and different ``Response`` classes), see the
 :ref:`HttpFoundation component documentation <component-http-foundation-request>`.
 
+.. note::
+
+    Technically, a controller can return a value other than a ``Response``.
+    However, your application is responsible for transforming that value into a
+    ``Response`` object. This is handled using :doc:`events </event_dispatcher>`
+    (specifically the :ref:`kernel.view event <component-http-kernel-kernel-view>`),
+    an advanced feature you'll learn about later.
+
 Accessing Configuration Values
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
