@@ -447,7 +447,7 @@ and provides methods for getting and setting response headers. The header names 
 normalized. As a result, the name ``Content-Type`` is equivalent to
 the name ``content-type`` or ``content_type``.
 
-In Symfony, a controller is required to return a ``Response`` object::
+In Symfony, a controller usually returns a ``Response`` object::
 
     use Symfony\Component\HttpFoundation\Response;
 
@@ -462,6 +462,14 @@ To facilitate this, different response objects are included to address different
 response types.  Some of these are mentioned below. To learn more about the
 ``Request`` and ``Response`` (and different ``Response`` classes), see the
 :ref:`HttpFoundation component documentation <component-http-foundation-request>`.
+
+.. note::
+
+    When a controller returns a non-``Response`` object, a ``kernel.view``
+    listener is expected to transform it into a ``Response`` object;
+    otherwise an exception is thrown.
+
+    See :ref:`kernel.view event <component-http-kernel-kernel-view>` for details on the ``kernel.view`` event.
 
 Accessing Configuration Values
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
