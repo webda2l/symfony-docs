@@ -317,7 +317,7 @@ logic you want::
     {
         private $accessDecisionManager;
 
-        public function __construct(AccessDecisionManager $accessDecisionManager)
+        public function __construct(AccessDecisionManagerInterface $accessDecisionManager)
         {
             $this->accessDecisionManager = $accessDecisionManager;
         }
