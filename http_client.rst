@@ -2355,11 +2355,11 @@ First, use a browser or HTTP client to perform the HTTP request(s) you want to
 test. Then, save that information as a ``.har`` file somewhere in your application::
 
     // ExternalArticleServiceTest.php
-    use PHPUnit\Framework\TestCase;
+    use Symfony\Bundle\FrameworkBundle\Test\KernelTestCase;
     use Symfony\Component\HttpClient\MockHttpClient;
     use Symfony\Component\HttpClient\Response\MockResponse;
 
-    final class ExternalArticleServiceTest extends TestCase
+    final class ExternalArticleServiceTest extends KernelTestCase
     {
         public function testSubmitData(): void
         {
