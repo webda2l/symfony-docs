@@ -67,6 +67,9 @@ issue):
 * **Adding new deprecations**: After a version reaches stability, new
   deprecations cannot be added anymore.
 
+* **Adding or updating annotations**: Adding or updating annotations (PHPDoc
+  annotations for instance) is not allowed; fixing them might be accepted.
+
 Anything not explicitly listed above should be done on the next minor or major
 version instead. For instance, the following changes are never accepted in a
 patch version:
