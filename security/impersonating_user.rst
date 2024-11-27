@@ -383,7 +383,7 @@ logic you want::
     class SwitchToCustomerVoter extends Voter
     {
         public function __construct(
-            private AccessDecisionManager $accessDecisionManager,
+            private AccessDecisionManagerInterface $accessDecisionManager,
         ) {
         }
 
