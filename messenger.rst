@@ -919,7 +919,7 @@ Rate Limited Transport
     The ``rate_limiter`` option was introduced in Symfony 6.2.
 
 Sometimes you might need to rate limit your message worker. You can configure a
-rate limiter on a transport (requires the :doc:`RateLimiter component </rate-limiter>`)
+rate limiter on a transport (requires the :doc:`RateLimiter component </rate_limiter>`)
 by setting its ``rate_limiter`` option:
 
 .. configuration-block::
