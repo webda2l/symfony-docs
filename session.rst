@@ -492,12 +492,11 @@ the ``php.ini`` directive ``session.gc_maxlifetime``. The meaning in this contex
 that any stored session that was saved more than ``gc_maxlifetime`` ago should be
 deleted. This allows one to expire records based on idle time.
 
-However, some operating systems (e.g. Debian) do their own session handling and set
-the ``session.gc_probability`` variable to ``0`` to stop PHP doing garbage
-collection. That's why Symfony now overwrites this value to ``1``.
-
-If you wish to use the original value set in your ``php.ini``, add the following
-configuration:
+However, some operating systems (e.g. Debian) manage session handling differently
+and set the ``session.gc_probability`` variable to ``0`` to prevent PHP from performing
+garbage collection. By default, Symfony uses the value of the ``gc_probability``
+directive set in the ``php.ini`` file. If you can't modify this PHP setting, you
+can configure it directly in Symfony:
 
 .. code-block:: yaml
 
@@ -505,13 +504,18 @@ configuration:
     framework:
         session:
             # ...
-            gc_probability: null
+            gc_probability: 1
 
-You can configure these settings by passing ``gc_probability``, ``gc_divisor``
-and ``gc_maxlifetime`` in an array to the constructor of
+Alternatively, you can configure these settings by passing ``gc_probability``,
+``gc_divisor`` and ``gc_maxlifetime`` in an array to the constructor of
 :class:`Symfony\\Component\\HttpFoundation\\Session\\Storage\\NativeSessionStorage`
 or to the :method:`Symfony\\Component\\HttpFoundation\\Session\\Storage\\NativeSessionStorage::setOptions`
 method.
+
+.. versionadded:: 7.2
+
+    Using the ``php.ini`` directive as the default value for ``gc_probability``
+    was introduced in Symfony 7.2.
 
 .. _session-database:
 
