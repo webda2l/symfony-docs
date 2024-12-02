@@ -156,11 +156,12 @@ values for the year, month and day fields::
 ``calendar``
 ~~~~~~~~~~~~
 
-**type**: ``\IntlCalendar`` **default**: ``null``
+**type**: ``integer`` or ``\IntlCalendar`` **default**: ``null``
 
 The calendar to use for formatting and parsing the date. The value should be
-an instance of the :phpclass:`IntlCalendar` to use. By default, the Gregorian
-calendar with the application default locale is used.
+an ``integer`` from :phpclass:`IntlDateFormatter` calendar constants or an instance
+of the :phpclass:`IntlCalendar` to use. By default, the Gregorian calendar
+with the application default locale is used.
 
 .. versionadded:: 7.2
 
