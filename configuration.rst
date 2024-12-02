@@ -379,7 +379,7 @@ a new ``locale`` parameter is added to the ``config/services.yaml`` file).
 
     By convention, parameters whose names start with a dot ``.`` (for example,
     ``.mailer.transport``), are available only during the container compilation.
-    They are useful when working with :ref:`Compiler Passes </service_container/compiler_passes>`
+    They are useful when working with :doc:`Compiler Passes </service_container/compiler_passes>`
     to declare some temporary parameters that won't be available later in the application.
 
 Configuration parameters are usually validation-free, but you can ensure that

@@ -289,34 +289,34 @@ the ``decoration_priority`` option. Its value is an integer that defaults to
 
 .. configuration-block::
 
-        .. code-block:: php-attributes
+    .. code-block:: php-attributes
+
+        // ...
+        use Symfony\Component\DependencyInjection\Attribute\AsDecorator;
+        use Symfony\Component\DependencyInjection\Attribute\AutowireDecorated;
+
+        #[AsDecorator(decorates: Foo::class, priority: 5)]
+        class Bar
+        {
+            public function __construct(
+                #[AutowireDecorated]
+                private $inner,
+            ) {
+            }
+            // ...
+        }
+
+        #[AsDecorator(decorates: Foo::class, priority: 1)]
+        class Baz
+        {
+            public function __construct(
+                #[AutowireDecorated]
+                private $inner,
+            ) {
+            }
 
             // ...
-            use Symfony\Component\DependencyInjection\Attribute\AsDecorator;
-            use Symfony\Component\DependencyInjection\Attribute\AutowireDecorated;
-
-            #[AsDecorator(decorates: Foo::class, priority: 5)]
-            class Bar
-            {
-                public function __construct(
-                    #[AutowireDecorated]
-                    private $inner,
-                ) {
-                }
-                // ...
-            }
-
-            #[AsDecorator(decorates: Foo::class, priority: 1)]
-            class Baz
-            {
-                public function __construct(
-                    #[AutowireDecorated]
-                    private $inner,
-                ) {
-                }
-
-                // ...
-            }
+        }
 
     .. code-block:: yaml
 
@@ -609,23 +609,23 @@ Three different behaviors are available:
 
 .. configuration-block::
 
-        .. code-block:: php-attributes
+    .. code-block:: php-attributes
+
+        // ...
+        use Symfony\Component\DependencyInjection\Attribute\AsDecorator;
+        use Symfony\Component\DependencyInjection\Attribute\AutowireDecorated;
+        use Symfony\Component\DependencyInjection\ContainerInterface;
+
+        #[AsDecorator(decorates: Mailer::class, onInvalid: ContainerInterface::IGNORE_ON_INVALID_REFERENCE)]
+        class Bar
+        {
+            public function __construct(
+                #[AutowireDecorated] private $inner,
+            ) {
+            }
 
             // ...
-            use Symfony\Component\DependencyInjection\Attribute\AsDecorator;
-            use Symfony\Component\DependencyInjection\Attribute\AutowireDecorated;
-            use Symfony\Component\DependencyInjection\ContainerInterface;
-
-            #[AsDecorator(decorates: Mailer::class, onInvalid: ContainerInterface::IGNORE_ON_INVALID_REFERENCE)]
-            class Bar
-            {
-                public function __construct(
-                    #[AutowireDecorated] private $inner,
-                ) {
-                }
-
-                // ...
-            }
+        }
 
     .. code-block:: yaml
 
