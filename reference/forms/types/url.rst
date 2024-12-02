@@ -25,6 +25,13 @@ Field Options
 
 **type**: ``string`` **default**: ``http``
 
+Set this value to ``null`` to render the field using a ``<input type="url"/>``,
+allowing the browser to perform local validation before submission.
+
+When this value is neither ``null`` nor an empty string, the form field is
+rendered using a ``<input type="text"/>``. This ensures users can submit the
+form field without specifying the protocol.
+
 If a value is submitted that doesn't begin with some protocol (e.g. ``http://``,
 ``ftp://``, etc), this protocol will be prepended to the string when
 the data is submitted to the form.
