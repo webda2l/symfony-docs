@@ -560,16 +560,16 @@ both strings or address objects::
         // ...
     ;
 
-.. versionadded:: 7.2
-
-    Support for non-ASCII email addresses (e.g. ``jânë.dœ@ëxãmplę.com``)
-    was introduced in Symfony 7.2.
-
 .. tip::
 
     Instead of calling ``->from()`` *every* time you create a new email, you can
     :ref:`configure emails globally <mailer-configure-email-globally>` to set the
     same ``From`` email to all messages.
+
+.. versionadded:: 7.2
+
+    Support for non-ASCII email addresses (e.g. ``jânë.dœ@ëxãmplę.com``)
+    was introduced in Symfony 7.2.
 
 .. note::
 
