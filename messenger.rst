@@ -1134,6 +1134,15 @@ and must be retried. If you throw
 :class:`Symfony\\Component\\Messenger\\Exception\\RecoverableMessageHandlingException`,
 the message will always be retried infinitely and ``max_retries`` setting will be ignored.
 
+You can define a custom retry delay (e.g., to use the value from the ``Retry-After``
+header in an HTTP response) by setting the ``retryDelay`` argument in the
+constructor of the ``RecoverableMessageHandlingException``.
+
+.. versionadded:: 7.2
+
+    The ``retryDelay`` argument and the ``getRetryDelay()`` method were introduced
+    in Symfony 7.2.
+
 .. _messenger-failure-transport:
 
 Saving & Retrying Failed Messages
