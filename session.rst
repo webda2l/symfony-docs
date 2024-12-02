@@ -494,24 +494,17 @@ deleted. This allows one to expire records based on idle time.
 
 However, some operating systems (e.g. Debian) do their own session handling and set
 the ``session.gc_probability`` variable to ``0`` to stop PHP doing garbage
-collection. That's why Symfony now overwrites this value to ``1``.
-
-If you wish to use the original value set in your ``php.ini``, add the following
-configuration:
-
-.. code-block:: yaml
-
-    # config/packages/framework.yaml
-    framework:
-        session:
-            # ...
-            gc_probability: null
+collection.
 
 You can configure these settings by passing ``gc_probability``, ``gc_divisor``
 and ``gc_maxlifetime`` in an array to the constructor of
 :class:`Symfony\\Component\\HttpFoundation\\Session\\Storage\\NativeSessionStorage`
 or to the :method:`Symfony\\Component\\HttpFoundation\\Session\\Storage\\NativeSessionStorage::setOptions`
 method.
+
+.. versionadded:: 7.2
+
+    Starting from Symfony 7.2, ``php.ini``'s directive is used as default for ``gc_probability``.
 
 .. _session-database:
 
