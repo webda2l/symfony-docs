@@ -311,7 +311,8 @@ as a service in your app. If you're using the
 that's done automatically!
 
 If you're not using :ref:`autoconfigure <services-autoconfigure>`, make sure
-to register your class as a service and tag it with ``serializer.encoder``:
+to register your class as a service and tag it with
+:ref:`serializer.encoder <reference-dic-tags-serializer-encoder>`:
 
 .. configuration-block::
 
