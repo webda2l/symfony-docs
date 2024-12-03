@@ -367,11 +367,13 @@ of the ``anonymize()`` method to specify the number of bytes that should be
 anonymized depending on the IP address format::
 
     $ipv4 = '123.234.235.236';
-    $anonymousIpv4 = IpUtils::anonymize($ipv4, v4Bytes: 3);
+    $anonymousIpv4 = IpUtils::anonymize($ipv4, 3);
     // $anonymousIpv4 = '123.0.0.0'
 
     $ipv6 = '2a01:198:603:10:396e:4789:8e99:890f';
-    $anonymousIpv6 = IpUtils::anonymize($ipv6, v6Bytes: 10);
+    // (you must define the second argument (bytes to anonymize in IPv4 addresses)
+    // even when you are only anonymizing IPv6 addresses)
+    $anonymousIpv6 = IpUtils::anonymize($ipv6, 3, 10);
     // $anonymousIpv6 = '2a01:198:603::'
 
 .. versionadded:: 7.2
