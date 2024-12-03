@@ -16,7 +16,7 @@ via Composer:
 
 .. code-block:: terminal
 
-    $ composer symfony/framework-bundle symfony/runtime
+    $ composer require symfony/framework-bundle symfony/runtime
 
 Next, create an ``index.php`` file that defines the kernel class and runs it:
 
