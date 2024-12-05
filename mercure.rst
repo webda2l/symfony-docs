@@ -312,18 +312,12 @@ as patterns:
 
 .. tip::
 
-    Google Chrome DevTools natively integrate a `practical UI`_ displaying in live
-    the received events:
+    Google Chrome features a practical UI to display the received events:
 
     .. image:: /_images/mercure/chrome.png
         :alt: The Chrome DevTools showing the EventStream tab containing information about each SSE event.
 
-    To use it:
-
-    * open the DevTools
-    * select the "Network" tab
-    * click on the request to the Mercure hub
-    * click on the "EventStream" sub-tab.
+    In DevTools, select the "Network" tab, then click on the request to the Mercure hub, then on the "EventStream" sub-tab.
 
 Discovery
 ---------
@@ -676,7 +670,7 @@ sent:
         mercure.hub.default:
             class: App\Tests\Functional\Stub\HubStub
 
-As MercureBundle support multiple hubs, you may have to replace
+As MercureBundle supports multiple hubs, you may have to replace
 the other service definitions accordingly.
 
 .. tip::
@@ -766,7 +760,6 @@ Going further
 .. _`JSON Web Token`: https://tools.ietf.org/html/rfc7519
 .. _`example JWT`: https://jwt.io/#debugger-io?token=eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJtZXJjdXJlIjp7InB1Ymxpc2giOlsiKiJdfX0.iHLdpAEjX4BqCsHJEegxRmO-Y6sMxXwNATrQyRNt3GY
 .. _`IRI`: https://tools.ietf.org/html/rfc3987
-.. _`practical UI`: https://twitter.com/ChromeDevTools/status/562324683194785792
 .. _`the dedicated API Platform documentation`: https://api-platform.com/docs/core/mercure/
 .. _`the online debugger`: https://uri-template-tester.mercure.rocks
 .. _`a feature to test applications using Mercure`: https://github.com/symfony/panther#creating-isolated-browsers-to-test-apps-using-mercure-or-websocket
