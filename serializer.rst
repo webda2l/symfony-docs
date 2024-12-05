@@ -290,9 +290,9 @@ The serializer, and its normalizers and encoders, are configured through
 the *serializer context*. This context can be configured in multiple
 places:
 
-* `Globally through the framework configuration <Configure a Default Context>`_
-* `While serializing/deserializing <Pass Context while Serializing/Deserializing>`_
-* `For a specific property <Configure Context on a Specific Property>`_
+* :ref:`Globally through the framework configuration <serializer-default-context>`
+* :ref:`While serializing/deserializing <serializer-context-while-serializing-deserializing>`
+* :ref:`For a specific property <serializer-using-context-builders>`
 
 You can use all three options at the same time. When the same setting is
 configured in multiple places, the latter in the list above will override
@@ -362,6 +362,8 @@ instance to disallow extra fields while deserializing:
             ]),
         ];
         $serializer = new Serializer($normalizers, $encoders);
+
+.. _serializer-context-while-serializing-deserializing:
 
 Pass Context while Serializing/Deserializing
 ............................................
@@ -1949,7 +1951,7 @@ these type names to the real PHP class name when deserializing:
         </serializer>
 
 With the discriminator map configured, the serializer can now pick the
-correct class for properties typed as `InvoiceItemInterface`::
+correct class for properties typed as ``InvoiceItemInterface``::
 
 .. configuration-block::
 
