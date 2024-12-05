@@ -960,16 +960,22 @@ parameter::
     $jsonData = ...; // the serialized JSON data from the previous example
     $persons = $serializer->deserialize($JsonData, Person::class.'[]', 'json');
 
-For nested classes, you have to add a PHPDoc type to the property/setter::
+For nested classes, you have to add a PHPDoc type to the property, constructor or setter::
 
     // src/Model/UserGroup.php
     namespace App\Model;
 
     class UserGroup
     {
-        private array $members;
+        /**
+         * @param Person[] $members
+         */
+        public function __construct(
+            private array $members,
+        ) {
+        }
 
-        // ...
+        // or if you're using a setter
 
         /**
          * @param Person[] $members
@@ -978,6 +984,8 @@ For nested classes, you have to add a PHPDoc type to the property/setter::
         {
             $this->members = $members;
         }
+
+        // ...
     }
 
 .. tip::
@@ -1358,8 +1366,6 @@ normalizers (in order of priority):
 
     During denormalization, it supports using the constructor as well as
     the discovered methods.
-
-:ref:`serializer.encoder <reference-dic-tags-serializer-encoder>`
 
 .. danger::
 
