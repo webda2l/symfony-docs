@@ -1767,7 +1767,7 @@ You can log in a user programmatically using the ``login()`` method of the
 :class:`Symfony\\Bundle\\SecurityBundle\\Security` helper::
 
     // src/Controller/SecurityController.php
-    namespace App\Controller\SecurityController;
+    namespace App\Controller;
 
     use App\Security\Authenticator\ExampleAuthenticator;
     use Symfony\Bundle\SecurityBundle\Security;
