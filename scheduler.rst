@@ -818,6 +818,14 @@ the Messenger component:
 .. image:: /_images/components/scheduler/generate_consume.png
     :alt: Symfony Scheduler - generate and consume
 
+.. tip::
+
+    Depending on your deployment scenario, instead of manually executing this
+    Messenger worker process, you might want to run it with cron, supervisor or systemd,
+    and ensure workers are running at all times. Check out the `Deploying to Production`_
+    section of the Messenger component documentation.
+
+
 Creating a Consumer Programmatically
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
@@ -981,6 +989,7 @@ helping you identify those messages when needed.
     to redispatched messages was introduced in Symfony 6.4.
 
 .. _`MakerBundle`: https://symfony.com/doc/current/bundles/SymfonyMakerBundle/index.html
+.. _`Deploying to Production`: https://symfony.com/doc/current/messenger.html#deploying-to-production
 .. _`Memoizing`: https://en.wikipedia.org/wiki/Memoization
 .. _`cron command-line utility`: https://en.wikipedia.org/wiki/Cron
 .. _`crontab.guru website`: https://crontab.guru/
