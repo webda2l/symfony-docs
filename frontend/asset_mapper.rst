@@ -647,6 +647,7 @@ which will automatically do most of these things for you:
 - **Compress your assets**: Your web server should compress (e.g. using gzip)
   your assets (JavaScript, CSS, images) before sending them to the browser. This
   is automatically enabled in Caddy and can be activated in Nginx and Apache.
+  In Cloudflare, assets are compressed by default.
 
 - **Set long-lived cache expiry**: Your web server should set a long-lived
   ``Cache-Control`` HTTP header on your assets. Because the AssetMapper component includes a version
