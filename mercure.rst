@@ -130,11 +130,12 @@ MercureBundle provides a more advanced configuration:
         mercure:
             hubs:
                 default:
-                    url: https://mercure-hub.example.com/.well-known/mercure
+                    url: '%env(string:MERCURE_URL)%'
+                    public_url: '%env(string:MERCURE_PUBLIC_URL)%'
                     jwt:
-                        secret: '!ChangeThisMercureHubJWTSecretKey!'
-                        publish: ['foo', 'https://example.com/foo']
-                        subscribe: ['bar', 'https://example.com/bar']
+                        secret: '%env(string:MERCURE_JWT_SECRET)%'
+                        publish: ['https://example.com/foo1', 'https://example.com/foo2']
+                        subscribe: ['https://example.com/bar1', 'https://example.com/bar2']
                         algorithm: 'hmac.sha256'
                         provider: 'My\Provider'
                         factory: 'My\Factory'
@@ -147,19 +148,20 @@ MercureBundle provides a more advanced configuration:
         <config>
             <hub
                 name="default"
-                url="https://mercure-hub.example.com/.well-known/mercure"
-            >
+                url="%env(string:MERCURE_URL)%"
+                public_url="%env(string:MERCURE_PUBLIC_URL)%"
+            > <!-- public_url defaults to url -->
                 <jwt
-                    secret="!ChangeThisMercureHubJWTSecretKey!"
+                    secret="%env(string:MERCURE_JWT_SECRET)%"
                     algorithm="hmac.sha256"
                     provider="My\Provider"
                     factory="My\Factory"
                     value="my.jwt"
                 >
-                    <publish>foo</publish>
-                    <publish>https://example.com/foo</publish>
-                    <subscribe>bar</subscribe>
-                    <subscribe>https://example.com/bar</subscribe>
+                    <publish>https://example.com/foo1</publish>
+                    <publish>https://example.com/foo2</publish>
+                    <subscribe>https://example.com/bar1</subscribe>
+                    <subscribe>https://example.com/bar2</subscribe>
                 </jwt>
             </hub>
         </config>
@@ -170,11 +172,12 @@ MercureBundle provides a more advanced configuration:
         $container->loadFromExtension('mercure', [
             'hubs' => [
                 'default' => [
-                    'url' => 'https://mercure-hub.example.com/.well-known/mercure',
+                    'url' => '%env(string:MERCURE_URL)%',
+                    'public_url' => '%env(string:MERCURE_PUBLIC_URL)%',
                     'jwt' => [
-                        'secret' => '!ChangeThisMercureHubJWTSecretKey!',
-                        'publish' => ['foo', 'https://example.com/foo'],
-                        'subscribe' => ['bar', 'https://example.com/bar'],
+                        'secret' => '%env(string:MERCURE_JWT_SECRET)%',
+                        'publish' => ['https://example.com/foo1', 'https://example.com/foo2'],
+                        'subscribe' => ['https://example.com/bar1', 'https://example.com/bar2'],
                         'algorithm' => 'hmac.sha256',
                         'provider' => 'My\Provider',
                         'factory' => 'My\Factory',
