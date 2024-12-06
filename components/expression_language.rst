@@ -107,7 +107,7 @@ if the expression is not valid::
     $expressionLanguage->lint('1 + 2', []); // doesn't throw anything
 
     $expressionLanguage->lint('1 + a', []);
-    // Throw SyntaxError Exception
+    // throws a SyntaxError exception:
     // "Variable "a" is not valid around position 5 for expression `1 + a`."
 
 The behavior of these methods can be configured with some flags defined in the
@@ -125,7 +125,7 @@ This is how you can use these flags::
 
     $expressionLanguage = new ExpressionLanguage();
 
-    // Does not throw a SyntaxError because the unknown variables and functions are ignored
+    // does not throw a SyntaxError because the unknown variables and functions are ignored
     $expressionLanguage->lint('unknown_var + unknown_function()', [], Parser::IGNORE_UNKNOWN_VARIABLES | Parser::IGNORE_UNKNOWN_FUNCTIONS);
 
 .. versionadded:: 7.1
