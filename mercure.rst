@@ -684,8 +684,6 @@ Debugging
 
     The WebProfiler panel was introduced in MercureBundle 0.2.
 
-Enable the panel in your configuration, as follows:
-
 MercureBundle is shipped with a debug panel. Install the Debug pack to
 enable it::
 
