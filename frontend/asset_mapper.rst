@@ -626,7 +626,7 @@ To make your AssetMapper-powered site fly, there are a few things you need to
 do. If you want to take a shortcut, you can use a service like `Cloudflare`_,
 which will automatically do most of these things for you:
 
-- **Use HTTP/2**: Your web server should be running HTTP/2 (or HTTP/3) so the
+- **Use HTTP/2**: Your web server should be running HTTP/2 or HTTP/3 so the
   browser can download assets in parallel. HTTP/2 is automatically enabled in Caddy
   and can be activated in Nginx and Apache. Or, proxy your site through a
   service like Cloudflare, which will automatically enable HTTP/2 for you.
