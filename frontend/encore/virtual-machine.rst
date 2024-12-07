@@ -87,7 +87,7 @@ connections:
           }
       }
 
-.. caution::
+.. danger::
 
     Make sure to run the development server inside your virtual machine only;
     otherwise other computers can have access to it.
@@ -110,7 +110,7 @@ the dev-server. To fix this, set the ``allowedHosts`` option:
             options.allowedHosts = all;
         })
 
-.. caution::
+.. warning::
 
     Beware that `it's not recommended to set allowedHosts to all`_ in general, but
     here it's required to solve the issue when using Encore in a virtual machine.

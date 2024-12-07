@@ -93,7 +93,7 @@ and what headers your reverse proxy uses to send information:
     ``private_ranges`` as a shortcut for private IP address ranges for the
     ``trusted_proxies`` option was introduced in Symfony 7.1.
 
-.. caution::
+.. danger::
 
     Enabling the ``Request::HEADER_X_FORWARDED_HOST`` option exposes the
     application to `HTTP Host header attacks`_. Make sure the proxy really

@@ -21,7 +21,7 @@ The component supports:
 * **null** - ``null``
 * **exponential** - also known as scientific (e.g. ``1.99E+3`` or ``1e-2``)
 
-.. caution::
+.. warning::
 
     A backslash (``\``) must be escaped by 3 backslashes (``\\\\``) in a string
     and 7 backslashes (``\\\\\\\\``) in a regex::

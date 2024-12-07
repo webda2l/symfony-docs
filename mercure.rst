@@ -442,7 +442,7 @@ Using cookies is the most secure and preferred way when the client is a web
 browser. If the client is not a web browser, then using an authorization header
 is the way to go.
 
-.. caution::
+.. warning::
 
     To use the cookie authentication method, the Symfony app and the Hub
     must be served from the same domain (can be different sub-domains).

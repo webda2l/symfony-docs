@@ -1070,7 +1070,7 @@ template fragments. Configure that special URL in the ``fragments`` option:
             $framework->fragments()->path('/_fragment');
         };
 
-.. caution::
+.. warning::
 
     Embedding controllers requires making requests to those controllers and
     rendering some templates as result. This can have a significant impact on
@@ -1276,7 +1276,7 @@ different templates to create the final contents. This inheritance mechanism
 boosts your productivity because each template includes only its unique contents
 and leaves the repeated contents and HTML structure to some parent templates.
 
-.. caution::
+.. warning::
 
     When using ``extends``, a child template is forbidden to define template
     parts outside of a block. The following code throws a ``SyntaxError``:

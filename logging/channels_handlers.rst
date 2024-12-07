@@ -95,7 +95,7 @@ from the ``security`` channel. The following example does that only in the
             }
         };
 
-.. caution::
+.. warning::
 
     The ``channels`` configuration only works for top-level handlers. Handlers
     that are nested inside a group, buffer, filter, fingers crossed or other

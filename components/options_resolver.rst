@@ -485,7 +485,7 @@ these options, you can return the desired default value::
         }
     }
 
-.. caution::
+.. warning::
 
     The argument of the callable must be type hinted as ``Options``. Otherwise,
     the callable itself is considered as the default value of the option.
@@ -699,7 +699,7 @@ to the closure to access to them::
         }
     }
 
-.. caution::
+.. warning::
 
     The arguments of the closure must be type hinted as ``OptionsResolver`` and
     ``Options`` respectively. Otherwise, the closure itself is considered as the

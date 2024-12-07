@@ -257,7 +257,7 @@ After setting up hashing, you can configure all the user information in
             ;
         };
 
-.. caution::
+.. warning::
 
     When using a ``memory`` provider, and not the ``auto`` algorithm, you have
     to choose an encoding without salt (i.e. ``bcrypt``).

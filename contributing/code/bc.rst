@@ -30,7 +30,7 @@ The second section, "Working on Symfony Code", is targeted at Symfony
 contributors. This section lists detailed rules that every contributor needs to
 follow to ensure smooth upgrades for our users.
 
-.. caution::
+.. warning::
 
     :doc:`Experimental Features </contributing/code/experimental>` and code
     marked with the ``@internal`` tags are excluded from our Backward
@@ -53,7 +53,7 @@ All interfaces shipped with Symfony can be used in type hints. You can also call
 any of the methods that they declare. We guarantee that we won't break code that
 sticks to these rules.
 
-.. caution::
+.. warning::
 
     The exception to this rule are interfaces tagged with ``@internal``. Such
     interfaces should not be used or implemented.
@@ -89,7 +89,7 @@ Using our Classes
 All classes provided by Symfony may be instantiated and accessed through their
 public methods and properties.
 
-.. caution::
+.. warning::
 
     Classes, properties and methods that bear the tag ``@internal`` as well as
     the classes located in the various ``*\Tests\`` namespaces are an
@@ -146,7 +146,7 @@ Using our Traits
 
 All traits provided by Symfony may be used in your classes.
 
-.. caution::
+.. warning::
 
     The exception to this rule are traits tagged with ``@internal``. Such
     traits should not be used.

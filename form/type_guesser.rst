@@ -162,7 +162,7 @@ instance with the value of the option. This constructor has 2 arguments:
 ``null`` is guessed when you believe the value of the option should not be
 set.
 
-.. caution::
+.. warning::
 
     You should be very careful using the ``guessMaxLength()`` method. When the
     type is a float, you cannot determine a length (e.g. you want a float to be

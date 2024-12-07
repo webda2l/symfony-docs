@@ -70,7 +70,7 @@ distinguished name (DN) and the password of a user::
 
     $ldap->bind($dn, $password);
 
-.. caution::
+.. danger::
 
     When the LDAP server allows unauthenticated binds, a blank password will always be valid.
 

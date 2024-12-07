@@ -25,7 +25,7 @@ By default, the choice key or an incrementing integer may be used (starting at `
 
     See the :ref:`"choice_loader" option documentation <reference-form-choice-loader>`.
 
-.. caution::
+.. warning::
 
     The configured value must be a valid form name. Make sure to only return
     valid names when using a callable. Valid form names must be composed of

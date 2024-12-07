@@ -42,7 +42,7 @@ the component. This file runs the following logic:
 #. At last, the Runtime is used to run the application (i.e. calling
    ``$kernel->handle(Request::createFromGlobals())->send()``).
 
-.. caution::
+.. warning::
 
     If you use the Composer ``--no-plugins`` option, the ``autoload_runtime.php``
     file won't be created.

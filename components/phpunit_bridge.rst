@@ -621,7 +621,7 @@ test::
 
 And that's all!
 
-.. caution::
+.. warning::
 
     Time-based function mocking follows the `PHP namespace resolutions rules`_
     so "fully qualified function calls" (e.g ``\time()``) cannot be mocked.

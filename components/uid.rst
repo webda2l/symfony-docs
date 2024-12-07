@@ -361,7 +361,7 @@ entity primary keys::
         // ...
     }
 
-.. caution::
+.. warning::
 
     Using UUIDs as primary keys is usually not recommended for performance reasons:
     indexes are slower and take more space (because UUIDs in binary format take
@@ -549,7 +549,7 @@ entity primary keys::
         // ...
     }
 
-.. caution::
+.. warning::
 
     Using ULIDs as primary keys is usually not recommended for performance reasons.
     Although ULIDs don't suffer from index fragmentation issues (because the values

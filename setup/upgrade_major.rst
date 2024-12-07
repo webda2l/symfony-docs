@@ -98,7 +98,7 @@ Now, you can start fixing the notices:
 Once you fixed them all, the command ends with ``0`` (success) and you're
 done!
 
-.. caution::
+.. warning::
 
     You will probably see many deprecations about incompatible native
     return types. See :ref:`Add Native Return Types <upgrading-native-return-types>`

@@ -189,7 +189,7 @@ To lock the default resource, autowire the lock factory using
         }
     }
 
-.. caution::
+.. warning::
 
     The same instance of ``LockInterface`` won't block when calling ``acquire``
     multiple times inside the same process. When several services use the
