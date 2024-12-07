@@ -117,7 +117,7 @@ In this example, it will first validate all constraints in the group ``User``
 (which is the same as the ``Default`` group). Only if all constraints in
 that group are valid, the second group, ``Strict``, will be validated.
 
-.. caution::
+.. warning::
 
     As you have already seen in :doc:`/validation/groups`, the ``Default`` group
     and the group containing the class name (e.g. ``User``) were identical.
@@ -131,7 +131,7 @@ that group are valid, the second group, ``Strict``, will be validated.
     sequence, which will contain the ``Default`` group which references the
     same group sequence, ...).
 
-.. caution::
+.. warning::
 
     Calling ``validate()`` with a group in the sequence (``Strict`` in previous
     example) will cause a validation **only** with that group and not with all

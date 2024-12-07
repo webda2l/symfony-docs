@@ -359,7 +359,7 @@ lose the lock it acquired automatically::
         throw new \Exception('Process failed');
     }
 
-.. caution::
+.. warning::
 
     A common pitfall might be to use the ``isAcquired()`` method to check if
     a lock has already been acquired by any process. As you can see in this example
@@ -427,7 +427,7 @@ when the PHP process ends)::
     // if none is given, sys_get_temp_dir() is used internally.
     $store = new FlockStore('/var/stores');
 
-.. caution::
+.. warning::
 
     Beware that some file systems (such as some types of NFS) do not support
     locking. In those cases, it's better to use a directory on a local disk
@@ -668,7 +668,7 @@ the stores::
 
     $store = new CombinedStore($stores, new UnanimousStrategy());
 
-.. caution::
+.. warning::
 
     In order to get high availability when using the ``ConsensusStrategy``, the
     minimum cluster size must be three servers. This allows the cluster to keep
@@ -720,7 +720,7 @@ the ``Lock``.
 Every concurrent process must store the ``Lock`` on the same server. Otherwise two
 different machines may allow two different processes to acquire the same ``Lock``.
 
-.. caution::
+.. warning::
 
     To guarantee that the same server will always be safe, do not use Memcached
     behind a LoadBalancer, a cluster or round-robin DNS. Even if the main server
@@ -762,12 +762,12 @@ Using the above methods, a robust code would be::
         // Perform the task whose duration MUST be less than 5 seconds
     }
 
-.. caution::
+.. warning::
 
     Choose wisely the lifetime of the ``Lock`` and check whether its remaining
     time to live is enough to perform the task.
 
-.. caution::
+.. warning::
 
     Storing a ``Lock`` usually takes a few milliseconds, but network conditions
     may increase that time a lot (up to a few seconds). Take that into account
@@ -776,7 +776,7 @@ Using the above methods, a robust code would be::
 By design, locks are stored on servers with a defined lifetime. If the date or
 time of the machine changes, a lock could be released sooner than expected.
 
-.. caution::
+.. warning::
 
     To guarantee that date won't change, the NTP service should be disabled
     and the date should be updated when the service is stopped.
@@ -798,7 +798,7 @@ deployments.
 
 Some file systems (such as some types of NFS) do not support locking.
 
-.. caution::
+.. warning::
 
     All concurrent processes must use the same physical file system by running
     on the same machine and using the same absolute path to the lock directory.
@@ -827,7 +827,7 @@ and may disappear by mistake at any time.
 If the Memcached service or the machine hosting it restarts, every lock would
 be lost without notifying the running processes.
 
-.. caution::
+.. warning::
 
     To avoid that someone else acquires a lock after a restart, it's recommended
     to delay service start and wait at least as long as the longest lock TTL.
@@ -835,7 +835,7 @@ be lost without notifying the running processes.
 By default Memcached uses a LRU mechanism to remove old entries when the service
 needs space to add new items.
 
-.. caution::
+.. warning::
 
     The number of items stored in Memcached must be under control. If it's not
     possible, LRU should be disabled and Lock should be stored in a dedicated
@@ -853,7 +853,7 @@ method uses the Memcached's ``flush()`` method which purges and removes everythi
 MongoDbStore
 ~~~~~~~~~~~~
 
-.. caution::
+.. warning::
 
     The locked resource name is indexed in the ``_id`` field of the lock
     collection. Beware that an indexed field's value in MongoDB can be
@@ -879,7 +879,7 @@ about `Expire Data from Collections by Setting TTL`_ in MongoDB.
     recommended to set constructor option ``gcProbability`` to ``0.0`` to
     disable this behavior if you have manually dealt with TTL index creation.
 
-.. caution::
+.. warning::
 
     This store relies on all PHP application and database nodes to have
     synchronized clocks for lock expiry to occur at the correct time. To ensure
@@ -896,12 +896,12 @@ PdoStore
 
 The PdoStore relies on the `ACID`_ properties of the SQL engine.
 
-.. caution::
+.. warning::
 
     In a cluster configured with multiple primaries, ensure writes are
     synchronously propagated to every node, or always use the same node.
 
-.. caution::
+.. warning::
 
     Some SQL engines like MySQL allow to disable the unique constraint check.
     Ensure that this is not the case ``SET unique_checks=1;``.
@@ -910,7 +910,7 @@ In order to purge old locks, this store uses a current datetime to define an
 expiration date reference. This mechanism relies on all server nodes to
 have synchronized clocks.
 
-.. caution::
+.. warning::
 
     To ensure locks don't expire prematurely; the TTLs should be set with
     enough extra time to account for any clock drift between nodes.
@@ -939,7 +939,7 @@ and may disappear by mistake at any time.
 If the Redis service or the machine hosting it restarts, every locks would
 be lost without notifying the running processes.
 
-.. caution::
+.. warning::
 
     To avoid that someone else acquires a lock after a restart, it's recommended
     to delay service start and wait at least as long as the longest lock TTL.
@@ -967,7 +967,7 @@ The ``CombinedStore`` will be, at best, as reliable as the least reliable of
 all managed stores. As soon as one managed store returns erroneous information,
 the ``CombinedStore`` won't be reliable.
 
-.. caution::
+.. warning::
 
     All concurrent processes must use the same configuration, with the same
     amount of managed stored and the same endpoint.
@@ -985,13 +985,13 @@ must run on the same machine, virtual machine or container. Be careful when
 updating a Kubernetes or Swarm service because for a short period of time, there
 can be two running containers in parallel.
 
-.. caution::
+.. warning::
 
     All concurrent processes must use the same machine. Before starting a
     concurrent process on a new machine, check that other processes are stopped
     on the old one.
 
-.. caution::
+.. warning::
 
     When running on systemd with non-system user and option ``RemoveIPC=yes``
     (default value), locks are deleted by systemd when that user logs out.

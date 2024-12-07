@@ -102,7 +102,7 @@ using the following configuration options:
     Support for the ``SYMFONY_TRUSTED_PROXIES`` and ``SYMFONY_TRUSTED_HEADERS``
     environment variables was introduced in Symfony 7.2.
 
-.. caution::
+.. danger::
 
     Enabling the ``Request::HEADER_X_FORWARDED_HOST`` option exposes the
     application to `HTTP Host header attacks`_. Make sure the proxy really

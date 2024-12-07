@@ -303,13 +303,13 @@ These are the method that you can define in the data collector class:
     from ``AbstractDataCollector``). If you need some services to collect the
     data, inject those services in the data collector constructor.
 
-    .. caution::
+    .. warning::
 
         The ``collect()`` method is only called once. It is not used to "gather"
         data but is there to "pick up" the data that has been stored by your
         service.
 
-    .. caution::
+    .. warning::
 
         As the profiler serializes data collector instances, you should not
         store objects that cannot be serialized (like PDO objects) or you need

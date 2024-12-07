@@ -21,7 +21,7 @@ Configuring lazy services is one answer to this. With a lazy service, a
 like the ``mailer``, except that the ``mailer`` isn't actually instantiated
 until you interact with the proxy in some way.
 
-.. caution::
+.. warning::
 
     Lazy services do not support `final`_ or ``readonly`` classes, but you can use
     `Interface Proxifying`_ to work around this limitation.

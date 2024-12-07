@@ -644,7 +644,7 @@ method:
 
         // ...
 
-.. caution::
+.. warning::
 
     The form's ``createView()`` method should be called *after* ``handleRequest()`` is
     called. Otherwise, when using :doc:`form events </form/events>`, changes done

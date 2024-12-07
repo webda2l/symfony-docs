@@ -14,7 +14,7 @@ cache lifetimes, but to actively notify the gateway cache when content
 changes. Reverse proxies usually provide a channel to receive such
 notifications, typically through special HTTP requests.
 
-.. caution::
+.. warning::
 
     While cache invalidation is powerful, avoid it when possible. If you fail
     to invalidate something, outdated caches will be served for a potentially

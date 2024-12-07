@@ -175,7 +175,7 @@ named ``kernel.http_method_override``.
     :ref:`Changing the Action and HTTP Method <forms-change-action-method>` of
     Symfony forms.
 
-.. caution::
+.. warning::
 
     If you're using the :ref:`HttpCache Reverse Proxy <symfony2-reverse-proxy>`
     with this option, the kernel will ignore the ``_method`` parameter,

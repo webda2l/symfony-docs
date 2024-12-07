@@ -19,7 +19,7 @@ Renders a ``textarea`` HTML element.
     ``<textarea>``, consider using the FOSCKEditorBundle community bundle. Read
     `its documentation`_ to learn how to integrate it in your Symfony application.
 
-.. caution::
+.. warning::
 
     When allowing users to type HTML code in the textarea (or using a
     WYSIWYG) editor, the application is vulnerable to :ref:`XSS injection <xss-attacks>`,

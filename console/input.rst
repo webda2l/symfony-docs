@@ -197,7 +197,7 @@ values after a whitespace or an ``=`` sign (e.g. ``--iterations 5`` or
 ``--iterations=5``), but short options can only use whitespaces or no
 separation at all (e.g. ``-i 5`` or ``-i5``).
 
-.. caution::
+.. warning::
 
     While it is possible to separate an option from its value with a whitespace,
     using this form leads to an ambiguity should the option appear before the

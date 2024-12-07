@@ -70,9 +70,10 @@ html5
 If set to ``true``, the HTML input will be rendered as a native HTML5
 ``<input type="number">`` element.
 
-.. caution::
+.. warning::
 
-    As HTML5 number format is normalized, it is incompatible with ``grouping`` option.
+    As HTML5 number format is normalized, it is incompatible with the ``grouping``
+    option.
 
 input
 ~~~~~
