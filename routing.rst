@@ -302,7 +302,7 @@ arbitrary matching logic:
         # config/routes.yaml
         contact:
             path:       /contact
-            controller: 'App\Controller\DefaultController::contact'
+            controller: App\Controller\DefaultController::contact
             condition:  "context.getMethod() in ['GET', 'HEAD'] and request.headers.get('User-Agent') matches '/firefox/i'"
             # expressions can also include configuration parameters:
             # condition: "request.headers.get('User-Agent') matches '%app.allowed_browsers%'"
@@ -311,7 +311,7 @@ arbitrary matching logic:
 
         post_show:
             path:       /posts/{id}
-            controller: 'App\Controller\DefaultController::showPost'
+            controller: App\Controller\DefaultController::showPost
             # expressions can retrieve route parameter values using the "params" variable
             condition:  "params['id'] < 1000"
 
