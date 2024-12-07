@@ -23,7 +23,8 @@ rules:
     forbidden_directives:
         directives:
             - '.. index::'
-            - '.. caution::'
+            - directive: '.. caution::'
+              replacements: ['.. warning::', '.. danger::']
     indention: ~
     lowercase_as_in_use_statements: ~
     max_blank_lines:
