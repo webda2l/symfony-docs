@@ -30,18 +30,25 @@ A custom name converter can handle such cases::
 
     class OrgPrefixNameConverter implements NameConverterInterface
     {
-        public function normalize(string $propertyName): string
+        public function normalize(string $propertyName, string $class = null, ?string $format = null, array $context = []): string
         {
             // during normalization, add the prefix
             return 'org_'.$propertyName;
         }
 
-        public function denormalize(string $propertyName): string
+        public function denormalize(string $propertyName, ?string $class = null, ?string $format = null, array $context = []): string
         {
             // remove the 'org_' prefix on denormalizing
             return str_starts_with($propertyName, 'org_') ? substr($propertyName, 4) : $propertyName;
         }
     }
+
+.. versionadded:: 7.1
+
+    Accessing the current class name, format and context via
+    :method:`Symfony\\Component\\Serializer\\NameConverter\\NameConverterInterface::normalize`
+    and :method:`Symfony\\Component\\Serializer\\NameConverter\\NameConverterInterface::denormalize`
+    was introduced in Symfony 7.1.
 
 .. note::
 
