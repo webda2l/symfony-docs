@@ -33,7 +33,7 @@ and cache root path as constructor parameters::
         $directory = null
     );
 
-.. caution::
+.. warning::
 
     The overhead of filesystem IO often makes this adapter one of the *slower*
     choices. If throughput is paramount, the in-memory adapters

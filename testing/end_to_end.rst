@@ -457,7 +457,7 @@ Accepting Self-Signed SSL Certificates
 To force Chrome to accept invalid and self-signed certificates, you can set the
 following environment variable: ``PANTHER_CHROME_ARGUMENTS='--ignore-certificate-errors'``.
 
-.. caution::
+.. danger::
 
     This option is insecure, use it only for testing in development environments,
     never in production (e.g. for web crawlers).

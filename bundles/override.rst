@@ -19,7 +19,7 @@ For example, to override the ``templates/registration/confirmed.html.twig``
 template from the AcmeUserBundle, create this template:
 ``<your-project>/templates/bundles/AcmeUserBundle/registration/confirmed.html.twig``
 
-.. caution::
+.. warning::
 
     If you add a template in a new location, you *may* need to clear your
     cache (``php bin/console cache:clear``), even if you are in debug mode.

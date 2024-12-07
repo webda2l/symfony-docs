@@ -876,7 +876,7 @@ pass ``null`` to it::
         }
     }
 
-.. caution::
+.. warning::
 
     When using a specific :doc:`form validation group </form/validation_groups>`,
     the field type guesser will still consider *all* validation constraints when

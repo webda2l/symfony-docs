@@ -57,7 +57,7 @@ method)::
     ``$this->getApplication()->find('demo:greet')->run()`` will allow proper
     events to be dispatched for that inner command as well.
 
-.. caution::
+.. warning::
 
     Note that all the commands will run in the same process and some of Symfony's
     built-in commands may not work well this way. For instance, the ``cache:clear``

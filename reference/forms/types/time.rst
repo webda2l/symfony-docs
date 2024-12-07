@@ -115,7 +115,7 @@ of the time. This must be a valid `PHP time format`_.
 
 .. include:: /reference/forms/types/options/model_timezone.rst.inc
 
-.. caution::
+.. warning::
 
     When using different values for ``model_timezone`` and `view_timezone`_,
     a `reference_date`_ must be configured.
@@ -136,7 +136,7 @@ based on this date.
 When no `reference_date`_ is set the ``view_timezone`` defaults to the
 configured `model_timezone`_.
 
-.. caution::
+.. warning::
 
     When using different values for `model_timezone`_ and ``view_timezone``,
     a `reference_date`_ must be configured.
@@ -159,7 +159,7 @@ following:
   will be validated against the form ``hh:mm`` (or ``hh:mm:ss`` if using
   seconds).
 
-.. caution::
+.. warning::
 
     Combining the widget type ``single_text`` and the `with_minutes`_ option
     set to ``false`` can cause unexpected behavior in the client as the

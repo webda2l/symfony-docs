@@ -644,7 +644,7 @@ the name of the hasher to use::
         }
     }
 
-.. caution::
+.. warning::
 
     When :ref:`migrating passwords <security-password-migration>`, you don't
     need to implement ``PasswordHasherAwareInterface`` to return the legacy

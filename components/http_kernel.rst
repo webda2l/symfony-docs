@@ -494,7 +494,7 @@ you will trigger the ``kernel.terminate`` event where you can perform certain
 actions that you may have delayed in order to return the response as quickly
 as possible to the client (e.g. sending emails).
 
-.. caution::
+.. warning::
 
     Internally, the HttpKernel makes use of the :phpfunction:`fastcgi_finish_request`
     PHP function. This means that at the moment, only the `PHP FPM`_ server

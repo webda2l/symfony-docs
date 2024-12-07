@@ -582,7 +582,7 @@ accessor methods for parameters::
     // adds a new parameter
     $container->setParameter('mailer.transport', 'sendmail');
 
-.. caution::
+.. warning::
 
     The used ``.`` notation is a
     :ref:`Symfony convention <service-naming-conventions>` to make parameters
@@ -1392,7 +1392,7 @@ and ``site_update_manager.normal_users``. Thanks to the alias, if you type-hint
 If you want to pass the second, you'll need to :ref:`manually wire the service <services-wire-specific-service>`
 or to create a named :ref:`autowiring alias <autowiring-alias>`.
 
-.. caution::
+.. warning::
 
     If you do *not* create the alias and are :ref:`loading all services from src/ <service-container-services-load-example>`,
     then *three* services have been created (the automatic service + your two services)

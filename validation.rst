@@ -529,7 +529,7 @@ class to have at least 3 characters.
             }
         }
 
-.. caution::
+.. warning::
 
     The validator will use a value ``null`` if a typed property is uninitialized.
     This can cause unexpected behavior if the property holds a value when initialized.

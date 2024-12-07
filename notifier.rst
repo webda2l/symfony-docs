@@ -45,7 +45,7 @@ to send SMS messages to mobile phones. This feature requires subscribing to
 a third-party service that sends SMS messages. Symfony provides integration
 with a couple popular SMS services:
 
-.. caution::
+.. warning::
 
     If any of the DSN values contains any character considered special in a
     URI (such as ``: / ? # [ ] @ ! $ & ' ( ) * + , ; =``), you must
@@ -327,7 +327,7 @@ information such as the message ID and the original message contents.
 Chat Channel
 ~~~~~~~~~~~~
 
-.. caution::
+.. warning::
 
     If any of the DSN values contains any character considered special in a
     URI (such as ``: / ? # [ ] @ ! $ & ' ( ) * + , ; =``), you must
@@ -370,7 +370,7 @@ Service                                  Package                               D
 
     The LINE Notify, Mastodon and Twitter integrations were introduced in Symfony 6.3.
 
-.. caution::
+.. warning::
 
     By default, if you have the :doc:`Messenger component </messenger>` installed,
     the notifications will be sent through the MessageBus. If you don't have a
@@ -540,7 +540,7 @@ notification emails:
 Push Channel
 ~~~~~~~~~~~~
 
-.. caution::
+.. warning::
 
     If any of the DSN values contains any character considered special in a
     URI (such as ``: / ? # [ ] @ ! $ & ' ( ) * + , ; =``), you must

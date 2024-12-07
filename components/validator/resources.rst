@@ -232,7 +232,7 @@ You can set this custom implementation using
         ->setMetadataFactory(new CustomMetadataFactory(...))
         ->getValidator();
 
-.. caution::
+.. warning::
 
     Since you are using a custom metadata factory, you can't configure loaders
     and caches using the ``add*Mapping()`` methods anymore. You now have to

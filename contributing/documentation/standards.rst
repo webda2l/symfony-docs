@@ -122,7 +122,7 @@ Example
         }
     }
 
-.. caution::
+.. warning::
 
     In YAML you should put a space after ``{`` and before ``}`` (e.g. ``{ _controller: ... }``),
     but this should not be done in Twig (e.g.  ``{'hello' : 'value'}``).

@@ -57,7 +57,7 @@ logging these HTTP codes based on the MonologBundle configuration:
             $mainHandler->excludedHttpCode()->code(404);
         };
 
-.. caution::
+.. warning::
 
     Combining ``excluded_http_codes`` with a ``passthru_level`` lower than
     ``error`` (i.e. ``debug``, ``info``, ``notice`` or ``warning``) will not

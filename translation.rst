@@ -392,7 +392,7 @@ translation of *static blocks of text*:
 
     {% trans %}Hello %name%{% endtrans %}
 
-.. caution::
+.. warning::
 
     The ``%var%`` notation of placeholders is required when translating in
     Twig templates using the tag.
@@ -410,7 +410,7 @@ You can also specify the message domain and pass some additional variables:
 
     {% trans with {'%name%': 'Fabien'} from 'app' into 'fr' %}Hello %name%{% endtrans %}
 
-.. caution::
+.. warning::
 
     Using the translation tag has the same effect as the filter, but with one
     major difference: automatic output escaping is **not** applied to translations
@@ -536,7 +536,7 @@ The choice of which loader to use is entirely up to you and is a matter of
 taste. The recommended option is to use YAML for simple projects and use XLIFF
 if you're generating translations with specialized programs or teams.
 
-.. caution::
+.. warning::
 
     Each time you create a *new* message catalog (or install a bundle
     that includes a translation catalog), be sure to clear your cache so
@@ -1188,7 +1188,7 @@ unused translation messages templates:
 
     {{ 'Symfony is great'|trans }}
 
-.. caution::
+.. warning::
 
     The extractors can't find messages translated outside templates (like form
     labels or controllers) unless using :ref:`translatable objects

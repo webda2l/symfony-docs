@@ -86,7 +86,7 @@ fetched from the container::
 
     // gets a specific argument
     $firstArgument = $definition->getArgument(0);
-    
+
     // adds a new named argument
     // '$argumentName' = the name of the argument in the constructor, including the '$' symbol
     $definition = $definition->setArgument('$argumentName', $argumentValue);
@@ -100,7 +100,7 @@ fetched from the container::
     // replaces all previously configured arguments with the passed array
     $definition->setArguments($arguments);
 
-.. caution::
+.. warning::
 
     Don't use ``get()`` to get a service that you want to inject as constructor
     argument, the service is not yet available. Instead, use a

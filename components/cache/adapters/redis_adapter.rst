@@ -15,7 +15,7 @@ Unlike the :doc:`APCu adapter </components/cache/adapters/apcu_adapter>`, and si
 shared memory; you can store contents independent of your PHP environment. The ability
 to utilize a cluster of servers to provide redundancy and/or fail-over is also available.
 
-.. caution::
+.. warning::
 
     **Requirements:** At least one `Redis server`_ must be installed and running to use this
     adapter. Additionally, this adapter requires a compatible extension or library that implements

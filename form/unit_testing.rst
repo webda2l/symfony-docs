@@ -1,7 +1,7 @@
 How to Unit Test your Forms
 ===========================
 
-.. caution::
+.. warning::
 
     This article is intended for developers who create
     :doc:`custom form types </form/create_custom_field_type>`. If you are using
@@ -121,7 +121,7 @@ variable exists and will be available in your form themes::
     Use `PHPUnit data providers`_ to test multiple form conditions using
     the same test code.
 
-.. caution::
+.. warning::
 
     When your type relies on the ``EntityType``, you should register the
     :class:`Symfony\\Bridge\\Doctrine\\Form\\DoctrineOrmExtension`, which will

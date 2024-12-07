@@ -327,7 +327,7 @@ to display it can be customized::
     // the bar width
     $progressBar->setBarWidth(50);
 
-.. caution::
+.. warning::
 
     For performance reasons, Symfony redraws the screen once every 100ms. If this is too
     fast or too slow for your application, use the methods

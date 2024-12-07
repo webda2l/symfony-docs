@@ -51,7 +51,7 @@ argument (thanks to autowiring). In other words, you only need to create this
 class and everything works automatically! You can call the ``app:sunshine``
 command and start logging.
 
-.. caution::
+.. warning::
 
     You *do* have access to services in ``configure()``. However, if your command is
     not :ref:`lazy <console-command-service-lazy-loading>`, try to avoid doing any
@@ -130,7 +130,7 @@ only when the ``app:sunshine`` command is actually called.
 
     You don't need to call ``setName()`` for configuring the command when it is lazy.
 
-.. caution::
+.. warning::
 
     Calling the ``list`` command will instantiate all commands, including lazy commands.
     However, if the command is a ``Symfony\Component\Console\Command\LazyCommand``, then

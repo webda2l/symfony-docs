@@ -49,7 +49,7 @@ Data passed to the form must be a
 :class:`Symfony\\Component\\Security\\Core\\User\\PasswordAuthenticatedUserInterface`
 object.
 
-.. caution::
+.. warning::
 
     To minimize the risk of leaking the plain password, this option can
     only be used with the :ref:`"mapped" option <reference-form-password-mapped>`

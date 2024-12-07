@@ -95,7 +95,7 @@ method::
 You can also customize the `choice_name`_ of each choice. You can learn more
 about all of these options in the sections below.
 
-.. caution::
+.. warning::
 
     The *placeholder* is a specific field, when the choices are optional the
     first item in the list must be empty, so the user can unselect.

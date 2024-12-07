@@ -573,7 +573,7 @@ can also register it manually:
     that defaults to ``0``. The higher the number, the earlier that warmers are
     executed.
 
-.. caution::
+.. warning::
 
     If your cache warmer fails its execution because of any exception, Symfony
     won't try to execute it again for the next requests. Therefore, your

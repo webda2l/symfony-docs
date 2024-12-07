@@ -82,7 +82,7 @@ in your ``package.json`` file.
     in the :ref:`Symfony CLI Workers <symfony-server_configuring-workers>`
     documentation.
 
-.. caution::
+.. warning::
 
     Whenever you make changes in your ``webpack.config.js`` file, you must
     stop and restart ``encore``.
@@ -434,7 +434,7 @@ Your app now supports Sass. Encore also supports LESS and Stylus. See
 Compiling Only a CSS File
 -------------------------
 
-.. caution::
+.. warning::
 
     Using ``addStyleEntry()`` is supported, but not recommended. A better option
     is to follow the pattern above: use ``addEntry()`` to point to a JavaScript

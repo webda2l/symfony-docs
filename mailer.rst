@@ -61,7 +61,7 @@ over SMTP by configuring the DSN in your ``.env`` file (the ``user``,
             $framework->mailer()->dsn(env('MAILER_DSN'));
         };
 
-.. caution::
+.. warning::
 
     If the username, password or host contain any character considered special in a
     URI (such as ``: / ? # [ ] @ ! $ & ' ( ) * + , ; =``), you must
@@ -82,7 +82,7 @@ native        ``native://default``                      Mailer uses the sendmail
                                                         ``php.ini`` settings when ``sendmail_path`` is not configured.
 ============  ========================================  ==============================================================
 
-.. caution::
+.. warning::
 
     When using ``native://default``, if ``php.ini`` uses the ``sendmail -t``
     command, you won't have error reporting and ``Bcc`` headers won't be removed.
@@ -229,20 +229,20 @@ party provider:
 
     The ``sandbox`` option in ``Mailjet`` API was introduced in Symfony 6.3.
 
-.. caution::
+.. warning::
 
     If your credentials contain special characters, you must URL-encode them.
     For example, the DSN ``ses+smtp://ABC1234:abc+12/345@default`` should be
     configured as ``ses+smtp://ABC1234:abc%2B12%2F345@default``
 
-.. caution::
+.. warning::
 
     If you want to use the ``ses+smtp`` transport together with :doc:`Messenger </messenger>`
     to :ref:`send messages in background <mailer-sending-messages-async>`,
     you need to add the ``ping_threshold`` parameter to your ``MAILER_DSN`` with
     a value lower than ``10``: ``ses+smtp://USERNAME:PASSWORD@default?ping_threshold=9``
 
-.. caution::
+.. warning::
 
     If you send custom headers when using the `Amazon SES`_ transport (to receive
     them later via a webhook), make sure to use the ``ses+https`` provider because
@@ -773,7 +773,7 @@ and headers.
             $mailer->header('X-Custom-Header')->value('foobar');
         };
 
-.. caution::
+.. warning::
 
     Some third-party providers don't support the usage of keywords like ``from``
     in the ``headers``. Check out your provider's documentation before setting
@@ -1201,7 +1201,7 @@ Before signing/encrypting messages, make sure to have:
     When using OpenSSL to generate certificates, make sure to add the
     ``-addtrust emailProtection`` command option.
 
-.. caution::
+.. warning::
 
     Signing and encrypting messages require their contents to be fully rendered.
     For example, the content of :ref:`templated emails <mailer-twig>` is rendered
@@ -1226,7 +1226,7 @@ using for example OpenSSL or obtained at an official Certificate Authority (CA).
 The email recipient must have the CA certificate in the list of trusted issuers
 in order to verify the signature.
 
-.. caution::
+.. warning::
 
     If you use message signature, sending to ``Bcc`` will be removed from the
     message. If you need to send a message to multiple recipients, you need

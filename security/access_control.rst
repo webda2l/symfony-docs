@@ -221,7 +221,7 @@ Example #7:
   * **Why?** This doesn't match any ``access_control`` rules, since its URI
   * doesn't match any of the ``path`` values.
 
-.. caution::
+.. warning::
 
     Matching the URI is done without ``$_GET`` parameters.
     :ref:`Deny access in PHP code <security-securing-controller>` if you want
@@ -254,7 +254,7 @@ options:
     can learn how to use your custom attributes by reading
     :ref:`security/custom-voter`.
 
-.. caution::
+.. warning::
 
     If you define both ``roles`` and ``allow_if``, and your Access Decision
     Strategy is the default one (``affirmative``), then the user will be granted
@@ -276,7 +276,7 @@ entry that *only* matches requests coming from some IP address or range.
 For example, this *could* be used to deny access to a URL pattern to all
 requests *except* those from a trusted, internal server.
 
-.. caution::
+.. warning::
 
     As you'll read in the explanation below the example, the ``ips`` option
     does not restrict to a specific IP address. Instead, using the ``ips``

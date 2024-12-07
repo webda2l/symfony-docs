@@ -58,7 +58,7 @@ The database connection information is stored as an environment variable called
     # to use oracle:
     # DATABASE_URL="oci8://db_user:db_password@127.0.0.1:1521/db_name"
 
-.. caution::
+.. warning::
 
     If the username, password, host or database name contain any character considered
     special in a URI (such as ``: / ? # [ ] @ ! $ & ' ( ) * + , ; =``),
@@ -180,7 +180,7 @@ Whoa! You now have a new ``src/Entity/Product.php`` file::
     column with default value NULL*. Add a ``nullable=true`` option to the
     ``description`` property to fix the problem.
 
-.. caution::
+.. warning::
 
     There is a `limit of 767 bytes for the index key prefix`_ when using
     InnoDB tables in MySQL 5.6 and earlier versions. String columns with 255
@@ -210,7 +210,7 @@ If you want to use XML instead of attributes, add ``type: xml`` and
 ``dir: '%kernel.project_dir%/config/doctrine'`` to the entity mappings in your
 ``config/packages/doctrine.yaml`` file.
 
-.. caution::
+.. warning::
 
     Be careful not to use reserved SQL keywords as your table or column names
     (e.g. ``GROUP`` or ``USER``). See Doctrine's `Reserved SQL keywords documentation`_

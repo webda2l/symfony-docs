@@ -194,7 +194,7 @@ controller. Based on this property, the correct user is loaded and a login
 link is created using
 :method:`Symfony\\Component\\Security\\Http\\LoginLink\\LoginLinkHandlerInterface::createLoginLink`.
 
-.. caution::
+.. warning::
 
     It is important to send this link to the user and **not show it directly**,
     as that would allow anyone to login. For instance, use the

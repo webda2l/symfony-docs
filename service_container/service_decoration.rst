@@ -683,7 +683,7 @@ Three different behaviors are available:
             ;
         };
 
-.. caution::
+.. warning::
 
     When using ``null``, you may have to update the decorator constructor in
     order to make decorated dependency nullable::

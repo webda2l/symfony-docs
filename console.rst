@@ -391,7 +391,7 @@ Output sections let you manipulate the Console output in advanced ways, such as
 are updated independently and :ref:`appending rows to tables <console-modify-rendered-tables>`
 that have already been rendered.
 
-.. caution::
+.. warning::
 
     Terminals only allow overwriting the visible content, so you must take into
     account the console height when trying to write/overwrite section contents.
@@ -556,13 +556,13 @@ call ``setAutoExit(false)`` on it to get the command result in ``CommandTester``
     You can also test a whole console application by using
     :class:`Symfony\\Component\\Console\\Tester\\ApplicationTester`.
 
-.. caution::
+.. warning::
 
     When testing commands using the ``CommandTester`` class, console events are
     not dispatched. If you need to test those events, use the
     :class:`Symfony\\Component\\Console\\Tester\\ApplicationTester` instead.
 
-.. caution::
+.. warning::
 
     When testing commands using the :class:`Symfony\\Component\\Console\\Tester\\ApplicationTester`
     class, don't forget to disable the auto exit flag::
@@ -572,7 +572,7 @@ call ``setAutoExit(false)`` on it to get the command result in ``CommandTester``
 
         $tester = new ApplicationTester($application);
 
-.. caution::
+.. warning::
 
     When testing ``InputOption::VALUE_NONE`` command options, you must pass ``true``
     to them::
@@ -649,7 +649,7 @@ profile is accessible through the web page of the profiler.
     terminal supports links). If you run it in debug verbosity (``-vvv``) you'll
     also see the time and memory consumed by the command.
 
-.. caution::
+.. warning::
 
     When profiling the ``messenger:consume`` command from the :doc:`Messenger </messenger>`
     component, add the ``--no-reset`` option to the command or you won't get any
