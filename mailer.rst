@@ -361,7 +361,7 @@ setting the ``auto_tls`` option to ``false`` in the DSN::
 
     $dsn = 'smtp://user:pass@10.0.0.25?auto_tls=false';
 
-.. caution::
+.. warning::
 
     It's not recommended to disable TLS while connecting to an SMTP server over
     the Internet, but it can be useful when both the application and the SMTP

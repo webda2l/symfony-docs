@@ -320,7 +320,7 @@ before, execute your migrations:
 
     $ php bin/console doctrine:migrations:migrate
 
-.. caution::
+.. warning::
 
     If you are using an SQLite database, you'll see the following error:
     *PDOException: SQLSTATE[HY000]: General error: 1 Cannot add a NOT NULL
