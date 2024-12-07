@@ -24,7 +24,7 @@ will only load and render the choices that are preset as default values or
 submitted. This defers the loading of the full list of choices, helping to
 improve your form's performance.
 
-.. caution::
+.. warning::
 
     Keep in mind that when using ``choice_lazy``, you are responsible for
     providing the user interface for selecting choices, typically through a
