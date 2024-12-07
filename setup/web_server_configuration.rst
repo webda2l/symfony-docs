@@ -129,7 +129,7 @@ The **minimum configuration** to get your application running under Nginx is:
     If you have other PHP files in your public directory that need to be executed,
     be sure to include them in the ``location`` block above.
 
-.. caution::
+.. warning::
 
     After you deploy to production, make sure that you **cannot** access the ``index.php``
     script (i.e. ``http://example.com/index.php``).

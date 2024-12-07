@@ -259,7 +259,7 @@ One great advantage of the ESI renderer is that you can make your application
 as dynamic as needed and at the same time, hit the application as little as
 possible.
 
-.. caution::
+.. warning::
 
     The fragment listener only responds to signed requests. Requests are only
     signed when using the fragment renderer and the ``render_esi`` Twig

@@ -195,7 +195,7 @@ then set on the ``tag`` field of the ``Task`` and can be accessed via ``$task->g
 So far, this works great, but only to edit *existing* tags. It doesn't allow us
 yet to add new tags or delete existing ones.
 
-.. caution::
+.. warning::
 
     You can embed nested collections as many levels down as you like. However,
     if you use Xdebug, you may receive a ``Maximum function nesting level of '100'
@@ -427,13 +427,13 @@ That was fine, but forcing the use of the "adder" method makes handling
 these new ``Tag`` objects easier (especially if you're using Doctrine, which
 you will learn about next!).
 
-.. caution::
+.. warning::
 
     You have to create **both** ``addTag()`` and ``removeTag()`` methods,
     otherwise the form will still use ``setTag()`` even if ``by_reference`` is ``false``.
     You'll learn more about the ``removeTag()`` method later in this article.
 
-.. caution::
+.. warning::
 
     Symfony can only make the plural-to-singular conversion (e.g. from the
     ``tags`` property to the ``addTag()`` method) for English words. Code

@@ -1,4 +1,4 @@
-.. caution::
+.. warning::
 
     If ``timestamp`` is used, ``DateType`` is limited to dates between
     Fri, 13 Dec 1901 20:45:54 UTC and Tue, 19 Jan 2038 03:14:07 UTC on 32bit

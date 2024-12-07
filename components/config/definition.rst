@@ -675,7 +675,7 @@ The separator used in keys is typically ``_`` in YAML and ``-`` in XML.
 For example, ``auto_connect`` in YAML and ``auto-connect`` in XML. The
 normalization would make both of these ``auto_connect``.
 
-.. caution::
+.. warning::
 
     The target key will not be altered if it's mixed like
     ``foo-bar_moo`` or if it already exists.
@@ -894,7 +894,7 @@ Otherwise the result is a clean array of configuration values::
         $configs
     );
 
-.. caution::
+.. warning::
 
     When processing the configuration tree, the processor assumes that the top
     level array key (which matches the extension name) is already stripped off.

@@ -103,7 +103,7 @@ This can be tricky: if the date picker is misconfigured, Symfony won't understan
 the format and will throw a validation error. You can also configure the format
 that Symfony should expect via the `format`_ option.
 
-.. caution::
+.. warning::
 
     The string used by a JavaScript date picker to describe its format (e.g. ``yyyy-mm-dd``)
     may not match the string that Symfony uses (e.g. ``yyyy-MM-dd``). This is because

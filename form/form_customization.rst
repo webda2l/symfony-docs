@@ -74,7 +74,7 @@ control over how each form field is rendered, so you can fully customize them:
         </div>
     </div>
 
-.. caution::
+.. warning::
 
    If you're rendering each field manually, make sure you don't forget the
    ``_token`` field that is automatically added for CSRF protection.
@@ -305,7 +305,7 @@ Renders any errors for the given field.
     {# render any "global" errors not associated to any form field #}
     {{ form_errors(form) }}
 
-.. caution::
+.. warning::
 
     In the Bootstrap 4 form theme, ``form_errors()`` is already included in
     ``form_label()``. Read more about this in the

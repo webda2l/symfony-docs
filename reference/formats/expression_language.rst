@@ -26,7 +26,7 @@ The component supports:
     Support for decimals without leading zeros and underscore separators were
     introduced in Symfony 6.1.
 
-.. caution::
+.. warning::
 
     A backslash (``\``) must be escaped by 3 backslashes (``\\\\``) in a string
     and 7 backslashes (``\\\\\\\\``) in a regex::

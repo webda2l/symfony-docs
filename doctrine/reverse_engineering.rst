@@ -1,7 +1,7 @@
 How to Generate Entities from an Existing Database
 ==================================================
 
-.. caution::
+.. warning::
 
     The ``doctrine:mapping:import`` command used to generate Doctrine entities
     from existing databases was deprecated by Doctrine in 2019 and there's no

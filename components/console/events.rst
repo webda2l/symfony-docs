@@ -14,7 +14,7 @@ the wheel, it uses the Symfony EventDispatcher component to do the work::
     $application->setDispatcher($dispatcher);
     $application->run();
 
-.. caution::
+.. warning::
 
     Console events are only triggered by the main command being executed.
     Commands called by the main command will not trigger any event, unless

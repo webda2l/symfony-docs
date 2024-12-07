@@ -11,7 +11,7 @@ service that can be reused in the controller. However, when the command is part
 of a third-party library, you don't want to modify or duplicate their code.
 Instead, you can run the command directly from the controller.
 
-.. caution::
+.. warning::
 
     In comparison with a direct call from the console, calling a command from
     a controller has a slight performance impact because of the request stack

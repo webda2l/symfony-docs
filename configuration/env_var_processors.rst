@@ -691,7 +691,7 @@ Symfony provides the following env var processors:
                 ],
             ]);
 
-    .. caution::
+    .. warning::
 
         In order to ease extraction of the resource from the URL, the leading
         ``/`` is trimmed from the ``path`` component.

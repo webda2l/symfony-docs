@@ -119,7 +119,7 @@ To read from properties, use the "dot" notation::
 
     var_dump($propertyAccessor->getValue($person, 'children[0].firstName')); // 'Bar'
 
-.. caution::
+.. warning::
 
     Accessing public properties is the last option used by ``PropertyAccessor``.
     It tries to access the value using the below methods first before using
@@ -271,7 +271,7 @@ The ``getValue()`` method can also use the magic ``__get()`` method::
 
     var_dump($propertyAccessor->getValue($person, 'Wouter')); // [...]
 
-.. caution::
+.. warning::
 
     When implementing the magic ``__get()`` method, you also need to implement
     ``__isset()``.
@@ -312,7 +312,7 @@ enable this feature by using :class:`Symfony\\Component\\PropertyAccess\\Propert
 
     var_dump($propertyAccessor->getValue($person, 'wouter')); // [...]
 
-.. caution::
+.. warning::
 
     The ``__call()`` feature is disabled by default, you can enable it by calling
     :method:`Symfony\\Component\\PropertyAccess\\PropertyAccessorBuilder::enableMagicCall`

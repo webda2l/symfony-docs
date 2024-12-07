@@ -126,7 +126,7 @@ in your form type::
         }
     }
 
-.. caution::
+.. warning::
 
     The data passed to the mapper is *not yet validated*. This means that your
     objects should allow being created in an invalid state in order to produce
@@ -215,7 +215,7 @@ If available, these options have priority over the property path accessor and
 the default data mapper will still use the :doc:`PropertyAccess component </components/property_access>`
 for the other form fields.
 
-.. caution::
+.. warning::
 
     When a form has the ``inherit_data`` option set to ``true``, it does not use the data mapper and
     lets its parent map inner values.

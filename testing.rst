@@ -235,7 +235,7 @@ in them, files lower in the list override previous items):
 #. ``.env.test``: overriding/setting specific test values or vars;
 #. ``.env.test.local``: overriding settings specific for this machine.
 
-.. caution::
+.. warning::
 
     The ``.env.local`` file is **not** used in the test environment, to
     make each test set-up as consistent as possible.
@@ -761,7 +761,7 @@ You can also override HTTP headers on a per request basis::
         'HTTP_USER_AGENT' => 'MySuperBrowser/1.0',
     ]);
 
-.. caution::
+.. warning::
 
     The name of your custom headers must follow the syntax defined in the
     `section 4.1.18 of RFC 3875`_: replace ``-`` by ``_``, transform it into

@@ -16,7 +16,7 @@ source code.
 If you want to learn more about this format, check out the `reStructuredText Primer`_
 tutorial and the `reStructuredText Reference`_.
 
-.. caution::
+.. warning::
 
     If you are familiar with Markdown, be careful as things are sometimes very
     similar but different:

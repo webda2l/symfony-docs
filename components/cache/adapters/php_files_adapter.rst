@@ -28,7 +28,7 @@ file similar to the following::
     handles file includes, this adapter has the potential to be much faster than other
     filesystem-based caches.
 
-.. caution::
+.. warning::
 
     While it supports updates and because it is using OPcache as a backend, this adapter is
     better suited for append-mostly needs. Using it in other scenarios might lead to

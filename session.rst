@@ -419,7 +419,7 @@ session metadata files:
 Check out the Symfony config reference to learn more about the other available
 :ref:`Session configuration options <config-framework-session>`.
 
-.. caution::
+.. warning::
 
     Symfony sessions are incompatible with ``php.ini`` directive
     ``session.auto_start = 1`` This directive should be turned off in
@@ -1531,7 +1531,7 @@ event::
         }
     }
 
-.. caution::
+.. warning::
 
     In order to update the language immediately after a user has changed their
     language preferences, you also need to update the session when you change

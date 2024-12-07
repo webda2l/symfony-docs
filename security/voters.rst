@@ -273,7 +273,7 @@ with ``ROLE_SUPER_ADMIN``::
         }
     }
 
-.. caution::
+.. warning::
 
     In the previous example, avoid using the following code to check if a role
     is granted permission::

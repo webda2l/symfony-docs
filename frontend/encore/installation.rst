@@ -200,7 +200,7 @@ You'll customize and learn more about these files in :doc:`/frontend/encore/simp
 When you execute Encore, it will ask you to install a few more dependencies based
 on which features of Encore you have enabled.
 
-.. caution::
+.. warning::
 
     Some of the documentation will use features that are specific to Symfony or
     Symfony's `WebpackEncoreBundle`_. These are optional, and are special ways

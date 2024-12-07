@@ -5,7 +5,7 @@ This adapter is a high-performance, shared memory cache. It can *significantly*
 increase an application's performance, as its cache contents are stored in shared
 memory, a component appreciably faster than many others, such as the filesystem.
 
-.. caution::
+.. warning::
 
     **Requirement:** The `APCu extension`_ must be installed and active to use
     this adapter.
@@ -30,7 +30,7 @@ and cache items version string as constructor arguments::
         $version = null
     );
 
-.. caution::
+.. warning::
 
     Use of this adapter is discouraged in write/delete heavy workloads, as these
     operations cause memory fragmentation that results in significantly degraded performance.

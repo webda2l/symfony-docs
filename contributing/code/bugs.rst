@@ -4,7 +4,7 @@ Reporting a Bug
 Whenever you find a bug in Symfony, we kindly ask you to report it. It helps
 us make a better Symfony.
 
-.. caution::
+.. warning::
 
     If you think you've found a security issue, please use the special
     :doc:`procedure <security>` instead.

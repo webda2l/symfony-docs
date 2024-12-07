@@ -227,7 +227,7 @@ but it should typically be added to your web server configuration.
     # .env
     APP_ID=api
 
-.. caution::
+.. warning::
 
     The value of this variable must match the application directory within
     ``apps/`` as it is used in the Kernel to load the specific application

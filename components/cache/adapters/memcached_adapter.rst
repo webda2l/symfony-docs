@@ -8,7 +8,7 @@ shared memory; you can store contents independent of your PHP environment.
 The ability to utilize a cluster of servers to provide redundancy and/or fail-over
 is also available.
 
-.. caution::
+.. warning::
 
     **Requirements:** The `Memcached PHP extension`_ as well as a `Memcached server`_
     must be installed, active, and running to use this adapter. Version ``2.2`` or
@@ -256,7 +256,7 @@ Available Options
     executed in a "fire-and-forget" manner; no attempt to ensure the operation
     has been received or acted on will be made once the client has executed it.
 
-    .. caution::
+    .. warning::
 
         Not all library operations are tested in this mode. Mixed TCP and UDP
         servers are not allowed.

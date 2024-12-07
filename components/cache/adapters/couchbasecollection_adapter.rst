@@ -8,7 +8,7 @@ shared memory; you can store contents independent of your PHP environment.
 The ability to utilize a cluster of servers to provide redundancy and/or fail-over
 is also available.
 
-.. caution::
+.. warning::
 
     **Requirements:** The `Couchbase PHP extension`_ as well as a `Couchbase server`_
     must be installed, active, and running to use this adapter. Version ``3.0`` or
