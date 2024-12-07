@@ -52,7 +52,7 @@ to send SMS messages to mobile phones. This feature requires subscribing to
 a third-party service that sends SMS messages. Symfony provides integration
 with a couple popular SMS services:
 
-.. caution::
+.. warning::
 
     If any of the DSN values contains any character considered special in a
     URI (such as ``: / ? # [ ] @ ! $ & ' ( ) * + , ; =``), you must
@@ -339,7 +339,7 @@ information such as the message ID and the original message contents.
 Chat Channel
 ~~~~~~~~~~~~
 
-.. caution::
+.. warning::
 
     If any of the DSN values contains any character considered special in a
     URI (such as ``: / ? # [ ] @ ! $ & ' ( ) * + , ; =``), you must
@@ -388,7 +388,7 @@ Service                                  Package                               D
     The ``Gitter`` integration was removed in Symfony 7.2 because that service
     no longer provides an API.
 
-.. caution::
+.. warning::
 
     By default, if you have the :doc:`Messenger component </messenger>` installed,
     the notifications will be sent through the MessageBus. If you don't have a
@@ -558,7 +558,7 @@ notification emails:
 Push Channel
 ~~~~~~~~~~~~
 
-.. caution::
+.. warning::
 
     If any of the DSN values contains any character considered special in a
     URI (such as ``: / ? # [ ] @ ! $ & ' ( ) * + , ; =``), you must

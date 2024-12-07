@@ -52,7 +52,7 @@ This will print the following to the command line:
 
     Hello World
 
-.. caution::
+.. warning::
 
     This feature has a limitation: you cannot pass any argument or option to
     the default command because they are ignored.

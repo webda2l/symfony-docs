@@ -165,6 +165,6 @@ Finally, make this work by adding the location form to your two original forms::
 That's it! You have extracted duplicated field definitions to a separate
 location form that you can reuse wherever you need it.
 
-.. caution::
+.. warning::
 
     Forms with the ``inherit_data`` option set cannot have ``*_SET_DATA`` event listeners.

@@ -1065,7 +1065,7 @@ using :doc:`valid PropertyAccess syntax </components/property_access>`:
             </class>
         </serializer>
 
-.. caution::
+.. warning::
 
     The ``SerializedPath`` cannot be used in combination with a
     ``SerializedName`` for the same property.

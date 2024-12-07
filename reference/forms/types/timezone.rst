@@ -67,7 +67,7 @@ Overridden Options
 The Timezone type defaults the choices to all timezones returned by
 :phpmethod:`DateTimeZone::listIdentifiers`, broken down by continent.
 
-.. caution::
+.. warning::
 
     If you want to override the built-in choices of the timezone type, you
     will also have to set the ``choice_loader`` option to ``null``.

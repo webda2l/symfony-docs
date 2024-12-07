@@ -22,7 +22,7 @@ initial value in the rendered form.
     :doc:`/form/use_empty_data` article for more details about these
     options.
 
-.. caution::
+.. warning::
 
     :doc:`Form data transformers </form/data_transformers>` will still be
     applied to the ``empty_data`` value. This means that an empty string will

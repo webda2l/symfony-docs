@@ -111,7 +111,7 @@ In this case you have changed the location of the cache directory to
 You can also change the cache directory by defining an environment variable
 named ``APP_CACHE_DIR`` whose value is the full path of the cache folder.
 
-.. caution::
+.. warning::
 
     You should keep the cache directory different for each environment,
     otherwise some unexpected behavior may happen. Each environment generates

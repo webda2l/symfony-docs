@@ -67,12 +67,12 @@ Edit your web server configuration (commonly ``httpd.conf`` or ``apache2.conf``
 for Apache) and set its user to be the same as your CLI user (e.g. for Apache,
 update the ``User`` and ``Group`` directives).
 
-.. caution::
+.. danger::
 
     If this solution is used in a production server, be sure this user only has
     limited privileges (no access to private data or servers, execution of
-    unsafe binaries, etc.) as a compromised server would give to the hacker
-    those privileges.
+    unsafe binaries, etc.) as a compromised server would give those privileges
+    to the hacker.
 
 3. Without Using ACL
 ~~~~~~~~~~~~~~~~~~~~
@@ -89,7 +89,7 @@ and ``public/index.php`` files::
 
     umask(0000); // This will let the permissions be 0777
 
-.. caution::
+.. warning::
 
     Changing the ``umask`` is not thread-safe, so the ACL methods are recommended
     when they are available.

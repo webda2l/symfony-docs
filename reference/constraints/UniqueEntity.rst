@@ -126,14 +126,14 @@ between all of the rows in your user table:
             }
         }
 
-.. caution::
+.. warning::
 
     This constraint doesn't provide any protection against `race conditions`_.
     They may occur when another entity is persisted by an external process after
     this validation has passed and before this entity is actually persisted in
     the database.
 
-.. caution::
+.. warning::
 
     This constraint cannot deal with duplicates found in a collection of items
     that haven't been persisted as entities yet. You'll need to create your own
@@ -355,7 +355,7 @@ this option to specify one or more fields to only ignore ``null`` values on them
             }
         }
 
-.. caution::
+.. warning::
 
     If you ``ignoreNull`` on fields that are part of a unique index in your
     database, you might see insertion errors when your application attempts to

@@ -829,7 +829,7 @@ Then, register the ``SodiumMarshaller`` service using this key:
             //->addArgument(['env(base64:CACHE_DECRYPTION_KEY)', 'env(base64:OLD_CACHE_DECRYPTION_KEY)'])
             ->addArgument(new Reference('.inner'));
 
-.. caution::
+.. danger::
 
     This will encrypt the values of the cache items, but not the cache keys. Be
     careful not to leak sensitive data in the keys.

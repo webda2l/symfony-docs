@@ -15,7 +15,7 @@ entities, each with their own database connection strings or separate cache conf
     advanced and not usually required. Be sure you actually need multiple
     entity managers before adding in this layer of complexity.
 
-.. caution::
+.. warning::
 
     Entities cannot define associations across different entity managers. If you
     need that, there are `several alternatives`_ that require some custom setup.
@@ -142,7 +142,7 @@ and ``customer``. The ``default`` entity manager manages entities in the
 entities in ``src/Entity/Customer``. You've also defined two connections, one
 for each entity manager, but you are free to define the same connection for both.
 
-.. caution::
+.. warning::
 
     When working with multiple connections and entity managers, you should be
     explicit about which configuration you want. If you *do* omit the name of
@@ -251,7 +251,7 @@ The same applies to repository calls::
         }
     }
 
-.. caution::
+.. warning::
 
     One entity can be managed by more than one entity manager. This however
     results in unexpected behavior when extending from ``ServiceEntityRepository``

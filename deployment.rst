@@ -184,7 +184,7 @@ as you normally do:
     significantly by building a "class map". The ``--no-dev`` flag ensures that
     development packages are not installed in the production environment.
 
-.. caution::
+.. warning::
 
     If you get a "class not found" error during this step, you may need to
     run ``export APP_ENV=prod`` (or ``export SYMFONY_ENV=prod`` if you're not

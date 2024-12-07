@@ -5,7 +5,7 @@ Validates that a value is **not** equal to another value, defined in the
 options. To force that a value is equal, see
 :doc:`/reference/constraints/EqualTo`.
 
-.. caution::
+.. warning::
 
     This constraint compares using ``!=``, so ``3`` and ``"3"`` are considered
     equal. Use :doc:`/reference/constraints/NotIdenticalTo` to compare with

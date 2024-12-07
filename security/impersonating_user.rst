@@ -5,7 +5,7 @@ Sometimes, it's useful to be able to switch from one user to another without
 having to log out and log in again (for instance when you are debugging something
 a user sees that you can't reproduce).
 
-.. caution::
+.. warning::
 
     User impersonation is not compatible with some authentication mechanisms
     (e.g. ``REMOTE_USER``) where the authentication information is expected to be

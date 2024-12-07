@@ -81,7 +81,7 @@ the ``list()`` method of the ``BlogController`` class.
     example, URLs like ``/blog?foo=bar`` and ``/blog?foo=bar&bar=foo`` will
     also match the ``blog_list`` route.
 
-.. caution::
+.. warning::
 
     If you define multiple PHP classes in the same file, Symfony only loads the
     routes of the first class, ignoring all the other routes.
@@ -406,7 +406,7 @@ Behind the scenes, expressions are compiled down to raw PHP. Because of this,
 using the ``condition`` key causes no extra overhead beyond the time it takes
 for the underlying PHP to execute.
 
-.. caution::
+.. warning::
 
     Conditions are *not* taken into account when generating URLs (which is
     explained later in this article).
@@ -853,7 +853,7 @@ other configuration formats they are defined with the ``defaults`` option:
 Now, when the user visits ``/blog``, the ``blog_list`` route will match and
 ``$page`` will default to a value of ``1``.
 
-.. caution::
+.. warning::
 
     You can have more than one optional parameter (e.g. ``/blog/{slug}/{page}``),
     but everything after an optional parameter must be optional. For example,
@@ -1534,7 +1534,7 @@ when importing the routes.
             ;
         };
 
-.. caution::
+.. warning::
 
     The ``exclude`` option only works when the ``resource`` value is a glob string.
     If you use a regular string (e.g. ``'../src/Controller'``) the ``exclude``
@@ -2342,7 +2342,7 @@ use the ``generateUrl()`` helper::
         // the 'blog' route only defines the 'page' parameter; the generated URL is:
         // /blog/2?category=Symfony
 
-.. caution::
+.. warning::
 
     While objects are converted to string when used as placeholders, they are not
     converted when used as extra parameters. So, if you're passing an object (e.g. an Uuid)

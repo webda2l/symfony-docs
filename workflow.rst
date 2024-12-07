@@ -321,7 +321,7 @@ if you are using Doctrine, the matching column definition should use the type ``
         // ...
     }
 
-.. caution::
+.. warning::
 
     You should not use the type ``simple_array`` for your marking store. Inside
     a multiple state marking store, places are stored as keys with a value of one,

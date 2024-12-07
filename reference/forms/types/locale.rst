@@ -46,7 +46,7 @@ Overridden Options
 The choices option defaults to all locales. It uses the default locale to
 specify the language.
 
-.. caution::
+.. warning::
 
     If you want to override the built-in choices of the locale type, you
     will also have to set the ``choice_loader`` option to ``null``.

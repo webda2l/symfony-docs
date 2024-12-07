@@ -294,7 +294,7 @@ domains work:
     # Example with Cypress
     $ https_proxy=$(symfony proxy:url) ./node_modules/bin/cypress open
 
-.. caution::
+.. warning::
 
     Although env var names are always defined in uppercase, the ``https_proxy``
     env var `is treated differently`_ than other env vars and its name must be
@@ -357,7 +357,7 @@ There are several options that you can set using a ``.symfony.local.yaml`` confi
         use_gzip: true # Toggle GZIP compression
         no_workers: true # Do not start workers
 
-.. caution::
+.. warning::
 
     Setting domains in this configuration file will override any domains you set
     using the ``proxy:domain:attach`` command for the current project when you start
@@ -524,7 +524,7 @@ its location, same as for ``docker-compose``:
     If you have more than one Docker Compose file, you can provide them all
     separated by ``:`` as explained in the `Docker compose CLI env var reference`_.
 
-.. caution::
+.. warning::
 
     When using the Symfony binary with ``php bin/console`` (``symfony console ...``),
     the binary will **always** use environment variables detected via Docker and will
@@ -534,7 +534,7 @@ its location, same as for ``docker-compose``:
     ``symfony console doctrine:database:drop --force --env=test``, the command will drop the database
     defined in your Docker configuration and not the "test" one.
 
-.. caution::
+.. warning::
 
     Similar to other web servers, this tool automatically exposes all environment
     variables available in the CLI context. Ensure that this local server is not

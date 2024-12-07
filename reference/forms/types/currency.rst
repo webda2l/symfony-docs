@@ -35,7 +35,7 @@ Overridden Options
 
 The choices option defaults to all currencies.
 
-.. caution::
+.. warning::
 
     If you want to override the built-in choices of the currency type, you
     will also have to set the ``choice_loader`` option to ``null``.

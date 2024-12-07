@@ -3,7 +3,7 @@
 The Bundle System
 =================
 
-.. caution::
+.. warning::
 
     In Symfony versions prior to 4.0, it was recommended to organize your own
     application code using bundles. This is :ref:`no longer recommended <best-practice-no-application-bundles>` and bundles
@@ -58,7 +58,7 @@ Start by creating a new class called ``AcmeBlogBundle``::
     {
     }
 
-.. caution::
+.. warning::
 
     If your bundle must be compatible with previous Symfony versions you have to
     extend from the :class:`Symfony\\Component\\HttpKernel\\Bundle\\Bundle` instead.
@@ -118,7 +118,7 @@ to be adjusted if needed:
 
 .. _bundles-legacy-directory-structure:
 
-.. caution::
+.. warning::
 
     The recommended bundle structure was changed in Symfony 5, read the
     `Symfony 4.4 bundle documentation`_ for information about the old

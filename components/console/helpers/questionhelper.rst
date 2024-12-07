@@ -329,7 +329,7 @@ convenient for passwords::
         return Command::SUCCESS;
     }
 
-.. caution::
+.. warning::
 
     When you ask for a hidden response, Symfony will use either a binary, change
     ``stty`` mode or use another trick to hide the response. If none is available,
@@ -392,7 +392,7 @@ method::
         return Command::SUCCESS;
     }
 
-.. caution::
+.. warning::
 
     The normalizer is called first and the returned value is used as the input
     of the validator. If the answer is invalid, don't throw exceptions in the
@@ -540,7 +540,7 @@ This way you can test any user interaction (even complex ones) by passing the ap
     simulates a user hitting ``ENTER`` after each input, no need for passing
     an additional input.
 
-.. caution::
+.. warning::
 
     On Windows systems Symfony uses a special binary to implement hidden
     questions. This means that those questions don't use the default ``Input``

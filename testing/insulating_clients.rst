@@ -43,7 +43,7 @@ clean PHP process, thus avoiding any side effects.
     As an insulated client is slower, you can keep one client in the main
     process, and insulate the other ones.
 
-.. caution::
+.. warning::
 
     Insulating tests requires some serializing and unserializing operations. If
     your test includes data that can't be serialized, such as file streams when

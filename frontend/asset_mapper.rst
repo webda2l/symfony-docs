@@ -91,7 +91,7 @@ This will physically copy all the files from your mapped directories to
 ``public/assets/`` so that they're served directly by your web server.
 See :ref:`Deployment <asset-mapper-deployment>` for more details.
 
-.. caution::
+.. warning::
 
     If you run the ``asset-map:compile`` command on your development machine,
     you won't see any changes made to your assets when reloading the page.

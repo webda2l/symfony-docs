@@ -107,7 +107,7 @@ This handler must implement
 The access token authenticator will use the returned user identifier to
 load the user using the :ref:`user provider <security-user-providers>`.
 
-.. caution::
+.. warning::
 
     It is important to check the token if is valid. For instance, the
     example above verifies whether the token has not expired. With
@@ -136,7 +136,7 @@ Symfony provides other extractors as per the `RFC6750`_:
     The token is part of the request body during a POST request. Usually
     ``access_token``.
 
-.. caution::
+.. warning::
 
     Because of the security weaknesses associated with the URI method,
     including the high likelihood that the URL or the request body

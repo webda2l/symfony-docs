@@ -171,7 +171,7 @@ class to the label:
         ],
         // ...
 
-.. caution::
+.. warning::
 
     Switches only work with **checkbox**.
 
@@ -201,7 +201,7 @@ class to the ``row_attr`` option.
             }
         }) }}
 
-.. caution::
+.. warning::
 
     If you fill the ``help`` option of your form, it will also be rendered
     as part of the group.
@@ -239,7 +239,7 @@ of your form type.
             }
         }) }}
 
-.. caution::
+.. warning::
 
     You **must** provide a ``label`` and a ``placeholder`` to make floating
     labels work properly.

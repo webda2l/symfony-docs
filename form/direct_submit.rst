@@ -65,7 +65,7 @@ the fields defined by the form class. Otherwise, you'll see a form validation er
     argument to ``submit()``. Passing ``false`` will remove any missing fields
     within the form object. Otherwise, the missing fields will be set to ``null``.
 
-.. caution::
+.. warning::
 
     When the second parameter ``$clearMissing`` is ``false``, like with the
     "PATCH" method, the validation will only apply to the submitted fields. If

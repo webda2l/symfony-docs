@@ -108,7 +108,7 @@ You can configure the options passed to the ``other_options`` argument of
     // this option allows a subprocess to continue running after the main script exited
     $process->setOptions(['create_new_console' => true]);
 
-.. caution::
+.. warning::
 
     Most of the options defined by ``proc_open()`` (such as ``create_new_console``
     and ``suppress_errors``) are only supported on Windows operating systems.
@@ -552,7 +552,7 @@ Use :method:`Symfony\\Component\\Process\\Process::disableOutput` and
     $process->disableOutput();
     $process->run();
 
-.. caution::
+.. warning::
 
     You cannot enable or disable the output while the process is running.
 

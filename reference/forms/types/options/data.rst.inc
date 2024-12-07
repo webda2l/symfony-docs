@@ -16,7 +16,7 @@ an individual field, you can set it in the data option::
         'data' => 'abcdef',
     ]);
 
-.. caution::
+.. warning::
 
     The ``data`` option *always* overrides the value taken from the domain data
     (object) when rendering. This means the object value is also overridden when
