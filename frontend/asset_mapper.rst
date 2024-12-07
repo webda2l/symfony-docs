@@ -726,7 +726,7 @@ installed the following PHP extensions or CLI commands:
 
 * Brotli: ``brotli`` CLI command; `brotli PHP extension`_;
 * Zstandard: ``zstd`` CLI command; `zstd PHP extension`_;
-* gzip: ``gzip`` CLI command; `zlib PHP extension`_.
+* gzip: ``zopfli`` (better) or ``gzip`` CLI command; `zlib PHP extension`_.
 
 Then, update your AssetMapper configuration to define which compression to use
 and which file extensions should be compressed:
@@ -750,6 +750,27 @@ compressed files are created with the same name as the original but with the
 ``.br``, ``.zst``, or ``.gz`` extension appended. Web servers that support asset
 precompression will use the compressed assets automatically, so there's nothing
 else to configure in your server.
+
+Finally, you need to configure your web server to serve the precompressed assets
+instead of the original ones:
+
+.. configuration-block::
+
+    .. code-block:: caddy
+
+        file_server {
+            precompressed br zstd gzip
+        }
+
+    .. code-block:: nginx
+
+        gzip_static on;
+
+        # Requires https://github.com/google/ngx_brotli
+        brotli_static on;
+
+        # Requires https://github.com/tokers/zstd-nginx-module
+        zstd_static on;
 
 .. tip::
 
