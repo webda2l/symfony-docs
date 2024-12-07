@@ -656,7 +656,9 @@ which will automatically do most of these things for you:
 - **Compress your assets**: Your web server should compress (e.g. using gzip)
   your assets (JavaScript, CSS, images) before sending them to the browser. This
   is automatically enabled in Caddy and can be activated in Nginx and Apache.
-  In Cloudflare, assets are compressed by default.
+  In Cloudflare, assets are compressed by default. AssetMapper also supports
+  :ref:`precompressing your web assets <performance-precompressing>` to further
+  improve performance.
 
 - **Set long-lived cache expiry**: Your web server should set a long-lived
   ``Cache-Control`` HTTP header on your assets. Because the AssetMapper component includes a version
@@ -703,6 +705,57 @@ even though it hasn't yet seen the ``import`` statement for them.
 
 Additionally, if the :doc:`WebLink Component </web_link>` is available in your application,
 Symfony will add a ``Link`` header in the response to preload the CSS files.
+
+.. _performance-precompressing:
+
+Pre-Compressing Assets
+----------------------
+
+Although most servers (Caddy, Nginx, Apache, FrankenPHP) and services like Cloudflare
+provide asset compression features, AssetMapper also allows you to compress all
+your assets before serving them.
+
+This improves performance because you can compress assets using the highest (and
+slowest) compression ratios beforehand and provide those compressed assets to the
+server, which then returns them to the client without wasting CPU resources on
+compression.
+
+AssetMapper supports  `Brotli`_, `Zstandard`_ and  `gzip`_ compression formats.
+Before using any of them, the server that pre-compresses assets must have
+installed the following PHP extensions or CLI commands:
+
+* Brotli: ``brotli`` CLI command; `brotli PHP extension`_;
+* Zstandard: ``zstd`` CLI command; `zstd PHP extension`_;
+* gzip: ``gzip`` CLI command; `zlib PHP extension`_.
+
+Then, update your AssetMapper configuration to define which compression to use
+and which file extensions should be compressed:
+
+.. code-block:: yaml
+
+    # config/packages/asset_mapper.yaml
+    framework:
+        asset_mapper:
+            # ...
+
+            precompress:
+                format: 'zstandard'
+                # if you don't define the following option, AssetMapper will compress all
+                # the extensions considered safe (css, js, json, svg, xml, ttf, otf, wasm, etc.)
+                extensions: ['css', 'js', 'json', 'svg', 'xml']
+
+Now, when running the ``asset-map:compile`` command, all matching files will be
+compressed in the configured format and at the highest compression level. The
+compressed files are created with the same name as the original but with the
+``.br``, ``.zst``, or ``.gz`` extension appended. Web servers that support asset
+precompression will use the compressed assets automatically, so there's nothing
+else to configure in your server.
+
+.. tip::
+
+    AssetMapper provides an ``assets:compress`` CLI command and a service called
+    ``asset_mapper.compressor`` that you can use anywhere in your application to
+    compress any kind of files (e.g. files uploaded by users to your application).
 
 Frequently Asked Questions
 --------------------------
@@ -1195,3 +1248,9 @@ command as part of your CI to be warned anytime a new vulnerability is found.
 .. _strict-dynamic: https://developer.mozilla.org/en-US/docs/Web/HTTP/Headers/Content-Security-Policy/script-src#strict-dynamic
 .. _kocal/biome-js-bundle: https://github.com/Kocal/BiomeJsBundle
 .. _`SensioLabs Minify Bundle`: https://github.com/sensiolabs/minify-bundle
+.. _`Brotli`: https://en.wikipedia.org/wiki/Brotli
+.. _`Zstandard`: https://en.wikipedia.org/wiki/Zstd
+.. _`gzip`: https://en.wikipedia.org/wiki/Gzip
+.. _`brotli PHP extension`: https://pecl.php.net/package/brotli
+.. _`zstd PHP extension`: https://pecl.php.net/package/zstd
+.. _`zlib PHP extension`: https://www.php.net/manual/en/book.zlib.php
