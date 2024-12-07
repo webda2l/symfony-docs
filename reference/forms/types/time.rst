@@ -82,8 +82,9 @@ values for the hour, minute and second fields::
         ],
     ]);
 
-If you want seconds to be displayed as well, take a look at the setting 
-`with_seconds`_, which is by default set to false.
+.. seealso::
+
+    See the `with_seconds`_ option on how to enable seconds in the form type.
 
 .. include:: /reference/forms/types/options/hours.rst.inc
 
