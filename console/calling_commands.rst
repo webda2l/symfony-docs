@@ -36,6 +36,9 @@ method)::
                 '--yell'  => true,
             ]);
 
+            // disable interactive behavior for the greet command
+            $greetInput->setInteractive(false);
+
             $returnCode = $this->getApplication()->doRun($greetInput, $output);
 
             // ...
