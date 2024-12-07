@@ -238,7 +238,7 @@ The serializer uses a two-step process when (de)serializing objects:
     ></object>
 
 In both directions, data is always first converted to an array. This splits
-the process in two seperate responsibilities:
+the process in two separate responsibilities:
 
 Normalizers
     These classes convert **objects** into **arrays** and vice versa. They
