@@ -1818,7 +1818,7 @@ property. This can be used instead of
             },
         ],
     ];
-    $jsonContent = $serializer->serialize($person, 'json');
+    $jsonContent = $serializer->serialize($person, 'json', $context);
     // $jsonContent contains {"name":"cordoval","age":34,"createdAt":"2014-03-22T09:43:12-0500"}
 
 Advanced Deserialization
