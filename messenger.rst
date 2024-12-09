@@ -1453,7 +1453,7 @@ The transport has a number of options:
     (no description available)
 
 ``sasl_method``
-
+    (no description available)
 
 ``connection_name``
     For custom connection names (requires at least version 1.10 of the PHP AMQP
