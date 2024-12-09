@@ -80,6 +80,10 @@ values for the hour, minute and second fields::
         ],
     ]);
 
+.. seealso::
+
+    See the `with_seconds`_ option on how to enable seconds in the form type.
+
 .. include:: /reference/forms/types/options/hours.rst.inc
 
 .. include:: /reference/forms/types/options/html5.rst.inc
