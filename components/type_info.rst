@@ -43,9 +43,9 @@ to the :class:`Symfony\\Component\\TypeInfo\\Type` static methods as following::
 Resolvers
 ~~~~~~~~~
 
-The second way of using the component is to use ``TypeInfo`` to resolve a type
-based on reflection or a simple string, this is aimed towards libraries that wants to
-describe a class or anything that has a type easily::
+The second way to use the component is by using ``TypeInfo`` to resolve a type
+based on reflection or a simple string. This approach is designed for libraries
+that need a simple way to describe a class or anything with a type::
 
     use Symfony\Component\TypeInfo\Type;
     use Symfony\Component\TypeInfo\TypeResolver\TypeResolver;
@@ -82,13 +82,15 @@ Each of these calls will return you a ``Type`` instance that corresponds to the
 static method used. You can also resolve types from a string (as shown in the
 ``bool`` parameter of the previous example)
 
-PHPDoc parsing
+PHPDoc Parsing
 ~~~~~~~~~~~~~~
 
-But most times you won't have clean typed properties or you want a more precise type
-thank to advanced PHPDoc, to do that you would want a string resolver based on that PHPDoc.
-First you will require ``phpstan/phpdoc-parser`` package from composer to support string
-revolving. Then you would do as following::
+In many cases, you may not have cleanly typed properties or may need more precise
+type definitions provided by advanced PHPDoc. To achieve this, you can use a string
+resolver based on the PHPDoc annotations.
+
+First, run the command ``composer require phpstan/phpdoc-parser`` to install the
+PHP package required for string resolving. Then, follow these steps::
 
     use Symfony\Component\TypeInfo\TypeResolver\TypeResolver;
 
@@ -106,35 +108,40 @@ revolving. Then you would do as following::
     $typeResolver->resolve(new \ReflectionProperty(Dummy::class, 'id')); // returns an "int" Type
     $typeResolver->resolve(new \ReflectionProperty(Dummy::class, 'id')); // returns a collection with "int" as key and "string" as values Type
 
-Advanced usages
+Advanced Usages
 ~~~~~~~~~~~~~~~
 
-There is many methods to manipulate and check types depending on your needs within the TypeInfo components.
+The TypeInfo component provides various methods to manipulate and check types,
+depending on your needs.
 
-If you need a check a simple Type::
+Checking a **simple type**::
 
-    // You need to check if a Type
-    $type = Type::int(); // with a simple int type
-    // You can check if a given type comply with a given identifier
-    $type->isIdentifiedBy(TypeIdentifier::INT); // true
+    // define a simple integer type
+    $type = Type::int();
+    // check if the type matches a specific identifier
+    $type->isIdentifiedBy(TypeIdentifier::INT);    // true
     $type->isIdentifiedBy(TypeIdentifier::STRING); // false
 
-    $type = Type::union(Type::string(), Type::int()); // with an union of int and string types
-    // You can now see that the second check will pass to true since we have an union with a string type
-    $type->isIdentifiedBy(TypeIdentifier::INT); // true
+    // define a union type (equivalent to PHP's int|string)
+    $type = Type::union(Type::string(), Type::int());
+    // now the second check is true because the union type contains the string type
+    $type->isIdentifiedBy(TypeIdentifier::INT);    // true
     $type->isIdentifiedBy(TypeIdentifier::STRING); // true
 
     class DummyParent {}
     class Dummy extends DummyParent implements DummyInterface {}
-    $type = Type::object(Dummy::class); // with an object Type
-    // You can check is the Type is an object, or even if it's a given class
-    $type->isIdentifiedBy(TypeIdentifier::OBJECT); // true
-    $type->isIdentifiedBy(Dummy::class); // true
-    // Or inherits/implements something
-    $type->isIdentifiedBy(DummyParent::class); // true
-    $type->isIdentifiedBy(DummyInterface::class); // true
 
-Sometimes you want to check for more than one thing at a time so a callable may be better to check everything::
+    // define an object type
+    $type = Type::object(Dummy::class);
+
+    // check if the type is an object or matches a specific class
+    $type->isIdentifiedBy(TypeIdentifier::OBJECT); // true
+    $type->isIdentifiedBy(Dummy::class);           // true
+    // check if it inherits/implements something
+    $type->isIdentifiedBy(DummyParent::class);     // true
+    $type->isIdentifiedBy(DummyInterface::class);  // true
+
+Using callables for **complex checks**:
 
     class Foo
     {
@@ -150,8 +157,7 @@ Sometimes you want to check for more than one thing at a time so a callable may 
     $stringType = $resolver->resolve($reflClass->getProperty('string'));
     $floatType = $resolver->resolve($reflClass->getProperty('float'));
 
-    // your callable to check whatever you need
-    // here we want to validate a given type is a non nullable number
+    // define a callable to validate non-nullable number types
     $isNonNullableNumber = function (Type $type): bool {
         if ($type->isNullable()) {
             return false;
@@ -165,5 +171,5 @@ Sometimes you want to check for more than one thing at a time so a callable may 
     };
 
     $integerType->isSatisfiedBy($isNonNullableNumber); // true
-    $stringType->isSatisfiedBy($isNonNullableNumber); // false
-    $floatType->isSatisfiedBy($isNonNullableNumber); // false
+    $stringType->isSatisfiedBy($isNonNullableNumber);  // false
+    $floatType->isSatisfiedBy($isNonNullableNumber);   // false
