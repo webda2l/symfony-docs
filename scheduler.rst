@@ -820,11 +820,10 @@ the Messenger component:
 
 .. tip::
 
-    Depending on your deployment scenario, instead of manually executing this
-    Messenger worker process, you might want to run it with cron, supervisor or systemd,
-    and ensure workers are running at all times. Check out the `Deploying to Production`_
-    section of the Messenger component documentation.
-
+    Depending on your deployment scenario, you may prefer automating the execution of
+    the Messenger worker process using tools like cron, Supervisor, or systemd.
+    This ensures workers are running continuously. For more details, refer to the
+    `Deploying to Production`_ section of the Messenger component documentation.
 
 Creating a Consumer Programmatically
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
