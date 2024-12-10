@@ -798,7 +798,7 @@ method::
         {
             $response = $this->sendEarlyHints([
                 new Link(rel: 'preconnect', href: 'https://fonts.google.com'),
-                (new Link(href: '/style.css'))->withAttribute('as', 'stylesheet'),
+                (new Link(href: '/style.css'))->withAttribute('as', 'style'),
                 (new Link(href: '/script.js'))->withAttribute('as', 'script'),
             ]);
 
