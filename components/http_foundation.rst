@@ -681,8 +681,19 @@ Streaming a Response
 ~~~~~~~~~~~~~~~~~~~~
 
 The :class:`Symfony\\Component\\HttpFoundation\\StreamedResponse` class allows
-you to stream the Response back to the client. The response content is
-represented by a PHP callable instead of a string::
+you to stream the Response back to the client. The response content can be
+represented by a string iterable::
+
+    use Symfony\Component\HttpFoundation\StreamedResponse;
+
+    $chunks = ['Hello', ' World'];
+
+    $response = new StreamedResponse();
+    $response->setChunks($chunks);
+    $response->send();
+
+For most complex use cases, the response content can be instead represented by
+a PHP callable::
 
     use Symfony\Component\HttpFoundation\StreamedResponse;
 
@@ -709,6 +720,10 @@ represented by a PHP callable instead of a string::
 
         // disables FastCGI buffering in nginx only for this response
         $response->headers->set('X-Accel-Buffering', 'no');
+
+.. versionadded:: 7.3
+
+    Support for using string iterables was introduced in Symfony 7.3.
 
 Streaming a JSON Response
 ~~~~~~~~~~~~~~~~~~~~~~~~~
