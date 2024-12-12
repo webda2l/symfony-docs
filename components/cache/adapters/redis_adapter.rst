@@ -39,9 +39,11 @@ as the second and third parameters::
         // own lifetime, with a value 0 causing items to be stored indefinitely (i.e.
         // until RedisAdapter::clear() is invoked or the server(s) are purged)
         $defaultLifetime = 0,
-        // $marshaller (optional) MarshallerInterface instance to control serialization
-        // and deserialization of cache items. By default, it uses native PHP serialization.
-        // Useful to compress data, use custom serialization, or optimize the size and performance of cached items.
+
+        // $marshaller (optional) An instance of MarshallerInterface to control the serialization
+        // and deserialization of cache items. By default, native PHP serialization is used.
+        // This can be useful for compressing data, applying custom serialization logic, or
+        // optimizing the size and performance of cached items
         ?MarshallerInterface $marshaller = null
     );
 
@@ -275,6 +277,7 @@ Working with Marshaller
 
 TagAwareMarshaller for Tag-Based Caching
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+
 Optimizes caching for tag-based retrieval, allowing efficient management of related items::
 
     $marshaller = new TagAwareMarshaller();
@@ -287,7 +290,8 @@ Optimizes caching for tag-based retrieval, allowing efficient management of rela
 
 SodiumMarshaller for Encrypted Caching
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
-Encrypts cached data with Sodium for added security::
+
+Encrypts cached data using Sodium for enhanced security::
 
     $encryptionKeys = [sodium_crypto_box_keypair()];
     $marshaller = new SodiumMarshaller($encryptionKeys);
@@ -300,7 +304,8 @@ Encrypts cached data with Sodium for added security::
 
 DefaultMarshaller with igbinary Serialization
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
-Uses igbinary for faster, more efficient serialization when available::
+
+Uses ``igbinary` for faster and more efficient serialization when available::
 
     $marshaller = new DefaultMarshaller(true);
 
@@ -312,7 +317,8 @@ Uses igbinary for faster, more efficient serialization when available::
 
 DefaultMarshaller with Exception on Failure
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
-Throws an exception if serialization fails, aiding in error handling::
+
+Throws an exception if serialization fails, facilitating error handling::
 
     $marshaller = new DefaultMarshaller(false, true);
 
@@ -323,12 +329,13 @@ Throws an exception if serialization fails, aiding in error handling::
         $item->set('data');
         $cache->save($item);
     } catch (\ValueError $e) {
-        echo 'Serialization failed: ' . $e->getMessage();
+        echo 'Serialization failed: '.$e->getMessage();
     }
 
 SodiumMarshaller with Key Rotation
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
-Supports key rotation, allowing secure decryption with both old and new keys::
+
+Supports key rotation, ensuring secure decryption with both old and new keys::
 
     $keys = [sodium_crypto_box_keypair(), sodium_crypto_box_keypair()];
     $marshaller = new SodiumMarshaller($keys);
