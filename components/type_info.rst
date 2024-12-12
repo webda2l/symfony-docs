@@ -141,7 +141,7 @@ Checking a **simple type**::
     $type->isIdentifiedBy(DummyParent::class);     // true
     $type->isIdentifiedBy(DummyInterface::class);  // true
 
-Using callables for **complex checks**:
+Using callables for **complex checks**::
 
     class Foo
     {
