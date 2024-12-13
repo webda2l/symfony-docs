@@ -1789,7 +1789,7 @@ identifier of the next nested object, instead of omitting the property::
     $child = new Person('Joe', $mother);
 
     // all callback parameters are optional (you can omit the ones you don't use)
-    $maxDepthHandler = function (object $innerObject, object $outerObject, string $attributeName, ?string $format = null, array $context = []): string {
+    $maxDepthHandler = function (object $innerObject, object $outerObject, string $attributeName, ?string $format = null, array $context = []): ?string {
         // return only the name of the next person in the tree
         return $innerObject instanceof Person ? $innerObject->getName() : null;
     };
