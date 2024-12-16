@@ -130,8 +130,10 @@ asset_version
 
 .. code-block:: twig
 
-    {{ asset_version(packageName = null) }}
+    {{ asset_version(path, packageName = null) }}
 
+``path``
+    **type**: ``string``
 ``packageName`` *(optional)*
     **type**: ``string`` | ``null`` **default**: ``null``
 
