@@ -30,7 +30,7 @@ A custom name converter can handle such cases::
 
     class OrgPrefixNameConverter implements NameConverterInterface
     {
-        public function normalize(string $propertyName, string $class = null, ?string $format = null, array $context = []): string
+        public function normalize(string $propertyName, ?string $class = null, ?string $format = null, array $context = []): string
         {
             // during normalization, add the prefix
             return 'org_'.$propertyName;
