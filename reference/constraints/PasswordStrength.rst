@@ -178,7 +178,7 @@ service to use your own estimator:
                 class: App\Validator\CustomPasswordStrengthEstimator
 
             Symfony\Component\Validator\Constraints\PasswordStrengthValidator:
-                arguments: [!service_closure '@custom_password_strength_estimator']
+                arguments: [!closure '@custom_password_strength_estimator']
 
     .. code-block:: xml
 
@@ -192,7 +192,7 @@ service to use your own estimator:
                 <service id="custom_password_strength_estimator" class="App\Validator\CustomPasswordStrengthEstimator"/>
 
                 <service id="Symfony\Component\Validator\Constraints\PasswordStrengthValidator">
-                    <argument type="service_closure" id="custom_password_strength_estimator"/>
+                    <argument type="closure" id="custom_password_strength_estimator"/>
                 </service>
             </services>
         </container>
@@ -210,5 +210,5 @@ service to use your own estimator:
             $services->set('custom_password_strength_estimator', CustomPasswordStrengthEstimator::class);
 
             $services->set(PasswordStrengthValidator::class)
-                ->args([service_closure('custom_password_strength_estimator')]);
+                ->args([closure('custom_password_strength_estimator')]);
         };
