@@ -2233,7 +2233,7 @@ test it in a real application::
             );
             $this->assertSame($expectedRequestData, $mockResponse->getRequestOptions()['body']);
 
-            $this->assertSame($responseData, $expectedResponseData);
+            $this->assertSame($expectedResponseData, $responseData);
         }
     }
 
@@ -2266,7 +2266,7 @@ test. Then, save that information as a ``.har`` file somewhere in your applicati
             $responseData = $service->createArticle($requestData);
 
             // Assert
-            $this->assertSame($responseData, 'the expected response');
+            $this->assertSame('the expected response', $responseData);
         }
     }
 
