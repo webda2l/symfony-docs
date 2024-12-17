@@ -443,6 +443,27 @@ HTTP status to return if the validation fails::
 
 The default status code returned if the validation fails is 404.
 
+If you want to map your object to a nested array in your query with a specific key,
+you can use the ``key`` option in your :class:`Symfony\\Component\\HttpKernel\\Attribute\\MapQueryString`
+attribute::
+
+    use App\Model\SearchDto;
+    use Symfony\Component\HttpFoundation\Response;
+    use Symfony\Component\HttpKernel\Attribute\MapQueryString;
+
+    // ...
+
+    public function dashboard(
+        #[MapQueryString(key: 'search')] SearchDto $searchDto
+    ): Response
+    {
+        // ...
+    }
+
+.. versionadded:: 7.3
+
+    The ``key`` option of ``#[MapQueryString]`` was introduced in Symfony 7.3.
+
 If you need a valid DTO even when the request query string is empty, set a
 default value for your controller arguments::
 
