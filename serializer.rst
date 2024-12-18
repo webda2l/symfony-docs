@@ -1352,6 +1352,31 @@ normalizers (in order of priority):
     This denormalizer converts an array of arrays to an array of objects
     (with the given type). See :ref:`Handling Arrays <serializer-handling-arrays>`.
 
+    ByUsing the PropertyInfoExtractor you can simply annotate the arrays by '@var Person[]'
+
+    .. configuration-block::
+
+        .. code-block:: php-standalone
+
+            use Symfony\Component\PropertyInfo\Extractor\PhpDocExtractor;
+            use Symfony\Component\PropertyInfo\Extractor\ReflectionExtractor;
+            use Symfony\Component\PropertyInfo\PropertyInfoExtractor;
+            use Symfony\Component\Serializer\Encoder\JsonEncoder;
+            use Symfony\Component\Serializer\Mapping\Factory\ClassMetadataFactory;
+            use Symfony\Component\Serializer\Mapping\Loader\AttributeLoader;
+            use Symfony\Component\Serializer\Normalizer\ArrayDenormalizer;
+            use Symfony\Component\Serializer\Normalizer\ObjectNormalizer;
+            use Symfony\Component\Serializer\Serializer;
+    
+            $reflectionExtractor = new ReflectionExtractor();
+            $phpDocExtractor = new PhpDocExtractor();
+            $propertyInfo = new PropertyInfoExtractor([], [$phpDocExtractor, $reflectionExtractor]);
+            
+            $classMetadataFactory = new ClassMetadataFactory(new AttributeLoader());
+            $normalizers = [new ObjectNormalizer($classMetadataFactory, null, null, $propertyInfo), new ArrayDenormalizer()];
+            
+            $this->serializer = new Serializer($normalizers, [new JsonEncoder()]);
+
 :class:`Symfony\\Component\\Serializer\\Normalizer\\ObjectNormalizer`
     This is the most powerful default normalizer and used for any object
     that could not be normalized by the other normalizers.
