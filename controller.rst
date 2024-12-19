@@ -443,9 +443,8 @@ HTTP status to return if the validation fails::
 
 The default status code returned if the validation fails is 404.
 
-If you want to map your object to a nested array in your query with a specific key,
-you can use the ``key`` option in your :class:`Symfony\\Component\\HttpKernel\\Attribute\\MapQueryString`
-attribute::
+If you want to map your object to a nested array in your query using a specific key,
+set the ``key`` option in the ``#[MapQueryString]`` attribute::
 
     use App\Model\SearchDto;
     use Symfony\Component\HttpFoundation\Response;
