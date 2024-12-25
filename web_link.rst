@@ -55,13 +55,7 @@ make one request for the HTML page and another request for the linked CSS file.
 However, thanks to HTTP/2 your application can start sending the CSS file
 contents even before browsers request them.
 
-To do that, first install the WebLink component:
-
-.. code-block:: terminal
-
-    $ composer require symfony/web-link
-
-Now, update the template to use the ``preload()`` Twig function provided by
+You can update the template to use the ``preload()`` Twig function provided by
 WebLink. The `"as" attribute`_ is mandatory because browsers need it to apply
 correct prioritization and the content security policy:
 
