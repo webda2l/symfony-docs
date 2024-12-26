@@ -12,7 +12,7 @@ The component has two main features:
 * :ref:`Mapping & Versioning Assets <mapping-assets>`: All files inside of ``assets/``
   are made available publicly and **versioned**. You can reference the file
   ``assets/images/product.jpg`` in a Twig template with ``{{ asset('images/product.jpg') }}``.
-  The final URL will include a version hash, like ``/assets/images/product-3c16d9220694c0e56d8648f25e6035e9.jpg``.
+  The final URL will include a version hash, like ``/assets/images/product-3c16d92m.jpg``.
 
 * :ref:`Importmaps <importmaps-javascript>`: A native browser feature that makes it easier
   to use the JavaScript ``import`` statement (e.g. ``import { Modal } from 'bootstrap'``)
@@ -70,7 +70,7 @@ The path - ``images/duck.png`` - is relative to your mapped directory (``assets/
 This is known as the **logical path** to your asset.
 
 If you look at the HTML in your page, the URL will be something
-like: ``/assets/images/duck-3c16d9220694c0e56d8648f25e6035e9.png``. If you change
+like: ``/assets/images/duck-3c16d92m.png``. If you change
 the file, the version part of the URL will also change automatically.
 
 .. _asset-mapper-compile-assets:
@@ -78,7 +78,7 @@ the file, the version part of the URL will also change automatically.
 Serving Assets in dev vs prod
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
-In the ``dev`` environment, the URL ``/assets/images/duck-3c16d9220694c0e56d8648f25e6035e9.png``
+In the ``dev`` environment, the URL ``/assets/images/duck-3c16d92m.png``
 is handled and returned by your Symfony app.
 
 For the ``prod`` environment, before deploy, you should run:
@@ -283,9 +283,9 @@ outputs an `importmap`_:
 
     <script type="importmap">{
         "imports": {
-            "app": "/assets/app-4e986c1a2318dd050b1d47db8d856278.js",
-            "/assets/duck.js": "/assets/duck-1b7a64b3b3d31219c262cf72521a5267.js",
-            "bootstrap": "/assets/vendor/bootstrap/bootstrap.index-f0935445d9c6022100863214b519a1f2.js"
+            "app": "/assets/app-4e986c1a.js",
+            "/assets/duck.js": "/assets/duck-1b7a64b3.js",
+            "bootstrap": "/assets/vendor/bootstrap/bootstrap.index-f093544d.js"
         }
     }</script>
 
@@ -342,8 +342,8 @@ The ``importmap()`` function also outputs a set of "preloads":
 
 .. code-block:: html
 
-    <link rel="modulepreload" href="/assets/app-4e986c1a2318dd050b1d47db8d856278.js">
-    <link rel="modulepreload" href="/assets/duck-1b7a64b3b3d31219c262cf72521a5267.js">
+    <link rel="modulepreload" href="/assets/app-4e986c1a.js">
+    <link rel="modulepreload" href="/assets/duck-1b7a64b3.js">
 
 This is a performance optimization and you can learn more about below
 in :ref:`Performance: Add Preloading <performance-preloading>`.
@@ -494,9 +494,9 @@ for ``duck.png``:
 
 .. code-block:: css
 
-    /* public/assets/styles/app-3c16d9220694c0e56d8648f25e6035e9.css */
+    /* public/assets/styles/app-3c16d92m.css */
     .quack {
-        background-image: url('../images/duck-3c16d9220694c0e56d8648f25e6035e9.png');
+        background-image: url('../images/duck-3c16d92m.png');
     }
 
 .. _asset-mapper-tailwind:
@@ -573,7 +573,7 @@ Sometimes a JavaScript file you're importing (e.g. ``import './duck.js'``),
 or a CSS/image file you're referencing won't be found, and you'll see a 404
 error in your browser's console. You'll also notice that the 404 URL is missing
 the version hash in the filename (e.g. a 404 to ``/assets/duck.js`` instead of
-a path like ``/assets/duck.1b7a64b3b3d31219c262cf72521a5267.js``).
+a path like ``/assets/duck-1b7a64b3.js``).
 
 This is usually because the path is wrong. If you're referencing the file
 directly in a Twig template:
@@ -848,7 +848,7 @@ be versioned! It will output something like:
 
 .. code-block:: html+twig
 
-    <link rel="stylesheet" href="/assets/bundles/babdevpagerfanta/css/pagerfanta-ea64fc9c55f8394e696554f8aeb81a8e.css">
+    <link rel="stylesheet" href="/assets/bundles/babdevpagerfanta/css/pagerfanta-ea64fc9c.css">
 
 Overriding 3rd-Party Assets
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~
