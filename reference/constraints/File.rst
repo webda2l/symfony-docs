@@ -314,12 +314,12 @@ Parameter                       Description
 The message displayed if the extension of the file is not a valid extension
 per the `extensions`_ option.
 
-==================== ==============================================================
-Parameter            Description
-==================== ==============================================================
-``{{ extension }}``  The extension of the given file
-``{{ extensions }}`` The list of allowed file extensions
-==================== ==============================================================
+====================  ==============================================================
+Parameter             Description
+====================  ==============================================================
+``{{ extension }}``   The extension of the given file
+``{{ extensions }}``  The list of allowed file extensions
+====================  ==============================================================
 
 ``mimeTypesMessage``
 ~~~~~~~~~~~~~~~~~~~~
