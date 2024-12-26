@@ -298,7 +298,12 @@ Parameter                       Description
 The message displayed if the extension of the file is not a valid extension
 per the `extensions`_ option.
 
-.. include:: /reference/constraints/_parameters-mime-types-message-option.rst.inc
+====================  ==============================================================
+Parameter             Description
+====================  ==============================================================
+``{{ extension }}``   The extension of the given file
+``{{ extensions }}``  The list of allowed file extensions
+====================  ==============================================================
 
 ``mimeTypesMessage``
 ~~~~~~~~~~~~~~~~~~~~
