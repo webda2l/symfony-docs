@@ -530,5 +530,10 @@ options has been set.
 
 This message has no parameters.
 
+.. note::
+
+    SVG images sizes are not currently supported. Using size constraints with
+    these files will display this message.
+
 .. _`IANA website`: https://www.iana.org/assignments/media-types/media-types.xhtml
 .. _`PHP GD extension`: https://www.php.net/manual/en/book.image.php
