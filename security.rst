@@ -2966,4 +2966,3 @@ Authorization (Denying Access)
 .. _`Login CSRF attacks`: https://en.wikipedia.org/wiki/Cross-site_request_forgery#Forging_login_requests
 .. _`PHP date relative formats`: https://www.php.net/manual/en/datetime.formats.php#datetime.formats.relative
 .. _`Oauth2-client`: https://github.com/thephpleague/oauth2-client
-.. _`SensitiveParameter PHP attribute`: https://www.php.net/manual/en/class.sensitiveparameter.php
