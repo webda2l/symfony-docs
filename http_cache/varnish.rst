@@ -70,21 +70,18 @@ into :ref:`caching pages that contain CSRF protected forms <caching-pages-that-c
 Cookies created in JavaScript and used only in the frontend, e.g. when using
 Google Analytics, are nonetheless sent to the server. These cookies are not
 relevant for the backend and should not affect the caching decision. Configure
-your Varnish cache to `clean the cookies header`_. You want to keep the
-session cookie, if there is one, and get rid of all other cookies so that pages
-are cached if there is no active session. Unless you changed the default
-configuration of PHP, your session cookie has the name ``PHPSESSID``:
+your Varnish cache to `clean the cookies header`_. The goal is to retain only essential cookies—such as session cookies—and remove all others. By doing this, pages can still be cached when there is no active session. If you are using PHP and have not changed its default configuration, the session cookie is typically named PHPSESSID. Additionally, if your application relies on other important cookies, such as a "REMEMBERME" cookie for "remember me" functionality or "trusted_device" for 2FA, these cookies should also be preserved.
 
 .. configuration-block::
 
     .. code-block:: varnish4
 
         sub vcl_recv {
-            // Remove all cookies except the session ID.
+            // Remove all cookies except for essential ones.
             if (req.http.Cookie) {
                 set req.http.Cookie = ";" + req.http.Cookie;
                 set req.http.Cookie = regsuball(req.http.Cookie, "; +", ";");
-                set req.http.Cookie = regsuball(req.http.Cookie, ";(PHPSESSID)=", "; \1=");
+                set req.http.Cookie = regsuball(req.http.Cookie, ";(PHPSESSID|REMEMBERME)=", "; \1=");
                 set req.http.Cookie = regsuball(req.http.Cookie, ";[^ ][^;]*", "");
                 set req.http.Cookie = regsuball(req.http.Cookie, "^[; ]+|[; ]+$", "");
 
@@ -98,11 +95,11 @@ configuration of PHP, your session cookie has the name ``PHPSESSID``:
     .. code-block:: varnish3
 
         sub vcl_recv {
-            // Remove all cookies except the session ID.
+            // Remove all cookies except for essential ones.
             if (req.http.Cookie) {
                 set req.http.Cookie = ";" + req.http.Cookie;
                 set req.http.Cookie = regsuball(req.http.Cookie, "; +", ";");
-                set req.http.Cookie = regsuball(req.http.Cookie, ";(PHPSESSID)=", "; \1=");
+                set req.http.Cookie = regsuball(req.http.Cookie, ";(PHPSESSID|REMEMBERME)=", "; \1=");
                 set req.http.Cookie = regsuball(req.http.Cookie, ";[^ ][^;]*", "");
                 set req.http.Cookie = regsuball(req.http.Cookie, "^[; ]+|[; ]+$", "");
 
