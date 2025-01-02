@@ -67,10 +67,18 @@ at least for some parts of the site, e.g. when using forms with
 and clear the session when it is no longer needed. Alternatively, you can look
 into :ref:`caching pages that contain CSRF protected forms <caching-pages-that-contain-csrf-protected-forms>`.
 
-Cookies created in JavaScript and used only in the frontend, e.g. when using
-Google Analytics, are nonetheless sent to the server. These cookies are not
-relevant for the backend and should not affect the caching decision. Configure
-your Varnish cache to `clean the cookies header`_. The goal is to retain only essential cookies—such as session cookies—and remove all others. By doing this, pages can still be cached when there is no active session. If you are using PHP and have not changed its default configuration, the session cookie is typically named PHPSESSID. Additionally, if your application relies on other important cookies, such as a "REMEMBERME" cookie for "remember me" functionality or "trusted_device" for 2FA, these cookies should also be preserved.
+Cookies created in JavaScript and used only on the frontend, such as those from
+Google Analytics, are still sent to the server. These cookies are not relevant
+for backend processing and should not influence the caching logic. To ensure
+this, configure your Varnish cache to `clean the cookies header`_ by retaining
+only essential cookies (e.g., session cookies) and removing all others. This
+allows pages to be cached when there is no active session.
+
+If you are using PHP with its default configuration, the session cookie is
+typically named ``PHPSESSID``. Additionally, if your application depends on other
+critical cookies, such as a ``REMEMBERME`` cookie for :doc:`remember me </security/remember_me>`
+functionality or a trusted device cookie for two-factor authentication, these
+cookies should also be preserved.
 
 .. configuration-block::
 
