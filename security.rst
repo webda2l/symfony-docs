@@ -2549,6 +2549,17 @@ the built-in ``is_granted()`` helper function in any Twig template:
 
 .. _security-isgranted:
 
+Similarly, if you want to check if a specific user has a certain role, you can use
+the built-in ``is_granted_for_user()`` helper function:
+
+.. code-block:: html+twig
+
+    {% if is_granted_for_user(user, 'ROLE_ADMIN') %}
+        <a href="...">Delete</a>
+    {% endif %}
+
+.. _security-isgrantedforuser:
+
 Securing other Services
 .......................
 
