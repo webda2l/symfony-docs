@@ -815,6 +815,7 @@ A validation rule always has an "if" part. You can specify this part in
 the following ways:
 
 - ``ifTrue()``
+- ``ifFalse()``
 - ``ifString()``
 - ``ifNull()``
 - ``ifEmpty()``
@@ -832,6 +833,10 @@ A validation rule also requires a "then" part:
 
 Usually, "then" is a closure. Its return value will be used as a new value
 for the node, instead of the node's original value.
+
+.. versionadded:: 7.3
+
+    The ``ifFalse()`` method was introduced in Symfony 7.3.
 
 Configuring the Node Path Separator
 -----------------------------------
