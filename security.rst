@@ -712,7 +712,7 @@ many other authenticators:
 
     If your application logs users in via a third-party service such as
     Google, Facebook or Twitter (social login), check out the `HWIOAuthBundle`_
-    community bundle.
+    community bundle or `Oauth2-client`_ package.
 
 .. _security-form-login:
 
@@ -2965,3 +2965,5 @@ Authorization (Denying Access)
 .. _`HTTP Basic authentication`: https://en.wikipedia.org/wiki/Basic_access_authentication
 .. _`Login CSRF attacks`: https://en.wikipedia.org/wiki/Cross-site_request_forgery#Forging_login_requests
 .. _`PHP date relative formats`: https://www.php.net/manual/en/datetime.formats.php#datetime.formats.relative
+.. _`Oauth2-client`: https://github.com/thephpleague/oauth2-client
+.. _`SensitiveParameter PHP attribute`: https://www.php.net/manual/en/class.sensitiveparameter.php
