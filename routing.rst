@@ -2802,6 +2802,11 @@ argument of :method:`Symfony\\Component\\HttpFoundation\\UriSigner::sign`::
 
     The feature to add an expiration date for a signed URI was introduced in Symfony 7.1.
 
+.. versionadded:: 7.3
+
+    Starting with Symfony 7.3, signed URI hashes no longer include the ``/`` or
+    ``+`` characters, as these may cause issues with certain clients.
+
 Troubleshooting
 ---------------
 
