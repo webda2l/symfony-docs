@@ -66,14 +66,15 @@ You can use ``#[HasNamedArguments]`` to make some constraint options required::
         }
     }
 
-Constraint with private properties
+Constraint with Private Properties
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
-Constraints are cached for efficiency, but private properties are not supported
-by default.
+Constraints are cached for performance reasons. To achieve this, the base
+``Constraint`` class uses PHP's :phpfunction:`get_object_vars()` function, which
+excludes private properties of child classes.
 
-So if you're using private properties in your constraint, you must override default
-``__sleep`` method ::
+If your constraint defines private properties, you must explicitly include them
+in the ``__sleep()`` method to ensure they are serialized correctly::
 
     // src/Validator/ContainsAlphanumeric.php
     namespace App\Validator;
