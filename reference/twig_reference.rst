@@ -177,6 +177,10 @@ can be found in :ref:`security-template`.
 is_granted_for_user
 ~~~~~~~~~~~~~~~~~~~
 
+.. versionadded:: 7.3
+
+    The ``is_granted_for_user()`` function was introduced in Symfony 7.3.
+
 .. code-block:: twig
 
     {{ is_granted_for_user(user, attribute, subject = null, field = null) }}
