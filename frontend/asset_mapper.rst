@@ -747,11 +747,9 @@ and which file extensions should be compressed:
 Now, when running the ``asset-map:compile`` command, all matching files will be
 compressed in the configured format and at the highest compression level. The
 compressed files are created with the same name as the original but with the
-``.br``, ``.zst``, or ``.gz`` extension appended. Web servers that support asset
-precompression will use the compressed assets automatically, so there's nothing
-else to configure in your server.
+``.br``, ``.zst``, or ``.gz`` extension appended.
 
-Finally, you need to configure your web server to serve the precompressed assets
+Then, you need to configure your web server to serve the precompressed assets
 instead of the original ones:
 
 .. configuration-block::
