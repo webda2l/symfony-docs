@@ -174,6 +174,27 @@ Returns ``true`` if the current user has the given role.
 Optionally, an object can be passed to be used by the voter. More information
 can be found in :ref:`security-template`.
 
+is_granted_for_user
+~~~~~~~~~~~~~~~~~~~
+
+.. code-block:: twig
+
+    {{ is_granted_for_user(user, attribute, subject = null, field = null) }}
+
+``user``
+    **type**: ``object``
+``attribute``
+    **type**: ``string``
+``subject`` *(optional)*
+    **type**: ``object``
+``field`` *(optional)*
+    **type**: ``string``
+
+Returns ``true`` if the user is authorized for the specified attribute.
+
+Optionally, an object can be passed to be used by the voter. More information
+can be found in :ref:`security-template`.
+
 logout_path
 ~~~~~~~~~~~
 
