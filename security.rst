@@ -2596,12 +2596,13 @@ want to include extra details only for users that have a ``ROLE_SALES_ADMIN`` ro
           // ...
       }
 
+
 .. tip::
 
-    Using ``isGranted()`` checks authorization against the currently logged in user. If you need to check
-    against a user that is not the one logged in or if checking authorization when the user session is not
-    available in a CLI context (example: message queue, cronjob) ``isGrantedForUser()`` can be used to set the
-    target user explicitly.
+    The ``isGranted()`` method checks authorization for the currently logged-in user.
+    If you need to check authorization for a different user or when the user session
+    is unavailable (e.g., in a CLI context such as a message queue or cron job), you
+    can use the ``isGrantedForUser()`` method to explicitly set the target user.
 
     .. versionadded:: 7.3
 
