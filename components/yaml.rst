@@ -440,6 +440,34 @@ By default, digit-only array keys are dumped as integers. You can use the
     $dumped = Yaml::dump([200 => 'foo'], 2, 4, Yaml::DUMP_NUMERIC_KEY_AS_STRING);
     // '200': foo
 
+Dumping Collection of Maps
+~~~~~~~~~~~~~~~~~~~~~~~~~~
+
+By default, the collection of maps uses a hyphen on a separate line as a delimiter.
+To use the delimiter line as part of the map dump, use the ``Yaml::DUMP_COMPACT_NESTED_MAPPING`` flag.
+
+Dump without flag set:
+
+.. code-block:: yaml
+
+    planets:
+      -
+        name: Mercury
+        distance: 57910000
+      -
+        name: Jupiter
+        distance: 778500000
+
+Dump with ``Yaml::DUMP_COMPACT_NESTED_MAPPING`` flag set:
+
+.. code-block:: yaml
+
+    planets:
+      - name: Mercury
+        distance: 57910000
+      - name: Jupiter
+        distance: 778500000
+
 Syntax Validation
 ~~~~~~~~~~~~~~~~~
 
