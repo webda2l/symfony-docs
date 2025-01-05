@@ -66,7 +66,7 @@ Constraint with Private Properties
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
 Constraints are cached for performance reasons. To achieve this, the base
-``Constraint`` class uses PHP's :phpfunction:`get_object_vars()` function, which
+``Constraint`` class uses PHP's :phpfunction:`get_object_vars` function, which
 excludes private properties of child classes.
 
 If your constraint defines private properties, you must explicitly include them
