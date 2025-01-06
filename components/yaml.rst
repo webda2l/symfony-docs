@@ -428,6 +428,16 @@ you can dump them as ``~`` with the ``DUMP_NULL_AS_TILDE`` flag::
     $dumped = Yaml::dump(['foo' => null], 2, 4, Yaml::DUMP_NULL_AS_TILDE);
     // foo: ~
 
+Another valid representation of the ``null`` value is an empty string. You can
+use the ``DUMP_NULL_AS_EMPTY`` flag to dump null values as empty strings::
+
+    $dumped = Yaml::dump(['foo' => null], 2, 4, Yaml::DUMP_NULL_AS_EMPTY);
+    // foo:
+
+.. versionadded:: 7.3
+
+    The ``DUMP_NULL_AS_EMPTY`` flag was introduced in Symfony 7.3.
+
 Dumping Numeric Keys as Strings
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
