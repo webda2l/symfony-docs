@@ -469,7 +469,18 @@ information from annotations of properties and methods, such as ``@var``,
     use App\Domain\Foo;
 
     $phpStanExtractor = new PhpStanExtractor();
+
+    // Type information.
     $phpStanExtractor->getTypesFromConstructor(Foo::class, 'bar');
+    // Description information.
+    $phpStanExtractor->getShortDescription($class, 'bar');
+    $phpStanExtractor->getLongDescription($class, 'bar');
+
+.. versionadded:: 7.3
+
+    The :method:`Symfony\\Component\\PropertyInfo\\Extractor\\PhpStanExtractor::getShortDescription`
+    and :method:`Symfony\\Component\\PropertyInfo\\Extractor\\PhpStanExtractor::getLongDescription`
+    methods were introduced in Symfony 7.3.
 
 SerializerExtractor
 ~~~~~~~~~~~~~~~~~~~
