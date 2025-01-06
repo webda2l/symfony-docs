@@ -52,6 +52,14 @@ argument of type ``service_closure``:
                 # In case the dependency is optional
                 # arguments: [!service_closure '@?mailer']
 
+.. versionadded:: 7.3
+
+                # A shorthand is available
+                # arguments: ['@>mailer']
+
+                # It also works when the dependency is optional
+                # arguments: ['@>?mailer']
+
     .. code-block:: xml
 
         <!-- config/services.xml -->
