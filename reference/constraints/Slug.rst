@@ -5,8 +5,8 @@ Slug
 
     The ``Slug`` constraint was introduced in Symfony 7.3.
 
-Validates that a value is a slug.
-A slug is a string that, by default, matches the regex ``/^[a-z0-9]+(?:-[a-z0-9]+)*$/``.
+Validates that a value is a slug. By default, a slug is a string that matches
+the following regular expression: ``/^[a-z0-9]+(?:-[a-z0-9]+)*$/``.
 
 .. include:: /reference/constraints/_empty-values-are-valid.rst.inc
 
@@ -19,7 +19,7 @@ Validator   :class:`Symfony\\Component\\Validator\\Constraints\\SlugValidator`
 Basic Usage
 -----------
 
-The ``Slug`` constraint can be applied to a property or a "getter" method:
+The ``Slug`` constraint can be applied to a property or a getter method:
 
 .. configuration-block::
 
@@ -77,14 +77,14 @@ The ``Slug`` constraint can be applied to a property or a "getter" method:
             }
         }
 
-Examples of valid values :
+Examples of valid values:
 
 * foobar
 * foo-bar
 * foo123
 * foo-123bar
 
-Upper case characters would result in an violation of this constraint.
+Uppercase characters would result in an violation of this constraint.
 
 Options
 -------
@@ -94,8 +94,8 @@ Options
 
 **type**: ``string`` default: ``/^[a-z0-9]+(?:-[a-z0-9]+)*$/``
 
-This option allows you to modify the regular expression pattern that the input will be matched against
-via the :phpfunction:`preg_match` PHP function.
+This option allows you to modify the regular expression pattern that the input
+will be matched against via the :phpfunction:`preg_match` PHP function.
 
 If you need to use it, you might also want to take a look at the :doc:`Regex constraint <Regex>`.
 
