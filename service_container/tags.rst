@@ -1281,4 +1281,19 @@ be used directly on the class of the service you want to configure::
         // ...
     }
 
+You can apply the ``#[AsTaggedItem]`` attribute multiple times to register the
+same service under different indexes:
+
+    #[AsTaggedItem(index: 'handler_one', priority: 5)]
+    #[AsTaggedItem(index: 'handler_two', priority: 20)]
+    class SomeService
+    {
+        // ...
+    }
+
+.. versionadded:: 7.3
+
+    The feature to apply the ``#[AsTaggedItem]`` attribute multiple times was
+    introduced in Symfony 7.3.
+
 .. _`PHP constructor promotion`: https://www.php.net/manual/en/language.oop5.decon.php#language.oop5.decon.constructor.promotion
