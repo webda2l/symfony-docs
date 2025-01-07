@@ -1028,7 +1028,7 @@ be ``authenticate``:
     <form action="{{ path('app_login') }}" method="post">
         {# ... the login fields #}
 
-        <input type="hidden" name="_csrf_token" value="{{ csrf_token('authenticate') }}">
+        <input type="hidden" name="_csrf_token" data-controller="csrf-protection" value="{{ csrf_token('authenticate') }}">
 
         <button type="submit">login</button>
     </form>
