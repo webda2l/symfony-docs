@@ -2805,6 +2805,12 @@ service, which you can inject in your services or controllers::
     ``Symfony\Component\HttpKernel\UriSigner`` to
     ``Symfony\Component\HttpFoundation\UriSigner``.
 
+.. note::
+
+    The generated URI hashes may include the ``/`` and ``+`` characters, which
+    can cause issues with certain clients. If you encounter this problem, replace
+    them using the following: ``strtr($hash, ['/' => '_', '+' => '-'])``.
+
 Troubleshooting
 ---------------
 
