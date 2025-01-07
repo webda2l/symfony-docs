@@ -33,6 +33,7 @@ String Constraints
 * :doc:`NotCompromisedPassword </reference/constraints/NotCompromisedPassword>`
 * :doc:`PasswordStrength </reference/constraints/PasswordStrength>`
 * :doc:`Regex </reference/constraints/Regex>`
+* :doc:`Slug </reference/constraints/Slug>`
 * :doc:`Ulid </reference/constraints/Ulid>`
 * :doc:`Url </reference/constraints/Url>`
 * :doc:`UserPassword </reference/constraints/UserPassword>`
