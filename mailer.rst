@@ -331,8 +331,8 @@ The failover-transport starts using the first transport and if it fails, it
 will retry the same delivery with the next transports until one of them succeeds
 (or until all of them fail).
 
-By default, the delivery will be retried 60 seconds after previous sending failed.
-You can change the retry period by setting the ``retry_period`` option in the DSN:
+By default, delivery is retried 60 seconds after a failed attempt. You can adjust
+the retry period by setting the ``retry_period`` option in the DSN:
 
 .. code-block:: env
 
@@ -362,8 +362,8 @@ As with the failover transport, round-robin retries deliveries until
 a transport succeeds (or all fail). In contrast to the failover transport,
 it *spreads* the load across all its transports.
 
-By default, the delivery will be retried 60 seconds after previous sending failed.
-You can change the retry period by setting the ``retry_period`` option in the DSN:
+By default, delivery is retried 60 seconds after a failed attempt. You can adjust
+the retry period by setting the ``retry_period`` option in the DSN:
 
 .. code-block:: env
 
