@@ -114,7 +114,7 @@ Advanced Usages
 The TypeInfo component provides various methods to manipulate and check types,
 depending on your needs.
 
-Checking a **simple type**::
+**Identify** a type::
 
     // define a simple integer type
     $type = Type::int();
@@ -140,6 +140,23 @@ Checking a **simple type**::
     // check if it inherits/implements something
     $type->isIdentifiedBy(DummyParent::class);     // true
     $type->isIdentifiedBy(DummyInterface::class);  // true
+
+Checking if a type **accepts a value**::
+
+    $type = Type::int();
+    // check if the type accepts a given value
+    $type->accepts(123); // true
+    $type->accepts('z'); // false
+
+    $type = Type::union(Type::string(), Type::int());
+    // now the second check is true because the union type accepts either a int and a string value
+    $type->accepts(123); // true
+    $type->accepts('z'); // true
+
+.. versionadded:: 7.3
+
+    The :method:`Symfony\\Component\\TypeInfo\\Type::accepts`
+    method was introduced in Symfony 7.3.
 
 Using callables for **complex checks**::
 
