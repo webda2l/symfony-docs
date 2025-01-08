@@ -160,14 +160,12 @@ is_granted
 
 .. code-block:: twig
 
-    {{ is_granted(role, object = null, field = null) }}
+    {{ is_granted(role, object = null) }}
 
 ``role``
     **type**: ``string``
 ``object`` *(optional)*
     **type**: ``object``
-``field`` *(optional)*
-    **type**: ``string``
 
 Returns ``true`` if the current user has the given role.
 
@@ -183,7 +181,7 @@ is_granted_for_user
 
 .. code-block:: twig
 
-    {{ is_granted_for_user(user, attribute, subject = null, field = null) }}
+    {{ is_granted_for_user(user, attribute, subject = null) }}
 
 ``user``
     **type**: ``object``
@@ -191,8 +189,6 @@ is_granted_for_user
     **type**: ``string``
 ``subject`` *(optional)*
     **type**: ``object``
-``field`` *(optional)*
-    **type**: ``string``
 
 Returns ``true`` if the user is authorized for the specified attribute.
 
