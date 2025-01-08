@@ -149,7 +149,7 @@ Checking if a type **accepts a value**::
     $type->accepts('z'); // false
 
     $type = Type::union(Type::string(), Type::int());
-    // now the second check is true because the union type accepts either a int and a string value
+    // now the second check is true because the union type accepts either an int or a string value
     $type->accepts(123); // true
     $type->accepts('z'); // true
 
