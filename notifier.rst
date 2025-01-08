@@ -76,7 +76,7 @@ Service
                     **Webhook support**: No
 `Brevo`_            **Install**: ``composer require symfony/brevo-notifier`` \
                     **DSN**: ``brevo://API_KEY@default?sender=SENDER`` \
-                    **Webhook support**: Yes
+                    **Webhook support**: No
 `Clickatell`_       **Install**: ``composer require symfony/clickatell-notifier`` \
                     **DSN**: ``clickatell://ACCESS_TOKEN@default?from=FROM`` \
                     **Webhook support**: No
