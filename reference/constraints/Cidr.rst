@@ -126,6 +126,12 @@ Parameter        Description
 This determines exactly *how* the CIDR notation is validated and can take one
 of :ref:`IP version ranges <reference-constraint-ip-version>`.
 
+.. note::
+
+    IP range (``*_private``, ``*_reserved``) is only validating against IP, but not the whole
+    netmask. You need to set the ``{{ min }}`` value for the netmask to harden the validation a bit.
+    For example, ``9.0.0.0/6`` results to be ``*_public``, but also uses ``10.0.0.0/8`` range (``*_private``).
+
 .. versionadded:: 7.1
 
     The support of all IP version ranges was introduced in Symfony 7.1.
