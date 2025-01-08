@@ -1583,12 +1583,6 @@ DSN by using the ``table_name`` option:
 Or, to create the table yourself, set the ``auto_setup`` option to ``false`` and
 :ref:`generate a migration <doctrine-creating-the-database-tables-schema>`.
 
-.. warning::
-
-    The datetime property of the messages stored in the database uses the
-    timezone of the current system. This may cause issues if multiple machines
-    with different timezone configuration use the same storage.
-
 The transport has a number of options:
 
 ``table_name`` (default: ``messenger_messages``)
