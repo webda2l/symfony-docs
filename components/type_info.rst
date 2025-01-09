@@ -106,7 +106,7 @@ PHP package required for string resolving. Then, follow these steps::
 
     $typeResolver = TypeResolver::create();
     $typeResolver->resolve(new \ReflectionProperty(Dummy::class, 'id')); // returns an "int" Type
-    $typeResolver->resolve(new \ReflectionProperty(Dummy::class, 'id')); // returns a collection with "int" as key and "string" as values Type
+    $typeResolver->resolve(new \ReflectionProperty(Dummy::class, 'tags')); // returns a collection with "int" as key and "string" as values Type
 
 Advanced Usages
 ~~~~~~~~~~~~~~~
