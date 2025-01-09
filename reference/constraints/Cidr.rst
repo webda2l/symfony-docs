@@ -128,9 +128,11 @@ of :ref:`IP version ranges <reference-constraint-ip-version>`.
 
 .. note::
 
-    IP range (``*_private``, ``*_reserved``) is only validating against IP, but not the whole
-    netmask. You need to set the ``{{ min }}`` value for the netmask to harden the validation a bit.
-    For example, ``9.0.0.0/6`` results to be ``*_public``, but also uses ``10.0.0.0/8`` range (``*_private``).
+    The IP range checks (e.g., ``*_private``, ``*_reserved``) validate only the
+    IP address, not the entire netmask. To improve validation, you can set the
+    ``{{ min }}`` value for the netmask. For example, the range ``9.0.0.0/6`` is
+    considered ``*_public``, but it also includes the ``10.0.0.0/8`` range, which
+    is categorized as ``*_private``.
 
 .. versionadded:: 7.1
 
