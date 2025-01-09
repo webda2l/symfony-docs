@@ -305,19 +305,20 @@ correctly. To validate the types of the options, call
 
             // specify multiple allowed types
             $resolver->setAllowedTypes('port', ['null', 'int']);
-            // which is similar to
+            // if you prefer, you can also use the following equivalent syntax
             $resolver->setAllowedTypes('port', 'int|null');
 
             // check all items in an array recursively for a type
             $resolver->setAllowedTypes('dates', 'DateTime[]');
             $resolver->setAllowedTypes('ports', 'int[]');
+            // the following syntax means "an array of integers or an array of strings"
             $resolver->setAllowedTypes('endpoints', '(int|string)[]');
         }
     }
 
 .. versionadded:: 7.3
 
-    Union of type, using the ``|`` syntax, was introduced in Symfony 7.3.
+    Defining type unions with the ``|`` syntax was introduced in Symfony 7.3.
 
 You can pass any type for which an ``is_<type>()`` function is defined in PHP.
 You may also pass fully qualified class or interface names (which is checked
