@@ -137,6 +137,7 @@ This can be done by setting the ``constraints`` option in the
     use Symfony\Component\Form\Extension\Core\Type\TextType;
     use Symfony\Component\Form\FormBuilderInterface;
     use Symfony\Component\OptionsResolver\OptionsResolver;
+    use Symfony\Component\Validator\Constraints\Collection;
     use Symfony\Component\Validator\Constraints\Length;
     use Symfony\Component\Validator\Constraints\NotBlank;
 
@@ -149,17 +150,15 @@ This can be done by setting the ``constraints`` option in the
 
     public function configureOptions(OptionsResolver $resolver): void
     {
-        $constraints = [
-            'firstName' => new Length(['min' => 3]),
-            'lastName' => [
-                new NotBlank(),
-                new Length(['min' => 3]),
-            ],
-        ];
-
         $resolver->setDefaults([
             'data_class' => null,
-            'constraints' => $constraints,
+            'constraints' => new Collection([
+                'firstName' => new Length(['min' => 3]),
+                'lastName' => [
+                    new NotBlank(),
+                    new Length(['min' => 3]),
+                ],
+            ]),
         ]);
     }
 
