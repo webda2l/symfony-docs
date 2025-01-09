@@ -236,10 +236,6 @@ Service
 
     The ``Primotexto``, ``Sipgate`` and ``Sweego`` integrations were introduced in Symfony 7.2.
 
-.. versionadded:: 7.3
-
-    Webhook support for the ``Brevo`` integration was introduced in Symfony 7.3.
-
 .. deprecated:: 7.1
 
     The `Sms77`_ integration is deprecated since
