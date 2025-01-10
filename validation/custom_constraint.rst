@@ -495,7 +495,7 @@ A class constraint validator must be applied to the class itself:
 
         use App\Validator as AcmeAssert;
 
-        #[AcmeAssert\ProtocolClass]
+        #[AcmeAssert\ConfirmedPaymentReceipt]
         class AcmeEntity
         {
             // ...
