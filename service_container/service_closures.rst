@@ -52,12 +52,11 @@ argument of type ``service_closure``:
                 # In case the dependency is optional
                 # arguments: [!service_closure '@?mailer']
 
-.. versionadded:: 7.3
+            # you can also use the special '@>' syntax as a shortcut of '!service_closure'
+            App\Service\AnotherService:
+                arguments: ['@>mailer']
 
-                # A shorthand is available
-                # arguments: ['@>mailer']
-
-                # It also works when the dependency is optional
+                # the shortcut also works for optional dependencies
                 # arguments: ['@>?mailer']
 
     .. code-block:: xml
@@ -97,6 +96,10 @@ argument of type ``service_closure``:
             // $services->set(MyService::class)
             //     ->args([service_closure('mailer')->ignoreOnInvalid()]);
         };
+
+.. versionadded:: 7.3
+
+    The ``@>`` shortcut syntax for YAML was introduced in Symfony 7.3.
 
 .. seealso::
 
