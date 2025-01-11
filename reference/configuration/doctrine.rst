@@ -507,9 +507,9 @@ set up the connection using environment variables for the certificate paths:
                     server-version="8.0.31"
                     driver="pdo_mysql">
 
-                    <doctrine:option key="1007">%env(MYSQL_SSL_KEY)%</doctrine:option>
-                    <doctrine:option key="1008">%env(MYSQL_SSL_CERT)%</doctrine:option>
-                    <doctrine:option key="1009">%env(MYSQL_SSL_CA)%</doctrine:option>
+                    <doctrine:option key-type="constant" key="PDO::MYSQL_ATTR_SSL_KEY">%env(MYSQL_SSL_KEY)%</doctrine:option>
+                    <doctrine:option key-type="constant" key="PDO::MYSQL_ATTR_SSL_CERT">%env(MYSQL_SSL_CERT)%</doctrine:option>
+                    <doctrine:option key-type="constant" key="PDO::MYSQL_ATTR_SSL_CA">%env(MYSQL_SSL_CA)%</doctrine:option>
                 </doctrine:dbal>
             </doctrine:config>
         </container>
