@@ -13,6 +13,17 @@ This document states the rules that govern the Symfony core team. These rules
 are effective upon publication of this document and all Symfony Core members
 must adhere to said rules and protocol.
 
+Role of a Core Member
+---------------------
+
+In addition to being a regular contributor, core members are expected to:
+
+ * Review, approve, and merge pull requests;
+
+ * Help enforce, improve, and implement Symfony :doc:`processes and policies </contributing/index>`;
+
+ * Participate in the Symfony Core Team discussions (on Slack and GitHub).
+
 Core Organization
 -----------------
 
