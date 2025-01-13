@@ -142,21 +142,22 @@ Twig ``stimulus_*`` functions.
 
 Each controller has a number of options in ``package.json`` file:
 
-==================  ====================================================================================================
-Option              Description
-==================  ====================================================================================================
-enabled             Whether the controller should be enabled by default.
-main                Path to the controller file.
-fetch               How controller & dependencies are included when the page loads.
-                    Use ``eager`` (default) to make controller & dependencies included in the JavaScript that's
-                    downloaded when the page is loaded.
-                    Use ``lazy`` to make controller & dependencies isolated into a separate file and only downloaded
-                    asynchronously if (and when) the data-controller HTML appears on the page.
-autoimport          List of files to be imported with the controller. Useful e.g. when there are several CSS styles
-                    depending on the frontend framework used (like Bootstrap 4 or 5, Tailwind CSS...).
-                    The value must be an object with files as keys, and a boolean as value for each file to set
-                    whether the file should be imported.
-==================  ====================================================================================================
+``enabled``:
+    Whether the controller should be enabled by default.
+``main``:
+    Path to the controller file.
+``fetch``:
+    How controller & dependencies are included when the page loads.
+    Use ``eager`` (default) to make controller & dependencies included in the
+    JavaScript that's downloaded when the page is loaded.
+    Use ``lazy`` to make controller & dependencies isolated into a separate file
+    and only downloaded asynchronously if (and when) the data-controller HTML
+    appears on the page.
+``autoimport``:
+    List of files to be imported with the controller. Useful e.g. when there are
+    several CSS styles depending on the frontend framework used (like Bootstrap 4
+    or 5, Tailwind CSS...). The value must be an object with files as keys, and
+    a boolean as value for each file to set whether the file should be imported.
 
 Specifics for Asset Mapper
 --------------------------
