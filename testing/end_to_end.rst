@@ -111,12 +111,12 @@ Here is an example of a snippet that uses Panther to test an application::
     $client->clickLink('Getting started');
 
     // wait for an element to be present in the DOM, even if hidden
-    $crawler = $client->waitFor('#installing-the-framework');
+    $crawler = $client->waitFor('#bootstrapping-the-core-library');
     // you can also wait for an element to be visible
-    $crawler = $client->waitForVisibility('#installing-the-framework');
+    $crawler = $client->waitForVisibility('#bootstrapping-the-core-library');
 
     // get the text of an element thanks to the query selector syntax
-    echo $crawler->filter('#installing-the-framework')->text();
+    echo $crawler->filter('div:has(> #bootstrapping-the-core-library)')->text();
     // take a screenshot of the current page
     $client->takeScreenshot('screen.png');
 
@@ -305,13 +305,13 @@ faster. Two alternative clients are available:
 * The second leverages :class:`Symfony\\Component\\BrowserKit\\HttpBrowser`.
   It is an intermediate between Symfony's kernel and Panther's test clients.
   ``HttpBrowser`` sends real HTTP requests using the
-  :doc:`HttpClient component </http_client>`. It is fast and is able to browse
+  :doc:`HttpClient component </http_client>`. It is fast and can browse
   any webpage, not only the ones of the application under test.
   However, HttpBrowser doesn't support JavaScript and other advanced features
   because it is entirely written in PHP. This one can be used in any PHP
   application.
 
-Because all clients implement the exact same API, you can switch from one to
+Because all clients implement the same API, you can switch from one to
 another just by calling the appropriate factory method, resulting in a good
 trade-off for every single test case: if JavaScript is needed or not, if an
 authentication against an external SSO has to be done, etc.
@@ -355,10 +355,10 @@ Testing Real-Time Applications
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
 Panther provides a convenient way to test applications with real-time
-capabilities which use `Mercure`_, `WebSocket`_ and similar technologies.
+capabilities that use `Mercure`_, `WebSocket`_ and similar technologies.
 
 The ``PantherTestCase::createAdditionalPantherClient()`` method can create
-additional, isolated browsers which can interact with other ones. For instance,
+additional, isolated browsers that can interact with other ones. For instance,
 this can be useful to test a chat application having several users
 connected simultaneously::
 
@@ -450,6 +450,22 @@ To use a proxy server, you have to set the ``PANTHER_CHROME_ARGUMENTS``:
 
     # .env.test
     PANTHER_CHROME_ARGUMENTS='--proxy-server=socks://127.0.0.1:9050'
+
+Using Selenium With the Built-In Web Server
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+
+If you want to use `Selenium Grid`_ with the built-in web server, you need to
+configure the Panther client as follows::
+
+    $client = Client::createPantherClient(
+        options: [
+            'browser' => PantherTestCase::SELENIUM,
+        ],
+        managerOptions: [
+            'host' => 'http://selenium-hub:4444', // the host of the Selenium Server (Grid)
+            'capabilities' => DesiredCapabilities::firefox(), // the capabilities of the browser
+        ],
+    );
 
 Accepting Self-Signed SSL Certificates
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
@@ -597,6 +613,13 @@ behavior:
     Toggle the browser's dev tools (default ``enabled``, useful to debug)
 ``PANTHER_ERROR_SCREENSHOT_ATTACH``
     Add screenshots mentioned above to test output in junit attachment format
+``PANTHER_NO_REDUCED_MOTION``
+    Disable non-essential movement in the browser (e.g. animations)
+
+.. versionadded:: 2.2.0
+
+    The support for the ``PANTHER_NO_REDUCED_MOTION`` env var was added
+    in Panther 2.2.0.
 
 Chrome Specific Environment Variables
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
@@ -604,7 +627,8 @@ Chrome Specific Environment Variables
 ``PANTHER_NO_SANDBOX``
     Disable `Chrome's sandboxing`_ (unsafe, but allows to use Panther in containers)
 ``PANTHER_CHROME_ARGUMENTS``
-    Customize Chrome arguments. You need to set ``PANTHER_NO_HEADLESS`` to fully customize
+    Customize Chrome arguments. You need to set ``PANTHER_NO_HEADLESS`` to ``1``
+    to fully customize
 ``PANTHER_CHROME_BINARY``
     To use another ``google-chrome`` binary
 
@@ -616,12 +640,33 @@ Firefox Specific Environment Variables
 ``PANTHER_FIREFOX_BINARY``
     To use another ``firefox`` binary
 
+Changing the Size of the Browser Window
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+
+It's possible to control the size of the browser window. This also controls the
+size of the screenshots.
+
+This is how you would do it with Chrome::
+
+    $client = Client::createChromeClient(null, ['--window-size=1500,4000']);
+
+You can achieve the same thing by setting the ``PANTHER_CHROME_ARGUMENTS`` env
+var to ``--window-size=1500,4000``.
+
+On Firefox, here is how you would do it::
+
+    use Facebook\WebDriver\WebDriverDimension;
+
+    $client = Client::createFirefoxClient();
+    $size = new WebDriverDimension(1500, 4000);
+    $client->manage()->window()->setSize($size);
+
 .. _panther_interactive-mode:
 
 Interactive Mode
 ----------------
 
-Panther can make a pause in your tests suites after a failure.
+Panther can make a pause in your test suites after a failure.
 Thanks to this break time, you can investigate the encountered problem through
 the web browser. To enable this mode, you need the ``--debug`` PHPUnit option
 without the headless mode:
@@ -709,7 +754,7 @@ Here is a minimal ``.travis.yaml`` file to run Panther tests:
 
     language: php
     addons:
-      # If you don't use Chrome, or Firefox, remove the corresponding line
+      # If you don't use Chrome or Firefox, remove the corresponding line
       chrome: stable
       firefox: latest
 
@@ -788,7 +833,7 @@ The following features are not currently supported:
 * Updating existing documents (browsers are mostly used to consume data, not to create webpages)
 * Setting form values using the multidimensional PHP array syntax
 * Methods returning an instance of ``\DOMElement`` (because this library uses ``WebDriverElement`` internally)
-* Selecting invalid choices in select
+* Selecting invalid choices in the select
 
 Also, there is a known issue if you are using Bootstrap 5. It implements a
 scrolling effect which tends to mislead Panther. To fix this, we advise you to
@@ -875,3 +920,4 @@ documentation:
 .. _`LiipFunctionalTestBundle`: https://github.com/liip/LiipFunctionalTestBundle
 .. _`PHP built-in server`: https://www.php.net/manual/en/features.commandline.webserver.php
 .. _`Functional Testing tutorial`: https://symfonycasts.com/screencast/last-stack/testing
+.. _`Selenium Grid`: https://www.selenium.dev/documentation/grid/
