@@ -34,7 +34,9 @@ The Symfony Core groups, in descending order of priority, are as follows:
 In addition, there are other groups created to manage specific topics:
 
 * **Security Team**: manages the whole security process (triaging reported vulnerabilities,
-  fixing the reported issues, coordinating the release of security fixes, etc.)
+  fixing the reported issues, coordinating the release of security fixes, etc.);
+
+* **Symfony UX Team**: manages the `UX repositories`_;
 
 * **Documentation Team**: manages the whole `symfony-docs repository`_.
 
@@ -71,7 +73,7 @@ Active Core Members
   * **Fabien Potencier** (`fabpot`_);
   * **Jérémy Derussé** (`jderusse`_).
 
-* **Symfony UX** (``@symfony/ux`` on GitHub):
+* **Symfony UX Team** (``@symfony/ux`` on GitHub):
 
   * **Ryan Weaver** (`weaverryan`_);
   * **Kevin Bond** (`kbond`_);
@@ -188,6 +190,7 @@ discretion of the **Project Leader**.
     violations, and minor CSS, JavaScript and HTML modifications.
 
 .. _`symfony-docs repository`: https://github.com/symfony/symfony-docs
+.. _`UX repositories`: https://github.com/symfony/ux
 .. _`fabpot`: https://github.com/fabpot/
 .. _`webmozart`: https://github.com/webmozart/
 .. _`Tobion`: https://github.com/Tobion/
