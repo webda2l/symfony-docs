@@ -396,7 +396,7 @@ command to see which argument resolvers are present and in which order they run:
 
 .. code-block:: terminal
 
-    $ php bin/console debug:container debug.argument_resolver.inner --show-arguments
+    $ php bin/console debug:container debug.argument_resolver.inner
 
 You can also configure the name passed to the ``ValueResolver`` attribute to target
 your resolver. Otherwise it will default to the service's id.
