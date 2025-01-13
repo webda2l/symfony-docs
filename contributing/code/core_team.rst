@@ -75,7 +75,7 @@ Active Core Members
 
   * **Ryan Weaver** (`weaverryan`_);
   * **Kevin Bond** (`kbond`_);
-  * **Simon Andre** (`smnandre`_);
+  * **Simon André** (`smnandre`_);
   * **Hugo Alliaume** (`kocal`_);
   * **Matheo Daninos** (`webmamba`_).
 
