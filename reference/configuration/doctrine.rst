@@ -483,12 +483,12 @@ set up the connection using environment variables for the certificate paths:
                 server_version: '8.0.31'
                 driver: 'pdo_mysql'
                 options:
-                    # SSL private key (PDO::MYSQL_ATTR_SSL_KEY)
-                    1007: '%env(MYSQL_SSL_KEY)%'
-                    # SSL certificate (PDO::MYSQL_ATTR_SSL_CERT)
-                    1008: '%env(MYSQL_SSL_CERT)%'
-                    # SSL CA authority (PDO::MYSQL_ATTR_SSL_CA)
-                    1009: '%env(MYSQL_SSL_CA)%'
+                    # SSL private key
+                    !php/const 'PDO::MYSQL_ATTR_SSL_KEY': '%env(MYSQL_SSL_KEY)%'
+                    # SSL certificate
+                    !php/const 'PDO::MYSQL_ATTR_SSL_CERT': '%env(MYSQL_SSL_CERT)%'
+                    # SSL CA authority
+                    !php/const 'PDO::MYSQL_ATTR_SSL_CA': '%env(MYSQL_SSL_CA)%'
 
     .. code-block:: xml
 
