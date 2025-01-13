@@ -71,6 +71,14 @@ Active Core Members
   * **Fabien Potencier** (`fabpot`_);
   * **Jérémy Derussé** (`jderusse`_).
 
+* **Symfony UX** (``@symfony/ux`` on GitHub):
+
+  * **Ryan Weaver** (`weaverryan`_);
+  * **Kevin Bond** (`kbond`_);
+  * **Simon Andre** (`smnandre`_);
+  * **Hugo Alliaume** (`kocal`_);
+  * **Matheo Daninos** (`webmamba`_).
+
 * **Documentation Team** (``@symfony/team-symfony-docs`` on GitHub):
 
   * **Fabien Potencier** (`fabpot`_);
@@ -211,3 +219,6 @@ discretion of the **Project Leader**.
 .. _`welcomattic`: https://github.com/welcomattic/
 .. _`kbond`: https://github.com/kbond/
 .. _`gromnan`: https://github.com/gromnan/
+.. _`smnandre`: https://github.com/smnandre/
+.. _`kocal`: https://github.com/kocal/
+.. _`webmamba`: https://github.com/webmamba/
