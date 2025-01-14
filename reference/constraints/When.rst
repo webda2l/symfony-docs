@@ -163,7 +163,7 @@ validation of constraints won't be triggered.
 To learn more about the expression language syntax, see
 :doc:`/reference/formats/expression_language`.
 
-Depending on how you use the constraint, you have access to 1 or 3 variables
+Depending on how you use the constraint, you have access to different variables
 in your expression:
 
 ``this``
@@ -172,7 +172,13 @@ in your expression:
     The value of the property being validated (only available when
     the constraint is applied to a property).
 ``context``
-    This is the context that is used in validation
+    The :class:`Symfony\\Component\\Validator\\Context\\ExecutionContextInterface`
+    object that provides information such as the currently validated class, the
+    name of the currently validated property, the list of violations, etc.
+
+.. versionadded:: 7.2
+
+    The ``context`` variable in expressions was introduced in Symfony 7.2.
 
 The ``value`` variable can be used when you want to execute more complex
 validation based on its value:
