@@ -168,8 +168,8 @@ All code must be committed to the repository through pull requests, except for
 :ref:`minor change <core-team_minor-changes>` which can be committed directly
 to the repository.
 
-**Mergers** must always use the command-line ``gh`` tool to merge pull
-requests.
+**Mergers** must always use the command-line ``gh`` tool provided by the
+**Project Leader** to merge pull requests.
 
 When merging a pull request, the tool asks for a category that should be chosen
 following these rules:
