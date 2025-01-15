@@ -168,8 +168,28 @@ All code must be committed to the repository through pull requests, except for
 :ref:`minor change <core-team_minor-changes>` which can be committed directly
 to the repository.
 
-**Mergers** must always use the command-line ``gh`` tool provided by the
-**Project Leader** to merge the pull requests.
+**Mergers** must always use the command-line ``gh`` tool to merge pull
+requests.
+
+When merging a pull request, the tool asks for a category that should be chosen
+following these rules:
+
+* **Feature**: For new features and deprecations; Pull requests must be merged
+  in the development branch.
+
+* **Bug**: Only for bug fixes; We are very conservative when it comes to
+  merging older, but still maintained, branches. Read the :doc:`maintenance`
+  document for more information.
+
+* **Minor**: For everything that does not change the code or when they don't
+  need to be listed in the CHANGELOG files: typos, Markdown files, test files,
+  new or missing translations, etc.
+
+* **Security**: It's the category used for security fixes and should never be
+  used except by the security team.
+
+Getting the right category is important as it is used by automated tools to
+generate the CHANGELOG files when releasing new versions.
 
 Release Policy
 ~~~~~~~~~~~~~~
