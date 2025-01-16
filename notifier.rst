@@ -76,7 +76,7 @@ Service
                     **Webhook support**: No
 `Brevo`_            **Install**: ``composer require symfony/brevo-notifier`` \
                     **DSN**: ``brevo://API_KEY@default?sender=SENDER`` \
-                    **Webhook support**: No
+                    **Webhook support**: Yes
 `Clickatell`_       **Install**: ``composer require symfony/clickatell-notifier`` \
                     **DSN**: ``clickatell://ACCESS_TOKEN@default?from=FROM`` \
                     **Webhook support**: No
@@ -235,6 +235,10 @@ Service
 .. versionadded:: 7.2
 
     The ``Primotexto``, ``Sipgate`` and ``Sweego`` integrations were introduced in Symfony 7.2.
+
+.. versionadded:: 7.3
+
+    Webhook support for the ``Brevo`` integration was introduced in Symfony 7.3.
 
 .. deprecated:: 7.1
 
