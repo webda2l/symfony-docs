@@ -162,19 +162,39 @@ starting with ``symfony/`` to the new major version:
           "...": "...",
       }
 
-At the bottom of your ``composer.json`` file, in the ``extra`` block you can
-find a data setting for the Symfony version. Make sure to also upgrade
-this one. For instance, update it to ``6.0.*`` to upgrade to Symfony 6.0:
+A more efficient way to handle Symfony dependency updates is by setting the
+``extra.symfony.require`` configuration option in your ``composer.json`` file.
+In Symfony applications using :doc:`Symfony Flex </setup/flex>`, this setting
+restricts Symfony packages to a single specific version, improving both
+dependency management and Composer update performance:
 
 .. code-block:: diff
 
-      "extra": {
-          "symfony": {
-              "allow-contrib": false,
-    -         "require": "5.4.*"
-    +         "require": "6.0.*"
-          }
+      {
+          "...": "...",
+
+          "require": {
+    -         "symfony/cache": "6.0.*",
+    +         "symfony/cache": "*",
+    -         "symfony/config": "6.0.*",
+    +         "symfony/config": "*",
+    -         "symfony/console": "6.0.*",
+    +         "symfony/console": "*",
+              "...": "...",
+          },
+          "...": "...",
+
+    +     "extra": {
+    +         "symfony": {
+    +             "require": "6.0.*"
+    +         }
+    +     }
       }
+
+.. warning::
+
+    Tools like `dependabot`_ may ignore this setting and upgrade Symfony
+    dependencies. For more details, see this `GitHub issue about dependabot`_.
 
 .. tip::
 
@@ -338,3 +358,5 @@ Classes in the ``vendor/`` directory are always ignored.
 .. _`PHP CS Fixer`: https://github.com/friendsofphp/php-cs-fixer
 .. _`Rector`: https://github.com/rectorphp/rector
 .. _`maintained Symfony versions`: https://symfony.com/releases
+.. _`dependabot`: https://docs.github.com/en/code-security/dependabot
+.. _`GitHub issue about dependabot`: https://github.com/dependabot/dependabot-core/issues/4631
