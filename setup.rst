@@ -281,6 +281,19 @@ create new projects. If you use Composer, you need to tell the exact version:
 
     $ composer create-project symfony/skeleton:"6.4.*" my_project_directory
 
+With an already existing project, you can restrict Symfony packages to one
+specific version by :doc:`using Symfony Flex in your project </setup/flex>`
+and setting the ``extra.symfony.require`` config:
+
+.. code-block:: terminal
+
+    $ composer config extra.symfony.require "6.4.*"
+
+.. warning::
+
+    Tools like `dependabot`_ may ignore this setting and upgrade the Symfony dependencies,
+    see this `GitHub issue about dependabot`_.
+
 The Symfony Demo application
 ----------------------------
 
@@ -315,6 +328,8 @@ Learn More
 .. _`Install Composer`: https://getcomposer.org/download/
 .. _`install the Symfony CLI`: https://symfony.com/download
 .. _`symfony-cli/symfony-cli GitHub repository`: https://github.com/symfony-cli/symfony-cli
+.. _`dependabot`: https://docs.github.com/en/code-security/dependabot
+.. _`GitHub issue about dependabot`: https://github.com/dependabot/dependabot-core/issues/4631
 .. _`The Symfony Demo Application`: https://github.com/symfony/demo
 .. _`Symfony Flex`: https://github.com/symfony/flex
 .. _`PHP security advisories database`: https://github.com/FriendsOfPHP/security-advisories
