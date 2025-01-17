@@ -56,8 +56,21 @@ on the given link to perform the redirect.
 toolbar
 ~~~~~~~
 
+enabled
+.......
 **type**: ``boolean`` **default**: ``false``
 
 It enables and disables the toolbar entirely. Usually you set this to ``true``
 in the ``dev`` and ``test`` environments and to ``false`` in the ``prod``
 environment.
+
+ajax_replace
+............
+**type**: ``boolean`` **default**: ``false``
+
+If you set this option to ``true``, the toolbar is replaced on AJAX requests.
+This only works in combination with an enabled toolbar.
+
+.. versionadded:: 7.3
+
+    The ``ajax_replace`` configuration option was introduced in Symfony 7.3.
