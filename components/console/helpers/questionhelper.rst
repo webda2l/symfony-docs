@@ -128,7 +128,7 @@ but ``red`` could be set instead (could be more explicit)::
         $question = new ChoiceQuestion(
             'Please select your favorite color (defaults to red)',
             // choices can also be PHP objects that implement __toString() method
-            ['red', 'blue', 'yellow'],
+            ['red', 'blue', 'yellow'], // pass an associative array to display custom indices: [3 => 'red', 7 => 'blue']
             0
         );
         $question->setErrorMessage('Color %s is invalid.');
