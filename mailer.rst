@@ -431,21 +431,21 @@ Binding to IPv4 or IPv6
 
 .. versionadded:: 7.3
 
-    The option to bind to IPv4 or IPv6 or a specific IP address was introduced in Symfony 7.3.
+    The option to bind to IPv4, or IPv6, or a specific IP address was introduced in Symfony 7.3.
 
-By default, the underlying SocketStream will bind to IPv4 or IPv6 depending on the available
-interfaces. By specifying the ``source_ip`` option, binding to either IPv4 or IPv6 can be enforced,
-or even to a specific address. To bind to IPv4, use::
+By default, the underlying ``SocketStream`` will bind to IPv4 or IPv6 based on the
+available interfaces. You can enforce binding to a specific protocol or IP address
+by using the ``source_ip`` option. To bind to IPv4, use::
 
     $dsn = 'smtp://smtp.example.com?source_ip=0.0.0.0';
 
-As per RFC2732, IPv6 addresses must be surrounded by square brackets. To bind to IPv6, use::
+As per RFC2732, IPv6 addresses must be enclosed in square brackets. To bind to IPv6, use::
 
     $dsn = 'smtp://smtp.example.com?source_ip=[::]';
 
 .. note::
 
-    This setting only works when the ``smtp://`` protocol is used.
+    This option only works when using the ``smtp://`` protocol.
 
 Overriding default SMTP authenticators
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
