@@ -18,11 +18,9 @@ Role of a Core Team Member
 
 In addition to being a regular contributor, core team members are expected to:
 
- * Review, approve, and merge pull requests;
-
- * Help enforce, improve, and implement Symfony :doc:`processes and policies </contributing/index>`;
-
- * Participate in the Symfony Core Team discussions (on Slack and GitHub).
+* Review, approve, and merge pull requests;
+* Help enforce, improve, and implement Symfony :doc:`processes and policies </contributing/index>`;
+* Participate in the Symfony Core Team discussions (on Slack and GitHub).
 
 Core Organization
 -----------------
@@ -46,9 +44,7 @@ In addition, there are other groups created to manage specific topics:
 
 * **Security Team**: manages the whole security process (triaging reported vulnerabilities,
   fixing the reported issues, coordinating the release of security fixes, etc.);
-
 * **Symfony UX Team**: manages the `UX repositories`_;
-
 * **Documentation Team**: manages the whole `symfony-docs repository`_.
 
 Active Core Members
@@ -152,7 +148,6 @@ Pull Request Voting Policy
 
 * Core members can change their votes as many times as they desire
   during the course of a pull request discussion;
-
 * Core members are not allowed to vote on their own pull requests.
 
 Pull Request Merging Policy
@@ -161,13 +156,10 @@ Pull Request Merging Policy
 A pull request **can be merged** if:
 
 * It is a :ref:`minor change <core-team_minor-changes>`;
-
 * Enough time was given for peer reviews;
-
 * It is a bug fix and at least two **Mergers Team** members voted ``+1``
   (only one if the submitter is part of the Mergers team) and no Core
   member voted ``-1`` (via GitHub reviews or as comments).
-
 * It is a new feature and at least two **Mergers Team** members voted
   ``+1`` (if the submitter is part of the Mergers team, two *other* members)
   and no Core member voted ``-1`` (via GitHub reviews or as comments).
@@ -187,15 +179,12 @@ following these rules:
 
 * **Feature**: For new features and deprecations; Pull requests must be merged
   in the development branch.
-
 * **Bug**: Only for bug fixes; We are very conservative when it comes to
   merging older, but still maintained, branches. Read the :doc:`maintenance`
   document for more information.
-
 * **Minor**: For everything that does not change the code or when they don't
   need to be listed in the CHANGELOG files: typos, Markdown files, test files,
   new or missing translations, etc.
-
 * **Security**: It's the category used for security fixes and should never be
   used except by the security team.
 
