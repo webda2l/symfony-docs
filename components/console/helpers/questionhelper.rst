@@ -145,6 +145,28 @@ The option which should be selected by default is provided with the third
 argument of the constructor. The default is ``null``, which means that no
 option is the default one.
 
+Choice questions display both the choice value and a numeric index, which starts
+from 0 by default. The user can type either the numeric index or the choice value
+to make a selection:
+
+.. code-block:: terminal
+
+    Please select your favorite color (defaults to red):
+      [0] red
+      [1] blue
+      [2] yellow
+    >
+
+.. tip::
+
+    To use custom indices, pass an array with custom numeric keys as the choice
+    values::
+
+        new ChoiceQuestion('Select a room:', [
+            102 => 'Room Foo',
+            213 => 'Room Bar',
+        ]);
+
 If the user enters an invalid string, an error message is shown and the user
 is asked to provide the answer another time, until they enter a valid string
 or reach the maximum number of attempts. The default value for the maximum number
