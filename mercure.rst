@@ -309,10 +309,11 @@ as patterns:
     }
     </script>
 
-However, on the client side (i.e. in JavaScript's ``EventSource``), there is no built-in way
-to see which topic a certain message is coming from. So if this (or any other meta information)
-is important to you, you need to include it in the message's data (e.g. by adding a key to the
-JSON, or a `data-*` attribute to the HTML).
+However, on the client side (i.e. in JavaScript's ``EventSource``), there is no
+built-in way to know which topic a certain message originates from. If this (or
+any other meta information) is important to you, you need to include it in the
+message's data (e.g. by adding a key to the JSON, or a ``data-*`` attribute to
+the HTML).
 
 .. tip::
 
