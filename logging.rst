@@ -1,8 +1,10 @@
 Logging
 =======
 
-Symfony comes with a minimalist `PSR-3`_ logger: :class:`Symfony\\Component\\HttpKernel\\Log\\Logger`.
-In conformance with `the twelve-factor app methodology`_, it sends messages starting from the
+Symfony comes with two minimalist `PSR-3`_ loggers: :class:`Symfony\\Component\\HttpKernel\\Log\\Logger`
+for the HTTP context and :class:`Symfony\\Component\\Console\\Logger\\ConsoleLogger` for the
+CLI context.
+In conformance with `the twelve-factor app methodology`_, they send messages starting from the
 ``WARNING`` level to `stderr`_.
 
 The minimal log level can be changed by setting the ``SHELL_VERBOSITY`` environment variable:
@@ -17,13 +19,18 @@ The minimal log level can be changed by setting the ``SHELL_VERBOSITY`` environm
 =========================  =================
 
 The minimum log level, the default output and the log format can also be changed by
-passing the appropriate arguments to the constructor of :class:`Symfony\\Component\\HttpKernel\\Log\\Logger`.
-To do so, :ref:`override the "logger" service definition <service-psr4-loader>`.
+passing the appropriate arguments to the constructor of :class:`Symfony\\Component\\HttpKernel\\Log\\Logger`
+and :class:`Symfony\\Component\\Console\\Logger\\ConsoleLogger`.
+
+The :class:`Symfony\\Component\\HttpKernel\\Log\\Logger` class is available through the ``logger`` service.
+To pass your configuration, you can :ref:`override the "logger" service definition <service-psr4-loader>`.
+
+For more information about ``ConsoleLogger``, see :doc:`/components/console/logger`.
 
 Logging a Message
 -----------------
 
-To log a message, inject the default logger in your controller or service::
+To log a message using the ``logger`` service, inject the default logger in your controller or service::
 
     use Psr\Log\LoggerInterface;
     // ...
@@ -55,7 +62,7 @@ Adding placeholders to log messages is recommended because:
 * It's better for security, because escaping can then be done by the
   implementation in a context-aware fashion.
 
-The ``logger`` service has different methods for different logging levels/priorities.
+The logger implementations has different methods for different logging levels/priorities.
 See `LoggerInterface`_ for a list of all of the methods on the logger.
 
 Monolog
