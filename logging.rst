@@ -3,9 +3,8 @@ Logging
 
 Symfony comes with two minimalist `PSR-3`_ loggers: :class:`Symfony\\Component\\HttpKernel\\Log\\Logger`
 for the HTTP context and :class:`Symfony\\Component\\Console\\Logger\\ConsoleLogger` for the
-CLI context.
-In conformance with `the twelve-factor app methodology`_, they send messages starting from the
-``WARNING`` level to `stderr`_.
+CLI context. In conformance with `the twelve-factor app methodology`_, they send messages
+starting from the ``WARNING`` level to `stderr`_.
 
 The minimal log level can be changed by setting the ``SHELL_VERBOSITY`` environment variable:
 
@@ -30,7 +29,7 @@ For more information about ``ConsoleLogger``, see :doc:`/components/console/logg
 Logging a Message
 -----------------
 
-To log a message using the ``logger`` service, inject the default logger in your controller or service::
+To log a message, inject the default logger in your controller or service::
 
     use Psr\Log\LoggerInterface;
     // ...
@@ -62,7 +61,7 @@ Adding placeholders to log messages is recommended because:
 * It's better for security, because escaping can then be done by the
   implementation in a context-aware fashion.
 
-The logger implementations has different methods for different logging levels/priorities.
+The ``logger`` service has different methods for different logging levels/priorities.
 See `LoggerInterface`_ for a list of all of the methods on the logger.
 
 Monolog
