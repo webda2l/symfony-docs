@@ -453,10 +453,8 @@ By default, digit-only array keys are dumped as integers. You can use the
 Dumping Collection of Maps
 ~~~~~~~~~~~~~~~~~~~~~~~~~~
 
-By default, the collection of maps uses a hyphen on a separate line as a delimiter.
-To use the delimiter line as part of the map dump, use the ``Yaml::DUMP_COMPACT_NESTED_MAPPING`` flag.
-
-Dump without flag set:
+When the YAML component dumps collections of maps, it uses a hyphen on a separate
+line as a delimiter:
 
 .. code-block:: yaml
 
@@ -468,7 +466,8 @@ Dump without flag set:
         name: Jupiter
         distance: 778500000
 
-Dump with ``Yaml::DUMP_COMPACT_NESTED_MAPPING`` flag set:
+To produce a more compact output where the delimiter is included within the map,
+use the ``Yaml::DUMP_COMPACT_NESTED_MAPPING`` flag:
 
 .. code-block:: yaml
 
@@ -477,6 +476,10 @@ Dump with ``Yaml::DUMP_COMPACT_NESTED_MAPPING`` flag set:
         distance: 57910000
       - name: Jupiter
         distance: 778500000
+
+.. versionadded:: 7.3
+
+    The ``Yaml::DUMP_COMPACT_NESTED_MAPPING`` flag was introduced in Symfony 7.3.
 
 Syntax Validation
 ~~~~~~~~~~~~~~~~~
