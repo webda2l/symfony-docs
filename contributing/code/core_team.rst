@@ -70,7 +70,6 @@ Active Core Members
   * **Alexander M. Turek** (`derrabus`_);
   * **Jérémy Derussé** (`jderusse`_);
   * **Oskar Stark** (`OskarStark`_);
-  * **Thomas Calvet** (`fancyweb`_);
   * **Mathieu Santostefano** (`welcomattic`_);
   * **Kevin Bond** (`kbond`_);
   * **Jérôme Tamarelle** (`gromnan`_).
@@ -114,7 +113,8 @@ Symfony contributions:
 * **Tobias Schultze** (`Tobion`_);
 * **Maxime Steinhausser** (`ogizanagi`_);
 * **Titouan Galopin** (`tgalopin`_);
-* **Michael Cullum** (`michaelcullum`_).
+* **Michael Cullum** (`michaelcullum`_);
+* **Thomas Calvet** (`fancyweb`_).
 
 Core Membership Application
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~
