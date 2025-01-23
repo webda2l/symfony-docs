@@ -16,8 +16,9 @@ time, but you can use them for your own features too.
     By definition, the Symfony rate limiters require Symfony to be booted
     in a PHP process. This makes them not useful to protect against `DoS attacks`_.
     Such protections must consume the least resources possible. Consider
-    using `Apache mod_ratelimit`_, `NGINX rate limiting`_ or proxies (like
-    AWS or Cloudflare) to prevent your server from being overwhelmed.
+    using `Apache mod_ratelimit`_, `NGINX rate limiting`_,
+    `Caddy HTTP rate limit module`_ (also supported by FrankenPHP)
+    or proxies (like AWS or Cloudflare) to prevent your server from being overwhelmed.
 
 .. _rate-limiter-policies:
 
@@ -543,6 +544,7 @@ you can use a specific :ref:`named lock <lock-named-locks>` via the
 .. _`DoS attacks`: https://cheatsheetseries.owasp.org/cheatsheets/Denial_of_Service_Cheat_Sheet.html
 .. _`Apache mod_ratelimit`: https://httpd.apache.org/docs/current/mod/mod_ratelimit.html
 .. _`NGINX rate limiting`: https://www.nginx.com/blog/rate-limiting-nginx/
+.. _`Caddy HTTP rate limit module`: https://github.com/mholt/caddy-ratelimit
 .. _`token bucket algorithm`: https://en.wikipedia.org/wiki/Token_bucket
 .. _`PHP date relative formats`: https://www.php.net/manual/en/datetime.formats.php#datetime.formats.relative
 .. _`Race conditions`: https://en.wikipedia.org/wiki/Race_condition
