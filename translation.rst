@@ -145,7 +145,7 @@ different formats:
     .. code-block:: yaml
 
         # translations/messages.fr.yaml
-        Symfony is great: J'aime Symfony
+        Symfony is great: Symfony est génial
 
     .. code-block:: xml
 
@@ -156,7 +156,7 @@ different formats:
                 <body>
                     <trans-unit id="symfony_is_great">
                         <source>Symfony is great</source>
-                        <target>J'aime Symfony</target>
+                        <target>Symfony est génial</target>
                     </trans-unit>
                 </body>
             </file>
@@ -166,14 +166,14 @@ different formats:
 
         // translations/messages.fr.php
         return [
-            'Symfony is great' => "J'aime Symfony",
+            'Symfony is great' => 'Symfony est génial',
         ];
 
 You can find more information on where these files
 :ref:`should be located <translation-resource-locations>`.
 
 Now, if the language of the user's locale is French (e.g. ``fr_FR`` or ``fr_BE``),
-the message will be translated into ``J'aime Symfony``. You can also translate
+the message will be translated into ``Symfony est génial``. You can also translate
 the message inside your :ref:`templates <translation-in-templates>`.
 
 .. _translation-real-vs-keyword-messages:
@@ -1219,7 +1219,7 @@ for the ``fr`` locale:
                 <body>
                     <trans-unit id="1">
                         <source>Symfony is great</source>
-                        <target>J'aime Symfony</target>
+                        <target>Symfony est génial</target>
                     </trans-unit>
                 </body>
             </file>
@@ -1228,13 +1228,13 @@ for the ``fr`` locale:
     .. code-block:: yaml
 
         # translations/messages.fr.yaml
-        Symfony is great: J'aime Symfony
+        Symfony is great: Symfony est génial
 
     .. code-block:: php
 
         // translations/messages.fr.php
         return [
-            'Symfony is great' => 'J\'aime Symfony',
+            'Symfony is great' => 'Symfony est génial',
         ];
 
 and for the ``en`` locale:
@@ -1277,7 +1277,7 @@ To inspect all messages in the ``fr`` locale for the application, run:
     ---------  ------------------  ----------------------  -------------------------------
      State      Id                  Message Preview (fr)    Fallback Message Preview (en)
     ---------  ------------------  ----------------------  -------------------------------
-     unused     Symfony is great    J'aime Symfony          Symfony is great
+     unused     Symfony is great    Symfony est génial      Symfony is great
     ---------  ------------------  ----------------------  -------------------------------
 
 It shows you a table with the result when translating the message in the ``fr``
@@ -1297,7 +1297,7 @@ output:
     ---------  ------------------  ----------------------  -------------------------------
      State      Id                  Message Preview (fr)    Fallback Message Preview (en)
     ---------  ------------------  ----------------------  -------------------------------
-                Symfony is great    J'aime Symfony          Symfony is great
+                Symfony is great    Symfony est génial      Symfony is great
     ---------  ------------------  ----------------------  -------------------------------
 
 The state is empty which means the message is translated in the ``fr`` locale
