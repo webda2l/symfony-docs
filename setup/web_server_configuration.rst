@@ -207,6 +207,9 @@ When using Caddy on the server, you can use a configuration like this:
 
         # otherwise, use PHP-FPM (replace "unix//var/..." with "127.0.0.1:9000" when using TCP)
         php_fastcgi unix//var/run/php/php8.3-fpm.sock {
+            # only fallback to root index.php aka front controller.
+            try_files {path} index.php
+
             # optionally set the value of the environment variables used in the application
             # env APP_ENV "prod"
             # env APP_SECRET "<app-secret-id>"
