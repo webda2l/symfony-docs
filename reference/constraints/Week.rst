@@ -79,10 +79,10 @@ the following:
 
             public static function loadValidatorMetadata(ClassMetadata $metadata): void
             {
-                $metadata->addPropertyConstraint('startWeek', new Assert\Week([
-                    'min' => '2022-W01',
-                    'max' => '2022-W20',
-                ]));
+                $metadata->addPropertyConstraint('startWeek', new Assert\Week(
+                    min: '2022-W01',
+                    max: '2022-W20',
+                ));
             }
         }
 

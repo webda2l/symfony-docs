@@ -95,9 +95,9 @@ between all of the rows in your user table:
 
             public static function loadValidatorMetadata(ClassMetadata $metadata): void
             {
-                $metadata->addConstraint(new UniqueEntity([
-                    'fields' => 'email',
-                ]));
+                $metadata->addConstraint(new UniqueEntity(
+                    fields: 'email',
+                ));
 
                 $metadata->addPropertyConstraint('email', new Assert\Email());
             }
@@ -260,7 +260,7 @@ Now, the message would be bound to the ``port`` field with this configuration.
 ``fields``
 ~~~~~~~~~~
 
-**type**: ``array`` | ``string`` [:ref:`default option <validation-default-option>`]
+**type**: ``array`` | ``string``
 
 This required option is the field (or list of fields) on which this entity
 should be unique. For example, if you specified both the ``email`` and ``name``
@@ -346,10 +346,10 @@ this option to specify one or more fields to only ignore ``null`` values on them
         {
             public static function loadValidatorMetadata(ClassMetadata $metadata)
             {
-                $metadata->addConstraint(new UniqueEntity([
-                    'fields' => ['email', 'phoneNumber'],
-                    'ignoreNull' => 'phoneNumber',
-                ]));
+                $metadata->addConstraint(new UniqueEntity(
+                    fields: ['email', 'phoneNumber'],
+                    ignoreNull: 'phoneNumber',
+                ));
 
                 // ...
             }

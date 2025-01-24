@@ -152,9 +152,9 @@ Parameter        Description
 
             public static function loadValidatorMetadata(ClassMetadata $metadata): void
             {
-                $metadata->addPropertyConstraint('bioUrl', new Assert\Url([
-                    'message' => 'The url "{{ value }}" is not a valid url.',
-                ]));
+                $metadata->addPropertyConstraint('bioUrl', new Assert\Url(
+                    message: 'The url "{{ value }}" is not a valid url.',
+                ));
             }
         }
 
@@ -231,9 +231,9 @@ the ``ftp://`` type URLs to be valid, redefine the ``protocols`` array, listing
 
             public static function loadValidatorMetadata(ClassMetadata $metadata): void
             {
-                $metadata->addPropertyConstraint('bioUrl', new Assert\Url([
-                    'protocols' => ['http', 'https', 'ftp'],
-                ]));
+                $metadata->addPropertyConstraint('bioUrl', new Assert\Url(
+                    protocols: ['http', 'https', 'ftp'],
+                ));
             }
         }
 
@@ -302,9 +302,9 @@ also relative URLs that contain no protocol (e.g. ``//example.com``).
 
             public static function loadValidatorMetadata(ClassMetadata $metadata): void
             {
-                $metadata->addPropertyConstraint('bioUrl', new Assert\Url([
-                    'relativeProtocol' => true,
-                ]));
+                $metadata->addPropertyConstraint('bioUrl', new Assert\Url(
+                    relativeProtocol: true,
+                ));
             }
         }
 
@@ -414,10 +414,10 @@ Parameter        Description
 
             public static function loadValidatorMetadata(ClassMetadata $metadata): void
             {
-                $metadata->addPropertyConstraint('homepageUrl', new Assert\Url([
-                    'requireTld' => true,
-                    'tldMessage' => 'Add at least one TLD to the {{ value }} URL.',
-                ]));
+                $metadata->addPropertyConstraint('homepageUrl', new Assert\Url(
+                    requireTld: true,
+                    tldMessage: 'Add at least one TLD to the {{ value }} URL.',
+                ));
             }
         }
 

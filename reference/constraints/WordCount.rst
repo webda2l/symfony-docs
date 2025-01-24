@@ -78,10 +78,10 @@ class contains between 100 and 200 words, you could do the following:
 
             public static function loadValidatorMetadata(ClassMetadata $metadata): void
             {
-                $metadata->addPropertyConstraint('content', new Assert\WordCount([
-                    'min' => 100,
-                    'max' => 200,
-                ]));
+                $metadata->addPropertyConstraint('content', new Assert\WordCount(
+                    min: 100,
+                    max: 200,
+                ));
             }
         }
 

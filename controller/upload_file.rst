@@ -75,14 +75,14 @@ so Symfony doesn't try to get/set its value from the related entity::
                     // unmapped fields can't define their validation using attributes
                     // in the associated entity, so you can use the PHP constraint classes
                     'constraints' => [
-                        new File([
-                            'maxSize' => '1024k',
-                            'mimeTypes' => [
+                        new File(
+                            maxSize: '1024k',
+                            mimeTypes: [
                                 'application/pdf',
                                 'application/x-pdf',
                             ],
-                            'mimeTypesMessage' => 'Please upload a valid PDF document',
-                        ])
+                            mimeTypesMessage: 'Please upload a valid PDF document',
+                        )
                     ],
                 ])
                 // ...

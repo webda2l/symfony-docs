@@ -85,12 +85,12 @@ and ``50``, you might add the following:
 
             public static function loadValidatorMetadata(ClassMetadata $metadata): void
             {
-                $metadata->addPropertyConstraint('firstName', new Assert\Length([
-                    'min' => 2,
-                    'max' => 50,
-                    'minMessage' => 'Your first name must be at least {{ limit }} characters long',
-                    'maxMessage' => 'Your first name cannot be longer than {{ limit }} characters',
-                ]));
+                $metadata->addPropertyConstraint('firstName', new Assert\Length(
+                    min: 2,
+                    max: 50,
+                    minMessage: 'Your first name must be at least {{ limit }} characters long',
+                    maxMessage: 'Your first name cannot be longer than {{ limit }} characters',
+                ));
             }
         }
 

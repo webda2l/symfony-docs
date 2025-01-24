@@ -248,7 +248,7 @@ You can use custom validators like the ones provided by Symfony itself:
             public static function loadValidatorMetadata(ClassMetadata $metadata): void
             {
                 $metadata->addPropertyConstraint('name', new NotBlank());
-                $metadata->addPropertyConstraint('name', new ContainsAlphanumeric(['mode' => 'loose']));
+                $metadata->addPropertyConstraint('name', new ContainsAlphanumeric(mode: 'loose'));
             }
         }
 
@@ -273,6 +273,7 @@ define those options as public properties on the constraint class::
     // src/Validator/Foo.php
     namespace App\Validator;
 
+    use Symfony\Component\Validator\Attribute\HasNamedArguments;
     use Symfony\Component\Validator\Constraint;
 
     #[\Attribute]
@@ -282,6 +283,7 @@ define those options as public properties on the constraint class::
         public $message = 'This value is invalid';
         public $optionalBarOption = false;
 
+        #[HasNamedArguments]
         public function __construct(
             $mandatoryFooOption,
             ?string $message = null,
@@ -402,10 +404,10 @@ the custom options like you pass any other option in built-in constraints:
             public static function loadValidatorMetadata(ClassMetadata $metadata)
             {
                 $metadata->addPropertyConstraint('name', new NotBlank());
-                $metadata->addPropertyConstraint('name', new Foo([
-                    'mandatoryFooOption' => 'bar',
-                    'optionalBarOption' => true,
-                ]));
+                $metadata->addPropertyConstraint('name', new Foo(
+                    mandatoryFooOption: 'bar',
+                    optionalBarOption: true,
+                ));
             }
         }
 

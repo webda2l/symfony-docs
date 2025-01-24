@@ -35,9 +35,9 @@ you can create your own named set or requirements to be reused consistently ever
                 return [
                     new Assert\NotBlank(),
                     new Assert\Type('string'),
-                    new Assert\Length(['min' => 12]),
+                    new Assert\Length(min: 12),
                     new Assert\NotCompromisedPassword(),
-                    new Assert\PasswordStrength(['minScore' => 4]),
+                    new Assert\PasswordStrength(minScore: 4),
                 ];
             }
         }

@@ -162,9 +162,9 @@ collection::
 
             public static function loadValidatorMetadata(ClassMetadata $metadata): void
             {
-                $metadata->addPropertyConstraint('coordinates', new Assert\Unique([
-                    'fields' => ['latitude', 'longitude'],
-                ]));
+                $metadata->addPropertyConstraint('coordinates', new Assert\Unique(
+                    fields: ['latitude', 'longitude'],
+                ));
             }
         }
 
