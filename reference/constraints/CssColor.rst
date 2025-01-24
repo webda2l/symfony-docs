@@ -110,15 +110,15 @@ the named CSS colors:
             {
                 $metadata->addPropertyConstraint('defaultColor', new Assert\CssColor());
 
-                $metadata->addPropertyConstraint('accentColor', new Assert\CssColor([
-                    'formats' => Assert\CssColor::HEX_LONG,
-                    'message' => 'The accent color must be a 6-character hexadecimal color.',
-                ]));
+                $metadata->addPropertyConstraint('accentColor', new Assert\CssColor(
+                    formats: Assert\CssColor::HEX_LONG,
+                    message: 'The accent color must be a 6-character hexadecimal color.',
+                ));
 
-                $metadata->addPropertyConstraint('currentColor', new Assert\CssColor([
-                    'formats' => [Assert\CssColor::BASIC_NAMED_COLORS, Assert\CssColor::EXTENDED_NAMED_COLORS],
-                    'message' => 'The color "{{ value }}" is not a valid CSS color name.',
-                ]));
+                $metadata->addPropertyConstraint('currentColor', new Assert\CssColor(
+                    formats: [Assert\CssColor::BASIC_NAMED_COLORS, Assert\CssColor::EXTENDED_NAMED_COLORS],
+                    message: 'The color "{{ value }}" is not a valid CSS color name.',
+                ));
             }
         }
 

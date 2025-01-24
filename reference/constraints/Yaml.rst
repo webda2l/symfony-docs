@@ -73,9 +73,9 @@ The ``Yaml`` constraint can be applied to a property or a "getter" method:
         {
             public static function loadValidatorMetadata(ClassMetadata $metadata): void
             {
-                $metadata->addPropertyConstraint('customConfiguration', new Assert\Yaml([
-                    'message' => 'Your configuration doesn\'t have valid YAML syntax.',
-                ]));
+                $metadata->addPropertyConstraint('customConfiguration', new Assert\Yaml(
+                    message: 'Your configuration doesn\'t have valid YAML syntax.',
+                ));
             }
         }
 
@@ -122,10 +122,10 @@ Its value is a combination of one or more of the :ref:`flags defined by the Yaml
         {
             public static function loadValidatorMetadata(ClassMetadata $metadata): void
             {
-                $metadata->addPropertyConstraint('customConfiguration', new Assert\Yaml([
-                    'message' => 'Your configuration doesn\'t have valid YAML syntax.',
-                    'flags' => Yaml::PARSE_CONSTANT | Yaml::PARSE_CUSTOM_TAGS | Yaml::PARSE_DATETIME,
-                ]));
+                $metadata->addPropertyConstraint('customConfiguration', new Assert\Yaml(
+                    message: 'Your configuration doesn\'t have valid YAML syntax.',
+                    flags: Yaml::PARSE_CONSTANT | Yaml::PARSE_CUSTOM_TAGS | Yaml::PARSE_DATETIME,
+                ));
             }
         }
 

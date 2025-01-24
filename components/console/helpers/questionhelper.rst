@@ -480,10 +480,10 @@ invalid answer and will only be able to proceed if their input is valid.
         use Symfony\Component\Validator\Validation;
 
         $question = new Question('Please enter the name of the bundle', 'AcmeDemoBundle');
-        $validation = Validation::createCallable(new Regex([
-            'pattern' => '/^[a-zA-Z]+Bundle$/',
-            'message' => 'The name of the bundle should be suffixed with \'Bundle\'',
-        ]));
+        $validation = Validation::createCallable(new Regex(
+            pattern: '/^[a-zA-Z]+Bundle$/',
+            message: 'The name of the bundle should be suffixed with \'Bundle\'',
+        ));
         $question->setValidator($validation);
 
 Validating a Hidden Response

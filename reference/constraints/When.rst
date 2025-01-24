@@ -127,15 +127,15 @@ One way to accomplish this is with the When constraint:
             public static function loadValidatorMetadata(ClassMetadata $metadata): void
             {
                 $metadata->addPropertyConstraint('value', new Assert\GreaterThan(0));
-                $metadata->addPropertyConstraint('value', new Assert\When([
-                    'expression' => 'this.getType() == "percent"',
-                    'constraints' => [
-                        new Assert\LessThanOrEqual([
-                            'value' => 100,
-                            'message' => 'The value should be between 1 and 100!',
-                        ]),
+                $metadata->addPropertyConstraint('value', new Assert\When(
+                    expression: 'this.getType() == "percent"',
+                    constraints: [
+                        new Assert\LessThanOrEqual(
+                            value: 100,
+                            message: 'The value should be between 1 and 100!',
+                        ),
                     ],
-                ]));
+                ));
             }
 
             // ...
@@ -256,12 +256,12 @@ validation based on its value:
 
             public static function loadValidatorMetadata(ClassMetadata $metadata): void
             {
-                $metadata->addPropertyConstraint('type', new Assert\When([
-                    'expression' => 'value == "percent"',
-                    'constraints' => [
+                $metadata->addPropertyConstraint('type', new Assert\When(
+                    expression: 'value == "percent"',
+                    constraints: [
                         new Assert\Callback('doComplexValidation'),
                     ],
-                ]));
+                ));
             }
 
             public function doComplexValidation(ExecutionContextInterface $context, $payload): void

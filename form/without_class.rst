@@ -96,12 +96,12 @@ but here's a short example::
     {
         $builder
             ->add('firstName', TextType::class, [
-                'constraints' => new Length(['min' => 3]),
+                'constraints' => new Length(min: 3),
             ])
             ->add('lastName', TextType::class, [
                 'constraints' => [
                     new NotBlank(),
-                    new Length(['min' => 3]),
+                    new Length(min: 3),
                 ],
             ])
         ;
@@ -153,10 +153,10 @@ This can be done by setting the ``constraints`` option in the
         $resolver->setDefaults([
             'data_class' => null,
             'constraints' => new Collection([
-                'firstName' => new Length(['min' => 3]),
+                'firstName' => new Length(min: 3),
                 'lastName' => [
                     new NotBlank(),
-                    new Length(['min' => 3]),
+                    new Length(min: 3),
                 ],
             ]),
         ]);
