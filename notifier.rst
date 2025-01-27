@@ -68,6 +68,7 @@ Service
 `AllMySms`_         **Install**: ``composer require symfony/all-my-sms-notifier`` \
                     **DSN**: ``allmysms://LOGIN:APIKEY@default?from=FROM`` \
                     **Webhook support**: No
+                    **SentMessage extra info**: `nbSms`, `balance`, `cost`
 `AmazonSns`_        **Install**: ``composer require symfony/amazon-sns-notifier`` \
                     **DSN**: ``sns://ACCESS_KEY:SECRET_KEY@default?region=REGION`` \
                     **Webhook support**: No
@@ -139,6 +140,7 @@ Service
 `OvhCloud`_         **Install**: ``composer require symfony/ovh-cloud-notifier`` \
                     **DSN**: ``ovhcloud://APPLICATION_KEY:APPLICATION_SECRET@default?consumer_key=CONSUMER_KEY&service_name=SERVICE_NAME`` \
                     **Webhook support**: No
+                    **SentMessage extra info**: `totalCreditsRemoved`
 `Plivo`_            **Install**: ``composer require symfony/plivo-notifier`` \
                     **DSN**: ``plivo://AUTH_ID:AUTH_TOKEN@default?from=FROM`` \
                     **Webhook support**: No
