@@ -543,6 +543,19 @@ command with the ``--all`` option:
 
     The ``--all`` option was introduced in Symfony 7.1.
 
+The ``--keepalive`` option can be used to prevent messages from being prematurely
+redelivered during long-running processing. It marks the message as "in progress"
+and prevents it from being redelivered until the worker finishes processing it.
+
+.. note::
+
+    This option is only available for supported transports, which are
+    the Beanstalkd and AmazonSQS transports.
+
+.. versionadded:: 7.2
+
+    The ``--keepalive`` option was introduced in Symfony 7.2.
+
 .. tip::
 
     In a development environment and if you're using the Symfony CLI tool,
@@ -1709,6 +1722,10 @@ The transport has a number of options:
     The message time to run before it is put back in the ready queue - in
     seconds.
 
+.. versionadded:: 7.2
+
+    Keepalive support, using the ``--keepalive`` option, was added in Symfony 7.2.
+
 .. _messenger-redis-transport:
 
 Redis Transport
@@ -2030,6 +2047,10 @@ The transport has a number of options:
 
     FIFO queues don't support setting a delay per message, a value of ``delay: 0``
     is required in the retry strategy settings.
+
+.. versionadded:: 7.2
+
+    Keepalive support, using the `--keepalive` option, was added in Symfony 7.2.
 
 Serializing Messages
 ~~~~~~~~~~~~~~~~~~~~
