@@ -195,7 +195,7 @@ Caddy
 
 When using Caddy on the server, you can use a configuration like this:
 
-.. code-block:: text
+.. code-block:: nginx
 
     # /etc/caddy/Caddyfile
     example.com, www.example.com {
