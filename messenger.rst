@@ -1699,7 +1699,7 @@ the message is marked as "in progress".
 
 .. versionadded:: 7.3
 
-    Keepalive support, using the ``--keepalive`` option, was added in Symfony 7.3.
+    Keepalive support, using the ``--keepalive`` option, was introduced in Symfony 7.3.
 
 Beanstalkd Transport
 ~~~~~~~~~~~~~~~~~~~~
