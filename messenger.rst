@@ -545,12 +545,16 @@ command with the ``--all`` option:
 
 The ``--keepalive`` option can be used to prevent messages from being prematurely
 redelivered during long-running processing. It marks the message as "in progress"
-and prevents it from being redelivered until the worker finishes processing it.
+and prevents it from being redelivered until the worker finishes processing it:
+
+.. code-block:: terminal
+
+    php bin/console messenger:consume --keepalive=5
 
 .. note::
 
     This option is only available for supported transports, which are
-    the Beanstalkd and AmazonSQS transports.
+    the Doctrine, Beanstalkd and AmazonSQS transports.
 
 .. versionadded:: 7.2
 
@@ -1688,6 +1692,14 @@ in the table.
 ``get_notify_timeout`` (default: ``0``)
     The length of time to wait for a response when calling
     ``PDO::pgsqlGetNotify``, in milliseconds.
+
+The keepalive feature, which prevents messages from being prematurely redelivered during
+long-running processing, updates the ``delivered_at`` timestamp periodically to ensure
+the message is marked as "in progress".
+
+.. versionadded:: 7.3
+
+    Keepalive support, using the ``--keepalive`` option, was added in Symfony 7.3.
 
 Beanstalkd Transport
 ~~~~~~~~~~~~~~~~~~~~
