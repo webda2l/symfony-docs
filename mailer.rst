@@ -824,6 +824,8 @@ Catch that exception to recover from the error or to display some message::
         // error message or try to resend the message
     }
 
+.. _mailer-debugging-emails:
+
 Debugging Emails
 ----------------
 
@@ -832,6 +834,10 @@ The :class:`Symfony\\Component\\Mailer\\SentMessage` object returned by the
 provides access to the original message (``getOriginalMessage()``) and to some
 debug information (``getDebug()``) such as the HTTP calls done by the HTTP
 transports, which is useful to debug errors.
+
+You can also access :class:`Symfony\\Component\\Mailer\\SentMessage` by listening
+to the :ref:`SentMessageEvent <mailer-sent-message-event>` and retrieve ``getDebug()``
+by listening to the :ref:`FailedMessageEvent <mailer-failed-message-event>`.
 
 .. note::
 
@@ -1701,24 +1707,26 @@ and their priorities:
 
     $ php bin/console debug:event-dispatcher "Symfony\Component\Mailer\Event\MessageEvent"
 
+.. _mailer-sent-message-event:
+
 SentMessageEvent
 ~~~~~~~~~~~~~~~~
 
 **Event Class**: :class:`Symfony\\Component\\Mailer\\Event\\SentMessageEvent`
 
 ``SentMessageEvent`` allows you to act on the :class:`Symfony\\Component\\\Mailer\\\SentMessage`
-class to access the original message (``getOriginalMessage()``) and some debugging
-information (``getDebug()``) such as the HTTP calls made by the HTTP transports,
-which is useful for debugging errors::
+class to access the original message (``getOriginalMessage()``) and some
+:ref:`debugging information <mailer-debugging-emails>` (``getDebug()``) such as
+the HTTP calls made by the HTTP transports, which is useful for debugging errors::
 
     use Symfony\Component\EventDispatcher\EventSubscriberInterface;
     use Symfony\Component\Mailer\Event\SentMessageEvent;
 
     public function onMessage(SentMessageEvent $event): void
     {
-        $message = $event->getMessage();
+        $message $event->getMessage();
 
-        // do something with the message
+        // do something with the message (e.g. get its id)
     }
 
 Execute this command to find out which listeners are registered for this event
@@ -1728,20 +1736,28 @@ and their priorities:
 
     $ php bin/console debug:event-dispatcher "Symfony\Component\Mailer\Event\SentMessageEvent"
 
+.. _mailer-failed-message-event:
+
 FailedMessageEvent
 ~~~~~~~~~~~~~~~~~~
 
 **Event Class**: :class:`Symfony\\Component\\Mailer\\Event\\FailedMessageEvent`
 
-``FailedMessageEvent`` allows acting on the initial message in case of a failure::
+``FailedMessageEvent`` allows acting on the initial message in case of a failure
+and some :ref:`debugging information <mailer-debugging-emails>` (``getDebug()``)
+such as the HTTP calls made by the HTTP transports, which is useful for debugging errors::
 
     use Symfony\Component\EventDispatcher\EventSubscriberInterface;
     use Symfony\Component\Mailer\Event\FailedMessageEvent;
+    use Symfony\Component\Mailer\Exception\TransportExceptionInterface;
 
     public function onMessage(FailedMessageEvent $event): void
     {
         // e.g you can get more information on this error when sending an email
-        $event->getError();
+        $error = $event->getError();
+        if ($error instanceof TransportExceptionInterface) {
+            $error->getDebug();
+        }
 
         // do something with the message
     }
