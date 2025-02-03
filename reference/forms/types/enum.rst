@@ -94,6 +94,22 @@ Inherited Options
 
 These options inherit from the :doc:`ChoiceType </reference/forms/types/choice>`:
 
+.. include:: /reference/forms/types/options/choice_attr.rst.inc
+
+.. include:: /reference/forms/types/options/choice_filter.rst.inc
+
+.. include:: /reference/forms/types/options/choice_label.rst.inc
+
+.. include:: /reference/forms/types/options/choice_loader.rst.inc
+
+.. include:: /reference/forms/types/options/choice_name.rst.inc
+
+.. include:: /reference/forms/types/options/choice_translation_domain_enabled.rst.inc
+
+.. include:: /reference/forms/types/options/choice_translation_parameters.rst.inc
+
+.. include:: /reference/forms/types/options/choice_value.rst.inc
+
 .. include:: /reference/forms/types/options/error_bubbling.rst.inc
 
 .. include:: /reference/forms/types/options/error_mapping.rst.inc
