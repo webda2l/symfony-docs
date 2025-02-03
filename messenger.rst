@@ -2920,6 +2920,11 @@ and a different instance will be created per bus.
             $bus->middleware()->id('App\Middleware\AnotherMiddleware');
         };
 
+.. tip::
+
+    If you have installed the Maker bundle, you can use the ``make:messenger-middleware`` command
+    to bootstrap the creation your own messenger middleware.
+
 .. _middleware-doctrine:
 
 Middleware for Doctrine
