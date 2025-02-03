@@ -812,9 +812,10 @@ The :class:`Symfony\\Component\\Mailer\\SentMessage` object returned by the
 provides access to the original message (``getOriginalMessage()``) and to some
 debug information (``getDebug()``) such as the HTTP calls done by the HTTP
 transports, which is useful to debug errors.
-Access to :class:`Symfony\\Component\\Mailer\\SentMessage` can also be obtained by listening
-to the :ref:`SentMessageEvent <mailer-sent-message-event>`, and to ``getDebug()`` by listening
-to the :ref:`FailedMessageEvent <mailer-failed-message-event>`."
+
+You can also access :class:`Symfony\\Component\\Mailer\\SentMessage` by listening
+to the :ref:`SentMessageEvent <mailer-sent-message-event>` and retrieve ``getDebug()``
+by listening to the :ref:`FailedMessageEvent <mailer-failed-message-event>`.
 
 .. note::
 
@@ -1730,18 +1731,17 @@ SentMessageEvent
 
 ``SentMessageEvent`` allows you to act on the :class:`Symfony\\Component\\\Mailer\\\SentMessage`
 class to access the original message (``getOriginalMessage()``) and some
-:ref:`debugging information <mailer-debugging-emails>` (``getDebug()``) such as the HTTP calls
-made by the HTTP transports, which is useful for debugging errors::
+:ref:`debugging information <mailer-debugging-emails>` (``getDebug()``) such as
+the HTTP calls made by the HTTP transports, which is useful for debugging errors::
 
     use Symfony\Component\EventDispatcher\EventSubscriberInterface;
     use Symfony\Component\Mailer\Event\SentMessageEvent;
 
     public function onMessage(SentMessageEvent $event): void
     {
-        // e.g you can get mail id
-        $event->getMessage();
+        $message $event->getMessage();
 
-        // do something with the message
+        // do something with the message (e.g. get its id)
     }
 
 Execute this command to find out which listeners are registered for this event
@@ -1762,9 +1762,9 @@ FailedMessageEvent
 
     The ``FailedMessageEvent`` event was introduced in Symfony 6.2.
 
-``FailedMessageEvent`` allows acting on the initial message in case of a failure and some
-:ref:`debugging information <mailer-debugging-emails>` (``getDebug()``) such as the HTTP calls made
-by the HTTP transports, which is useful for debugging errors::
+``FailedMessageEvent`` allows acting on the initial message in case of a failure
+and some :ref:`debugging information <mailer-debugging-emails>` (``getDebug()``)
+such as the HTTP calls made by the HTTP transports, which is useful for debugging errors::
 
     use Symfony\Component\EventDispatcher\EventSubscriberInterface;
     use Symfony\Component\Mailer\Event\FailedMessageEvent;
