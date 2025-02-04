@@ -163,7 +163,7 @@ the metadata from the attributes of the class. For example::
 To enable the attribute loader, call the
 :method:`Symfony\\Component\\Validator\\ValidatorBuilder::enableAttributeMapping` method.
 
-To disable the annotation loader after it was enabled, call
+To disable the attribute loader after it was enabled, call
 :method:`Symfony\\Component\\Validator\\ValidatorBuilder::disableAttributeMapping`.
 
 Using Multiple Loaders
