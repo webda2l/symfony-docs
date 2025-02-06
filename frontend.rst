@@ -35,7 +35,7 @@ Supports Sass/Tailwind            :ref:`yes <asset-mapper-tailwind>`  yes
 Supports React, Vue, Svelte?      yes :ref:`[1] <ux-note-1>`          yes
 Supports TypeScript               :ref:`yes <asset-mapper-ts>`        yes
 Removes comments from JavaScript  no :ref:`[2] <ux-note-2>`           yes
-Removes comments from CSS         no :ref:`[2] <ux-note-2>`           no
+Removes comments from CSS         no :ref:`[2] <ux-note-2>`           yes :ref:`[4] <ux-note-4>`
 Versioned assets                  always                              optional
 Can update 3rd party packages     yes                                 no :ref:`[3] <ux-note-3>`
 ================================  ==================================  ==========
@@ -55,6 +55,11 @@ be executed by a browser.
 .. _ux-note-3:
 
 **[3]** If you use ``npm``, there are update checkers available (e.g. ``npm-check``).
+
+.. _ux-note-4:
+
+**[4]** CSS comments can be removed using `CssMinimizerPlugin`_, which is included
+in Webpack Encore and configurable via ``Encore.configureCssMinimizerPlugin()``.
 
 .. _frontend-asset-mapper:
 
@@ -153,3 +158,4 @@ Other Front-End Articles
 .. _`SensioLabs Minify Bundle`: https://github.com/sensiolabs/minify-bundle
 .. _`AssetMapper screencast series`: https://symfonycasts.com/screencast/asset-mapper
 .. _`API Platform screencast series`: https://symfonycasts.com/screencast/api-platform
+.. _`CssMinimizerPlugin`: https://webpack.js.org/plugins/css-minimizer-webpack-plugin
