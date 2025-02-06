@@ -58,7 +58,8 @@ be executed by a browser.
 
 .. _ux-note-4:
 
-**[4]** Comments from CSS code can be removed with `CssMinimizerPlugin`_, configurable with ``Encore.configureCssMinimizerPlugin()``.
+**[4]** CSS comments can be removed using `CssMinimizerPlugin`_, which is included
+in Webpack Encore and configurable via ``Encore.configureCssMinimizerPlugin()``.
 
 .. _frontend-asset-mapper:
 
