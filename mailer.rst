@@ -661,8 +661,8 @@ header, etc.) but most of the times you'll set text headers::
 
     $email = (new Email())
         ->getHeaders()
-            // this non-standard header tells compliant autoresponders ("email holiday mode") to not
-            // reply to this message because it's an automated email
+            // this non-standard header tells compliant autoresponders ("email holiday mode")
+            // to not reply to this message because it's an automated email
             ->addTextHeader('X-Auto-Response-Suppress', 'OOF, DR, RN, NRN, AutoReply')
 
             // use an array if you want to add a header with multiple values
