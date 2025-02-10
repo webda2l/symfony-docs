@@ -3,7 +3,7 @@ Doctrine Events
 
 `Doctrine`_, the set of PHP libraries used by Symfony to work with databases,
 provides a lightweight event system to update entities during the application
-execution. These events, called `lifecycle events`_, allow to perform tasks such
+execution. These events, called `lifecycle events`_, allow performing tasks such
 as *"update the createdAt property automatically right before persisting entities
 of this type"*.
 
@@ -24,7 +24,7 @@ There are different ways to listen to these Doctrine events:
   methods are called for all entities, not only those of a certain type. They are
   ideal to **share event logic between entities**.
 
-The performance of each type of listener depends on how many entities applies to:
+The performance of each type of listener depends on how many entities it applies to:
 lifecycle callbacks are faster than entity listeners, which in turn are faster
 than lifecycle listeners.
 
