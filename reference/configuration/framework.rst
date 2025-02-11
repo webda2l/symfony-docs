@@ -1281,7 +1281,7 @@ timeout
 
 **type**: ``float`` **default**: depends on your PHP config
 
-Time, in seconds, to wait for a response. If the response takes longer, a
+Time, in seconds, to wait for network activity. If the connection is idle for longer, a
 :class:`Symfony\\Component\\HttpClient\\Exception\\TransportException` is thrown.
 Its default value is the same as the value of PHP's `default_socket_timeout`_
 config option.
