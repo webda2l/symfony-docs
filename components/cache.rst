@@ -209,11 +209,11 @@ the cache items before storing them.
 
 The :class:`Symfony\\Component\\Cache\\Marshaller\\DefaultMarshaller` uses PHP's
 ``serialize()`` function by default, but you can optionally use the ``igbinary_serialize()``
-function from the `Igbinary extension`_:
+function from the `Igbinary extension`_::
 
     use Symfony\Component\Cache\Adapter\RedisAdapter;
-    use Symfony\Component\Cache\DefaultMarshaller;
-    use Symfony\Component\Cache\DeflateMarshaller;
+    use Symfony\Component\Cache\Marshaller\DefaultMarshaller;
+    use Symfony\Component\Cache\Marshaller\DeflateMarshaller;
 
     $marshaller = new DeflateMarshaller(new DefaultMarshaller());
     // you can optionally use the Igbinary extension if you have it installed
