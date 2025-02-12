@@ -9,6 +9,7 @@ Applies to  :ref:`class <validation-class-target>`
             or :ref:`property/method <validation-property-target>`
 Options     - `expression`_
             - `constraints`_
+            _ `otherwise`_
             - `groups`_
             - `payload`_
             - `values`_
@@ -47,7 +48,7 @@ properties::
 To validate the object, you have some requirements:
 
 A) If ``type`` is ``percent``, then ``value`` must be less than or equal 100;
-B) If ``type`` is ``absolute``, then ``value`` can be anything;
+B) If ``type`` is not ``percent``, then ``value`` must be less than 9999;
 C) No matter the value of ``type``, the ``value`` must be greater than 0.
 
 One way to accomplish this is with the When constraint:
@@ -69,6 +70,9 @@ One way to accomplish this is with the When constraint:
                 constraints: [
                     new Assert\LessThanOrEqual(100, message: 'The value should be between 1 and 100!')
                 ],
+                otherwise: [
+                    new Assert\LessThan(9999, message: 'The value should be less than 9999!')
+                ],
             )]
             private ?int $value;
 
@@ -88,6 +92,10 @@ One way to accomplish this is with the When constraint:
                             - LessThanOrEqual:
                                 value: 100
                                 message: "The value should be between 1 and 100!"
+                        otherwise:
+                            - LessThan:
+                                value: 9999
+                                message: "The value should be less than 9999!"
 
     .. code-block:: xml
 
@@ -107,6 +115,12 @@ One way to accomplish this is with the When constraint:
                             <constraint name="LessThanOrEqual">
                                 <option name="value">100</option>
                                 <option name="message">The value should be between 1 and 100!</option>
+                            </constraint>
+                        </option>
+                        <option name="otherwise">
+                            <constraint name="LessThan">
+                                <option name="value">9999</option>
+                                <option name="message">The value should be less than 9999!</option>
                             </constraint>
                         </option>
                     </constraint>
@@ -133,6 +147,12 @@ One way to accomplish this is with the When constraint:
                         new Assert\LessThanOrEqual(
                             value: 100,
                             message: 'The value should be between 1 and 100!',
+                        ),
+                    ],
+                    otherwise: [
+                        new Assert\LessThan(
+                            value: 9999,
+                            message: 'The value should be less than 9999!',
                         ),
                     ],
                 ));
@@ -278,6 +298,17 @@ You can also pass custom variables using the `values`_ option.
 **type**: ``array|Constraint``
 
 One or multiple constraints that are applied if the expression returns true.
+
+``otherwise``
+~~~~~~~~~~~~~
+
+**type**: ``array|Constraint``
+
+One or multiple constraints that are applied if the expression returns false.
+
+.. versionadded:: 7.3
+
+    The ``otherwise`` option was introduced in Symfony 7.3.
 
 .. include:: /reference/constraints/_groups-option.rst.inc
 
