@@ -895,9 +895,9 @@ configuration option:
 
 .. versionadded:: 7.3
 
-    Support for signals plain name in configuration was introduced in Symfony 7.3.
-    Prior to this, you had to use the numeric values of the signals as defined
-    in the ``pcntl`` extension's `predefined constants`_.
+    Support for signals plain names in configuration was introduced in Symfony 7.3.
+    Previously, you had to use the numeric values of signals as defined by the
+    ``pcntl`` extension's `predefined constants`_.
 
 In some cases the ``SIGTERM`` signal is sent by Supervisor itself (e.g. stopping
 a Docker container having Supervisor as its entrypoint). In these cases you
