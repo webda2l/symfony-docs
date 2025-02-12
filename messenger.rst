@@ -848,7 +848,56 @@ message before terminating.
 
 However, you might prefer to use different POSIX signals for graceful shutdown.
 You can override default ones by setting the ``framework.messenger.stop_worker_on_signals``
-configuration option.
+configuration option:
+
+.. configuration-block::
+
+    .. code-block:: yaml
+
+        # config/packages/messenger.yaml
+        framework:
+            messenger:
+                stop_worker_on_signals:
+                    - SIGTERM
+                    - SIGINT
+                    - SIGUSR1
+
+    .. code-block:: xml
+
+        <!-- config/packages/messenger.xml -->
+        <?xml version="1.0" encoding="UTF-8" ?>
+        <container xmlns="http://symfony.com/schema/dic/services"
+                   xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+                   xmlns:framework="http://symfony.com/schema/dic/symfony"
+                   xsi:schemaLocation="http://symfony.com/schema/dic/services
+                https://symfony.com/schema/dic/services/services-1.0.xsd
+                http://symfony.com/schema/dic/symfony https://symfony.com/schema/dic/symfony/symfony-1.0.xsd">
+
+            <framework:config>
+                <framework:messenger>
+                    <!-- ... -->
+                    <framework:stop-worker-on-signal>SIGTERM</framework:stop-worker-on-signal>
+                    <framework:stop-worker-on-signal>SIGINT</framework:stop-worker-on-signal>
+                    <framework:stop-worker-on-signal>SIGUSR1</framework:stop-worker-on-signal>
+                </framework:messenger>
+            </framework:config>
+        </container>
+
+    .. code-block:: php
+
+        // config/packages/messenger.php
+        use Symfony\Config\FrameworkConfig;
+
+        return static function (FrameworkConfig $framework): void {
+            $framework->messenger()
+                ->stopWorkerOnSignals(['SIGTERM', 'SIGINT', 'SIGUSR1']);
+        };
+
+.. versionadded:: 7.3
+
+    Support for signals plain name in configuration was introduced in Symfony 7.3.
+    Prior to this, you had to use the numeric values of the signals as defined
+    in the ``pcntl`` extension's `predefined constants`_.
 
 In some cases the ``SIGTERM`` signal is sent by Supervisor itself (e.g. stopping
 a Docker container having Supervisor as its entrypoint). In these cases you
@@ -3587,3 +3636,4 @@ Learn more
 .. _`high connection churn`: https://www.rabbitmq.com/connections.html#high-connection-churn
 .. _`article about CQRS`: https://martinfowler.com/bliki/CQRS.html
 .. _`SSL context options`: https://php.net/context.ssl
+.. _`predefined constants`: https://www.php.net/pcntl.constants
