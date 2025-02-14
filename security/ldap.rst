@@ -259,19 +259,20 @@ and will not be considered as authenticated fully.
 role_fetcher
 ............
 
-**type**: ``string`` **default**: ``null``
+**Type**: ``string`` **Default**: ``null``
 
-When your LDAP service provides user roles, you can use this configuration option
-to define the role fetcher service. The role fetcher service must implement the
-``Component\Ldap\Security\RoleFetcherInterface`` interface.
-``default_roles`` is ignored when ``role_fetcher`` is set.
+When your LDAP service provides user roles, this option allows you to define
+the service that retrieves these roles. The role fetcher service must implement
+the ``Symfony\Component\Ldap\Security\RoleFetcherInterface``. When this option
+is set, the ``default_roles`` option is ignored.
 
-``Symfony\Component\Ldap\Security\MemberOfRoles`` is a concrete implementation
-of the ``RoleFetcherInterface`` that fetches roles from the ``ismemberof`` attribute.
+Symfony provides ``Symfony\Component\Ldap\Security\MemberOfRoles``, a concrete
+implementation of the interface that fetches roles from the ``ismemberof``
+attribute.
 
 .. versionadded:: 7.3
 
-    The configuration option ``role_fetcher`` was introduced in Symfony 7.3.
+    The ``role_fetcher`` configuration option was introduced in Symfony 7.3.
 
 uid_key
 .......
