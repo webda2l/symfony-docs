@@ -256,6 +256,23 @@ This is the default role you wish to give to a user fetched from the LDAP
 server. If you do not configure this key, your users won't have any roles,
 and will not be considered as authenticated fully.
 
+role_fetcher
+............
+
+**type**: ``string`` **default**: ``null``
+
+When your LDAP service provides user roles, you can use this configuration option
+to define the role fetcher service. The role fetcher service must implement the
+``Component\Ldap\Security\RoleFetcherInterface`` interface.
+``default_roles`` is ignored when ``role_fetcher`` is set.
+
+``Symfony\Component\Ldap\Security\MemberOfRoles`` is a concrete implementation
+of the ``RoleFetcherInterface`` that fetches roles from the ``ismemberof`` attribute.
+
+.. versionadded:: 7.3
+
+    The configuration option ``role_fetcher`` was introduced in Symfony 7.3.
+
 uid_key
 .......
 
