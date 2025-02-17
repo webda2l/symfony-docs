@@ -373,6 +373,7 @@ Service                                  Package                               D
 `LinkedIn`_                              ``symfony/linked-in-notifier``        ``linkedin://TOKEN:USER_ID@default``
 `Mastodon`_                              ``symfony/mastodon-notifier``         ``mastodon://ACCESS_TOKEN@HOST``
 `Mattermost`_                            ``symfony/mattermost-notifier``       ``mattermost://ACCESS_TOKEN@HOST/PATH?channel=CHANNEL``
+`Matrix`_                                ``symfony/matrix-notifier``           ``matrix://HOST:PORT/?accessToken=ACCESSTOKEN&ssl=SSL``
 `Mercure`_                               ``symfony/mercure-notifier``          ``mercure://HUB_ID?topic=TOPIC``
 `MicrosoftTeams`_                        ``symfony/microsoft-teams-notifier``  ``microsoftteams://default/PATH``
 `RocketChat`_                            ``symfony/rocket-chat-notifier``      ``rocketchat://TOKEN@ENDPOINT?channel=CHANNEL``
@@ -395,6 +396,10 @@ Service                                  Package                               D
 
     The ``Gitter`` integration was removed in Symfony 7.2 because that service
     no longer provides an API.
+
+.. versionadded:: 7.3
+
+    The ``Matrix`` integration was introduced in Symfony 7.3.
 
 .. warning::
 
@@ -1263,6 +1268,7 @@ is dispatched. Listeners receive a
 .. _`LOX24`: https://github.com/symfony/symfony/blob/{version}/src/Symfony/Component/Notifier/Bridge/Lox24/README.md
 .. _`Mailjet`: https://github.com/symfony/symfony/blob/{version}/src/Symfony/Component/Notifier/Bridge/Mailjet/README.md
 .. _`Mastodon`: https://github.com/symfony/symfony/blob/{version}/src/Symfony/Component/Notifier/Bridge/Mastodon/README.md
+.. _`Matrix`: https://github.com/symfony/symfony/blob/{version}/src/Symfony/Component/Notifier/Bridge/Matrix/README.md
 .. _`Mattermost`: https://github.com/symfony/symfony/blob/{version}/src/Symfony/Component/Notifier/Bridge/Mattermost/README.md
 .. _`Mercure`: https://github.com/symfony/symfony/blob/{version}/src/Symfony/Component/Notifier/Bridge/Mercure/README.md
 .. _`MessageBird`: https://github.com/symfony/symfony/blob/{version}/src/Symfony/Component/Notifier/Bridge/MessageBird/README.md
