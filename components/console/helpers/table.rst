@@ -196,6 +196,10 @@ This outputs the table in the Markdown format:
     | 960-425-059-0 | The Lord of the Rings    | J. R. R. Tolkien |
     | 80-902734-1-6 | And Then There Were None | Agatha Christie  |
 
+.. versionadded:: 7.3
+
+    The ``markdown`` style was introduced in Symfony 7.3.
+
 You can also set the style to ``compact``::
 
     $table->setStyle('compact');
