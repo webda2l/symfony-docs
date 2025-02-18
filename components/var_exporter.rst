@@ -285,6 +285,12 @@ possible to initialize properties one-by-one::
         // Then you can add more logic for the other properties
     });
 
+.. deprecated:: 6.4
+
+   The use of ``propertyName`` and ``propertyScope`` in the initializer function
+   is deprecated since Symfony 6.4 and will be removed in Symfony 7.0.
+   The initializer should now handle the entire object initialization at once.
+
 Ghost objects unfortunately can't work with abstract classes or internal PHP
 classes. Nevertheless, the VarExporter component covers this need with the help
 of :ref:`Virtual Proxies <var-exporter_virtual-proxies>`.
