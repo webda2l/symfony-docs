@@ -350,30 +350,50 @@ The chat channel is used to send chat messages to users by using
 :class:`Symfony\\Component\\Notifier\\Chatter` classes. Symfony provides
 integration with these chat services:
 
-=======================================  ====================================  =============================================================================
-Service                                  Package                               DSN
-=======================================  ====================================  =============================================================================
-`AmazonSns`_                             ``symfony/amazon-sns-notifier``       ``sns://ACCESS_KEY:SECRET_KEY@default?region=REGION``
-`Bluesky`_                               ``symfony/bluesky-notifier``          ``bluesky://USERNAME:PASSWORD@default``
-`Chatwork`_                              ``symfony/chatwork-notifier``         ``chatwork://API_TOKEN@default?room_id=ID``
-`Discord`_                               ``symfony/discord-notifier``          ``discord://TOKEN@default?webhook_id=ID``
-`FakeChat`_                              ``symfony/fake-chat-notifier``        ``fakechat+email://default?to=TO&from=FROM`` or ``fakechat+logger://default``
-`Firebase`_                              ``symfony/firebase-notifier``         ``firebase://USERNAME:PASSWORD@default``
-`GoogleChat`_                            ``symfony/google-chat-notifier``      ``googlechat://ACCESS_KEY:ACCESS_TOKEN@default/SPACE?thread_key=THREAD_KEY``
-`LINE Bot`_                              ``symfony/line-bot-notifier``         ``linebot://TOKEN@default?receiver=RECEIVER``
-`LINE Notify`_                           ``symfony/line-notify-notifier``      ``linenotify://TOKEN@default``
-`LinkedIn`_                              ``symfony/linked-in-notifier``        ``linkedin://TOKEN:USER_ID@default``
-`Mastodon`_                              ``symfony/mastodon-notifier``         ``mastodon://ACCESS_TOKEN@HOST``
-`Mattermost`_                            ``symfony/mattermost-notifier``       ``mattermost://ACCESS_TOKEN@HOST/PATH?channel=CHANNEL``
-`Mercure`_                               ``symfony/mercure-notifier``          ``mercure://HUB_ID?topic=TOPIC``
-`MicrosoftTeams`_                        ``symfony/microsoft-teams-notifier``  ``microsoftteams://default/PATH``
-`RocketChat`_                            ``symfony/rocket-chat-notifier``      ``rocketchat://TOKEN@ENDPOINT?channel=CHANNEL``
-`Slack`_                                 ``symfony/slack-notifier``            ``slack://TOKEN@default?channel=CHANNEL``
-`Telegram`_                              ``symfony/telegram-notifier``         ``telegram://TOKEN@default?channel=CHAT_ID``
-`Twitter`_                               ``symfony/twitter-notifier``          ``twitter://API_KEY:API_SECRET:ACCESS_TOKEN:ACCESS_SECRET@default``
-`Zendesk`_                               ``symfony/zendesk-notifier``          ``zendesk://EMAIL:TOKEN@SUBDOMAIN``
-`Zulip`_                                 ``symfony/zulip-notifier``            ``zulip://EMAIL:TOKEN@HOST?channel=CHANNEL``
-======================================   ====================================  =============================================================================
+======================================   =====================================================================================
+Service
+======================================   =====================================================================================
+`AmazonSns`_                             **Install**: ``composer require symfony/amazon-sns-notifier`` \
+                                         **DSN**: ``sns://ACCESS_KEY:SECRET_KEY@default?region=REGION``
+`Bluesky`_                               **Install**: ``composer require symfony/bluesky-notifier`` \
+                                         **DSN**: ``bluesky://USERNAME:PASSWORD@default``
+`Chatwork`_                              **Install**: ``composer require symfony/chatwork-notifier`` \
+                                         **DSN**: ``chatwork://API_TOKEN@default?room_id=ID``
+`Discord`_                               **Install**: ``composer require symfony/discord-notifier`` \
+                                         **DSN**: ``discord://TOKEN@default?webhook_id=ID``
+`FakeChat`_                              **Install**: ``composer require symfony/fake-chat-notifier`` \
+                                         **DSN**: ``fakechat+email://default?to=TO&from=FROM`` or ``fakechat+logger://default``
+`Firebase`_                              **Install**: ``composer require symfony/firebase-notifier`` \
+                                         **DSN**: ``firebase://USERNAME:PASSWORD@default``
+`GoogleChat`_                            **Install**: ``composer require symfony/google-chat-notifier`` \
+                                         **DSN**: ``googlechat://ACCESS_KEY:ACCESS_TOKEN@default/SPACE?thread_key=THREAD_KEY``
+`LINE Bot`_                              **Install**: ``composer require symfony/line-bot-notifier`` \
+                                         **DSN**: ``linebot://TOKEN@default?receiver=RECEIVER``
+`LINE Notify`_                           **Install**: ``composer require symfony/line-notify-notifier`` \
+                                         **DSN**: ``linenotify://TOKEN@default``
+`LinkedIn`_                              **Install**: ``composer require symfony/linked-in-notifier`` \
+                                         **DSN**: ``linkedin://TOKEN:USER_ID@default``
+`Mastodon`_                              **Install**: ``composer require symfony/mastodon-notifier`` \
+                                         **DSN**: ``mastodon://ACCESS_TOKEN@HOST``
+`Mattermost`_                            **Install**: ``composer require symfony/mattermost-notifier`` \
+                                         **DSN**: ``mattermost://ACCESS_TOKEN@HOST/PATH?channel=CHANNEL``
+`Mercure`_                               **Install**: ``composer require symfony/mercure-notifier`` \
+                                         **DSN**: ``mercure://HUB_ID?topic=TOPIC``
+`MicrosoftTeams`_                        **Install**: ``composer require symfony/microsoft-teams-notifier`` \
+                                         **DSN**: ``microsoftteams://default/PATH``
+`RocketChat`_                            **Install**: ``composer require symfony/rocket-chat-notifier`` \
+                                         **DSN**: ``rocketchat://TOKEN@ENDPOINT?channel=CHANNEL``
+`Slack`_                                 **Install**: ``composer require symfony/slack-notifier`` \
+                                         **DSN**: ``slack://TOKEN@default?channel=CHANNEL``
+`Telegram`_                              **Install**: ``composer require symfony/telegram-notifier`` \
+                                         **DSN**: ``telegram://TOKEN@default?channel=CHAT_ID``
+`Twitter`_                               **Install**: ``composer require symfony/twitter-notifier`` \
+                                         **DSN**: ``twitter://API_KEY:API_SECRET:ACCESS_TOKEN:ACCESS_SECRET@default``
+`Zendesk`_                               **Install**: ``composer require symfony/zendesk-notifier`` \
+                                         **DSN**: ``zendesk://EMAIL:TOKEN@SUBDOMAIN``
+`Zulip`_                                 **Install**: ``composer require symfony/zulip-notifier`` \
+                                         **DSN**: ``zulip://EMAIL:TOKEN@HOST?channel=CHANNEL``
+======================================   =====================================================================================
 
 .. versionadded:: 7.1
 
@@ -569,18 +589,26 @@ The push channel is used to send notifications to users by using
 :class:`Symfony\\Component\\Notifier\\Texter` classes. Symfony provides
 integration with these push services:
 
-===============  ====================================  ==============================================================================
-Service          Package                               DSN
-===============  ====================================  ==============================================================================
-`Engagespot`_    ``symfony/engagespot-notifier``       ``engagespot://API_KEY@default?campaign_name=CAMPAIGN_NAME``
-`Expo`_          ``symfony/expo-notifier``             ``expo://Token@default``
-`Novu`_          ``symfony/novu-notifier``             ``novu://API_KEY@default``
-`Ntfy`_          ``symfony/ntfy-notifier``             ``ntfy://default/TOPIC``
-`OneSignal`_     ``symfony/one-signal-notifier``       ``onesignal://APP_ID:API_KEY@default?defaultRecipientId=DEFAULT_RECIPIENT_ID``
-`PagerDuty`_     ``symfony/pager-duty-notifier``       ``pagerduty://TOKEN@SUBDOMAIN``
-`Pushover`_      ``symfony/pushover-notifier``         ``pushover://USER_KEY:APP_TOKEN@default``
-`Pushy`_         ``symfony/pushy-notifier``            ``pushy://API_KEY@default``
-===============  ====================================  ==============================================================================
+===============  =======================================================================================
+Service
+===============  =======================================================================================
+`Engagespot`_    **Install**: ``composer require symfony/engagespot-notifier`` \
+                 **DSN**: ``engagespot://API_KEY@default?campaign_name=CAMPAIGN_NAME``
+`Expo`_          **Install**: ``composer require symfony/expo-notifier`` \
+                 **DSN**: ``expo://TOKEN@default``
+`Novu`_          **Install**: ``composer require symfony/novu-notifier`` \
+                 **DSN**: ``novu://API_KEY@default``
+`Ntfy`_          **Install**: ``composer require symfony/ntfy-notifier`` \
+                 **DSN**: ``ntfy://default/TOPIC``
+`OneSignal`_     **Install**: ``composer require symfony/one-signal-notifier`` \
+                 **DSN**: ``onesignal://APP_ID:API_KEY@default?defaultRecipientId=DEFAULT_RECIPIENT_ID``
+`PagerDuty`_     **Install**: ``composer require symfony/pager-duty-notifier`` \
+                 **DSN**: ``pagerduty://TOKEN@SUBDOMAIN``
+`Pushover`_      **Install**: ``composer require symfony/pushover-notifier`` \
+                 **DSN**: ``pushover://USER_KEY:APP_TOKEN@default``
+`Pushy`_         **Install**: ``composer require symfony/pushy-notifier`` \
+                 **DSN**: ``pushy://API_KEY@default``
+===============  =======================================================================================
 
 To enable a texter, add the correct DSN in your ``.env`` file and
 configure the ``texter_transports``:
@@ -645,11 +673,11 @@ The desktop channel is used to display local desktop notifications on the same
 host machine using :class:`Symfony\\Component\\Notifier\\Texter` classes. Currently,
 Symfony is integrated with the following providers:
 
-===============  ====================================  ==============================================================================
-Provider         Package                               DSN
-===============  ====================================  ==============================================================================
-`JoliNotif`_     ``symfony/joli-notif-notifier``       ``jolinotif://default``
-===============  ====================================  ==============================================================================
+===============  ================================================  ==============================================================================
+Provider         Install                                           DSN
+===============  ================================================  ==============================================================================
+`JoliNotif`_     ``composer require symfony/joli-notif-notifier``  ``jolinotif://default``
+===============  ================================================  ==============================================================================
 
 .. versionadded:: 7.2
 
