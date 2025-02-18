@@ -264,17 +264,6 @@ While you never query ``$processor->hash`` value, heavy methods will never be
 triggered. But still, the ``$processor`` object exists and can be used in your
 code, passed to methods, functions, etc.
 
-Additionally and by adding two arguments to the initializer function, it is
-possible to initialize properties one-by-one::
-
-    $processor = LazyHashProcessor::createLazyGhost(initializer: function (HashProcessor $instance, string $propertyName, ?string $propertyScope): mixed {
-        if (HashProcessor::class === $propertyScope && 'hash' === $propertyName) {
-            // Return $hash value
-        }
-
-        // Then you can add more logic for the other properties
-    });
-
 Ghost objects unfortunately can't work with abstract classes or internal PHP
 classes. Nevertheless, the VarExporter component covers this need with the help
 of :ref:`Virtual Proxies <var-exporter_virtual-proxies>`.
