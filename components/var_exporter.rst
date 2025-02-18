@@ -260,11 +260,6 @@ convert non-lazy classes to lazy ones::
         $instance->validateHash();
     });
 
-.. deprecated:: 7.0
-
-    The ``initializer`` function allowed passing two arguments to it to initialize
-    properties one by one. This feature was removed in Symfony 7.0.
-
 While you never query ``$processor->hash`` value, heavy methods will never be
 triggered. But still, the ``$processor`` object exists and can be used in your
 code, passed to methods, functions, etc.
