@@ -590,6 +590,7 @@ to enable this feature. This could be added by using the following configuration
                 pools:
                     my_cache_pool:
                         adapter: cache.adapter.redis_tag_aware
+                        tags: true
 
     .. code-block:: xml
 
@@ -606,7 +607,7 @@ to enable this feature. This could be added by using the following configuration
             <framework:config>
                 <framework:cache>
                     <framework:pool name="my_cache_pool"
-                        adapter="cache.adapter.redis"
+                        adapter="cache.adapter.redis_tag_aware"
                         tags="true"
                     />
                 </framework:cache>
@@ -622,7 +623,7 @@ to enable this feature. This could be added by using the following configuration
             $framework->cache()
                 ->pool('my_cache_pool')
                     ->tags(true)
-                    ->adapters(['cache.adapter.redis'])
+                    ->adapters(['cache.adapter.redis_tag_aware'])
             ;
         };
 
