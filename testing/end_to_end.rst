@@ -1,40 +1,34 @@
 End-to-End Testing
 ==================
 
-    The Panther component allows to drive a real web browser with PHP to create
-    end-to-end tests.
+End-to-end tests simulate how real users interact with your application through
+a browser. They focus on verifying your user interface and the outcomes of user
+actions (like confirming that clicking a button sends an email).
+
+Unlike :ref:`application tests <functional-tests>`, these tests run in a real
+browser that can work in headless mode (without a graphical interface) for CI
+environments or with a graphical interface for debugging.
+
+Symfony provides a component called **Panther** to run end-to-end tests. Panther
+lets you run tests in a real browser and offers unique features not available in
+other test types:
+
+* Taking screenshots at any point during the test;
+* Executing JavaScript on your pages;
+* Supporting everything Chrome or Firefox does;
+* Simpler testing of real-time applications (e.g. WebSockets, Server-Sent Events with Mercure).
 
 Installation
 ------------
+
+Before creating and running your first end-to-end tests, run the following command
+to install the needed dependencies:
 
 .. code-block:: terminal
 
     $ composer require symfony/panther
 
 .. include:: /components/require_autoload.rst.inc
-
-Introduction
-------------
-
-End to end tests are a special type of application tests that
-simulate a real user interacting with your application. They are
-typically used to test the user interface (UI) of your application
-and the effects of these interactions (e.g. when I click on this button, a mail
-must be sent). The difference with functional tests detailed above is
-that End-to-End tests use a real browser instead of a simulated one. This
-browser can run in headless mode (without a graphical interface) or not.
-The first option is convenient for running tests in a Continuous Integration
-(CI), while the second one is useful for debugging purpose.
-
-This is the purpose of Panther, a component that provides a real browser
-to run your tests. Here are a few things that make Panther special, compared
-to other testing tools provided by Symfony:
-
-* Possibility to take screenshots of the browser at any time during the test
-* The JavaScript code contained in webpages is executed
-* Panther supports everything that Chrome (or Firefox) implements
-* Convenient way to test real-time applications (e.g. WebSockets, Server-Sent Events
-  with Mercure, etc.)
 
 Installing Web Drivers
 ~~~~~~~~~~~~~~~~~~~~~~
