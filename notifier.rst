@@ -365,7 +365,7 @@ Service
                                          **DSN**: ``sns://ACCESS_KEY:SECRET_KEY@default?region=REGION``
 `Bluesky`_                               **Install**: ``composer require symfony/bluesky-notifier`` \
                                          **DSN**: ``bluesky://USERNAME:PASSWORD@default``
-                                         **Extra properties in SentMessage**:: ``cid``
+                                         **Extra properties in SentMessage**: ``cid``
 `Chatwork`_                              **Install**: ``composer require symfony/chatwork-notifier`` \
                                          **DSN**: ``chatwork://API_TOKEN@default?room_id=ID``
 `Discord`_                               **Install**: ``composer require symfony/discord-notifier`` \
