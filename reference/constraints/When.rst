@@ -174,11 +174,12 @@ Options
 ``expression``
 ~~~~~~~~~~~~~~
 
-**type**: ``string``
+**type**: ``string|Closure``
 
-The condition written with the expression language syntax that will be evaluated.
-If the expression evaluates to a falsey value (i.e. using ``==``, not ``===``),
-validation of constraints won't be triggered.
+The condition as a closure or written with the expression language syntax
+that will be evaluated. If the closure return value or the evaluated expression
+is a falsey value (i.e. using ``==``, not ``===``), validation of constraints won't
+be triggered, and constraints of the ``otherwise`` option will, if provided.
 
 To learn more about the expression language syntax, see
 :doc:`/reference/formats/expression_language`.
@@ -200,6 +201,13 @@ in your expression:
 
     The ``context`` variable in expressions was introduced in Symfony 7.2.
 
+When using a closure, the first argument is the object being validated.
+
+.. versionadded:: 7.3
+
+    The support for closure in the ``expression`` option was introduced in Symfony 7.3
+    and requires PHP 8.5.
+
 The ``value`` variable can be used when you want to execute more complex
 validation based on its value:
 
@@ -215,11 +223,20 @@ validation based on its value:
 
         class Discount
         {
+            // either using an expression...
             #[Assert\When(
                 expression: 'value == "percent"',
                 constraints: [new Assert\Callback('doComplexValidation')],
             )]
+            // ... or using a closure
+            #[Assert\When(
+                expression: static function (Discount $discount) {
+                    return $discount->getType() === 'percent';
+                },
+                constraints: [new Assert\Callback('doComplexValidation')],
+            )]
             private ?string $type;
+
             // ...
 
             public function doComplexValidation(ExecutionContextInterface $context, $payload): void
