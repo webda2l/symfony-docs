@@ -418,10 +418,10 @@ by adding one of these attributes to a service or a command:
 :class:`Symfony\\Component\\Scheduler\\Attribute\\AsCronTask`.
 
 For both of these attributes, you have the ability to define the schedule to
-use via the ``schedule``option. By default, the ``default`` named schedule will
+use via the ``schedule`` option. By default, the ``default`` named schedule will
 be used. Also, by default, the ``__invoke`` method of your service will be called
-but, it's also possible to specify the method to call via the ``method``option
-and you can define arguments via ``arguments``option if necessary.
+but, it's also possible to specify the method to call via the ``method`` option
+and you can define arguments via ``arguments`` option if necessary.
 
 .. _scheduler-attributes-cron-task:
 
