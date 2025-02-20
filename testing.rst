@@ -5,14 +5,38 @@ Whenever you write a new line of code, you also potentially add new bugs.
 To build better and more reliable applications, you should test your code
 using both functional and unit tests.
 
+Symfony integrates with an independent library called `PHPUnit`_ to give you a
+rich testing framework. This article covers the PHPUnit basics you'll need to
+write Symfony tests. To learn everything about PHPUnit and its features, read
+the `official PHPUnit documentation`_.
+
+Types of Tests
+--------------
+
+There are many types of automated tests and precise definitions often
+differ from project to project. In Symfony, the following definitions are
+used. If you have learned something different, that is not necessarily
+wrong, just different from what the Symfony documentation is using.
+
+`Unit Tests`_
+    These tests ensure that *individual* units of source code (e.g. a single
+    class) behave as intended.
+
+`Integration Tests`_
+    These tests test a combination of classes and commonly interact with
+    Symfony's service container. These tests do not yet cover the fully
+    working application, those are called *Application tests*.
+
+`Application Tests`_
+    Application tests (also known as functional tests) test the behavior of a
+    complete application. They make HTTP requests (both real and simulated ones)
+    and test that the response is as expected.
+
 .. _testing-installation:
+.. _the-phpunit-testing-framework:
 
-The PHPUnit Testing Framework
------------------------------
-
-Symfony integrates with an independent library called `PHPUnit`_ to give
-you a rich testing framework. This article won't cover PHPUnit itself,
-which has its own excellent `documentation`_.
+Installation
+------------
 
 Before creating your first test, install ``symfony/test-pack``, which installs
 some other packages needed for testing (such as ``phpunit/phpunit``):
@@ -43,28 +67,6 @@ your test into multiple "test suites").
     ``phpunit.xml.dist`` and ``tests/bootstrap.php``. If these files are
     missing, you can try running the recipe again using
     ``composer recipes:install phpunit/phpunit --force -v``.
-
-Types of Tests
---------------
-
-There are many types of automated tests and precise definitions often
-differ from project to project. In Symfony, the following definitions are
-used. If you have learned something different, that is not necessarily
-wrong, just different from what the Symfony documentation is using.
-
-`Unit Tests`_
-    These tests ensure that *individual* units of source code (e.g. a single
-    class) behave as intended.
-
-`Integration Tests`_
-    These tests test a combination of classes and commonly interact with
-    Symfony's service container. These tests do not yet cover the fully
-    working application, those are called *Application tests*.
-
-`Application Tests`_
-    Application tests test the behavior of a complete application. They
-    make HTTP requests (both real and simulated ones) and test that the
-    response is as expected.
 
 Unit Tests
 ----------
@@ -1193,7 +1195,7 @@ Learn more
     /components/css_selector
 
 .. _`PHPUnit`: https://phpunit.de/
-.. _`documentation`: https://docs.phpunit.de/
+.. _`official PHPUnit documentation`: https://docs.phpunit.de/
 .. _`Writing Tests for PHPUnit`: https://docs.phpunit.de/en/10.5/writing-tests-for-phpunit.html
 .. _`PHPUnit documentation`: https://docs.phpunit.de/en/10.5/configuration.html
 .. _`unit test`: https://en.wikipedia.org/wiki/Unit_testing
