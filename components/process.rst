@@ -114,6 +114,8 @@ You can configure the options passed to the ``other_options`` argument of
     and ``suppress_errors``) are only supported on Windows operating systems.
     Check out the `PHP documentation for proc_open()`_ before using them.
 
+.. _process-using-features-from-the-os-shell:
+
 Using Features From the OS Shell
 --------------------------------
 

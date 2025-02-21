@@ -2301,8 +2301,9 @@ will take care of creating a new process with the parameters you passed::
 
     class CleanUpService
     {
-        public function __construct(private readonly MessageBusInterface $bus)
-        {
+        public function __construct(
+            private readonly MessageBusInterface $bus,
+        ) {
         }
 
         public function cleanUp(): void
@@ -2312,6 +2313,34 @@ will take care of creating a new process with the parameters you passed::
             // ...
         }
     }
+
+A static factory :method:`Symfony\\Component\\Process\\Messenger\\RunProcessMessage::fromShellCommandline` is also
+available if you want to use features of your shell such as redirections or pipes::
+
+    use Symfony\Component\Messenger\MessageBusInterface;
+    use Symfony\Component\Process\Messenger\RunProcessMessage;
+
+    class CleanUpService
+    {
+        public function __construct(
+            private readonly MessageBusInterface $bus,
+        ) {
+        }
+
+        public function cleanUp(): void
+        {
+            $this->bus->dispatch(RunProcessMessage::fromShellCommandline('echo "Hello World" > var/log/hello.txt'));
+
+            // ...
+        }
+    }
+
+For more information, see the
+dedicated :ref:`Using Features From the OS Shell <process-using-features-from-the-os-shell>` documentation.
+
+.. versionadded:: 7.3
+
+    The ``RunProcessMessage::fromShellCommandline()`` method was introduced in Symfony 7.3.
 
 Once handled, the handler will return a
 :class:`Symfony\\Component\\Process\\Messenger\\RunProcessContext` which
