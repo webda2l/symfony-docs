@@ -202,7 +202,7 @@ applied but the constraints defined in ``otherwise`` option (if provided) will b
 
 .. versionadded:: 7.3
 
-    The support for closure in the ``expression`` option was introduced in Symfony 7.3
+    The support for closures in the ``expression`` option was introduced in Symfony 7.3
     and requires PHP 8.5.
 
 .. configuration-block::
