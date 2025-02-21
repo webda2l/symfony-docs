@@ -176,16 +176,13 @@ Options
 
 **type**: ``string|Closure``
 
-The condition as a closure or written with the expression language syntax
-that will be evaluated. If the closure return value or the evaluated expression
-is a falsey value (i.e. using ``==``, not ``===``), validation of constraints won't
-be triggered, and constraints of the ``otherwise`` option will, if provided.
+The condition evaluated to decide if the constraint is applied or not. It can be
+defined as a closure or a string using the :doc:`expression language syntax </reference/formats/expression_language>`.
+If the result is a falsey value (``false``, ``null``, ``0``, an empty string or
+an empty array) the constraints defined in the ``constraints`` option won't be
+applied but the constraints defined in ``otherwise`` option (if provided) will be applied.
 
-To learn more about the expression language syntax, see
-:doc:`/reference/formats/expression_language`.
-
-Depending on how you use the constraint, you have access to different variables
-in your expression:
+**When using an expression**, you access to the following variables:
 
 ``this``
     The object being validated (e.g. an instance of Discount).
@@ -201,15 +198,12 @@ in your expression:
 
     The ``context`` variable in expressions was introduced in Symfony 7.2.
 
-When using a closure, the first argument is the object being validated.
+**When using a closure**, the first argument is the object being validated.
 
 .. versionadded:: 7.3
 
     The support for closure in the ``expression`` option was introduced in Symfony 7.3
     and requires PHP 8.5.
-
-The ``value`` variable can be used when you want to execute more complex
-validation based on its value:
 
 .. configuration-block::
 
@@ -228,6 +222,7 @@ validation based on its value:
                 expression: 'value == "percent"',
                 constraints: [new Assert\Callback('doComplexValidation')],
             )]
+
             // ... or using a closure
             #[Assert\When(
                 expression: static function (Discount $discount) {
