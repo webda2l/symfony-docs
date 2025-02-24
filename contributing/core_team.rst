@@ -82,7 +82,11 @@ Active Core Members
   * **Oskar Stark** (`OskarStark`_);
   * **Mathieu Santostefano** (`welcomattic`_);
   * **Kevin Bond** (`kbond`_);
-  * **Jérôme Tamarelle** (`gromnan`_).
+  * **Jérôme Tamarelle** (`gromnan`_);
+  * **Berislav Balogović** (`hypemc`_);
+  * **Mathias Arlaud** (`mtarld`_);
+  * **Florent Morselli** (`spomky`_);
+  * **Alexandre Daubois** (`alexandre-daubois`_).
 
 * **Security Team** (``@symfony/security`` on GitHub):
 
@@ -255,3 +259,7 @@ discretion of the **Project Leader**.
 .. _`smnandre`: https://github.com/smnandre/
 .. _`kocal`: https://github.com/kocal/
 .. _`webmamba`: https://github.com/webmamba/
+.. _`hypemc`: https://github.com/hypemc/
+.. _`mtarld`: https://github.com/mtarld/
+.. _`spomky`: https://github.com/spomky/
+.. _`alexandre-daubois`: https://github.com/alexandre-daubois/
