@@ -430,6 +430,7 @@
 /email/spool /mailer
 /email/testing /mailer
 /contributing/community/other /contributing/community
+/contributing/code/core_team /contributing/core_team
 /profiler/storage /profiler
 /setup/composer /setup
 /security/security_checker /setup
