@@ -42,12 +42,7 @@ In case the process fails, debugging is easier:
 Arguments
 ---------
 
-There are three ways to use the process helper:
-
-* Using a command line string::
-
-    // ...
-    $helper->run($output, 'figlet Symfony');
+There are two ways to use the process helper:
 
 * An array of arguments::
 
