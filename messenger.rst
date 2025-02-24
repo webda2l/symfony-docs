@@ -2064,6 +2064,12 @@ The transport has a number of options:
 ``queue_name`` (default: ``messages``)
     Name of the queue
 
+``queue_attributes``
+    Attributes of a queue as per `SQS CreateQueue API`_. Array of strings indexed by keys of ``AsyncAws\Sqs\Enum\QueueAttributeName``. Added in Symfony 7.3.
+
+``queue_tags``
+    Cost allocation tags of a queue as per `SQS CreateQueue API`_. Array of strings indexed by strings. Added in Symfony 7.3.
+
 ``region`` (default: ``eu-west-1``)
     Name of the AWS region
 
@@ -3637,3 +3643,4 @@ Learn more
 .. _`article about CQRS`: https://martinfowler.com/bliki/CQRS.html
 .. _`SSL context options`: https://php.net/context.ssl
 .. _`predefined constants`: https://www.php.net/pcntl.constants
+.. _`SQS CreateQueue API`: https://docs.aws.amazon.com/AWSSimpleQueueService/latest/APIReference/API_CreateQueue.html
