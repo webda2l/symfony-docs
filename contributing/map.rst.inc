@@ -1,3 +1,5 @@
+* :doc:`The Core Team </contributing/core_team>`
+
 * **Code of Conduct**
 
   * :doc:`/contributing/code_of_conduct/code_of_conduct`
@@ -12,7 +14,6 @@
   * :doc:`Pull Requests </contributing/code/pull_requests>`
   * :doc:`Reviewing Issues and Pull Requests </contributing/community/reviews>`
   * :doc:`Maintenance </contributing/code/maintenance>`
-  * :doc:`The Core Team </contributing/code/core_team>`
   * :doc:`Security </contributing/code/security>`
   * :doc:`Tests </contributing/code/tests>`
   * :doc:`Backward Compatibility </contributing/code/bc>`

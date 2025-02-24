@@ -96,7 +96,7 @@ only the asciicast file).
 
 [1]: http://dia-installer.de/
 [2]: https://fonts.google.com/specimen/PT+Sans+Narrow
-[3]: https://symfony.com/doc/current/contributing/code/core_team.html
+[3]: https://symfony.com/doc/current/contributing/core_team.html
 [4]: https://github.com/asciinema/asciinema
 [5]: https://github.com/asciinema/agg
 [6]: https://www.jetbrains.com/lp/mono/
