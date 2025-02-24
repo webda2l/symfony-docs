@@ -2065,10 +2065,10 @@ The transport has a number of options:
     Name of the queue
 
 ``queue_attributes``
-    Attributes of a queue as per `SQS CreateQueue API`_. Array of strings indexed by keys of ``AsyncAws\Sqs\Enum\QueueAttributeName``. Added in Symfony 7.3.
+    Attributes of a queue as per `SQS CreateQueue API`_. Array of strings indexed by keys of ``AsyncAws\Sqs\Enum\QueueAttributeName``.
 
 ``queue_tags``
-    Cost allocation tags of a queue as per `SQS CreateQueue API`_. Array of strings indexed by strings. Added in Symfony 7.3.
+    Cost allocation tags of a queue as per `SQS CreateQueue API`_. Array of strings indexed by strings.
 
 ``region`` (default: ``eu-west-1``)
     Name of the AWS region
@@ -2084,6 +2084,10 @@ The transport has a number of options:
 
 ``wait_time`` (default: ``20``)
     `Long polling`_ duration in seconds
+
+.. versionadded:: 7.3
+
+    The ``queue_attributes`` and ``queue_tags`` options were introduced in Symfony 7.3.
 
 .. note::
 
