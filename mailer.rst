@@ -1370,6 +1370,78 @@ key but not a certificate::
         ->toArray()
     );
 
+Signing Messages Globally
+.........................
+
+Instead of creating a signer instance for every email, you can configure a global signer
+that automatically applies to all outgoing messages. This approach reduces repetition
+and centralizes your configuration for both DKIM and S/MIME signing.
+
+.. configuration-block::
+
+    .. code-block:: yaml
+
+        # config/packages/mailer.yaml
+        framework:
+            mailer:
+                dkim_signer:
+                    key: 'file://%kernel.project_dir%/var/certificates/dkim.pem'
+                    domain: 'symfony.com'
+                    select: 's1'
+                smime_signer:
+                    key: '%kernel.project_dir%/var/certificates/smime.key'
+                    certificate: '%kernel.project_dir%/var/certificates/smime.crt'
+                    passphrase: ''
+
+    .. code-block:: xml
+
+        <!-- config/packages/mailer.xml -->
+        <?xml version="1.0" encoding="UTF-8" ?>
+        <container xmlns="http://symfony.com/schema/dic/services"
+            xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+            xmlns:framework="http://symfony.com/schema/dic/symfony"
+            xsi:schemaLocation="http://symfony.com/schema/dic/services
+                https://symfony.com/schema/dic/services/services-1.0.xsd
+                http://symfony.com/schema/dic/symfony https://symfony.com/schema/dic/symfony/symfony-1.0.xsd">
+
+            <!-- ... -->
+            <framework:config>
+                <framework:mailer>
+                    <framework:dkim-signer>
+                        <framework:key>file://%kernel.project_dir%/var/certificates/dkim.pem</framework:key>
+                        <framework:domain>symfony.com</framework:domain>
+                        <framework:select>s1</framework:select>
+                    </framework:dkim-signer>
+                    <framework:smime-signer>
+                        <framework:key>%kernel.project_dir%/var/certificates/smime.pem</framework:key>
+                        <framework:certificate>%kernel.project_dir%/var/certificates/smime.crt</framework:certificate>
+                        <framework:passphrase></framework:passphrase>
+                    </framework:smime-signer>
+                </framework:mailer>
+            </framework:config>
+        </container>
+
+    .. code-block:: php
+
+        // config/packages/mailer.php
+        use Symfony\Config\FrameworkConfig;
+
+        return static function (FrameworkConfig $framework): void {
+            $mailer = $framework->mailer();
+            $mailer->dsn('%env(MAILER_DSN)%');
+            $mailer->dkimSigner()
+                    ->key('file://%kernel.project_dir%/var/certificates/dkim.pem')
+                    ->domain('symfony.com')
+                    ->select('s1');
+
+            $mailer->smimeSigner()
+                    ->key('%kernel.project_dir%/var/certificates/smime.key')
+                    ->certificate('%kernel.project_dir%/var/certificates/smime.crt')
+                    ->passphrase('')
+            ;
+        };
+
+
 Encrypting Messages
 ~~~~~~~~~~~~~~~~~~~
 
@@ -1410,6 +1482,57 @@ and it will select the appropriate certificate depending on the ``To`` option::
 
     $firstEncryptedEmail = $encrypter->encrypt($firstEmail);
     $secondEncryptedEmail = $encrypter->encrypt($secondEmail);
+
+
+Encrypting Messages Globally
+............................
+
+Similarly, you can avoid instantiating a new encrypter for every email by setting up a
+global S/MIME encrypter. With this configuration, the encrypter is automatically
+applied to all emails you send.
+
+.. configuration-block::
+
+    .. code-block:: yaml
+
+        # config/packages/mailer.yaml
+        framework:
+            mailer:
+                smime_encrypter:
+                    certificate: '%kernel.project_dir%/var/certificates/smime.crt'
+
+    .. code-block:: xml
+
+        <!-- config/packages/mailer.xml -->
+        <?xml version="1.0" encoding="UTF-8" ?>
+        <container xmlns="http://symfony.com/schema/dic/services"
+            xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+            xmlns:framework="http://symfony.com/schema/dic/symfony"
+            xsi:schemaLocation="http://symfony.com/schema/dic/services
+                https://symfony.com/schema/dic/services/services-1.0.xsd
+                http://symfony.com/schema/dic/symfony https://symfony.com/schema/dic/symfony/symfony-1.0.xsd">
+
+            <!-- ... -->
+            <framework:config>
+                <framework:mailer>
+                    <framework:smime-encrypter>
+                        <framework:certificate>%kernel.project_dir%/var/certificates/smime.crt</framework:certificate>
+                    </framework:smime-encrypter>
+                </framework:mailer>
+            </framework:config>
+        </container>
+
+    .. code-block:: php
+
+        // config/packages/mailer.php
+        use Symfony\Config\FrameworkConfig;
+
+        return static function (FrameworkConfig $framework): void {
+            $mailer = $framework->mailer();
+            $mailer->smimeEncrypter()
+                    ->certificate('%kernel.project_dir%/var/certificates/smime.crt')
+            ;
+        };
 
 .. _multiple-email-transports:
 
