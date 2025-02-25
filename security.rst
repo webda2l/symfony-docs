@@ -2704,13 +2704,14 @@ anonymous users access by checking if there is no user set on the token::
     // ...
     use Symfony\Component\Security\Core\Authentication\Token\TokenInterface;
     use Symfony\Component\Security\Core\Authentication\User\UserInterface;
+    use Symfony\Component\Security\Core\Authorization\Voter\Vote;
     use Symfony\Component\Security\Core\Authorization\Voter\Voter;
 
     class PostVoter extends Voter
     {
         // ...
 
-        protected function voteOnAttribute(string $attribute, $subject, TokenInterface $token): bool
+        protected function voteOnAttribute(string $attribute, $subject, TokenInterface $token, ?Vote $vote = null): bool
         {
             // ...
 
@@ -2721,6 +2722,11 @@ anonymous users access by checking if there is no user set on the token::
             }
         }
     }
+
+.. versionadded:: 7.3
+    
+    The `$vote` parameter in the :method:`Symfony\\Component\\Security\\Core\\Authorization\\Voter\\VoterInterface::voteOnAttribute` method
+    was introduced in Symfony 7.3.
 
 Setting Individual User Permissions
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
