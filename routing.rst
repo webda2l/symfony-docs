@@ -1336,15 +1336,18 @@ A possible solution is to change the parameter requirements to be more permissiv
 Route Aliasing
 --------------
 
-Route alias allow you to have multiple name for the same route:
+Route alias allows you to have multiple names for the same route
+and can be used to provide backward compatibility for routes that
+have been renamed. Let's say you have a route called ``product_show``:
 
 .. configuration-block::
 
     .. code-block:: yaml
 
         # config/routes.yaml
-        new_route_name:
-            alias: original_route_name
+        product_show:
+            path: /product/{id}
+            controller: App\Controller\ProductController::show
 
     .. code-block:: xml
 
@@ -1355,7 +1358,7 @@ Route alias allow you to have multiple name for the same route:
             xsi:schemaLocation="http://symfony.com/schema/routing
                 https://symfony.com/schema/routing/routing-1.0.xsd">
 
-            <route id="new_route_name" alias="original_route_name"/>
+            <route id="product_show" path="/product/{id}" controller="App\Controller\ProductController::show"/>
         </routes>
 
     .. code-block:: php
@@ -1364,10 +1367,55 @@ Route alias allow you to have multiple name for the same route:
         use Symfony\Component\Routing\Loader\Configurator\RoutingConfigurator;
 
         return static function (RoutingConfigurator $routes): void {
-            $routes->alias('new_route_name', 'original_route_name');
+            $routes->add('product_show', '/product/{id}')
+                    ->controller('App\Controller\ProductController::show');
         };
 
-In this example, both ``original_route_name`` and ``new_route_name`` routes can
+Now, let's say you want to create a new route called ``product_details``
+that acts exactly the same as ``product_show``.
+
+Instead of duplicating the original route, you can create an alias for it.
+
+.. configuration-block::
+
+    .. code-block:: yaml
+
+        # config/routes.yaml
+        product_show:
+            path: /product/{id}
+            controller: App\Controller\ProductController::show
+
+        product_details:
+            # "alias" option refers to the name of the route declared above
+            alias: product_show
+
+    .. code-block:: xml
+
+        <!-- config/routes.xml -->
+        <?xml version="1.0" encoding="UTF-8" ?>
+        <routes xmlns="http://symfony.com/schema/routing"
+            xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+            xsi:schemaLocation="http://symfony.com/schema/routing
+                https://symfony.com/schema/routing/routing-1.0.xsd">
+
+            <route id="product_show" path="/product/{id}" controller="App\Controller\ProductController::show"/>
+            <!-- "alias" attribute value refers to the name of the route declared above -->
+            <route id="product_details" alias="product_show"/>
+        </routes>
+
+    .. code-block:: php
+
+        // config/routes.php
+        use Symfony\Component\Routing\Loader\Configurator\RoutingConfigurator;
+
+        return static function (RoutingConfigurator $routes): void {
+            $routes->add('product_show', '/product/{id}')
+                    ->controller('App\Controller\ProductController::show');
+            // second argument refers to the name of the route declared above
+            $routes->alias('product_details', 'product_show');
+        };
+
+In this example, both ``product_show`` and ``product_details`` routes can
 be used in the application and will produce the same result.
 
 .. _routing-alias-deprecation:
@@ -1375,27 +1423,45 @@ be used in the application and will produce the same result.
 Deprecating Route Aliases
 ~~~~~~~~~~~~~~~~~~~~~~~~~
 
-If some route alias should no longer be used (because it is outdated or
-you decided not to maintain it anymore), you can deprecate its definition:
+Route aliases can be used to provide backward compatibility for routes that
+have been renamed.
+
+Now, let's say you want to replace the ``product_show`` route in favor of
+``product_details`` and mark the old one as deprecated.
+
+In the previous example, the alias ``product_details`` was pointing to
+``product_show`` route.
+
+To mark the ``product_show`` route as deprecated, you need to "switch" the alias.
+The ``product_show`` become the alias, and will now point to the ``product_details`` route.
+This way, the ``product_show`` alias could be deprecated.
 
 .. configuration-block::
 
     .. code-block:: yaml
 
-        new_route_name:
-            alias: original_route_name
+        # Move the concrete route definition under ``product_details``
+        product_details:
+            path: /product/{id}
+            controller: App\Controller\ProductController::show
+
+        # Define the alias and the deprecation under the ``product_show`` definition
+        product_show:
+            alias: product_details
 
             # this outputs the following generic deprecation message:
-            # Since acme/package 1.2: The "new_route_name" route alias is deprecated. You should stop using it, as it will be removed in the future.
+            # Since acme/package 1.2: The "product_show" route alias is deprecated. You should stop using it, as it will be removed in the future.
             deprecated:
                 package: 'acme/package'
                 version: '1.2'
 
-            # you can also define a custom deprecation message (%alias_id% placeholder is available)
+            # or
+
+            # you can define a custom deprecation message (%alias_id% placeholder is available)
             deprecated:
                 package: 'acme/package'
                 version: '1.2'
-                message: 'The "%alias_id%" route alias is deprecated. Do not use it anymore.'
+                message: 'The "%alias_id%" route alias is deprecated. Please use "product_details" instead.'
 
     .. code-block:: xml
 
@@ -1405,35 +1471,46 @@ you decided not to maintain it anymore), you can deprecate its definition:
             xsi:schemaLocation="http://symfony.com/schema/routing
                 https://symfony.com/schema/routing/routing-1.0.xsd">
 
-            <route id="new_route_name" alias="original_route_name">
+            <!-- Move the concrete route definition under ``product_details`` -->
+            <route id="product_details" path="/product/{id}" controller="App\Controller\ProductController::show"/>
+
+            <!-- Define the alias and the deprecation under the ``product_show`` definition -->
+            <route id="product_show" alias="product_details">
                 <!-- this outputs the following generic deprecation message:
-                     Since acme/package 1.2: The "new_route_name" route alias is deprecated. You should stop using it, as it will be removed in the future. -->
+                     Since acme/package 1.2: The "product_show" route alias is deprecated. You should stop using it, as it will be removed in the future. -->
                 <deprecated package="acme/package" version="1.2"/>
 
-                <!-- you can also define a custom deprecation message (%alias_id% placeholder is available) -->
+                <!-- or -->
+
+                <!-- you can define a custom deprecation message (%alias_id% placeholder is available) -->
                 <deprecated package="acme/package" version="1.2">
-                    The "%alias_id%" route alias is deprecated. Do not use it anymore.
+                    The "%alias_id%" route alias is deprecated. Please use "product_details" instead.
                 </deprecated>
             </route>
         </routes>
 
     .. code-block:: php
 
-        $routes->alias('new_route_name', 'original_route_name')
+        $routes->add('product_details', '/product/{id}')
+                ->controller('App\Controller\ProductController::show');
+
+        $routes->alias('product_show', 'product_details')
             // this outputs the following generic deprecation message:
-            // Since acme/package 1.2: The "new_route_name" route alias is deprecated. You should stop using it, as it will be removed in the future.
+            // Since acme/package 1.2: The "product_show" route alias is deprecated. You should stop using it, as it will be removed in the future.
             ->deprecate('acme/package', '1.2', '')
 
-            // you can also define a custom deprecation message (%alias_id% placeholder is available)
+            // or
+
+            // you can define a custom deprecation message (%alias_id% placeholder is available)
             ->deprecate(
                 'acme/package',
                 '1.2',
-                'The "%alias_id%" route alias is deprecated. Do not use it anymore.'
+                'The "%alias_id%" route alias is deprecated. Please use "product_details" instead.'
             )
         ;
 
-In this example, every time the ``new_route_name`` alias is used, a deprecation
-warning is triggered, advising you to stop using that alias.
+In this example, every time the ``product_show`` alias is used, a deprecation
+warning is triggered, advising you to stop using this route and prefer using ``product_details``.
 
 The message is actually a message template, which replaces occurrences of the
 ``%alias_id%`` placeholder by the route alias name. You **must** have
