@@ -356,7 +356,7 @@ can also implement value completion for the input in your commands. For
 instance, you may want to complete all usernames from the database in the
 ``name`` argument of your greet command.
 
-To achieve this, use the 5th argument of ``addArgument()``/``addOption``::
+To achieve this, use the 5th argument of ``addArgument()`` or the 6th argument of ``addOption()``::
 
     // ...
     use Symfony\Component\Console\Completion\CompletionInput;
