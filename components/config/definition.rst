@@ -186,6 +186,25 @@ The configuration can now be written like this::
         ->end()
     ;
 
+You can also use the ``enumClass()`` method to pass the FQCN of an enum
+class to the node. This will automatically set the values of the node to
+the cases of the enum::
+
+    $rootNode
+        ->children()
+            ->enumNode('delivery')
+                ->enumClass(Delivery::class)
+            ->end()
+        ->end()
+    ;
+
+When using a backed enum, the values provided to the node will be casted
+to one of the enum cases if possible.
+
+.. versionadded:: 7.3
+
+    The ``enumClass()`` method was introduced in Symfony 7.3.
+
 Array Nodes
 ~~~~~~~~~~~
 
