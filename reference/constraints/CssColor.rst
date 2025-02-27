@@ -2,7 +2,7 @@ CssColor
 ========
 
 Validates that a value is a valid CSS color. The underlying value is
-casted to a string before being validated.
+cast to a string before being validated.
 
 ==========  ===================================================================
 Applies to  :ref:`property or method <validation-property-target>`

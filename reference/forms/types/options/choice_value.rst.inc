@@ -9,7 +9,7 @@ You don't normally need to worry about this, but it might be handy when processi
 an API request (since you can configure the value that will be sent in the API request).
 
 This can be a callable or a property path. By default, the choices are used if they
-can be casted to strings. Otherwise an incrementing integer is used (starting at ``0``).
+can be cast to strings. Otherwise an incrementing integer is used (starting at ``0``).
 
 If you pass a callable, it will receive one argument: the choice itself. When using
 the :doc:`/reference/forms/types/entity`, the argument will be the entity object
