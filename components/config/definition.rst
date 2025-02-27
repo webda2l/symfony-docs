@@ -198,7 +198,7 @@ the cases of the enum::
         ->end()
     ;
 
-When using a backed enum, the values provided to the node will be casted
+When using a backed enum, the values provided to the node will be cast
 to one of the enum cases if possible.
 
 .. versionadded:: 7.3
