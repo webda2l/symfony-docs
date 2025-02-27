@@ -1789,28 +1789,22 @@ The transport has a number of options:
 
     Keepalive support, using the ``--keepalive`` option, was added in Symfony 7.2.
 
-When using the Beanstalkd transport in Symfony Messenger, you can now set the priority of the messages being dispatched.
-This allows you to control the order in which the messages are processed, with lower values indicating higher priority.
-
-To configure the priority, use the ``Symfony\Component\Messenger\Bridge\Beanstalkd\Transport\BeanstalkdPriorityStamp``
-when dispatching a message:
-
-.. code-block:: php
+The Beanstalkd transport lets you set the priority of the messages being dispatched.
+Use the ``Symfony\Component\Messenger\Bridge\Beanstalkd\Transport\BeanstalkdPriorityStamp``
+and pass a number to specify the priority (default = ``1024``; lower numbers mean higher priority)::
 
     use App\Message\SomeMessage;
     use Symfony\Component\Messenger\Stamp\BeanstalkdPriorityStamp;
 
     $this->bus->dispatch(new SomeMessage('some data'), [
-        new BeanstalkdPriorityStamp(0), // Highest priority
+        // 0 = highest priority
+        // 2**32 - 1 = lowest priority
+        new BeanstalkdPriorityStamp(0),
     ]);
-
-As defined by the Beanstalkd protocol, the priority value must be an integer between 0 (highest priority) and 2**32 (lowest priority).
-
-If no priority is specified, the default value ``1024`` will be used.
 
 .. versionadded:: 7.3
 
-    ``BeanstalkdPriorityStamp`` support was added in Symfony 7.3.
+    ``BeanstalkdPriorityStamp`` support was introduced in Symfony 7.3.
 
 .. _messenger-redis-transport:
 
