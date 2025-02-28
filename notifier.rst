@@ -179,7 +179,7 @@ Service
                     **Webhook support**: No
 `Smsbox`_           **Install**: ``composer require symfony/smsbox-notifier`` \
                     **DSN**: ``smsbox://APIKEY@default?mode=MODE&strategy=STRATEGY&sender=SENDER`` \
-                    **Webhook support**: No
+                    **Webhook support**: Yes
 `SmsBiuras`_        **Install**: ``composer require symfony/sms-biuras-notifier`` \
                     **DSN**: ``smsbiuras://UID:API_KEY@default?from=FROM&test_mode=0`` \
                     **Webhook support**: No
