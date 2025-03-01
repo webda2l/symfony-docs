@@ -336,3 +336,49 @@ time and again, you can have just one (or several) listeners deal with them.
     your application (like :class:`Symfony\\Component\\Security\\Core\\Exception\\AccessDeniedException`)
     and takes measures like redirecting the user to the login page, logging them
     out and other things.
+
+Dumping error pages in static HTML files
+----------------------------------------
+
+When a web server cannot handle a request or when it triggers an error without
+calling the PHP application, it will return its default error pages, instead of
+rendering the errors as defined in your application (whether it's Symfony's
+default "Oops" error page or the pages you customized in your application).
+
+To avoid that and always have your web server rendering your application's error
+pages, you can dump each HTTP status error in a their own static HTML files:
+
+.. code-block:: terminal
+
+    $ php bin/console error:dump [--force] var/cache/prod/error_pages
+
+.. note::
+
+    By default, it will dump HTML files for each HTTP status error.
+    You can restrict that to dump only some HTTP status code by passing them as
+    in the second argument of the command.
+
+Once the static pages are generated, you can now configure your web server to use
+them instead of their default error page. Here is an example configuration with
+nginx:
+
+.. code-block:: nginx
+
+    # /etc/nginx/conf.d/example.com.conf
+    server {
+        # Your existing serverconfiguration
+        # ...
+
+
+	# Configure nginx to serve your application's error pages
+        error_page 400 /error_pages/400.html;
+        error_page 401 /error_pages/401.html;
+        # ...
+        error_page 510 /error_pages/510.html;
+        error_page 511 /error_pages/511.html;
+
+        location ^~ /error_pages/ {
+          root /path/to/your/symfony/var/cache/error_pages;
+          internal; # allows this location block to not be triggered when a user manually call these /error_pages/.* urls
+        }
+    }
