@@ -19,9 +19,6 @@ under the ``twig`` key in your application configuration.
     namespace and the related XSD schema is available at:
     ``https://symfony.com/schema/dic/twig/twig-1.0.xsd``
 
-Configuration
--------------
-
 auto_reload
 ~~~~~~~~~~~
 
