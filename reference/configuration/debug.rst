@@ -23,9 +23,6 @@ key in your application configuration.
     namespace and the related XSD schema is available at:
     ``https://symfony.com/schema/dic/debug/debug-1.0.xsd``
 
-Configuration
--------------
-
 max_items
 ~~~~~~~~~
 

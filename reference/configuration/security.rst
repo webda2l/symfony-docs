@@ -19,9 +19,6 @@ key in your application configuration.
     namespace and the related XSD schema is available at:
     ``https://symfony.com/schema/dic/services/services-1.0.xsd``
 
-Configuration
--------------
-
 **Basic Options**:
 
 * `access_denied_url`_
