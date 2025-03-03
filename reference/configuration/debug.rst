@@ -8,14 +8,14 @@ key in your application configuration.
 .. code-block:: terminal
 
     # displays the default config values defined by Symfony
-    $ php bin/console config:dump-reference framework
+    $ php bin/console config:dump-reference debug
 
     # displays the actual config values used by your application
-    $ php bin/console debug:config framework
+    $ php bin/console debug:config debug
 
     # displays the config values used by your application and replaces the
     # environment variables with their actual values
-    $ php bin/console debug:config --resolve-env framework
+    $ php bin/console debug:config --resolve-env debug
 
 .. note::
 
