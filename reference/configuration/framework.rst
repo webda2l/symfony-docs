@@ -19,9 +19,6 @@ configured under the ``framework`` key in your application configuration.
     namespace and the related XSD schema is available at:
     ``https://symfony.com/schema/dic/symfony/symfony-1.0.xsd``
 
-Configuration
--------------
-
 .. _configuration-framework-secret:
 
 secret

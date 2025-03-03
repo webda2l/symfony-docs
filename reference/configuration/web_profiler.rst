@@ -24,9 +24,6 @@ under the ``web_profiler`` key in your application configuration.
 
     The web debug toolbar is not available for responses of type ``StreamedResponse``.
 
-Configuration
--------------
-
 excluded_ajax_paths
 ~~~~~~~~~~~~~~~~~~~
 
