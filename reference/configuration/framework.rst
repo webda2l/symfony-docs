@@ -2802,14 +2802,6 @@ metadata of the class. You can define an array of strings with the names of
 several methods. In that case, all of them will be called in that order to load
 the metadata.
 
-.. _reference-validation-password-strength:
-
-password_strength
-.................
-
-The :doc:`PasswordStrength </reference/constraints/PasswordStrength>`
-constraint verifies the submitted string entropy is matching the minimum entropy score.
-
 .. _reference-validation-email_validation_mode:
 
 email_validation_mode
@@ -3007,11 +2999,15 @@ php_errors
 log
 ...
 
-**type**: ``boolean`` | ``int`` **default**: ``true``
+**type**: ``boolean`` | ``int`` | ``array<int, string>`` **default**: ``true``
 
 Use the application logger instead of the PHP logger for logging PHP errors.
-When an integer value is used, it also sets the log level. Those integer
-values must be the same used in the `error_reporting PHP option`_.
+When an integer value is used, it defines a bitmask of PHP errors that will
+be logged. Those integer values must be the same used in the
+`error_reporting PHP option`_. The default log levels will be used for each
+PHP error.
+When a boolean value is used, ``true`` enables logging for all PHP errors
+while ``false`` disables logging entirely.
 
 This option also accepts a map of PHP errors to log levels:
 
