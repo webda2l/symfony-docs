@@ -279,7 +279,7 @@ mailer
 html_to_text_converter
 ......................
 
-**type**: ``string`` **default**: ````
+**type**: ``string`` **default**: ``null``
 
 The service implementing
 :class:`Symfony\\Component\\Mime\\HtmlToTextConverter\\HtmlToTextConverterInterface`
