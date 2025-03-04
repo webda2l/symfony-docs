@@ -3059,11 +3059,15 @@ php_errors
 log
 ...
 
-**type**: ``boolean|int`` **default**: ``%kernel.debug%``
+**type**: ``boolean|int|array<int, string>`` **default**: ``%kernel.debug%``
 
 Use the application logger instead of the PHP logger for logging PHP errors.
-When an integer value is used, it also sets the log level. Those integer
-values must be the same used in the `error_reporting PHP option`_.
+When an integer value is used, it defines a bitmask of PHP errors that will
+be logged. Those integer values must be the same used in the
+`error_reporting PHP option`_. The default log levels will be used for each
+PHP error.
+When a boolean value is used, ``true`` enables logging for all PHP errors
+while ``false`` disables logging entirely.
 
 This option also accepts a map of PHP errors to log levels:
 
