@@ -315,7 +315,7 @@ mailer
 html_to_text_converter
 ......................
 
-**type**: ``string`` **default**: ````
+**type**: ``string`` **default**: ``null``
 
 .. versionadded:: 6.2
 
