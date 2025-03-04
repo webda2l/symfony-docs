@@ -23,32 +23,6 @@ key in your application configuration.
     namespace and the related XSD schema is available at:
     ``https://symfony.com/schema/dic/debug/debug-1.0.xsd``
 
-max_items
-~~~~~~~~~
-
-**type**: ``integer`` **default**: ``2500``
-
-This is the maximum number of items to dump. Setting this option to ``-1``
-disables the limit.
-
-min_depth
-~~~~~~~~~
-
-**type**: ``integer`` **default**: ``1``
-
-Configures the minimum tree depth until which all items are guaranteed to
-be cloned. After this depth is reached, only ``max_items`` items will be
-cloned. The default value is ``1``, which is consistent with older Symfony
-versions.
-
-max_string_length
-~~~~~~~~~~~~~~~~~
-
-**type**: ``integer`` **default**: ``-1``
-
-This option configures the maximum string length before truncating the
-string. The default value (``-1``) means that strings are never truncated.
-
 .. _configuration-debug-dump_destination:
 
 dump_destination
@@ -98,3 +72,29 @@ Typically, you would set this to ``php://stderr``:
 
 
 Configure it to ``"tcp://%env(VAR_DUMPER_SERVER)%"`` in order to use the :ref:`ServerDumper feature <var-dumper-dump-server>`.
+
+max_items
+~~~~~~~~~
+
+**type**: ``integer`` **default**: ``2500``
+
+This is the maximum number of items to dump. Setting this option to ``-1``
+disables the limit.
+
+max_string_length
+~~~~~~~~~~~~~~~~~
+
+**type**: ``integer`` **default**: ``-1``
+
+This option configures the maximum string length before truncating the
+string. The default value (``-1``) means that strings are never truncated.
+
+min_depth
+~~~~~~~~~
+
+**type**: ``integer`` **default**: ``1``
+
+Configures the minimum tree depth until which all items are guaranteed to
+be cloned. After this depth is reached, only ``max_items`` items will be
+cloned. The default value is ``1``, which is consistent with older Symfony
+versions.
