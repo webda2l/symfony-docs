@@ -541,7 +541,7 @@ Creating an Event Subscriber
 
 Next, you'll need to create an event subscriber, which will hold the logic
 that you want to be executed before your controllers. If you're not familiar with
-event subscribers, you can learn more about them at :doc:`/event_dispatcher`::
+event subscribers, you can learn more about :ref:`how to use them <events-subscriber>`::
 
     // src/EventSubscriber/TokenSubscriber.php
     namespace App\EventSubscriber;
