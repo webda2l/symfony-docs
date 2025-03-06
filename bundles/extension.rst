@@ -25,6 +25,7 @@ class, you can define the :method:`Symfony\\Component\\HttpKernel\\Bundle\\Abstr
 method to load service definitions from configuration files::
 
     // ...
+    use Symfony\Component\DependencyInjection\ContainerBuilder;
     use Symfony\Component\DependencyInjection\Loader\Configurator\ContainerConfigurator;
     use Symfony\Component\HttpKernel\Bundle\AbstractBundle;
 
