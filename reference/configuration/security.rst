@@ -157,7 +157,7 @@ The possible values of this option are:
   other session attributes are lost.
 
 access_control
---------------
+~~~~~~~~~~~~~~
 
 Defines the security protection of the URLs of your application. It's used for
 example to trigger the user authentication when trying to access to the backend
@@ -166,7 +166,7 @@ and to allow unauthenticated users to the login form page.
 This option is explained in detail in :doc:`/security/access_control`.
 
 firewalls
----------
+~~~~~~~~~
 
 This is arguably the most important option of the security config file. It
 defines the authentication mechanism used for each URL (or URL pattern) of your
