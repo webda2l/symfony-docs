@@ -555,7 +555,7 @@ the message from being redelivered until the worker completes processing it:
 
 .. note::
 
-    This option is only available for the following transports: Beanstalkd and AmazonSQS.
+    This option is only available for the following transports: Beanstalkd, AmazonSQS, Doctrine and Redis.
 
 .. versionadded:: 7.2
 
@@ -1745,13 +1745,12 @@ in the table.
     The length of time to wait for a response when calling
     ``PDO::pgsqlGetNotify``, in milliseconds.
 
-The keepalive feature, which prevents messages from being prematurely redelivered during
-long-running processing, updates the ``delivered_at`` timestamp periodically to ensure
-the message is marked as "in progress".
+The Doctrine transport supports the ``--keepalive`` option by periodically updating
+the ``delivered_at`` timestamp to prevent the message from being redelivered.
 
 .. versionadded:: 7.3
 
-    Keepalive support, using the ``--keepalive`` option, was introduced in Symfony 7.3.
+    Keepalive support was introduced in Symfony 7.3.
 
 Beanstalkd Transport
 ~~~~~~~~~~~~~~~~~~~~
@@ -1802,7 +1801,7 @@ The Beanstalkd transport supports the ``--keepalive`` option by using Beanstalkd
     Keepalive support was introduced in Symfony 7.2.
 
 The Beanstalkd transport lets you set the priority of the messages being dispatched.
-Use the :class:``Symfony\\Component\\Messenger\\Bridge\\Beanstalkd\\Transport\\BeanstalkdPriorityStamp``
+Use the :class:``Symfony\Component\Messenger\Bridge\Beanstalkd\Transport\BeanstalkdPriorityStamp``
 and pass a number to specify the priority (default = ``1024``; lower numbers mean higher priority)::
 
     use App\Message\SomeMessage;
@@ -1950,6 +1949,13 @@ under the transport in ``messenger.yaml``:
     ``stream_max_entries`` (if you can estimate how many max entries is acceptable
     in your case) to avoid memory leaks. Otherwise, all messages will remain
     forever in Redis.
+
+The Redis transport supports the ``--keepalive`` option by using Redis's ``XCLAIM``
+command to periodically reset the message's idle time to zero.
+
+.. versionadded:: 7.3
+
+    Keepalive support was introduced in Symfony 7.3.
 
 In Memory Transport
 ~~~~~~~~~~~~~~~~~~~
