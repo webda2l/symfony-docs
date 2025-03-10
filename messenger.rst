@@ -1786,6 +1786,13 @@ The transport has a number of options:
     The message time to run before it is put back in the ready queue - in
     seconds.
 
+The Beanstalkd transport supports the ``--keepalive`` option by using Beanstalkd's
+``touch`` command to periodically reset the job's ``ttr``.
+
+.. versionadded:: 7.2
+
+    Keepalive support was introduced in Symfony 7.2.
+
 The Beanstalkd transport lets you set the priority of the messages being dispatched.
 Use the ``Symfony\Component\Messenger\Bridge\Beanstalkd\Transport\BeanstalkdPriorityStamp``
 and pass a number to specify the priority (default = ``1024``; lower numbers mean higher priority)::
@@ -2134,6 +2141,13 @@ The transport has a number of options:
 
     FIFO queues don't support setting a delay per message, a value of ``delay: 0``
     is required in the retry strategy settings.
+
+The SQS transport supports the ``--keepalive`` option by using the ``ChangeMessageVisibility``
+action to periodically update the ``VisibilityTimeout`` of the message.
+
+.. versionadded:: 7.2
+
+    Keepalive support was introduced in Symfony 7.2.
 
 Serializing Messages
 ~~~~~~~~~~~~~~~~~~~~
