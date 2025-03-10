@@ -2048,7 +2048,7 @@ resources
 **type**: ``array``
 
 A map of lock stores to be created by the framework extension, with
-the name as key and DSN as value:
+the name as key and DSN or service id as value:
 
 .. configuration-block::
 
@@ -2725,7 +2725,7 @@ resources
 **type**: ``array``
 
 A map of semaphore stores to be created by the framework extension, with
-the name as key and DSN as value:
+the name as key and DSN or service id as value:
 
 .. configuration-block::
 
@@ -2756,11 +2756,12 @@ the name as key and DSN as value:
     .. code-block:: php
 
         // config/packages/semaphore.php
+        use function Symfony\Component\DependencyInjection\Loader\Configurator\env;
         use Symfony\Config\FrameworkConfig;
 
         return static function (FrameworkConfig $framework): void {
             $framework->semaphore()
-                ->resource('default', ['%env(SEMAPHORE_DSN)%']);
+                ->resource('default', [env('SEMAPHORE_DSN')]);
         };
 
 .. _reference-semaphore-resources-name:
