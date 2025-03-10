@@ -202,7 +202,7 @@ These are the options available on the :ref:`serializer context <serializer-cont
     If set to ``false``, will not wrap any value containing one of the
     following characters ( ``<``, ``>``, ``&``) in `a CDATA section`_ like
     following: ``<![CDATA[...]]>``.
-``cdata_wrapping_pattern`` (default: ````/[<>&]/````)
+``cdata_wrapping_pattern`` (default: ``/[<>&]/``)
     A regular expression pattern to determine if a value should be wrapped
     in a CDATA section.
 ``ignore_empty_attributes`` (default: ``false``)
