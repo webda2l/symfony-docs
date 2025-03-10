@@ -1801,7 +1801,7 @@ The Beanstalkd transport supports the ``--keepalive`` option by using Beanstalkd
     Keepalive support was introduced in Symfony 7.2.
 
 The Beanstalkd transport lets you set the priority of the messages being dispatched.
-Use the :class:``Symfony\Component\Messenger\Bridge\Beanstalkd\Transport\BeanstalkdPriorityStamp``
+Use the :class:`Symfony\\Component\\Messenger\\Bridge\\Beanstalkd\\Transport\\BeanstalkdPriorityStamp`
 and pass a number to specify the priority (default = ``1024``; lower numbers mean higher priority)::
 
     use App\Message\SomeMessage;
