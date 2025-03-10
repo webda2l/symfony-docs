@@ -1775,8 +1775,13 @@ The Beanstalkd transport DSN may looks like this:
 
 The transport has a number of options:
 
-``tube_name`` (default: ``default``)
-    Name of the queue
+``bury_on_reject`` (default: ``false``)
+    When set to ``true``, rejected messages are placed into a "buried" state
+    in Beanstalkd instead of being deleted.
+
+    .. versionadded:: 7.3
+
+        The ``bury_on_reject`` option was introduced in Symfony 7.3.
 
 ``timeout`` (default: ``0``)
     Message reservation timeout - in seconds. 0 will cause the server to
@@ -1785,6 +1790,9 @@ The transport has a number of options:
 ``ttr`` (default: ``90``)
     The message time to run before it is put back in the ready queue - in
     seconds.
+
+``tube_name`` (default: ``default``)
+    Name of the queue
 
 The Beanstalkd transport supports the ``--keepalive`` option by using Beanstalkd's
 ``touch`` command to periodically reset the job's ``ttr``.
