@@ -337,40 +337,41 @@ time and again, you can have just one (or several) listeners deal with them.
     and takes measures like redirecting the user to the login page, logging them
     out and other things.
 
-Dumping error pages in static HTML files
+Dumping Error Pages as Static HTML Files
 ----------------------------------------
 
-When a web server cannot handle a request or when it triggers an error without
-calling the PHP application, it will return its default error pages, instead of
-rendering the errors as defined in your application (whether it's Symfony's
-default "Oops" error page or the pages you customized in your application).
+.. versionadded:: 7.3
 
-To avoid that and always have your web server rendering your application's error
-pages, you can dump each HTTP status error in a their own static HTML files:
+    The feature to dump error pages into static HTML files was introduced in Symfony 7.3.
+
+If an error occurs before reaching your Symfony application, web servers display
+their own default error pages instead of your custom ones. Dumping your application's
+error pages to static HTML ensures users always see your defined pages and improves
+performance by allowing the server to deliver errors instantly without calling
+your application.
+
+Symfony provides the following command to turn your error pages into static HTML files:
 
 .. code-block:: terminal
 
-    $ php bin/console error:dump [--force] var/cache/prod/error_pages
+    # the first argument is the path where the HTML files are stored
+    $ APP_ENV=prod php bin/console error:dump var/cache/prod/error_pages/
 
-.. note::
+    # by default, it generates the pages of all 4xx and 5xx errors, but you can
+    # pass a list of HTTP status codes to only generate those
+    $ APP_ENV=prod php bin/console error:dump var/cache/prod/error_pages/ 401 403 404 500
 
-    By default, it will dump HTML files for each HTTP status error.
-    You can restrict that to dump only some HTTP status code by passing them as
-    in the second argument of the command.
-
-Once the static pages are generated, you can now configure your web server to use
-them instead of their default error page. Here is an example configuration with
-nginx:
+You must also configure your web server to use these generated pages. For example,
+if you use Nginx:
 
 .. code-block:: nginx
 
     # /etc/nginx/conf.d/example.com.conf
     server {
-        # Your existing serverconfiguration
+        # Existing server configuration
         # ...
 
-
-	# Configure nginx to serve your application's error pages
+        # Serve static error pages
         error_page 400 /error_pages/400.html;
         error_page 401 /error_pages/401.html;
         # ...
@@ -378,7 +379,7 @@ nginx:
         error_page 511 /error_pages/511.html;
 
         location ^~ /error_pages/ {
-          root /path/to/your/symfony/var/cache/error_pages;
-          internal; # allows this location block to not be triggered when a user manually call these /error_pages/.* urls
+            root /path/to/your/symfony/var/cache/error_pages;
+            internal; # prevent direct URL access
         }
     }
