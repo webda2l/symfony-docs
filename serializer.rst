@@ -2033,6 +2033,70 @@ correct class for properties typed as ``InvoiceItemInterface``::
         $invoiceLine = $serializer->deserialize($jsonString, InvoiceLine::class, 'json');
         // $invoiceLine contains new InvoiceLine(new Product(...))
 
+You can add a default type to avoid the need to add the type property
+when deserializing:
+
+.. configuration-block::
+
+    .. code-block:: php-attributes
+
+        namespace App\Model;
+
+        use Symfony\Component\Serializer\Attribute\DiscriminatorMap;
+
+        #[DiscriminatorMap(
+            typeProperty: 'type',
+            mapping: [
+                'product' => Product::class,
+                'shipping' => Shipping::class,
+            ],
+            defaultType: 'product',
+        )]
+        interface InvoiceItemInterface
+        {
+            // ...
+        }
+
+    .. code-block:: yaml
+
+        App\Model\InvoiceItemInterface:
+            discriminator_map:
+                type_property: type
+                mapping:
+                    product: 'App\Model\Product'
+                    shipping: 'App\Model\Shipping'
+                default_type: product
+
+    .. code-block:: xml
+
+        <?xml version="1.0" encoding="UTF-8" ?>
+        <serializer xmlns="http://symfony.com/schema/dic/serializer-mapping"
+            xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+            xsi:schemaLocation="http://symfony.com/schema/dic/serializer-mapping
+                https://symfony.com/schema/dic/serializer-mapping/serializer-mapping-1.0.xsd"
+        >
+            <class name="App\Model\InvoiceItemInterface">
+                <discriminator-map type-property="type" default-type="product">
+                    <mapping type="product" class="App\Model\Product"/>
+                    <mapping type="shipping" class="App\Model\Shipping"/>
+                </discriminator-map>
+            </class>
+        </serializer>
+
+Now it deserializes like this:
+
+.. configuration-block::
+
+    .. code-block:: php
+
+        // $jsonString does NOT contain "type" in "invoiceItem"
+        $invoiceLine = $serializer->deserialize('{"invoiceItem":{...},...}', InvoiceLine::class, 'json');
+        // $invoiceLine contains new InvoiceLine(new Product(...))
+
+.. versionadded:: 7.3
+
+    The ``defaultType`` parameter was added in Symfony 7.3.
+
 .. _serializer-unwrapping-denormalizer:
 
 Deserializing Input Partially (Unwrapping)
