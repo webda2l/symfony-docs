@@ -774,7 +774,7 @@ Now you can send notifications to your desktop as follows::
                 sprintf('%s is a new subscriber', $user->getFullName())
             );
 
-            $texter->send($message);
+            $this->texter->send($message);
         }
     }
 
