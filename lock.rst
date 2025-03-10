@@ -167,6 +167,10 @@ this behavior by using the ``lock`` key like:
             ;
         };
 
+.. versionadded:: 7.2
+
+    The option to use an existing service as the lock/semaphore was introduced in Symfony 7.2.
+
 Locking a Resource
 ------------------
 
