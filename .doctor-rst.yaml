@@ -41,6 +41,7 @@ rules:
     no_composer_req: ~
     no_directive_after_shorthand: ~
     no_duplicate_use_statements: ~
+    no_empty_literals: ~
     no_explicit_use_of_code_block_php: ~
     no_footnotes: ~
     no_inheritdoc: ~
@@ -118,3 +119,4 @@ whitelist:
         - '.. _`a feature to test applications using Mercure`: https://github.com/symfony/panther#creating-isolated-browsers-to-test-apps-using-mercure-or-websocket'
         - 'End to End Tests (E2E)'
         - '.. versionadded:: 2.2.0' # Panther
+        - '* Inline code blocks use double-ticks (````like this````).'
