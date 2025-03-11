@@ -249,8 +249,8 @@ workflows to make them fail when there are vulnerabilities.
 .. tip::
 
     In continuous integration services you can check security vulnerabilities
-    by invoking `composer audit`. This uses the same data internally as
-    ``check:security`` but does not require installing the entire Symfony CLI
+    by running the ``composer audit`` command. This uses the same data internally
+    as ``check:security`` but does not require installing the entire Symfony CLI
     during CI or on CI workers.
 
 Symfony LTS Versions
