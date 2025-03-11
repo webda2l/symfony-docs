@@ -538,6 +538,8 @@ with the ``property_info`` service in the Symfony Framework::
     // Type information.
     $doctrineExtractor->getTypes($class, $property);
 
+.. _components-property-information-constructor-extractor:
+
 ConstructorExtractor
 ~~~~~~~~~~~~~~~~~~~~
 
@@ -570,6 +572,7 @@ Creating Your Own Extractors
 
 You can create your own property information extractors by creating a
 class that implements one or more of the following interfaces:
+:class:`Symfony\\Component\\PropertyInfo\\ConstructorArgumentTypeExtractorInterface`,
 :class:`Symfony\\Component\\PropertyInfo\\PropertyAccessExtractorInterface`,
 :class:`Symfony\\Component\\PropertyInfo\\PropertyDescriptionExtractorInterface`,
 :class:`Symfony\\Component\\PropertyInfo\\PropertyListExtractorInterface`,
@@ -587,6 +590,11 @@ service by defining it as a service with one or more of the following
 * ``property_info.access_extractor`` if it provides access information.
 * ``property_info.initializable_extractor`` if it provides initializable information
   (it checks if a property can be initialized through the constructor).
+* ``property_info.constructor_extractor`` if it provides type information from the constructor argument.
+
+  .. versionadded:: 7.3
+
+      The ``property_info.constructor_extractor`` tag was introduced in Symfony 7.3.
 
 .. _`PSR-1`: https://www.php-fig.org/psr/psr-1/
 .. _`phpDocumentor Reflection`: https://github.com/phpDocumentor/ReflectionDocBlock
