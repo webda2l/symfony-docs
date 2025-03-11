@@ -215,10 +215,7 @@ returns an array of values that will be injected into the closure::
 
     class MyController extends AbstractController
     {
-        #[IsGranted(static function (
-            IsGrantedContext $context,
-            mixed $subject,
-        ) {
+        #[IsGranted(static function (IsGrantedContext $context, mixed $subject) {
             return $context->user === $subject['post']->getAuthor();
         }, subject: static function (array $args) {
             return [
