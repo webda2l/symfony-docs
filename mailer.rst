@@ -1367,9 +1367,9 @@ key but not a certificate::
 Signing Messages Globally
 .........................
 
-Instead of creating a signer instance for every email, you can configure a global signer
-that automatically applies to all outgoing messages. This approach reduces repetition
-and centralizes your configuration for both DKIM and S/MIME signing.
+Instead of creating a signer instance for each email, you can configure a global
+signer that automatically applies to all outgoing messages. This approach
+minimizes repetition and centralizes your configuration for DKIM and S/MIME signing.
 
 .. configuration-block::
 
@@ -1435,6 +1435,9 @@ and centralizes your configuration for both DKIM and S/MIME signing.
             ;
         };
 
+.. versionadded:: 7.3
+
+    Global message signing was introduced in Symfony 7.3.
 
 Encrypting Messages
 ~~~~~~~~~~~~~~~~~~~
@@ -1477,13 +1480,11 @@ and it will select the appropriate certificate depending on the ``To`` option::
     $firstEncryptedEmail = $encrypter->encrypt($firstEmail);
     $secondEncryptedEmail = $encrypter->encrypt($secondEmail);
 
-
 Encrypting Messages Globally
 ............................
 
-Similarly, you can avoid instantiating a new encrypter for every email by setting up a
-global S/MIME encrypter. With this configuration, the encrypter is automatically
-applied to all emails you send.
+Instead of creating a new encrypter for each email, you can configure a global S/MIME
+encrypter that automatically applies to all outgoing messages:
 
 .. configuration-block::
 
@@ -1527,6 +1528,10 @@ applied to all emails you send.
                     ->certificate('%kernel.project_dir%/var/certificates/smime.crt')
             ;
         };
+
+.. versionadded:: 7.3
+
+    Global message encryption configuration was introduced in Symfony 7.3.
 
 .. _multiple-email-transports:
 
