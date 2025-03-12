@@ -450,6 +450,23 @@ By default, digit-only array keys are dumped as integers. You can use the
     $dumped = Yaml::dump([200 => 'foo'], 2, 4, Yaml::DUMP_NUMERIC_KEY_AS_STRING);
     // '200': foo
 
+Dumping Double Quotes on Values
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+
+By default, only unsafe values are double quoted. In some scenarios, quoting
+even safe values is encouraged by various inspectors. You can use the
+``DUMP_FORCE_DOUBLE_QUOTES_ON_VALUES`` flag to enforce double quotes::
+
+    $dumped = Yaml::dump(['foo' => 'bar']);
+    // foo: bar
+
+    $dumped = Yaml::dump(['foo' => 'bar'], 2, 4, Yaml::DUMP_FORCE_DOUBLE_QUOTES_ON_VALUES);
+    // foo: "bar"
+
+.. versionadded:: 7.3
+
+    The ``Yaml::DUMP_FORCE_DOUBLE_QUOTES_ON_VALUES`` flag was introduced in Symfony 7.3.
+
 Dumping Collection of Maps
 ~~~~~~~~~~~~~~~~~~~~~~~~~~
 
