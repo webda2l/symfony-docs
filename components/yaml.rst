@@ -453,15 +453,19 @@ By default, digit-only array keys are dumped as integers. You can use the
 Dumping Double Quotes on Values
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
-By default, only unsafe values are double quoted. In some scenarios, quoting
-even safe values is encouraged by various inspectors. You can use the
-``DUMP_FORCE_DOUBLE_QUOTES_ON_VALUES`` flag to enforce double quotes::
+By default, only unsafe string values are enclosed in double quotes (for example,
+if they are reserved words or contain newlines and spaces). Use the
+``DUMP_FORCE_DOUBLE_QUOTES_ON_VALUES`` flag to add double quotes to all string values::
 
-    $dumped = Yaml::dump(['foo' => 'bar']);
-    // foo: bar
+    $dumped = Yaml::dump([
+        'foo' => 'bar', 'some foo' => 'some bar', 'x' => 3.14, 'y' => true, 'z' => null,
+    ]);
+    // foo: bar, 'some foo': 'some bar', x: 3.14, 'y': true, z: null
 
-    $dumped = Yaml::dump(['foo' => 'bar'], 2, 4, Yaml::DUMP_FORCE_DOUBLE_QUOTES_ON_VALUES);
-    // foo: "bar"
+    $dumped = Yaml::dump([
+        'foo' => 'bar', 'some foo' => 'some bar', 'x' => 3.14, 'y' => true, 'z' => null,
+    ], 2, 4, Yaml::DUMP_FORCE_DOUBLE_QUOTES_ON_VALUES);
+    // "foo": "bar", "some foo": "some bar", "x": 3.14, "y": true, "z": null
 
 .. versionadded:: 7.3
 
