@@ -201,25 +201,27 @@ Now you can inject your service into your class::
 Configuring the CSS Loader
 --------------------------
 
-Encore provides the method ``configureCssLoader()`` to configure options for ``css-loader``. This method allows you to customize how Webpack processes CSS assets.
+Encore provides the ``configureCssLoader()`` method to customize how ``css-loader``
+processes your CSS assets. One common use case is to prevent Webpack from resolving
+certain URLs.
 
-A common use case is filtering certain URLs so that Webpack does not attempt to resolve them. For example, if user-uploaded assets are stored under in a user uploaded directory, Webpack should not process these paths since they may not exist at build time.
-
-Use ``configureCssLoader()`` as follows:
+For instance, if your application serves user-uploaded assets from a specific
+directory, you'll want Webpack to ignore these paths since they may not exist
+during the build process:
 
 .. code-block:: javascript
 
     // Configuring the CSS Loader in Webpack Encore
-    // This ensures that Webpack does not attempt to resolve certain URLs in CSS files
-
+    // Prevent Webpack from resolving certain URLs in CSS files
     Encore.configureCssLoader((options) => {
         options.url = {
             filter: (url) => {
-                // Ignore URLs that start with /uploads/
+                // Ignore URLs beginning with /uploads/
                 if (url.startsWith('/uploads/')) {
                     return false;
                 }
-                return true; // Process other URLs normally
+
+                return true; // Process other URLs as usual
             },
         };
     });
