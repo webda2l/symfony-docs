@@ -572,7 +572,7 @@ Creating Your Own Extractors
 
 You can create your own property information extractors by creating a
 class that implements one or more of the following interfaces:
-:class:`Symfony\\Component\\PropertyInfo\\ConstructorArgumentTypeExtractorInterface`,
+:class:`Symfony\\Component\\PropertyInfo\\Extractor\\ConstructorArgumentTypeExtractorInterface`,
 :class:`Symfony\\Component\\PropertyInfo\\PropertyAccessExtractorInterface`,
 :class:`Symfony\\Component\\PropertyInfo\\PropertyDescriptionExtractorInterface`,
 :class:`Symfony\\Component\\PropertyInfo\\PropertyListExtractorInterface`,
