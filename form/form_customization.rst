@@ -103,6 +103,7 @@ That's why Symfony provides other Twig form helpers that render the value of
 each form field part without adding any HTML around it:
 
 * ``field_name()``
+* ``field_id()``
 * ``field_value()``
 * ``field_label()``
 * ``field_help()``
@@ -116,6 +117,7 @@ fields, so you no longer have to deal with form themes:
 
     <input
         name="{{ field_name(form.username) }}"
+        id="{{ field_id(form.username) }}"
         value="{{ field_value(form.username) }}"
         placeholder="{{ field_label(form.username) }}"
         class="form-control"
@@ -128,6 +130,10 @@ fields, so you no longer have to deal with form themes:
             <option value="{{ value }}">{{ label }}</option>
         {% endfor %}
     </select>
+
+.. versionadded:: 7.3
+
+    The ``field_id()`` helper was introduced in Symfony 7.3.
 
 Form Rendering Variables
 ------------------------
