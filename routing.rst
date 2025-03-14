@@ -456,6 +456,10 @@ route details:
     Use the ``--show-aliases`` option to show all available aliases for a given
     route.
 
+.. tip::
+
+    Use the ``--method`` option to filter routes by HTTP method. For example, to only show routes that use the ``GET`` method, add ``--method=GET``
+
 The other command is called ``router:match`` and it shows which route will match
 the given URL. It's useful to find out why some URL is not executing the
 controller action that you expect:
