@@ -1563,7 +1563,7 @@ Install it by running:
 
     $ composer require symfony/doctrine-messenger
 
-The Doctrine transport DSN may looks like this:
+The Doctrine transport DSN may look like this:
 
 .. code-block:: env
 
