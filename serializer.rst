@@ -344,7 +344,7 @@ instance to disallow extra fields while deserializing:
 
         return static function (FrameworkConfig $framework): void {
             $framework->serializer()
-                ->defaultContext('', [
+                ->defaultContext([
                     'allow_extra_attributes' => false,
                 ])
             ;
