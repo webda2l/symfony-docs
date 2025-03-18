@@ -434,6 +434,21 @@ evaluates them:
     blog_show         ANY      ANY      ANY    /blog/{slug}
     ----------------  -------  -------  -----  --------------------------------------------
 
+    # pass this option to also display all the defined route aliases
+    $ php bin/console debug:router --show-aliases
+
+    # pass this option to only display routes that match the given HTTP method
+    # (you can use the special value ANY to see routes that match any method)
+    $ php bin/console debug:router --method=GET
+    $ php bin/console debug:router --method=ANY
+
+    # pass the option more than once to display the routes that match all the given methods
+    $ php bin/console debug:router --method=GET --method=PATCH
+
+.. versionadded:: 7.3
+
+    The ``--method`` option was introduced in Symfony 7.3.
+
 Pass the name (or part of the name) of some route to this argument to print the
 route details:
 
@@ -450,15 +465,6 @@ route details:
     | Options     | compiler_class: Symfony\Component\Routing\RouteCompiler |
     |             | utf8: true                                              |
     +-------------+---------------------------------------------------------+
-
-.. tip::
-
-    Use the ``--show-aliases`` option to show all available aliases for a given
-    route.
-
-.. tip::
-
-    Use the ``--method`` option to filter routes by HTTP method. For example, to only show routes that use the ``GET`` method, add ``--method=GET``
 
 The other command is called ``router:match`` and it shows which route will match
 the given URL. It's useful to find out why some URL is not executing the
