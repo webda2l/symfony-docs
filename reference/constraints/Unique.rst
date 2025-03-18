@@ -221,9 +221,9 @@ trailing whitespace during validation.
 
 **type**: ``boolean`` **default**: ``true``
 
-By default, this constraint stops at the first violation. If the option is set to ``false``,
-validation will continue on all elements and return all detected
-:class:`Symfony\\Component\\Validator\\ConstraintViolation` object.
+By default, this constraint stops at the first violation. If this option is set
+to ``false``, validation continues on all elements and returns all detected
+:class:`Symfony\\Component\\Validator\\ConstraintViolation` objects.
 
 .. versionadded:: 7.3
 
