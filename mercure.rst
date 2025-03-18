@@ -415,7 +415,7 @@ of the ``Update`` constructor to ``true``::
             $update = new Update(
                 'https://example.com/books/1',
                 json_encode(['status' => 'OutOfStock']),
-                private: true
+                true // private
             );
 
             // Publisher's JWT must contain this topic, a URI template it matches or * in mercure.publish or you'll get a 401
@@ -712,7 +712,8 @@ enable it::
     :alt: The Mercure panel of the Symfony Profiler, showing information like time, memory, topics and data of each message sent by Mercure.
     :class: with-browser
 
-The Mercure hub itself provides a debug tool that can be enabled and available on `/.well-known/mercure/ui/`
+The Mercure hub itself provides a debug tool that can be enabled and it's
+available on ``/.well-known/mercure/ui/``
 
 Async dispatching
 -----------------
