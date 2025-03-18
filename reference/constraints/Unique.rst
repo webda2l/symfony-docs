@@ -216,4 +216,17 @@ trailing whitespace during validation.
 
 .. include:: /reference/constraints/_payload-option.rst.inc
 
+``stopOnFirstError``
+~~~~~~~~~~~~~~~~~~~~
+
+**type**: ``boolean`` **default**: ``true``
+
+By default, this constraint stops at the first violation. If the option is set to ``false``,
+validation will continue on all elements and return all detected
+:class:`Symfony\\Component\\Validator\\ConstraintViolation` object.
+
+.. versionadded:: 7.3
+
+    The ``stopOnFirstError`` option was introduced in Symfony 7.3.
+
 .. _`PHP callable`: https://www.php.net/callable
