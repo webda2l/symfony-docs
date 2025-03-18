@@ -282,6 +282,11 @@ URL in a dedicated HTML element:
     {{ mercure('https://example.com/books/1')|json_encode(constant('JSON_UNESCAPED_SLASHES') b-or constant('JSON_HEX_TAG'))|raw }}
     </script>
 
+    <!-- with Stimulus -->
+    <div {{ stimulus_controller('my-controller', {
+        mercureUrl: mercure('https://example.com/books/1'),
+    }) }}>
+
 Then retrieve it from your JS file:
 
 .. code-block:: javascript
@@ -289,6 +294,9 @@ Then retrieve it from your JS file:
     const url = JSON.parse(document.getElementById("mercure-url").textContent);
     const eventSource = new EventSource(url);
     // ...
+
+    // with Stimulus
+    this.eventSource = new EventSource(this.mercureUrlValue);
 
 Mercure also allows subscribing to several topics,
 and to use URI Templates or the special value ``*`` (matched by all topics)
@@ -703,6 +711,9 @@ enable it::
 .. image:: /_images/mercure/panel.png
     :alt: The Mercure panel of the Symfony Profiler, showing information like time, memory, topics and data of each message sent by Mercure.
     :class: with-browser
+
+The Mercure hub itself provides a debug tool that can be enabled and it's
+available on ``/.well-known/mercure/ui/``
 
 Async dispatching
 -----------------
