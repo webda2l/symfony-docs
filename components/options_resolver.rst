@@ -688,13 +688,13 @@ default value::
 
 .. deprecated:: 7.3
 
-    Defining nested option via :method:`Symfony\\Component\\OptionsResolver\\OptionsResolver::setDefault`
-    was deprecated since Symfony 7.3, use the :method:`Symfony\\Component\\OptionsResolver\\OptionsResolver::setOptions`
-    instead. Allowing to define default values for prototyped options.
+    Defining nested options via :method:`Symfony\\Component\\OptionsResolver\\OptionsResolver::setDefault`
+    is deprecated since Symfony 7.3. Use the :method:`Symfony\\Component\\OptionsResolver\\OptionsResolver::setOptions`
+    method instead, which also allows defining default values for prototyped options.
 
 .. versionadded:: 7.3
 
-    The :method:`Symfony\\Component\\OptionsResolver\\OptionsResolver::setOptions` was introduced in Symfony 7.3.
+    The ``setOptions()`` method was introduced in Symfony 7.3.
 
 Nested options also support required options, validation (type, value) and
 normalization of their values. If the default value of a nested option depends
