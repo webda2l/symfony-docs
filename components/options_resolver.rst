@@ -662,7 +662,7 @@ default value::
 
         public function configureOptions(OptionsResolver $resolver): void
         {
-            $resolver->setDefault('spool', function (OptionsResolver $spoolResolver): void {
+            $resolver->setOptions('spool', function (OptionsResolver $spoolResolver): void {
                 $spoolResolver->setDefaults([
                     'type' => 'file',
                     'path' => '/path/to/spool',
@@ -686,6 +686,16 @@ default value::
         ],
     ]);
 
+.. deprecated:: 7.3
+
+    Defining nested option via :method:`Symfony\\Component\\OptionsResolver\\OptionsResolver::setDefault`
+    was deprecated since Symfony 7.3, use the :method:`Symfony\\Component\\OptionsResolver\\OptionsResolver::setOptions`
+    instead. Allowing to define default values for prototyped options.
+
+.. versionadded:: 7.3
+
+    The :method:`Symfony\\Component\\OptionsResolver\\OptionsResolver::setOptions` was introduced in Symfony 7.3.
+
 Nested options also support required options, validation (type, value) and
 normalization of their values. If the default value of a nested option depends
 on another option defined in the parent level, add a second ``Options`` argument
@@ -698,7 +708,7 @@ to the closure to access to them::
         public function configureOptions(OptionsResolver $resolver): void
         {
             $resolver->setDefault('sandbox', false);
-            $resolver->setDefault('spool', function (OptionsResolver $spoolResolver, Options $parent): void {
+            $resolver->setOptions('spool', function (OptionsResolver $spoolResolver, Options $parent): void {
                 $spoolResolver->setDefaults([
                     'type' => $parent['sandbox'] ? 'memory' : 'file',
                     // ...
@@ -721,13 +731,13 @@ In same way, parent options can access to the nested options as normal arrays::
 
         public function configureOptions(OptionsResolver $resolver): void
         {
-            $resolver->setDefault('spool', function (OptionsResolver $spoolResolver): void {
+            $resolver->setOptions('spool', function (OptionsResolver $spoolResolver): void {
                 $spoolResolver->setDefaults([
                     'type' => 'file',
                     // ...
                 ]);
             });
-            $resolver->setDefault('profiling', function (Options $options): void {
+            $resolver->setOptions('profiling', function (Options $options): void {
                 return 'file' === $options['spool']['type'];
             });
         }
@@ -748,7 +758,7 @@ with ``host``, ``database``, ``user`` and ``password`` each.
 
 The best way to implement this is to define the ``connections`` option as prototype::
 
-    $resolver->setDefault('connections', function (OptionsResolver $connResolver): void {
+    $resolver->setOptions('connections', function (OptionsResolver $connResolver): void {
         $connResolver
             ->setPrototype(true)
             ->setRequired(['host', 'database'])
