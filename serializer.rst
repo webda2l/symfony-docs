@@ -1421,7 +1421,7 @@ like:
     .. code-block:: php
 
         // config/services.php
-        namespace Symfony\Component\DependencyInjection\Loader\Configurator\ContainerConfigurator;
+        namespace Symfony\Component\DependencyInjection\Loader\Configurator;
 
         use Symfony\Component\Serializer\Normalizer\CustomNormalizer;
 
