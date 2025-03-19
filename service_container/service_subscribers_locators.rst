@@ -270,8 +270,8 @@ the following dependency injection attributes in the ``getSubscribedServices()``
 method directly:
 
 * :class:`Symfony\\Component\\DependencyInjection\\Attribute\\Autowire`
-* :class:`Symfony\\Component\\DependencyInjection\\Attribute\\TaggedIterator`
-* :class:`Symfony\\Component\\DependencyInjection\\Attribute\\TaggedLocator`
+* :class:`Symfony\\Component\\DependencyInjection\\Attribute\\AutowireIterator`
+* :class:`Symfony\\Component\\DependencyInjection\\Attribute\\AutowireLocator`
 * :class:`Symfony\\Component\\DependencyInjection\\Attribute\\Target`
 * :class:`Symfony\\Component\\DependencyInjection\\Attribute\\AutowireDecorated`
 
@@ -282,8 +282,8 @@ This is done by having ``getSubscribedServices()`` return an array of
     use Psr\Container\ContainerInterface;
     use Psr\Log\LoggerInterface;
     use Symfony\Component\DependencyInjection\Attribute\Autowire;
-    use Symfony\Component\DependencyInjection\Attribute\TaggedIterator;
-    use Symfony\Component\DependencyInjection\Attribute\TaggedLocator;
+    use Symfony\Component\DependencyInjection\Attribute\AutowireIterator;
+    use Symfony\Component\DependencyInjection\Attribute\AutowireLocator;
     use Symfony\Component\DependencyInjection\Attribute\Target;
     use Symfony\Contracts\Service\Attribute\SubscribedService;
 
@@ -299,11 +299,11 @@ This is done by having ``getSubscribedServices()`` return an array of
             // Target
             new SubscribedService('event.logger', LoggerInterface::class, attributes: new Target('eventLogger')),
 
-            // TaggedIterator
-            new SubscribedService('loggers', 'iterable', attributes: new TaggedIterator('logger.tag')),
+            // AutowireIterator
+            new SubscribedService('loggers', 'iterable', attributes: new AutowireIterator('logger.tag')),
 
-            // TaggedLocator
-            new SubscribedService('handlers', ContainerInterface::class, attributes: new TaggedLocator('handler.tag')),
+            // AutowireLocator
+            new SubscribedService('handlers', ContainerInterface::class, attributes: new AutowireLocator('handler.tag')),
         ];
     }
 
@@ -975,8 +975,8 @@ You can use the ``attributes`` argument of ``SubscribedService`` to add any
 of the following dependency injection attributes:
 
 * :class:`Symfony\\Component\\DependencyInjection\\Attribute\\Autowire`
-* :class:`Symfony\\Component\\DependencyInjection\\Attribute\\TaggedIterator`
-* :class:`Symfony\\Component\\DependencyInjection\\Attribute\\TaggedLocator`
+* :class:`Symfony\\Component\\DependencyInjection\\Attribute\\AutowireIterator`
+* :class:`Symfony\\Component\\DependencyInjection\\Attribute\\AutowireLocator`
 * :class:`Symfony\\Component\\DependencyInjection\\Attribute\\Target`
 * :class:`Symfony\\Component\\DependencyInjection\\Attribute\\AutowireDecorated`
 
