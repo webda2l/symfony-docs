@@ -1239,6 +1239,71 @@ setting the ``name_converter`` setting to
         ];
         $serializer = new Serializer($normalizers, $encoders);
 
+snake_case to CamelCase
+~~~~~~~~~~~~~~~~~~~~~~~
+
+In Symfony applications, it is common to use camelCase for naming properties.
+However some packages may follow a snake_case convention.
+
+Symfony provides a built-in name converter designed to transform between
+CamelCase and snake_case styles during serialization and deserialization
+processes. You can use it instead of the metadata-aware name converter by
+setting the ``name_converter`` setting to
+``serializer.name_converter.snake_case_to_camel_case``:
+
+.. configuration-block::
+
+    .. code-block:: yaml
+
+        # config/packages/serializer.yaml
+        framework:
+            serializer:
+                name_converter: 'serializer.name_converter.snake_case_to_camel_case'
+
+    .. code-block:: xml
+
+        <!-- config/packages/serializer.xml -->
+        <?xml version="1.0" encoding="UTF-8" ?>
+        <container xmlns="http://symfony.com/schema/dic/services"
+            xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+            xmlns:framework="http://symfony.com/schema/dic/symfony"
+            xsi:schemaLocation="http://symfony.com/schema/dic/services
+                https://symfony.com/schema/dic/services/services-1.0.xsd
+                http://symfony.com/schema/dic/symfony https://symfony.com/schema/dic/symfony/symfony-1.0.xsd">
+
+            <framework:config>
+                <framework:serializer
+                    name-converter="serializer.name_converter.snake_case_to_camel_case"
+                />
+            </framework:config>
+        </container>
+
+    .. code-block:: php
+
+        // config/packages/serializer.php
+        use Symfony\Config\FrameworkConfig;
+
+        return static function (FrameworkConfig $framework): void {
+            $framework->serializer()
+                ->nameConverter('serializer.name_converter.snake_case_to_camel_case')
+            ;
+        };
+
+    .. code-block:: php-standalone
+
+        use Symfony\Component\Serializer\NameConverter\SnakeCaseToCamelCaseNameConverter;
+        use Symfony\Component\Serializer\Normalizer\ObjectNormalizer;
+
+        // ...
+        $normalizers = [
+            new ObjectNormalizer(null, new SnakeCaseToCamelCaseNameConverter()),
+        ];
+        $serializer = new Serializer($normalizers, $encoders);
+
+.. versionadded:: 7.2
+
+    The snake_case to CamelCase converter was introduced in Symfony 7.2.
+
 .. _serializer-built-in-normalizers:
 
 Serializer Normalizers
