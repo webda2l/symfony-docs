@@ -1242,12 +1242,12 @@ setting the ``name_converter`` setting to
 snake_case to CamelCase
 ~~~~~~~~~~~~~~~~~~~~~~~
 
-In Symfony applications is common to use camelCase to name properties. However
-some packages can use snake_case as convention.
+In Symfony applications, it is common to use camelCase for naming properties.
+However some packages may follow a snake_case convention.
 
 Symfony provides a built-in name converter designed to transform between
-CamelCase and snake_cased styles during serialization and deserialization
-processes. You can use it instead of the metadata aware name converter by
+CamelCase and snake_case styles during serialization and deserialization
+processes. You can use it instead of the metadata-aware name converter by
 setting the ``name_converter`` setting to
 ``serializer.name_converter.snake_case_to_camel_case``:
 
@@ -1299,6 +1299,10 @@ setting the ``name_converter`` setting to
             new ObjectNormalizer(null, new SnakeCaseToCamelCaseNameConverter()),
         ];
         $serializer = new Serializer($normalizers, $encoders);
+
+.. versionadded:: 7.2
+
+    The snake_case to CamelCase converter was introduced in Symfony 7.2.
 
 .. _serializer-built-in-normalizers:
 
