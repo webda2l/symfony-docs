@@ -1434,7 +1434,7 @@ Built-in Normalizers
 ~~~~~~~~~~~~~~~~~~~~
 
 Besides the normalizers registered by default (see previous section), the
-serializer component also provides some extra normalizers.You can register
+serializer component also provides some extra normalizers. You can register
 these by defining a service and tag it with :ref:`serializer.normalizer <reference-dic-tags-serializer-normalizer>`.
 For instance, to use the ``CustomNormalizer`` you have to define a service
 like:
@@ -1478,7 +1478,7 @@ like:
     .. code-block:: php
 
         // config/services.php
-        namespace Symfony\Component\DependencyInjection\Loader\Configurator;
+        namespace Symfony\Component\DependencyInjection\Loader\Configurator\ContainerConfigurator;
 
         use Symfony\Component\Serializer\Normalizer\CustomNormalizer;
 
