@@ -36,9 +36,14 @@ to the :class:`Symfony\\Component\\TypeInfo\\Type` static methods as following::
     Type::generic(Type::object(Collection::class), Type::int());
     Type::list(Type::bool());
     Type::intersection(Type::object(\Stringable::class), Type::object(\Iterator::class));
+    Type::fromValue(1.1) // same as Type::float()
 
     // Many others are available and can be
     // found in Symfony\Component\TypeInfo\TypeFactoryTrait
+
+.. versionadded:: 7.3
+
+    The ``fromValue()`` method was introduced in Symfony 7.3.
 
 Resolvers
 ~~~~~~~~~
