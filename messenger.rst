@@ -2314,8 +2314,8 @@ will take care of creating a new process with the parameters you passed::
         }
     }
 
-A static factory :method:`Symfony\\Component\\Process\\Messenger\\RunProcessMessage::fromShellCommandline` is also
-available if you want to use features of your shell such as redirections or pipes::
+If you want to use shell features such as redirections or pipes, use the static
+factory :method:Symfony\\Component\\Process\\Messenger\\RunProcessMessage::fromShellCommandline::
 
     use Symfony\Component\Messenger\MessageBusInterface;
     use Symfony\Component\Process\Messenger\RunProcessMessage;
@@ -2335,8 +2335,8 @@ available if you want to use features of your shell such as redirections or pipe
         }
     }
 
-For more information, see the
-dedicated :ref:`Using Features From the OS Shell <process-using-features-from-the-os-shell>` documentation.
+For more information, read the documentation about
+:ref:`using features from the OS shell <process-using-features-from-the-os-shell>`.
 
 .. versionadded:: 7.3
 
