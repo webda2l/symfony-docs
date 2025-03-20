@@ -367,6 +367,16 @@ attribute, arguments of your controller's action can be automatically fulfilled:
         // ...
     }
 
+:class:`Symfony\\Component\\HttpKernel\\Attribute\\MapQueryParameter` support
+arguments of type:
+
+- ``string``
+- ``int``
+- ``float``
+- ``bool``
+- ``array``
+- ``\BackedEnum``
+
 ``#[MapQueryParameter]`` can take an optional argument called ``filter``. You can use the
 `Validate Filters`_ constants defined in PHP::
 
