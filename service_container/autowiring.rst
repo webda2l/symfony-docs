@@ -408,8 +408,8 @@ Suppose you create a second class - ``UppercaseTransformer`` that implements
 If you register this as a service, you now have *two* services that implement the
 ``App\Util\TransformerInterface`` type. Autowiring subsystem can not decide
 which one to use. Remember, autowiring isn't magic; it looks for a service
-whose id matches the type-hint. So you need to choose one by creating an alias
-from the type to the correct service id (see :ref:`autowiring-interface-alias`).
+whose id matches the type-hint. So you need to choose one by :ref:`creating an alias
+<autowiring-interface-alias>` from the type to the correct service id.
 Additionally, you can define several named autowiring aliases if you want to use
 one implementation in some cases, and another implementation in some
 other cases.
