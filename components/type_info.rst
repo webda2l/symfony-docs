@@ -37,8 +37,8 @@ to the :class:`Symfony\\Component\\TypeInfo\\Type` static methods as following::
     Type::list(Type::bool());
     Type::intersection(Type::object(\Stringable::class), Type::object(\Iterator::class));
 
-    // Many others are available and can be
-    // found in Symfony\Component\TypeInfo\TypeFactoryTrait
+Many others methods are available and can be found
+in :class:`Symfony\\Component\\TypeInfo\\TypeFactoryTrait`.
 
 Resolvers
 ~~~~~~~~~
