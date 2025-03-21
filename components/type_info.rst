@@ -39,9 +39,9 @@ to the :class:`Symfony\\Component\\TypeInfo\\Type` static methods as following::
     // ... and more methods defined in Symfony\Component\TypeInfo\TypeFactoryTrait
 
     // you can also use a generic method that detects the type automatically
-    Type::fromValue(1.1)   // same as Type::float()
-    Type::fromValue('...') // same as Type::string()
-    Type::fromValue(false) // same as Type::false()
+    Type::fromValue(1.1);   // same as Type::float()
+    Type::fromValue('...'); // same as Type::string()
+    Type::fromValue(false); // same as Type::false()
 
 .. versionadded:: 7.3
 
