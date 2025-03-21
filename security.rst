@@ -575,8 +575,7 @@ Only one firewall is active on each request: Symfony uses the ``pattern`` key
 to find the first match (you can also
 :doc:`match by host or other things </security/firewall_restriction>`).
 Here, all real URLs are handled by the ``main`` firewall (no ``pattern`` key means
-it matches *all* URLs). A firewall can have many modes of authentication,
-in other words, it enables many ways to ask the question "Who are you?".
+it matches *all* URLs).
 
 The ``dev`` firewall is really a fake firewall: it makes sure that you
 don't accidentally block Symfony's dev tools - which live under URLs like
@@ -631,9 +630,10 @@ don't accidentally block Symfony's dev tools - which live under URLs like
 
         The feature to use an array of regex was introduced in Symfony 6.4.
 
-Often, the user is unknown (i.e. not logged in) when they first visit your
-website. If you visit your homepage right now, you *will* have access and
-you'll see that you're visiting a page behind the firewall in the toolbar:
+A firewall can have many modes of authentication, in other words, it enables many
+ways to ask the question "Who are you?". Often, the user is unknown (i.e. not logged in)
+when they first visit your website. If you visit your homepage right now, you *will*
+have access and you'll see that you're visiting a page behind the firewall in the toolbar:
 
 .. image:: /_images/security/anonymous_wdt.png
    :alt: The Symfony profiler toolbar where the Security information shows "Authenticated: no" and "Firewall name: main"
