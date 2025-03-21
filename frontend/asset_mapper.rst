@@ -215,6 +215,11 @@ to add any `npm package`_:
 
     $ php bin/console importmap:require bootstrap
 
+.. tip::
+
+    The command takes the well-know ``--dry-run`` option to simulate the installation of the packages, useful
+    to show what will be installed without altering anything.
+
 This adds the ``bootstrap`` package to your ``importmap.php`` file::
 
     // importmap.php
