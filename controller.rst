@@ -363,6 +363,15 @@ attribute, arguments of your controller's action can be automatically fulfilled:
         // ...
     }
 
+The ``MapQueryParameter`` attribute supports the following argument types:
+
+* ``\BackedEnum``
+* ``array``
+* ``bool``
+* ``float``
+* ``int``
+* ``string``
+
 ``#[MapQueryParameter]`` can take an optional argument called ``filter``. You can use the
 `Validate Filters`_ constants defined in PHP::
 
