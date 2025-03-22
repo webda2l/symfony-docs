@@ -397,9 +397,13 @@ Translation Files
 -----------------
 
 If a bundle provides message translations, they must be defined in the XLIFF
-format; the domain should be named after the bundle name (``acme_blog``).
+format; the domain should be named after the bundle name (``AcmeBlog``).
 
 A bundle must not override existing messages from another bundle.
+
+The translation domain must match the translation file names. For example,
+if the translation domain is ``AcmeBlog``, the English translation file name
+should be ``AcmeBlog.en.xlf``.
 
 Configuration
 -------------
