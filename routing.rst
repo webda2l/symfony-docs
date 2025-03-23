@@ -442,9 +442,6 @@ evaluates them:
     $ php bin/console debug:router --method=GET
     $ php bin/console debug:router --method=ANY
 
-    # pass the option more than once to display the routes that match all the given methods
-    $ php bin/console debug:router --method=GET --method=PATCH
-
 .. versionadded:: 7.3
 
     The ``--method`` option was introduced in Symfony 7.3.
