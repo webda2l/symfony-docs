@@ -1388,7 +1388,7 @@ normalizers (in order of priority):
     want ``null`` instead, you can set the ``BackedEnumNormalizer::ALLOW_INVALID_VALUES`` option.
 
 :class:`Symfony\\Component\\Serializer\\Normalizer\\NumberNormalizer`
-    This normalizer converts between :phpclass:`BcMath\Number` or :phpclass:`GMP` objects and
+    This normalizer converts between :phpclass:`BcMath\\Number` or :phpclass:`GMP` objects and
     strings or integers.
 
 .. versionadded:: 7.2
