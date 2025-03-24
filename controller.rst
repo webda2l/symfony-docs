@@ -375,7 +375,7 @@ The ``MapQueryParameter`` attribute supports the following argument types:
 
 .. versionadded:: 7.3
 
-    The support of ``AbstractUid`` was introduced in Symfony 7.3.
+    Support for ``AbstractUid`` objects was introduced in Symfony 7.3.
 
 ``#[MapQueryParameter]`` can take an optional argument called ``filter``. You can use the
 `Validate Filters`_ constants defined in PHP::
