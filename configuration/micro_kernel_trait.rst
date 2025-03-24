@@ -305,6 +305,9 @@ Now it looks like this::
             // (use 'annotation' as the second argument if you define routes as annotations)
             $routes->import(__DIR__.'/Controller/', 'attribute');
         }
+
+        // optionally, you can define the getCacheDir() and getLogDir() methods
+        // to override the default locations for these directories
     }
 
 Before continuing, run this command to add support for the new dependencies:
