@@ -260,11 +260,11 @@ Now it looks like this::
 
         public function registerBundles(): iterable
         {
-            yield FrameworkBundle();
-            yield TwigBundle();
+            yield new FrameworkBundle();
+            yield new TwigBundle();
 
             if ('dev' === $this->getEnvironment()) {
-                yield WebProfilerBundle();
+                yield new WebProfilerBundle();
             }
         }
 
@@ -304,18 +304,6 @@ Now it looks like this::
             // load the routes defined as PHP attributes
             // (use 'annotation' as the second argument if you define routes as annotations)
             $routes->import(__DIR__.'/Controller/', 'attribute');
-        }
-
-        // optional, to use the standard Symfony cache directory
-        public function getCacheDir(): string
-        {
-            return __DIR__.'/../var/cache/'.$this->getEnvironment();
-        }
-
-        // optional, to use the standard Symfony logs directory
-        public function getLogDir(): string
-        {
-            return __DIR__.'/../var/log';
         }
     }
 
