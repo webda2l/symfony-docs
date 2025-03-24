@@ -1,30 +1,35 @@
-How to Define Relationships with Abstract Classes and Interfaces
-================================================================
+Referencing Entities with Abstract Classes and Interfaces
+=========================================================
 
-One of the goals of bundles is to create discrete bundles of functionality
-that do not have many (if any) dependencies, allowing you to use that
-functionality in other applications without including unnecessary items.
+In applications where functionality is segregated with minimal concrete dependencies
+between the various layers, such as monoliths which are split into multiple modules,
+it might be hard to prevent hard dependencies on entities between modules.
 
 Doctrine 2.2 includes a new utility called the ``ResolveTargetEntityListener``,
 that functions by intercepting certain calls inside Doctrine and rewriting
 ``targetEntity`` parameters in your metadata mapping at runtime. It means that
-in your bundle you are able to use an interface or abstract class in your
-mappings and expect correct mapping to a concrete entity at runtime.
+you are able to use an interface or abstract class in your mappings and expect
+correct mapping to a concrete entity at runtime.
 
 This functionality allows you to define relationships between different entities
 without making them hard dependencies.
 
+.. tip::
+
+    Starting with Symfony 7.3, this functionality also works with the ``EntityValueResolver``.
+    See :ref:`doctrine-entity-value-resolver-resolve-target-entities` for more details.
+
 Background
 ----------
 
-Suppose you have an InvoiceBundle which provides invoicing functionality
-and a CustomerBundle that contains customer management tools. You want
-to keep these separated, because they can be used in other systems without
-each other, but for your application you want to use them together.
+Suppose you have an application which provides two modules; an Invoice module which
+provides invoicing functionality, and a Customer module that contains customer management
+tools. You want to keep dependencies between these modules separated, because they should
+not be aware of the other module's implementation details.
 
-In this case, you have an ``Invoice`` entity with a relationship to a
-non-existent object, an ``InvoiceSubjectInterface``. The goal is to get
-the ``ResolveTargetEntityListener`` to replace any mention of the interface
+In this case, you have an ``Invoice`` entity with a relationship to the interface
+``InvoiceSubjectInterface``. This is not recognized as a valid entity by Doctrine.
+The goal is to get the ``ResolveTargetEntityListener`` to replace any mention of the interface
 with a real object that implements that interface.
 
 Set up
@@ -89,7 +94,7 @@ An InvoiceSubjectInterface::
         public function getName(): string;
     }
 
-Next, you need to configure the listener, which tells the DoctrineBundle
+Next, you need to configure the ``resolve_target_entities`` option, which tells the DoctrineBundle
 about the replacement:
 
 .. configuration-block::
@@ -141,6 +146,6 @@ Final Thoughts
 --------------
 
 With the ``ResolveTargetEntityListener``, you are able to decouple your
-bundles, keeping them usable by themselves, but still being able to
+modules, keeping them usable by themselves, but still being able to
 define relationships between different objects. By using this method,
-your bundles will end up being easier to maintain independently.
+your modules will end up being easier to maintain independently.
