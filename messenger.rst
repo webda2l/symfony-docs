@@ -1312,7 +1312,7 @@ to retry them:
     # remove all messages in the failure transport
     $ php bin/console messenger:failed:remove --all
 
-    # remove only MyClass messages
+    # remove only App\Message\MyMessage messages
     $ php bin/console messenger:failed:remove --class-filter='App\Message\MyMessage'
 
 If the message fails again, it will be re-sent back to the failure transport
