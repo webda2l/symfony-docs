@@ -169,6 +169,32 @@ Content Methods
     styled according to the Symfony Style Guide, which allows you to use
     features such as dynamically appending rows.
 
+:method:`Symfony\\Component\\Console\\Style\\SymfonyStyle::tree`
+    It displays the given nested array as a formatted directory/file tree
+    structure in the console output::
+
+        $io->tree([
+            'src' =>  [
+                'Controller' => [
+                    'DefaultController.php',
+                ],
+                'Kernel.php',
+            ],
+            'templates' => [
+                'base.html.twig',
+            ],
+        ]);
+
+.. versionadded:: 7.3
+
+    The ``SymfonyStyle::tree()`` and the ``SymfonyStyle::createTree()`` methods
+    were introduced in Symfony 7.3.
+
+:method:`Symfony\\Component\\Console\\Style\\SymfonyStyle::createTree`
+    Creates an instance of :class:`Symfony\\Component\\Console\\Helper\\TreeHelper`
+    styled according to the Symfony Style Guide, which allows you to use
+    features such as dynamically nesting nodes.
+
 :method:`Symfony\\Component\\Console\\Style\\SymfonyStyle::newLine`
     It displays a blank line in the command output. Although it may seem useful,
     most of the times you won't need it at all. The reason is that every helper
