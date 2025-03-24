@@ -27,11 +27,11 @@ inside your console command::
 
     use Symfony\Component\Console\Attribute\AsCommand;
     use Symfony\Component\Console\Command\Command;
+    use Symfony\Component\Console\Helper\TreeHelper;
+    use Symfony\Component\Console\Helper\TreeNode;
     use Symfony\Component\Console\Input\InputInterface;
     use Symfony\Component\Console\Output\OutputInterface;
     use Symfony\Component\Console\Style\SymfonyStyle;
-    use Symfony\Component\Console\Helper\TreeHelper;
-    use Symfony\Component\Console\Helper\TreeNode;
 
     #[AsCommand(name: 'app:some-command', description: '...')]
     class SomeCommand extends Command
