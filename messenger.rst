@@ -1312,6 +1312,9 @@ to retry them:
     # remove all messages in the failure transport
     $ php bin/console messenger:failed:remove --all
 
+    # remove only MyClass messages
+    $ php bin/console messenger:failed:remove --class-filter='MyClass'
+
 If the message fails again, it will be re-sent back to the failure transport
 due to the normal :ref:`retry rules <messenger-retries-failures>`. Once the max
 retry has been hit, the message will be discarded permanently.
@@ -1320,6 +1323,11 @@ retry has been hit, the message will be discarded permanently.
 
     The option to skip a message in the ``messenger:failed:retry`` command was
     introduced in Symfony 7.2
+
+.. versionadded:: 7.3
+
+    The option to filter by a message class in the ``messenger:failed:remove`` command was
+    introduced in Symfony 7.3
 
 Multiple Failed Transports
 ~~~~~~~~~~~~~~~~~~~~~~~~~~
