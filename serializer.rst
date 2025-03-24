@@ -1387,6 +1387,14 @@ normalizers (in order of priority):
     By default, an exception is thrown when data is not a valid backed enumeration. If you
     want ``null`` instead, you can set the ``BackedEnumNormalizer::ALLOW_INVALID_VALUES`` option.
 
+:class:`Symfony\\Component\\Serializer\\Normalizer\\NumberNormalizer`
+    This normalizer converts between :phpclass:`BcMath\Number` or :phpclass:`GMP` objects and
+    strings or integers.
+
+.. versionadded:: 7.2
+
+    The ``NumberNormalizer`` was introduced in Symfony 7.2.
+
 :class:`Symfony\\Component\\Serializer\\Normalizer\\DataUriNormalizer`
     This normalizer converts between :phpclass:`SplFileInfo` objects and a
     `data URI`_ string (``data:...``) such that files can be embedded into
