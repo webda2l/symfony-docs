@@ -2,6 +2,8 @@ Tree Helper
 ===========
 
 The Tree Helper allows you to build and display tree structures in the console.
+It's commonly used to render directory hierarchies, but you can also use it to render
+any tree-like content, such us organizational charts, product category trees, taxonomies, etc.
 
 .. versionadded:: 7.3
 
@@ -10,16 +12,62 @@ The Tree Helper allows you to build and display tree structures in the console.
 Rendering a Tree
 ----------------
 
-The :method:`Symfony\\Component\\Console\\Helper\\TreeHelper::createTree` method creates a tree structure from an array and returns a :class:`Symfony\\Component\\Console\\Helper\\Tree`
+The :method:`Symfony\\Component\\Console\\Helper\\TreeHelper::createTree` method
+creates a tree structure from an array and returns a :class:`Symfony\\Component\\Console\\Helper\\Tree`
 object that can be rendered in the console.
 
-Building a Tree from an Array
-~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+Rendering a Tree from an Array
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
-You can build a tree from an array by passing the array to the :method:`Symfony\\Component\\Console\\Helper\\TreeHelper::createTree`
-method::
+You can build a tree from an array by passing the array to the
+:method:`Symfony\\Component\\Console\\Helper\\TreeHelper::createTree` method
+inside your console command::
 
+    namespace App\Command;
+
+    use Symfony\Component\Console\Attribute\AsCommand;
+    use Symfony\Component\Console\Command\Command;
+    use Symfony\Component\Console\Input\InputInterface;
+    use Symfony\Component\Console\Output\OutputInterface;
+    use Symfony\Component\Console\Style\SymfonyStyle;
     use Symfony\Component\Console\Helper\TreeHelper;
+    use Symfony\Component\Console\Helper\TreeNode;
+
+    #[AsCommand(name: 'app:some-command', description: '...')]
+    class SomeCommand extends Command
+    {
+        // ...
+
+        protected function execute(InputInterface $input, OutputInterface $output): int
+        {
+            $io = new SymfonyStyle($input, $output);
+
+            $node = TreeNode::fromValues([
+                'config/',
+                'public/',
+                'src/',
+                'templates/',
+                'tests/',
+            ]);
+
+            $tree = TreeHelper::createTree($io, $node);
+            $tree->render();
+
+            // ...
+        }
+    }
+
+This exampe would output the following:
+
+.. code-block:: terminal
+
+    ├── config/
+    ├── public/
+    ├── src/
+    ├── templates/
+    └── tests/
+
+The given contents can be defined in a multi-dimensional array:
 
     $tree = TreeHelper::createTree($io, null, [
         'src' =>  [
@@ -38,7 +86,7 @@ method::
 
 The above code will output the following tree:
 
-.. code-block:: text
+.. code-block:: terminal
 
     ├── src
     │   ├── Command
@@ -48,10 +96,11 @@ The above code will output the following tree:
     └── templates
         └── base.html.twig
 
-Manually Creating a Tree
-~~~~~~~~~~~~~~~~~~~~~~~~
+Building and Rendering a Tree
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
-You can manually create a tree by creating a new instance of the :class:`Symfony\\Component\\Console\\Helper\\Tree` class and adding nodes to it::
+You can build a tree by creating a new instance of the
+:class:`Symfony\\Component\\Console\\Helper\\Tree` class and adding nodes to it::
 
     use Symfony\Component\Console\Helper\TreeHelper;
     use Symfony\Component\Console\Helper\TreeNode;
@@ -75,11 +124,12 @@ Customizing the Tree Style
 Built-in Tree Styles
 ~~~~~~~~~~~~~~~~~~~~
 
-The tree helper provides a few built-in styles that you can use to customize the output of the tree.
+The tree helper provides a few built-in styles that you can use to customize the
+output of the tree.
 
 :method:`Symfony\\Component\\Console\\Helper\\TreeStyle::default`
 
-    .. code-block:: text
+    .. code-block:: terminal
 
         ├── config
         │   ├── packages
@@ -96,7 +146,7 @@ The tree helper provides a few built-in styles that you can use to customize the
 
 :method:`Symfony\\Component\\Console\\Helper\\TreeStyle::box`
 
-    .. code-block:: text
+    .. code-block:: terminal
 
         ┃╸ config
         ┃  ┃╸ packages
@@ -113,7 +163,7 @@ The tree helper provides a few built-in styles that you can use to customize the
 
 :method:`Symfony\\Component\\Console\\Helper\\TreeStyle::doubleBox`
 
-    .. code-block:: text
+    .. code-block:: terminal
 
         ╠═ config
         ║  ╠═ packages
@@ -130,7 +180,7 @@ The tree helper provides a few built-in styles that you can use to customize the
 
 :method:`Symfony\\Component\\Console\\Helper\\TreeStyle::compact`
 
-    .. code-block:: text
+    .. code-block:: terminal
 
         ├ config
         │ ├ packages
@@ -147,7 +197,7 @@ The tree helper provides a few built-in styles that you can use to customize the
 
 :method:`Symfony\\Component\\Console\\Helper\\TreeStyle::light`
 
-    .. code-block:: text
+    .. code-block:: terminal
 
         |-- config
         |   |-- packages
@@ -164,7 +214,7 @@ The tree helper provides a few built-in styles that you can use to customize the
 
 :method:`Symfony\\Component\\Console\\Helper\\TreeStyle::minimal`
 
-    .. code-block:: text
+    .. code-block:: terminal
 
         . config
         . . packages
@@ -181,7 +231,7 @@ The tree helper provides a few built-in styles that you can use to customize the
 
 :method:`Symfony\\Component\\Console\\Helper\\TreeStyle::rounded`
 
-    .. code-block:: text
+    .. code-block:: terminal
 
         ├─ config
         │  ├─ packages
@@ -226,7 +276,7 @@ of the :class:`Symfony\\Component\\Console\\Helper\\TreeStyle` class::
 
 The above code will output the following tree:
 
-.. code-block:: text
+.. code-block:: terminal
 
     🔵 🟣 🟡 src
     🔵 🟢 🟣 🟡 Command
