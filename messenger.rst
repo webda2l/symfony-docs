@@ -1313,7 +1313,7 @@ to retry them:
     $ php bin/console messenger:failed:remove --all
 
     # remove only MyClass messages
-    $ php bin/console messenger:failed:remove --class-filter='MyClass'
+    $ php bin/console messenger:failed:remove --class-filter='App\Message\MyMessage'
 
 If the message fails again, it will be re-sent back to the failure transport
 due to the normal :ref:`retry rules <messenger-retries-failures>`. Once the max
