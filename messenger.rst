@@ -1239,8 +1239,8 @@ to retry them:
     # see the 10 first messages
     $ php bin/console messenger:failed:show --max=10
 
-    # see only MyClass messages
-    $ php bin/console messenger:failed:show --class-filter='MyClass'
+    # see only App\Message\MyMessage messages
+    $ php bin/console messenger:failed:show --class-filter='App\Message\MyMessage'
 
     # see the number of messages by message class
     $ php bin/console messenger:failed:show --stats
