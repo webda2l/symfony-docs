@@ -217,8 +217,12 @@ to add any `npm package`_:
 
 .. tip::
 
-    The command takes the well-know ``--dry-run`` option to simulate the installation of the packages, useful
-    to show what will be installed without altering anything.
+    Add the ``--dry-run`` option to simulate package installation without actually
+    making any changes (e.g. ``php bin/console importmap:require bootstrap --dry-run``)
+
+    .. versionadded:: 7.3
+
+        The ``--dry-run`` option was introduced in Symfony 7.3.
 
 This adds the ``bootstrap`` package to your ``importmap.php`` file::
 
