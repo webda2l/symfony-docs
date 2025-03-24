@@ -269,6 +269,31 @@ timestamps::
 
 .. _clock_writing-tests:
 
+Storing DatePoints in Databases
+-------------------------------
+
+If you :doc:`use Doctrine </doctrine>`, consider using the ``date_point`` Doctrine
+type, which converts to/from ``DatePoint`` objects automatically::
+
+    // src/Entity/Product.php
+    namespace App\Entity;
+
+    use Doctrine\ORM\Mapping as ORM;
+    use Symfony\Component\Clock\DatePoint;
+
+    #[ORM\Entity]
+    class Product
+    {
+        #[ORM\Column]
+        private DatePoint $created;
+
+        // ...
+    }
+
+.. versionadded:: 7.3
+
+    The `DatePointType` was introduced in Symfony 7.3.
+
 Writing Time-Sensitive Tests
 ----------------------------
 
