@@ -347,23 +347,23 @@ providers until the user is found:
         return static function (SecurityConfig $security): void {
             // ...
 
-            $backendProvider = $security->provider('backend_users')
+            $security->provider('backend_users')
                 ->ldap()
                 // ...
             ;
 
-            $legacyProvider = $security->provider('legacy_users')
+            $security->provider('legacy_users')
                 ->entity()
                 // ...
             ;
 
-            $userProvider = $security->provider('users')
+            $security->provider('users')
                 ->entity()
                 // ...
             ;
 
-            $allProviders = $security->provider('all_users')->chain()
-                ->providers([$backendProvider, $legacyProvider, $userProvider])
+            $security->provider('all_users')->chain()
+                ->providers(['backend_users', 'legacy_users', 'users'])
             ;
         };
 
