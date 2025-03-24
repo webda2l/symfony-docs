@@ -1025,7 +1025,7 @@ exceptions
 
 **type**: ``array``
 
-Defines the :ref:`log level </logging>` and HTTP status code applied to the
+Defines the :ref:`log level </logging>`, :ref:`log channel </logging/channels_handlers>` and HTTP status code applied to the
 exceptions that match the given exception class:
 
 .. configuration-block::
@@ -1038,6 +1038,7 @@ exceptions that match the given exception class:
                 Symfony\Component\HttpKernel\Exception\BadRequestHttpException:
                     log_level: 'debug'
                     status_code: 422
+                    log_channel: 'custom_channel'
 
     .. code-block:: xml
 
@@ -1055,6 +1056,7 @@ exceptions that match the given exception class:
                     class="Symfony\Component\HttpKernel\Exception\BadRequestHttpException"
                     log-level="debug"
                     status-code="422"
+                    log-channel="custom_channel"
                 />
                 <!-- ... -->
             </framework:config>
@@ -1070,8 +1072,13 @@ exceptions that match the given exception class:
             $framework->exception(BadRequestHttpException::class)
                 ->logLevel('debug')
                 ->statusCode(422)
+                ->logChannel('custom_channel')
             ;
         };
+
+.. versionadded:: 7.3
+
+    The ``log_channel`` option was introduced in Symfony 7.3.
 
 The order in which you configure exceptions is important because Symfony will
 use the configuration of the first exception that matches ``instanceof``:
