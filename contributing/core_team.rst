@@ -86,6 +86,7 @@ Active Core Members
   * **Berislav Balogović** (`hypemc`_);
   * **Mathias Arlaud** (`mtarld`_);
   * **Florent Morselli** (`spomky`_);
+  * **Tugdual Saunier** (`tucksaun`_);
   * **Alexandre Daubois** (`alexandre-daubois`_).
 
 * **Security Team** (``@symfony/security`` on GitHub):
@@ -263,3 +264,4 @@ discretion of the **Project Leader**.
 .. _`mtarld`: https://github.com/mtarld/
 .. _`spomky`: https://github.com/spomky/
 .. _`alexandre-daubois`: https://github.com/alexandre-daubois/
+.. _`tucksaun`: https://github.com/tucksaun/
