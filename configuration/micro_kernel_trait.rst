@@ -260,11 +260,11 @@ Now it looks like this::
 
         public function registerBundles(): iterable
         {
-            yield FrameworkBundle();
-            yield TwigBundle();
+            yield new FrameworkBundle();
+            yield new TwigBundle();
 
             if ('dev' === $this->getEnvironment()) {
-                yield WebProfilerBundle();
+                yield new WebProfilerBundle();
             }
         }
 
@@ -306,17 +306,8 @@ Now it looks like this::
             $routes->import(__DIR__.'/Controller/', 'attribute');
         }
 
-        // optional, to use the standard Symfony cache directory
-        public function getCacheDir(): string
-        {
-            return __DIR__.'/../var/cache/'.$this->getEnvironment();
-        }
-
-        // optional, to use the standard Symfony logs directory
-        public function getLogDir(): string
-        {
-            return __DIR__.'/../var/log';
-        }
+        // optionally, you can define the getCacheDir() and getLogDir() methods
+        // to override the default locations for these directories
     }
 
 Before continuing, run this command to add support for the new dependencies:
