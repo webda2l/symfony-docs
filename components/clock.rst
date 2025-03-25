@@ -267,13 +267,11 @@ timestamps::
     :method:`Symfony\\Component\\Clock\\DatePoint::getMicrosecond` methods were
     introduced in Symfony 7.1.
 
-.. _clock_writing-tests:
+Storing DatePoints in the Database
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
-Storing DatePoints in Databases
--------------------------------
-
-If you :doc:`use Doctrine </doctrine>`, consider using the ``date_point`` Doctrine
-type, which converts to/from ``DatePoint`` objects automatically::
+If you :doc:`use Doctrine </doctrine>` to work with databases, consider using the
+``date_point`` Doctrine type, which converts to/from ``DatePoint`` objects automatically::
 
     // src/Entity/Product.php
     namespace App\Entity;
@@ -284,15 +282,22 @@ type, which converts to/from ``DatePoint`` objects automatically::
     #[ORM\Entity]
     class Product
     {
+        // if you don't define the Doctrine type explicitly, Symfony will autodetect it:
         #[ORM\Column]
-        private DatePoint $created;
+        private DatePoint $createdAt;
+
+        // if you prefer to define the Doctrine type explicitly:
+        #[ORM\Column(type: 'date_point')]
+        private DatePoint $updatedAt;
 
         // ...
     }
 
 .. versionadded:: 7.3
 
-    The `DatePointType` was introduced in Symfony 7.3.
+    The ``DatePointType`` was introduced in Symfony 7.3.
+
+.. _clock_writing-tests:
 
 Writing Time-Sensitive Tests
 ----------------------------
