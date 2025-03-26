@@ -67,7 +67,7 @@ This exampe would output the following:
     ├── templates/
     └── tests/
 
-The given contents can be defined in a multi-dimensional array:
+The given contents can be defined in a multi-dimensional array::
 
     $tree = TreeHelper::createTree($io, null, [
         'src' =>  [
@@ -125,126 +125,132 @@ Built-in Tree Styles
 ~~~~~~~~~~~~~~~~~~~~
 
 The tree helper provides a few built-in styles that you can use to customize the
-output of the tree.
+output of the tree::
 
-:method:`Symfony\\Component\\Console\\Helper\\TreeStyle::default`
+    use Symfony\Component\Console\Helper\TreeStyle;
+    // ...
 
-    .. code-block:: terminal
+    $tree = TreeHelper::createTree($io, $node, [], TreeStyle::compact());
+    $tree->render();
 
-        ├── config
-        │   ├── packages
-        │   └── routes
-        │      ├── framework.yaml
-        │      └── web_profiler.yaml
-        ├── src
-        │   ├── Command
-        │   ├── Controller
-        │   │   └── DefaultController.php
-        │   └── Kernel.php
-        └── templates
-           └── base.html.twig
+``TreeHelper::createTree($io, $node, [], TreeStyle::default())`` (`details`_)
 
-:method:`Symfony\\Component\\Console\\Helper\\TreeStyle::box`
+.. code-block:: terminal
 
-    .. code-block:: terminal
+    ├── config
+    │   ├── packages
+    │   └── routes
+    │      ├── framework.yaml
+    │      └── web_profiler.yaml
+    ├── src
+    │   ├── Command
+    │   ├── Controller
+    │   │   └── DefaultController.php
+    │   └── Kernel.php
+    └── templates
+       └── base.html.twig
 
-        ┃╸ config
-        ┃  ┃╸ packages
-        ┃  ┗╸ routes
-        ┃     ┃╸ framework.yaml
-        ┃     ┗╸ web_profiler.yaml
-        ┃╸ src
-        ┃  ┃╸ Command
-        ┃  ┃╸ Controller
-        ┃  ┃  ┗╸ DefaultController.php
-        ┃  ┗╸ Kernel.php
-        ┗╸ templates
-           ┗╸ base.html.twig
+``TreeHelper::createTree($io, $node, [], TreeStyle::box())`` (`details`_)
 
-:method:`Symfony\\Component\\Console\\Helper\\TreeStyle::doubleBox`
+.. code-block:: terminal
 
-    .. code-block:: terminal
+    ┃╸ config
+    ┃  ┃╸ packages
+    ┃  ┗╸ routes
+    ┃     ┃╸ framework.yaml
+    ┃     ┗╸ web_profiler.yaml
+    ┃╸ src
+    ┃  ┃╸ Command
+    ┃  ┃╸ Controller
+    ┃  ┃  ┗╸ DefaultController.php
+    ┃  ┗╸ Kernel.php
+    ┗╸ templates
+       ┗╸ base.html.twig
 
-        ╠═ config
-        ║  ╠═ packages
-        ║  ╚═ routes
-        ║    ╠═ framework.yaml
-        ║    ╚═ web_profiler.yaml
-        ╠═ src
-        ║  ╠═ Command
-        ║  ╠═ Controller
-        ║  ║  ╚═ DefaultController.php
-        ║  ╚═ Kernel.php
-        ╚═ templates
-          ╚═ base.html.twig
+``TreeHelper::createTree($io, $node, [], TreeStyle::doubleBox())`` (`details`_)
 
-:method:`Symfony\\Component\\Console\\Helper\\TreeStyle::compact`
+.. code-block:: terminal
 
-    .. code-block:: terminal
+    ╠═ config
+    ║  ╠═ packages
+    ║  ╚═ routes
+    ║    ╠═ framework.yaml
+    ║    ╚═ web_profiler.yaml
+    ╠═ src
+    ║  ╠═ Command
+    ║  ╠═ Controller
+    ║  ║  ╚═ DefaultController.php
+    ║  ╚═ Kernel.php
+    ╚═ templates
+      ╚═ base.html.twig
 
-        ├ config
-        │ ├ packages
-        │ └ routes
-        │   ├ framework.yaml
-        │   └ web_profiler.yaml
-        ├ src
-        │ ├ Command
-        │ ├ Controller
-        │ │ └ DefaultController.php
-        │ └ Kernel.php
-        └ templates
-          └ base.html.twig
+``TreeHelper::createTree($io, $node, [], TreeStyle::compact())`` (`details`_)
 
-:method:`Symfony\\Component\\Console\\Helper\\TreeStyle::light`
+.. code-block:: terminal
 
-    .. code-block:: terminal
+    ├ config
+    │ ├ packages
+    │ └ routes
+    │   ├ framework.yaml
+    │   └ web_profiler.yaml
+    ├ src
+    │ ├ Command
+    │ ├ Controller
+    │ │ └ DefaultController.php
+    │ └ Kernel.php
+    └ templates
+      └ base.html.twig
 
-        |-- config
-        |   |-- packages
-        |   `-- routes
-        |       |-- framework.yaml
-        |       `-- web_profiler.yaml
-        |-- src
-        |   |-- Command
-        |   |-- Controller
-        |   |   `-- DefaultController.php
-        |   `-- Kernel.php
-        `-- templates
-            `-- base.html.twig
+``TreeHelper::createTree($io, $node, [], TreeStyle::light())`` (`details`_)
 
-:method:`Symfony\\Component\\Console\\Helper\\TreeStyle::minimal`
+.. code-block:: terminal
 
-    .. code-block:: terminal
+    |-- config
+    |   |-- packages
+    |   `-- routes
+    |       |-- framework.yaml
+    |       `-- web_profiler.yaml
+    |-- src
+    |   |-- Command
+    |   |-- Controller
+    |   |   `-- DefaultController.php
+    |   `-- Kernel.php
+    `-- templates
+        `-- base.html.twig
 
-        . config
-        . . packages
-        . . routes
-        .   . framework.yaml
-        .   . web_profiler.yaml
-        . src
-        . . Command
-        . . Controller
-        . . . DefaultController.php
-        . . Kernel.php
-        . templates
-          . base.html.twig
+``TreeHelper::createTree($io, $node, [], TreeStyle::minimal())`` (`details`_)
 
-:method:`Symfony\\Component\\Console\\Helper\\TreeStyle::rounded`
+.. code-block:: terminal
 
-    .. code-block:: terminal
+    . config
+    . . packages
+    . . routes
+    .   . framework.yaml
+    .   . web_profiler.yaml
+    . src
+    . . Command
+    . . Controller
+    . . . DefaultController.php
+    . . Kernel.php
+    . templates
+      . base.html.twig
 
-        ├─ config
-        │  ├─ packages
-        │  ╰─ routes
-        │     ├─ framework.yaml
-        │     ╰─ web_profiler.yaml
-        ├─ src
-        │  ├─ Command
-        │  ├─ Controller
-        │  │  ╰─ DefaultController.php
-        │  ╰─ Kernel.php
-        ╰─ templates
-           ╰─ base.html.twig
+``TreeHelper::createTree($io, $node, [], TreeStyle::rounded())`` (`details`_)
+
+.. code-block:: terminal
+
+    ├─ config
+    │  ├─ packages
+    │  ╰─ routes
+    │     ├─ framework.yaml
+    │     ╰─ web_profiler.yaml
+    ├─ src
+    │  ├─ Command
+    │  ├─ Controller
+    │  │  ╰─ DefaultController.php
+    │  ╰─ Kernel.php
+    ╰─ templates
+       ╰─ base.html.twig
 
 Making a Custom Tree Style
 ~~~~~~~~~~~~~~~~~~~~~~~~~~
@@ -285,3 +291,5 @@ The above code will output the following tree:
     🔵 🟢 🟠 🟡 Kernel.php
     🔵 🟠 🟡 templates
     🔵 🔴 🟠 🟡 base.html.twig
+
+.. _`details`: https://github.com/symfony/symfony/blob/7.3/src/Symfony/Component/Console/Helper/TreeStyle.php
