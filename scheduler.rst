@@ -723,9 +723,14 @@ after a message is consumed::
         $schedule = $event->getSchedule();
         $context = $event->getMessageContext();
         $message = $event->getMessage();
+        $result = $event->getResult();
 
-        // do something with the schedule, context or message
+        // do something with the schedule, context, message or result
     }
+
+.. versionadded:: 7.3
+
+    The ``getResult()`` method was introduced in Symfony 7.3.
 
 Execute this command to find out which listeners are registered for this event
 and their priorities:
