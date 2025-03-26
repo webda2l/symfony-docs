@@ -288,8 +288,10 @@ object evaluated to the id::
         // ... do something, like deleting an object
     }
 
-You can use the ``methods`` parameter to the attribute to specify the HTTP methods that are allowed for
-the token validation, :class:`Symfony\\Component\\Security\\Http\\Attribute\\IsCsrfTokenValid` is ignored for other methods. By default, the attribute allows all methods::
+By default, the ``IsCsrfTokenValid`` attribute performs the CSRF token check for
+all HTTP methods. You can restrict this validation to specific methods using the
+``methods`` parameter. If the request uses a method not listed in the ``methods``
+array, the attribute is ignored for that request, and no CSRF validation occurs::
 
     #[IsCsrfTokenValid('delete-item', tokenKey: 'token', methods: ['DELETE'])]
     public function delete(Post $post): Response
@@ -301,6 +303,10 @@ the token validation, :class:`Symfony\\Component\\Security\\Http\\Attribute\\IsC
 
     The :class:`Symfony\\Component\\Security\\Http\\Attribute\\IsCsrfTokenValid`
     attribute was introduced in Symfony 7.1.
+
+.. versionadded:: 7.3
+
+    The ``methods`` parameter was introduced in Symfony 7.3.
 
 CSRF Tokens and Compression Side-Channel Attacks
 ------------------------------------------------
