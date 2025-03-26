@@ -288,6 +288,15 @@ object evaluated to the id::
         // ... do something, like deleting an object
     }
 
+You can use the ``methods`` parameter to the attribute to specify the HTTP methods that are allowed for
+the token validation, :class:`Symfony\\Component\\Security\\Http\\Attribute\\IsCsrfTokenValid` is ignored for other methods. By default, the attribute allows all methods::
+
+    #[IsCsrfTokenValid('delete-item', tokenKey: 'token', methods: ['DELETE'])]
+    public function delete(Post $post): Response
+    {
+        // ... delete the object
+    }
+
 .. versionadded:: 7.1
 
     The :class:`Symfony\\Component\\Security\\Http\\Attribute\\IsCsrfTokenValid`
