@@ -39,7 +39,7 @@ to customize the normalized data. To do that, leverage the ``ObjectNormalizer``:
 
             // Here, add, edit, or delete some data:
             $data['href']['self'] = $this->router->generate('topic_show', [
-                'id' => $topic->getId(),
+                'id' => $object->getId(),
             ], UrlGeneratorInterface::ABSOLUTE_URL);
 
             return $data;
