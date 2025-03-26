@@ -33,9 +33,9 @@ to customize the normalized data. To do that, leverage the ``ObjectNormalizer``:
         ) {
         }
 
-        public function normalize($topic, ?string $format = null, array $context = []): array
+        public function normalize(mixed $object, ?string $format = null, array $context = []): array
         {
-            $data = $this->normalizer->normalize($topic, $format, $context);
+            $data = $this->normalizer->normalize($object, $format, $context);
 
             // Here, add, edit, or delete some data:
             $data['href']['self'] = $this->router->generate('topic_show', [
