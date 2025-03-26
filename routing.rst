@@ -578,7 +578,7 @@ the ``{page}`` parameter using the ``requirements`` option:
             }
 
             #[Route('/blog/{slug}', name: 'blog_show')]
-            public function show($slug): Response
+            public function show(string $slug): Response
             {
                 // ...
             }
