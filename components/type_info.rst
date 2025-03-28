@@ -36,9 +36,12 @@ to the :class:`Symfony\\Component\\TypeInfo\\Type` static methods as following::
     Type::generic(Type::object(Collection::class), Type::int());
     Type::list(Type::bool());
     Type::intersection(Type::object(\Stringable::class), Type::object(\Iterator::class));
-    // ... and more methods defined in Symfony\Component\TypeInfo\TypeFactoryTrait
 
-    // you can also use a generic method that detects the type automatically
+Many others methods are available and can be found
+in :class:`Symfony\\Component\\TypeInfo\\TypeFactoryTrait`.
+
+You can also use a generic method that detects the type automatically::
+
     Type::fromValue(1.1);   // same as Type::float()
     Type::fromValue('...'); // same as Type::string()
     Type::fromValue(false); // same as Type::false()
