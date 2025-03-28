@@ -27,10 +27,24 @@ Core Team Member Responsibilities
 
 Core Team members are unpaid volunteers and as such, they are not expected to
 dedicate any specific amount of time on Symfony. They are expected to help the
-project in any way they can, from reviewing pull requests, writing documentation
-to participating in discussions and helping the community in general, but their
-involvement is completely voluntary and can be as much or as little as they
-want.
+project in any way they can. From reviewing pull requests and writing documentation,
+to participating in discussions and helping the community in general. However,
+their involvement is completely voluntary and can be as much or as little as
+they want.
+
+Core Team Communication
+~~~~~~~~~~~~~~~~~~~~~~~
+
+As an open source project, public discussions and documentation is favored
+over private ones. All communication in the Symfony community conforms to
+the :doc:`/contributing/code_of_conduct/code_of_conduct`. Request
+assistance from other Core and CARE team members when getting in situations
+not following the Code of Conduct.
+
+Core Team members are invited in a private Slack channel, for quick
+interactions and private processes (e.g. security issues). Each member
+should feel free to ask for assistance for anything they may encounter.
+Expect no judgement from other team members.
 
 Core Organization
 -----------------
@@ -146,6 +160,14 @@ A Symfony Core membership can be revoked for any of the following reasons:
 * Willful negligence or intent to harm the Symfony project;
 * Upon decision of the **Project Leader**.
 
+Core Membership Compensation
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+
+Core Team members work on Symfony on a purely voluntary basis. In return
+for their work for the Symfony project, members can get free access to
+Symfony conferences. Personal vouchers for Symfony conferences are handed out
+on request by the **Project Leader**.
+
 Code Development Rules
 ----------------------
 
@@ -170,7 +192,7 @@ Pull Request Merging Policy
 
 A pull request **can be merged** if:
 
-* It is a :ref:`minor change <core-team_minor-changes>`;
+* It is a :ref:`unsubstantial change <core-team_unsubstantial-changes>`;
 * Enough time was given for peer reviews;
 * It is a bug fix and at least two **Mergers Team** members voted ``+1``
   (only one if the submitter is part of the Mergers team) and no Core
@@ -179,12 +201,20 @@ A pull request **can be merged** if:
   ``+1`` (if the submitter is part of the Mergers team, two *other* members)
   and no Core member voted ``-1`` (via GitHub reviews or as comments).
 
+.. _core-team_unsubstantial-changes:
+
+.. note::
+
+    Unsubstantial changes comprise typos, DocBlock fixes, code standards
+    fixes, comment, exception message tweaks, and minor CSS, JavaScript and
+    HTML modifications.
+
 Pull Request Merging Process
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
-All code must be committed to the repository through pull requests, except for
-:ref:`minor change <core-team_minor-changes>` which can be committed directly
-to the repository.
+All code must be committed to the repository through pull requests, except
+for :ref:`unsubstantial change <core-team_unsubstantial-changes>` which can be
+committed directly to the repository.
 
 **Mergers** must always use the command-line ``gh`` tool provided by the
 **Project Leader** to merge pull requests.
@@ -206,6 +236,90 @@ following these rules:
 Getting the right category is important as it is used by automated tools to
 generate the CHANGELOG files when releasing new versions.
 
+.. tip::
+
+    Core team members are part of the ``mergers`` group on the ``symfony``
+    Github organization. This gives them write-access to many repositories,
+    including the main ``symfony/symfony`` mono-repository.
+
+    To avoid unintentional pushes to the main project (which in turn creates
+    new versions on Packagist), Core team members are encouraged to have
+    two clones of the project locally:
+
+    #. A clone for their own contributions, which they use to push to their
+       fork on GitHub. Clear out the push URL for the Symfony repository using
+       ``git remote set-url --push origin dev://null`` (change ``origin``
+       to the Git remote poiting to the Symfony repository);
+    #. A clone for merging, which they use in combination with ``gh`` and
+       allows them to push to the main repository.
+
+Upmerging Version Branches
+~~~~~~~~~~~~~~~~~~~~~~~~~~
+
+To synchronize changes in all versions, version branches are regularly
+merged from oldest to latest, called "upmerging". This is a manual process.
+There is no strict policy on when this occurs, but usually not more than
+once a day and at least once before monthly releases.
+
+Before starting the upmerge, Git must be configured to provide a merge
+summary by running:
+
+.. code-block:: terminal
+
+    # Run command in the "symfony" repository
+    $ git config merge.stat true
+
+The upmerge should always be done on all maintained versions at the same
+time. Refer to `the releases page`_ to find all actively maintained
+versions (indicated by a green color).
+
+The process follows these steps:
+
+#. Start on the oldest version and make sure it's up to date with the
+   upstream repository;
+#. Check-out the second oldest version, update from upstream and merge the
+   previous version from the local branch;
+#. Continue this process until you reached the latest version;
+#. Push the branches to the repository and monitor the test suite. Failure
+   might indicate hidden/missed merge conflicts.
+
+.. code-block:: terminal
+
+    # 'origin' is refered to as the main upstream project
+    $ git fetch origin
+
+    # update the local branches
+    $ git checkout 6.4
+    $ git reset --hard origin/6.4
+    $ git checkout 7.2
+    $ git reset --hard origin/7.2
+    $ git checkout 7.3
+    $ git reset --hard origin/7.3
+
+    # upmerge 6.4 into 7.2
+    $ git checkout 7.2
+    $ git merge --no-ff 6.4
+    # ... resolve conflicts
+    $ git commit
+
+    # upmerge 7.2 into 7.3
+    $ git checkout 7.3
+    $ git merge --no-ff 7.2
+    # ... resolve conflicts
+    $ git commit
+
+    $ git push origin 7.3 7.2 6.4
+
+.. warning::
+
+    Upmerges must be explicit, i.e. no fast-forward merges.
+
+.. tip::
+
+    Solving merge conflicts can be challenging. You can always ping other
+    Core team members to help you in the process (e.g. members that merged
+    a specific conflicting change).
+
 Release Policy
 ~~~~~~~~~~~~~~
 
@@ -216,13 +330,6 @@ Symfony Core Rules and Protocol Amendments
 
 The rules described in this document may be amended at any time at the
 discretion of the **Project Leader**.
-
-.. _core-team_minor-changes:
-
-.. note::
-
-    Minor changes comprise typos, DocBlock fixes, code standards
-    violations, and minor CSS, JavaScript and HTML modifications.
 
 .. _`symfony-docs repository`: https://github.com/symfony/symfony-docs
 .. _`UX repositories`: https://github.com/symfony/ux
@@ -265,3 +372,4 @@ discretion of the **Project Leader**.
 .. _`spomky`: https://github.com/spomky/
 .. _`alexandre-daubois`: https://github.com/alexandre-daubois/
 .. _`tucksaun`: https://github.com/tucksaun/
+.. _`the releases page`: https://symfony.com/releases
