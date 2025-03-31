@@ -69,6 +69,7 @@ In addition, there are other groups created to manage specific topics:
 * **Security Team**: manages the whole security process (triaging reported vulnerabilities,
   fixing the reported issues, coordinating the release of security fixes, etc.);
 * **Symfony UX Team**: manages the `UX repositories`_;
+* **Symfony CLI Team**: manages the `CLI repositories`_;
 * **Documentation Team**: manages the whole `symfony-docs repository`_.
 
 Active Core Members
@@ -100,7 +101,6 @@ Active Core Members
   * **Berislav Balogović** (`hypemc`_);
   * **Mathias Arlaud** (`mtarld`_);
   * **Florent Morselli** (`spomky`_);
-  * **Tugdual Saunier** (`tucksaun`_);
   * **Alexandre Daubois** (`alexandre-daubois`_).
 
 * **Security Team** (``@symfony/security`` on GitHub):
@@ -115,6 +115,11 @@ Active Core Members
   * **Simon André** (`smnandre`_);
   * **Hugo Alliaume** (`kocal`_);
   * **Matheo Daninos** (`webmamba`_).
+
+* **Symfony CLI Team** (``@symfony-cli/core`` on GitHub):
+
+  * **Fabien Potencier** (`fabpot`_);
+  * **Tugdual Saunier** (`tucksaun`_).
 
 * **Documentation Team** (``@symfony/team-symfony-docs`` on GitHub):
 
@@ -333,6 +338,7 @@ discretion of the **Project Leader**.
 
 .. _`symfony-docs repository`: https://github.com/symfony/symfony-docs
 .. _`UX repositories`: https://github.com/symfony/ux
+.. _`CLI repositories`: https://github.com/symfony-cli
 .. _`fabpot`: https://github.com/fabpot/
 .. _`webmozart`: https://github.com/webmozart/
 .. _`Tobion`: https://github.com/Tobion/
