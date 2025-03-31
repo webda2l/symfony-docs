@@ -1645,10 +1645,14 @@ The transport has a number of options:
     Exchange flags
 
 ``exchange[name]``
-    Name of the exchange
+    Name of the exchange, an empty string can be used to use the default exchange
 
 ``exchange[type]`` (default: ``fanout``)
     Type of exchange
+
+.. versionadded:: 7.3
+
+    Empty string support for ``exchange[name]`` was introduced in Symfony 7.3.
 
 You can also configure AMQP-specific settings on your message by adding
 :class:`Symfony\\Component\\Messenger\\Bridge\\Amqp\\Transport\\AmqpStamp` to
