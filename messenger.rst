@@ -2254,19 +2254,21 @@ on a case-by-case basis via the :class:`Symfony\\Component\\Messenger\\Stamp\\Se
     provides that control. See `SymfonyCasts' message serializer tutorial`_ for
     details.
 
-Closing connection
-~~~~~~~~~~~~~~~~~~
+Closing Connections
+~~~~~~~~~~~~~~~~~~~
 
-When using a transport that requires a connection, you can close it using
-the :method:`Symfony\\Component\\Messenger\\Transport\\CloseableTransportInterface::close`
-method to allow free resources for long-running processes.
+When using a transport that requires a connection, you can close it by calling the
+:method:`Symfony\\Component\\Messenger\\Transport\\CloseableTransportInterface::close`
+method to free up resources in long-running processes.
 
-This interface is implemented by the following transports: AmazonSqs, Amqp and Redis.
-If you want to close a Doctrine connection, this can be achieved :ref:`using middleware <middleware-for-doctrine>`.
+This interface is implemented by the following transports: AmazonSqs, Amqp, and Redis.
+If you need to close a Doctrine connection, you can do so
+:ref:`using middleware <middleware-for-doctrine>`.
 
 .. versionadded:: 7.3
 
-    The ``CloseableTransportInterface`` and ``close`` method were introduced in Symfony 7.3.
+    The ``CloseableTransportInterface`` and its ``close()`` method were introduced
+    in Symfony 7.3.
 
 Running Commands And External Processes
 ---------------------------------------
