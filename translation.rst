@@ -497,7 +497,9 @@ Symfony looks for message files (i.e. translations) in the following default loc
   ``Resources/translations/`` directory, which is no longer recommended for bundles).
 
 The locations are listed here with the highest priority first. That is, you can
-override the translation messages of a bundle in the first directory.
+override the translation messages of a bundle in the first directory. Bundles are processed
+in the order they are given in the ``config/bundles.php`` file, so bundles listed first have
+higher priority.
 
 The override mechanism works at a key level: only the overridden keys need
 to be listed in a higher priority message file. When a key is not found
