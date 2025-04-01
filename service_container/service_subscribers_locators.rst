@@ -298,10 +298,10 @@ This is done by having ``getSubscribedServices()`` return an array of
     The above example requires using ``3.2`` version or newer of ``symfony/service-contracts``.
 
 .. _service-locator_autowire-locator:
-.. _service-locator_autowire-iterator:
+.. _the-autowirelocator-and-autowireiterator-attributes:
 
-The AutowireLocator and AutowireIterator Attributes
-~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+The AutowireLocator Attribute
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
 Another way to define a service locator is to use the
 :class:`Symfony\\Component\\DependencyInjection\\Attribute\\AutowireLocator`
@@ -381,16 +381,17 @@ attribute::
     :class:`Symfony\\Component\\DependencyInjection\\Attribute\\AutowireLocator`
     attribute was introduced in Symfony 6.4.
 
+.. _service-locator_autowire-iterator:
+
 The AutowireIterator Attribute
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
-Variant of the ``AutowireLocator`` that specifically provides an iterable of services
-based on a tag. This allows you to collect all services with a particular tag into
-an iterable, which can be useful when you need to iterate over a set of services
-rather than retrieving them individually.
 
-For example, if you want to collect all the handlers for different command types,
-you can use the ``AutowireIterator`` attribute to automatically inject all services
-tagged with a specific tag::
+A variant of ``AutowireLocator`` that injects an iterable of services tagged
+with a specific :doc:`tag </service_container/tags>`. This is useful to loop
+over a set of tagged services instead of retrieving them individually.
+
+For example, to collect all handlers for different command types, use the
+``AutowireIterator`` attribute and pass the tag used by those services::
 
     // src/CommandBus.php
     namespace App;
@@ -404,7 +405,7 @@ tagged with a specific tag::
     {
         public function __construct(
             #[AutowireIterator('command_handler')]
-            private iterable $handlers, // Collects all services tagged with 'command_handler'
+            private iterable $handlers, // collects all services tagged with 'command_handler'
         ) {
         }
 
