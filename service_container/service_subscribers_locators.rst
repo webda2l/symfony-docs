@@ -320,10 +320,10 @@ This is done by having ``getSubscribedServices()`` return an array of
     The above example requires using ``3.2`` version or newer of ``symfony/service-contracts``.
 
 .. _service-locator_autowire-locator:
-.. _service-locator_autowire-iterator:
+.. _the-autowirelocator-and-autowireiterator-attributes:
 
-The AutowireLocator and AutowireIterator Attributes
-~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+The AutowireLocator Attribute
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
 Another way to define a service locator is to use the
 :class:`Symfony\\Component\\DependencyInjection\\Attribute\\AutowireLocator`
@@ -397,13 +397,43 @@ attribute::
         }
     }
 
-.. note::
+.. _service-locator_autowire-iterator:
 
-    To receive an iterable instead of a service locator, you can switch the
-    :class:`Symfony\\Component\\DependencyInjection\\Attribute\\AutowireLocator`
-    attribute to
-    :class:`Symfony\\Component\\DependencyInjection\\Attribute\\AutowireIterator`
-    attribute.
+The AutowireIterator Attribute
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+
+A variant of ``AutowireLocator`` that injects an iterable of services tagged
+with a specific :doc:`tag </service_container/tags>`. This is useful to loop
+over a set of tagged services instead of retrieving them individually.
+
+For example, to collect all handlers for different command types, use the
+``AutowireIterator`` attribute and pass the tag used by those services::
+
+    // src/CommandBus.php
+    namespace App;
+
+    use App\CommandHandler\BarHandler;
+    use App\CommandHandler\FooHandler;
+    use Psr\Container\ContainerInterface;
+    use Symfony\Component\DependencyInjection\Attribute\AutowireIterator;
+
+    class CommandBus
+    {
+        public function __construct(
+            #[AutowireIterator('command_handler')]
+            private iterable $handlers, // collects all services tagged with 'command_handler'
+        ) {
+        }
+
+        public function handle(Command $command): mixed
+        {
+            foreach ($this->handlers as $handler) {
+                if ($handler->supports($command)) {
+                    return $handler->handle($command);
+                }
+            }
+        }
+    }
 
 .. _service-subscribers-locators_defining-service-locator:
 
