@@ -1537,6 +1537,255 @@ like:
             PropertyNormalizer::NORMALIZE_VISIBILITY => PropertyNormalizer::NORMALIZE_PUBLIC | PropertyNormalizer::NORMALIZE_PROTECTED,
         ]);
 
+Named Serializers
+-----------------
+
+.. versionadded:: 7.2
+
+    Named serializers were introduced in Symfony 7.2.
+
+Sometimes, you may need multiple configurations for the serializer, such
+as different default contexts, name converters, or sets of normalizers and
+encoders, depending on the use case. For example, when your application
+communicates with multiple APIs, each with its own set of rules.
+
+This can be achieved by configuring multiple instances of the serializer
+using the ``named_serializers`` option:
+
+.. configuration-block::
+
+    .. code-block:: yaml
+
+        # config/packages/serializer.yaml
+        framework:
+            serializer:
+                named_serializers:
+                    api_client1:
+                        name_converter: 'serializer.name_converter.camel_case_to_snake_case'
+                        default_context:
+                            enable_max_depth: true
+                    api_client2:
+                        default_context:
+                            enable_max_depth: false
+
+    .. code-block:: xml
+
+        <!-- config/packages/serializer.xml -->
+        <?xml version="1.0" encoding="UTF-8" ?>
+        <container xmlns="http://symfony.com/schema/dic/services"
+            xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+            xmlns:framework="http://symfony.com/schema/dic/symfony"
+            xsi:schemaLocation="http://symfony.com/schema/dic/services
+                https://symfony.com/schema/dic/services/services-1.0.xsd
+                http://symfony.com/schema/dic/symfony https://symfony.com/schema/dic/symfony/symfony-1.0.xsd">
+
+            <framework:config>
+                <framework:serializer>
+
+                    <framework:named-serializer
+                        name="api_client1"
+                        name-converter="serializer.name_converter.camel_case_to_snake_case"
+                    >
+                        <framework:default-context>
+                            <framework:enable_max_depth>true</framework:enable_max_depth>
+                        </framework:default-context>
+                    </framework:named-serializer>
+
+                    <framework:named-serializer name="api_client2">
+                        <framework:default-context>
+                            <framework:enable_max_depth>false</framework:enable_max_depth>
+                        </framework:default-context>
+                    </framework:named-serializer>
+
+                </framework:serializer>
+            </framework:config>
+        </container>
+
+    .. code-block:: php
+
+        // config/packages/serializer.php
+        use Symfony\Config\FrameworkConfig;
+
+        return static function (FrameworkConfig $framework): void {
+            $framework->serializer()
+                ->namedSerializer('api_client1')
+                    ->nameConverter('serializer.name_converter.camel_case_to_snake_case')
+                    ->defaultContext([
+                        'enable_max_depth' => true,
+                    ])
+            ;
+            $framework->serializer()
+                ->namedSerializer('api_client2')
+                    ->defaultContext([
+                        'enable_max_depth' => false,
+                    ])
+            ;
+        };
+
+You can inject these different serializer instances
+using :ref:`named aliases <autowiring-multiple-implementations-same-type>`::
+
+    namespace App\Controller;
+
+    // ...
+    use Symfony\Component\DependencyInjection\Attribute\Target;
+
+    class PersonController extends AbstractController
+    {
+        public function index(
+            SerializerInterface $serializer,           // Default serializer
+            SerializerInterface $apiClient1Serializer, // api_client1 serializer
+            #[Target('apiClient2.serializer')]         // api_client2 serializer
+            SerializerInterface $customName,
+        ) {
+            // ...
+        }
+    }
+
+Named serializers are configured with the default set of normalizers and encoders.
+
+You can register additional normalizers and encoders with a specific named
+serializer by adding a ``serializer`` attribute to
+the :ref:`serializer.normalizer <reference-dic-tags-serializer-normalizer>`
+or :ref:`serializer.encoder <reference-dic-tags-serializer-encoder>` tags:
+
+.. configuration-block::
+
+    .. code-block:: yaml
+
+        # config/services.yaml
+        services:
+            # ...
+
+            Symfony\Component\Serializer\Normalizer\CustomNormalizer:
+                # Prevent this normalizer from automatically being included in the default serializer
+                autoconfigure: false
+                tags:
+                    # Include this normalizer in a single serializer
+                    - serializer.normalizer: { serializer: 'api_client1' }
+                    # Include this normalizer in multiple serializers
+                    - serializer.normalizer: { serializer: [ 'api_client1', 'api_client2' ] }
+                    # Include this normalizer in all serializers (including the default one)
+                    - serializer.normalizer: { serializer: '*' }
+
+    .. code-block:: xml
+
+        <!-- config/services.xml -->
+        <?xml version="1.0" encoding="UTF-8" ?>
+        <container xmlns="http://symfony.com/schema/dic/services"
+            xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+            xsi:schemaLocation="http://symfony.com/schema/dic/services
+                https://symfony.com/schema/dic/services/services-1.0.xsd">
+
+            <services>
+                <!-- ... -->
+
+                <!-- Disable autoconfigure to prevent this normalizer from automatically -->
+                <!-- being included in the default serializer -->
+                <service
+                    id="Symfony\Component\Serializer\Normalizer\CustomNormalizer"
+                    autoconfigure="false"
+                >
+                    <!-- Include this normalizer in a single serializer -->
+                    <tag name="serializer.normalizer" serializer="api_client1"/>
+
+                    <!-- Include this normalizer in multiple serializers -->
+                    <tag name="serializer.normalizer" serializer="api_client1"/>
+                    <tag name="serializer.normalizer" serializer="api_client2"/>
+
+                    <!-- Include this normalizer in all serializers (including the default one) -->
+                    <tag name="serializer.normalizer" serializer="*"/>
+                </service>
+            </services>
+        </container>
+
+    .. code-block:: php
+
+        // config/services.php
+        namespace Symfony\Component\DependencyInjection\Loader\Configurator;
+
+        use Symfony\Component\Serializer\Normalizer\CustomNormalizer;
+
+        return function(ContainerConfigurator $container) {
+            // ...
+
+            $services->set(CustomNormalizer::class)
+                // Prevent this normalizer from automatically being included in the default serializer
+                ->autoconfigure(false)
+
+                // Include this normalizer in a single serializer
+                ->tag('serializer.normalizer', ['serializer' => 'api_client1'])
+                // Include this normalizer in multiple serializers
+                ->tag('serializer.normalizer', ['serializer' => ['api_client1', 'api_client2']])
+                // Include this normalizer in all serializers (including the default one)
+                ->tag('serializer.normalizer', ['serializer' => '*'])
+            ;
+        };
+
+When the ``serializer`` attribute is not set, the service is registered with
+the default serializer.
+
+Each normalizer and encoder used in a named serializer is tagged with
+a ``serializer.normalizer.<name>`` or ``serializer.encoder.<name>`` tag,
+which can be used to list their priorities using the following command:
+
+.. code-block:: terminal
+
+    $ php bin/console debug:container --tag serializer.<normalizer|encoder>.<name>
+
+Additionally, you can exclude the default set of normalizers and encoders by
+setting the ``include_built_in_normalizers`` and ``include_built_in_encoders``
+options to ``false``:
+
+.. configuration-block::
+
+    .. code-block:: yaml
+
+        # config/packages/serializer.yaml
+        framework:
+            serializer:
+                named_serializers:
+                    api_client1:
+                        include_built_in_normalizers: false
+                        include_built_in_encoders: true
+
+    .. code-block:: xml
+
+        <!-- config/packages/serializer.xml -->
+        <?xml version="1.0" encoding="UTF-8" ?>
+        <container xmlns="http://symfony.com/schema/dic/services"
+            xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+            xmlns:framework="http://symfony.com/schema/dic/symfony"
+            xsi:schemaLocation="http://symfony.com/schema/dic/services
+                https://symfony.com/schema/dic/services/services-1.0.xsd
+                http://symfony.com/schema/dic/symfony https://symfony.com/schema/dic/symfony/symfony-1.0.xsd">
+
+            <framework:config>
+                <framework:serializer>
+
+                    <framework:named-serializer
+                        name="api_client1"
+                        include-built-in-normalizers="false"
+                        include-built-in-encoders="true"
+                    />
+
+                </framework:serializer>
+            </framework:config>
+        </container>
+
+    .. code-block:: php
+
+        // config/packages/serializer.php
+        use Symfony\Config\FrameworkConfig;
+
+        return static function (FrameworkConfig $framework): void {
+            $framework->serializer()
+                ->namedSerializer('api_client1')
+                    ->includeBuiltInNormalizers(false)
+                    ->includeBuiltInEncoders(true)
+            ;
+        };
+
 Debugging the Serializer
 ------------------------
 
