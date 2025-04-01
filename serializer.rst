@@ -1544,13 +1544,13 @@ Named Serializers
 
     Named serializers were introduced in Symfony 7.2.
 
-Sometimes, you may need multiple configurations for the serializer, such
-as different default contexts, name converters, or sets of normalizers and
-encoders, depending on the use case. For example, when your application
-communicates with multiple APIs, each with its own set of rules.
+Sometimes, you may need multiple configurations for the serializer, such as
+different default contexts, name converters, or sets of normalizers and encoders,
+depending on the use case. For example, when your application communicates with
+multiple APIs, each of which follows its own set of serialization rules.
 
-This can be achieved by configuring multiple instances of the serializer
-using the ``named_serializers`` option:
+You can achieve this by configuring multiple serializer instances using
+the ``named_serializers`` option:
 
 .. configuration-block::
 
@@ -1633,7 +1633,7 @@ using :ref:`named aliases <autowiring-multiple-implementations-same-type>`::
     class PersonController extends AbstractController
     {
         public function index(
-            SerializerInterface $serializer,           // Default serializer
+            SerializerInterface $serializer,           // default serializer
             SerializerInterface $apiClient1Serializer, // api_client1 serializer
             #[Target('apiClient2.serializer')]         // api_client2 serializer
             SerializerInterface $customName,
@@ -1642,10 +1642,10 @@ using :ref:`named aliases <autowiring-multiple-implementations-same-type>`::
         }
     }
 
-Named serializers are configured with the default set of normalizers and encoders.
-
-You can register additional normalizers and encoders with a specific named
-serializer by adding a ``serializer`` attribute to
+By default, named serializers use the built-in set of normalizers and encoders,
+just like the main serializer service. However, you can customize them by
+registering additional normalizers or encoders for a specific named serializer.
+To do that, add a ``serializer`` attribute to
 the :ref:`serializer.normalizer <reference-dic-tags-serializer-normalizer>`
 or :ref:`serializer.encoder <reference-dic-tags-serializer-encoder>` tags:
 
@@ -1658,14 +1658,14 @@ or :ref:`serializer.encoder <reference-dic-tags-serializer-encoder>` tags:
             # ...
 
             Symfony\Component\Serializer\Normalizer\CustomNormalizer:
-                # Prevent this normalizer from automatically being included in the default serializer
+                # prevent this normalizer from being automatically added to the default serializer
                 autoconfigure: false
                 tags:
-                    # Include this normalizer in a single serializer
+                    # add this normalizer only to a specific named serializer
                     - serializer.normalizer: { serializer: 'api_client1' }
-                    # Include this normalizer in multiple serializers
+                    # add this normalizer to several named serializers
                     - serializer.normalizer: { serializer: [ 'api_client1', 'api_client2' ] }
-                    # Include this normalizer in all serializers (including the default one)
+                    # add this normalizer to all serializers, including the default one
                     - serializer.normalizer: { serializer: '*' }
 
     .. code-block:: xml
@@ -1680,20 +1680,19 @@ or :ref:`serializer.encoder <reference-dic-tags-serializer-encoder>` tags:
             <services>
                 <!-- ... -->
 
-                <!-- Disable autoconfigure to prevent this normalizer from automatically -->
-                <!-- being included in the default serializer -->
+                <!-- prevent this normalizer from being automatically added to the default serializer -->
                 <service
                     id="Symfony\Component\Serializer\Normalizer\CustomNormalizer"
                     autoconfigure="false"
                 >
-                    <!-- Include this normalizer in a single serializer -->
+                    <!-- add this normalizer only to a specific named serializer -->
                     <tag name="serializer.normalizer" serializer="api_client1"/>
 
-                    <!-- Include this normalizer in multiple serializers -->
+                    <!-- add this normalizer to several named serializers -->
                     <tag name="serializer.normalizer" serializer="api_client1"/>
                     <tag name="serializer.normalizer" serializer="api_client2"/>
 
-                    <!-- Include this normalizer in all serializers (including the default one) -->
+                    <!-- add this normalizer to all serializers, including the default one -->
                     <tag name="serializer.normalizer" serializer="*"/>
                 </service>
             </services>
@@ -1710,32 +1709,32 @@ or :ref:`serializer.encoder <reference-dic-tags-serializer-encoder>` tags:
             // ...
 
             $services->set(CustomNormalizer::class)
-                // Prevent this normalizer from automatically being included in the default serializer
+                // prevent this normalizer from being automatically added to the default serializer
                 ->autoconfigure(false)
 
-                // Include this normalizer in a single serializer
+                // add this normalizer only to a specific named serializer
                 ->tag('serializer.normalizer', ['serializer' => 'api_client1'])
-                // Include this normalizer in multiple serializers
+                // add this normalizer to several named serializers
                 ->tag('serializer.normalizer', ['serializer' => ['api_client1', 'api_client2']])
-                // Include this normalizer in all serializers (including the default one)
+                // add this normalizer to all serializers, including the default one
                 ->tag('serializer.normalizer', ['serializer' => '*'])
             ;
         };
 
-When the ``serializer`` attribute is not set, the service is registered with
+When the ``serializer`` attribute is not set, the service is registered only with
 the default serializer.
 
-Each normalizer and encoder used in a named serializer is tagged with
-a ``serializer.normalizer.<name>`` or ``serializer.encoder.<name>`` tag,
-which can be used to list their priorities using the following command:
+Each normalizer or encoder used in a named serializer is tagged with a
+``serializer.normalizer.<name>`` or ``serializer.encoder.<name>`` tag.
+You can inspect their priorities using the following command:
 
 .. code-block:: terminal
 
     $ php bin/console debug:container --tag serializer.<normalizer|encoder>.<name>
 
-Additionally, you can exclude the default set of normalizers and encoders by
-setting the ``include_built_in_normalizers`` and ``include_built_in_encoders``
-options to ``false``:
+Additionally, you can exclude the default set of normalizers and encoders from a
+named serializer by setting the ``include_built_in_normalizers`` and
+``include_built_in_encoders`` options to ``false``:
 
 .. configuration-block::
 
