@@ -171,6 +171,25 @@ In a Symfony bundle, call this method in the ``load()`` method of the
         }
     }
 
+or if you are following the recommended way for new bundles and for bundles following the
+:ref:`recommended directory structure <bundles-directory-structure>`::
+
+    // ...
+    use Symfony\Component\DependencyInjection\ContainerBuilder;
+    use Symfony\Component\DependencyInjection\Loader\Configurator\ContainerConfigurator;
+    use Symfony\Component\HttpKernel\Bundle\AbstractBundle;
+    
+    class MyBundle extends AbstractBundle
+    {
+        public function loadExtension(array $config, ContainerConfigurator $container, ContainerBuilder $builder): void
+        {
+            $builder
+                ->registerForAutoconfiguration(CustomInterface::class)
+                ->addTag('app.custom_tag')
+            ;
+        }
+    }
+
 Autoconfiguration registering is not limited to interfaces. It is possible
 to use PHP attributes to autoconfigure services by using the
 :method:`Symfony\\Component\\DependencyInjection\\ContainerBuilder::registerAttributeForAutoconfiguration`
