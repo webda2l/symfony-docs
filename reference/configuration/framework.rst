@@ -128,7 +128,7 @@ and public.
 allow_reload
 ............
 
-**type**: ``string``
+**type**: ``boolean`` **default**: ``false``
 
 Specifies whether the client can force a cache reload by including a
 Cache-Control "no-cache" directive in the request. Set it to ``true``
@@ -137,7 +137,7 @@ for compliance with RFC 2616. (default: false)
 allow_revalidate
 ................
 
-**type**: ``string``
+**type**: ``boolean`` **default**: ``false``
 
 Specifies whether the client can force a cache revalidate by including a
 Cache-Control "max-age=0" directive in the request. Set it to ``true``
