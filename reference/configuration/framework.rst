@@ -2352,11 +2352,15 @@ Combine it with the ``collect`` option to enable/disable the profiler on demand:
 collect_serializer_data
 .......................
 
-**type**: ``boolean`` **default**: ``false``
+**type**: ``boolean`` **default**: ``true``
 
-Set this option to ``true`` to enable the serializer data collector and its
-profiler panel. When this option is ``true``, all normalizers and encoders are
+When this option is ``true``, all normalizers and encoders are
 decorated by traceable implementations that collect profiling information about them.
+
+.. deprecated:: 7.3
+
+    Setting the ``collect_serializer_data`` option to ``false`` is deprecated
+    since Symfony 7.3.
 
 .. _profiler-dsn:
 
