@@ -283,11 +283,13 @@ If ``relative`` is enabled, it'll create a path relative to the current path.
 
 .. code-block:: twig
 
+    {# consider that the app defines an 'app_blog' route with the path '/blog/{page}' #}
+
     {{ path(name = 'app_blog', parameters = {page: 3}, relative = false) }}
-    {# output (depending on the route configuration): /blog/3 or /blog?page=3 #}
+    {# output: /blog/3 #}
 
     {{ path(name = 'app_blog', parameters = {page: 3}, relative = true) }}
-    {# output (depending on the route configuration): blog/3 or ?page=3 #}
+    {# output: blog/3 #}
 
 .. seealso::
 
@@ -313,13 +315,13 @@ Returns the absolute URL (with scheme and host) for the given route. If
 
 .. code-block:: twig
 
+    {# consider that the app defines an 'app_blog' route with the path '/blog/{page}' #}
+
     {{ url(name = 'app_blog', parameters = {page: 3}, schemeRelative = false) }}
-    {# output (depending on the route configuration): http://example.org/blog/3
-    or http://example.org/blog?page=3 #}
+    {# output: http://example.org/blog/3 #}
 
     {{ url(name = 'app_blog', parameters = {page: 3}, schemeRelative = true) }}
-    {# output (depending on the route configuration): //example.org/blog/3
-    or //example.org/blog?page=3 #}
+    {# output: //example.org/blog/3 #}
 
 .. seealso::
 
@@ -784,7 +786,7 @@ The above example will be rendered as:
 
 .. code-block:: html
 
-    <abbr title="App\Controller\ProductController">ProductController</abbr>
+    <abbr title="App\Controller\ProductController">ProductController</abbr>::list()
 
 format_args
 ~~~~~~~~~~~
