@@ -110,6 +110,22 @@ asset
 ``packageName`` *(optional)*
     **type**: ``string`` | ``null`` **default**: ``null``
 
+.. code-block:: yaml
+
+    # config/packages/framework.yaml
+    framework:
+        # ...
+        assets:
+            packages:
+                foo_package:
+                    base_path: /avatars
+
+.. code-block:: twig
+
+    {# the image lives at "public/avatars/avatar.png" #}
+    {{ asset(path = 'avatar.png', packageName = 'foo_package') }}
+    {# output: /avatars/avatar.png #}
+
 Returns the public path of the given asset path (which can be a CSS file, a
 JavaScript file, an image path, etc.). This function takes into account where
 the application is installed (e.g. in case the project is accessed in a host
@@ -208,6 +224,30 @@ logout_path
 Generates a relative logout URL for the given firewall. If no key is provided,
 the URL is generated for the current firewall the user is logged into.
 
+.. code-block:: yaml
+
+    # config/packages/security.yaml
+    security:
+        # ...
+
+        firewalls:
+            main:
+                # ...
+                logout:
+                    path: '/logout'
+            othername:
+                # ...
+                logout:
+                    path: '/other/logout'
+
+.. code-block:: twig
+
+    {{ logout_path(key = 'main') }}
+    {# output: /logout #}
+
+    {{ logout_path(key = 'othername') }}
+    {# output: /other/logout #}
+
 logout_url
 ~~~~~~~~~~
 
@@ -220,6 +260,30 @@ logout_url
 
 Equal to the `logout_path`_ function, but it'll generate an absolute URL
 instead of a relative one.
+
+.. code-block:: yaml
+
+    # config/packages/security.yaml
+    security:
+        # ...
+
+        firewalls:
+            main:
+                # ...
+                logout:
+                    path: '/logout'
+            othername:
+                # ...
+                logout:
+                    path: '/other/logout'
+
+.. code-block:: twig
+
+    {{ logout_url(key = 'main') }}
+    {# output: http://example.org/logout #}
+
+    {{ logout_url(key = 'othername') }}
+    {# output: http://example.org/other/logout #}
 
 path
 ~~~~
@@ -237,6 +301,16 @@ path
 
 Returns the relative URL (without the scheme and host) for the given route.
 If ``relative`` is enabled, it'll create a path relative to the current path.
+
+.. code-block:: twig
+
+    {# consider that the app defines an 'app_blog' route with the path '/blog/{page}' #}
+
+    {{ path(name = 'app_blog', parameters = {page: 3}, relative = false) }}
+    {# output: /blog/3 #}
+
+    {{ path(name = 'app_blog', parameters = {page: 3}, relative = true) }}
+    {# output: blog/3 #}
 
 .. seealso::
 
@@ -259,6 +333,16 @@ url
 
 Returns the absolute URL (with scheme and host) for the given route. If
 ``schemeRelative`` is enabled, it'll create a scheme-relative URL.
+
+.. code-block:: twig
+
+    {# consider that the app defines an 'app_blog' route with the path '/blog/{page}' #}
+
+    {{ url(name = 'app_blog', parameters = {page: 3}, schemeRelative = false) }}
+    {# output: http://example.org/blog/3 #}
+
+    {{ url(name = 'app_blog', parameters = {page: 3}, schemeRelative = true) }}
+    {# output: //example.org/blog/3 #}
 
 .. seealso::
 
@@ -310,6 +394,11 @@ expression
 
 Creates an :class:`Symfony\\Component\\ExpressionLanguage\\Expression` related
 to the :doc:`ExpressionLanguage component </components/expression_language>`.
+
+.. code-block:: twig
+
+    {{ expression(1 + 2) }}
+    {# output: 3 #}
 
 impersonation_path
 ~~~~~~~~~~~~~~~~~~
@@ -385,6 +474,42 @@ t
 
 Creates a ``Translatable`` object that can be passed to the
 :ref:`trans filter <reference-twig-filter-trans>`.
+
+.. configuration-block::
+
+    .. code-block:: yaml
+
+        # translations/blog.en.yaml
+        message: Hello %name%
+
+    .. code-block:: xml
+
+        <!-- translations/blog.en.xlf -->
+        <?xml version="1.0" encoding="UTF-8" ?>
+        <xliff version="1.2" xmlns="urn:oasis:names:tc:xliff:document:1.2">
+            <file source-language="en" datatype="plaintext" original="file.ext">
+                <body>
+                    <trans-unit id="message">
+                        <source>message</source>
+                        <target>Hello %name%</target>
+                    </trans-unit>
+                </body>
+            </file>
+        </xliff>
+
+    .. code-block:: php
+
+        // translations/blog.en.php
+        return [
+            'message' => "Hello %name%",
+        ];
+
+Using the filter will be rendered as:
+
+.. code-block:: twig
+
+    {{ t(message = 'message', parameters = {'%name%': 'John'}, domain = 'blog')|trans }}
+    {# output: Hello John #}
 
 importmap
 ~~~~~~~~~
@@ -465,6 +590,42 @@ trans
 
 Translates the text into the current language. More information in
 :ref:`Translation Filters <translation-filters>`.
+
+.. configuration-block::
+
+    .. code-block:: yaml
+
+        # translations/messages.en.yaml
+        message: Hello %name%
+
+    .. code-block:: xml
+
+        <!-- translations/messages.en.xlf -->
+        <?xml version="1.0" encoding="UTF-8" ?>
+        <xliff version="1.2" xmlns="urn:oasis:names:tc:xliff:document:1.2">
+            <file source-language="en" datatype="plaintext" original="file.ext">
+                <body>
+                    <trans-unit id="message">
+                        <source>message</source>
+                        <target>Hello %name%</target>
+                    </trans-unit>
+                </body>
+            </file>
+        </xliff>
+
+    .. code-block:: php
+
+        // translations/messages.en.php
+        return [
+            'message' => "Hello %name%",
+        ];
+
+Using the filter will be rendered as:
+
+.. code-block:: twig
+
+    {{ 'message'|trans(arguments = {'%name%': 'John'}, domain = 'messages', locale = 'en') }}
+    {# output: Hello John #}
 
 sanitize_html
 ~~~~~~~~~~~~~
@@ -603,6 +764,16 @@ abbr_class
 Generates an ``<abbr>`` element with the short name of a PHP class (the
 FQCN will be shown in a tooltip when a user hovers over the element).
 
+.. code-block:: twig
+
+    {{ 'App\\Entity\\Product'|abbr_class }}
+
+The above example will be rendered as:
+
+.. code-block:: html
+
+    <abbr title="App\Entity\Product">Product</abbr>
+
 abbr_method
 ~~~~~~~~~~~
 
@@ -616,6 +787,16 @@ abbr_method
 Generates an ``<abbr>`` element using the ``FQCN::method()`` syntax. If
 ``method`` is ``Closure``, ``Closure`` will be used instead and if ``method``
 doesn't have a class name, it's shown as a function (``method()``).
+
+.. code-block:: twig
+
+    {{ 'App\\Controller\\ProductController::list'|abbr_method }}
+
+The above example will be rendered as:
+
+.. code-block:: html
+
+    <abbr title="App\Controller\ProductController">ProductController</abbr>::list()
 
 format_args
 ~~~~~~~~~~~
@@ -704,6 +885,11 @@ file_link
 Generates a link to the provided file and line number using
 a preconfigured scheme.
 
+.. code-block:: twig
+
+    {{ 'path/to/file/file.txt'|file_link(line = 3) }}
+    {# output: file://path/to/file/file.txt#L3 #}
+
 file_relative
 ~~~~~~~~~~~~~
 
@@ -745,6 +931,21 @@ serialize
 
 Accepts any data that can be serialized by the :doc:`Serializer component </serializer>`
 and returns a serialized string in the specified ``format``.
+
+For example::
+
+    $object = new \stdClass();
+    $object->foo = 'bar';
+    $object->content = [];
+    $object->createdAt = new \DateTime('2024-11-30');
+
+.. code-block:: twig
+
+    {{ object|serialize(format = 'json', context = {
+        'datetime_format': 'D, Y-m-d',
+        'empty_array_as_object': true,
+    }) }}
+    {# output: {"foo":"bar","content":{},"createdAt":"Sat, 2024-11-30"} #}
 
 .. _reference-twig-filter-emojify:
 
