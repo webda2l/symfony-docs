@@ -1004,11 +1004,11 @@ the session must not be used when authenticating users:
 .. _reference-security-lazy:
 
 lazy
-~~~~~~~~~
+~~~~
 
-Firewalls can configure a ``lazy`` boolean option in order to load the user and start the session only
-if the application actually accesses the User object,
-(e.g. via a is_granted() call in a template or isGranted() in a controller or service):
+Firewalls can configure a ``lazy`` boolean option to load the user and start the
+session only if the application actually accesses the User object, (e.g. calling
+``is_granted()`` in a template or ``isGranted()`` in a controller or service):
 
 .. configuration-block::
 
@@ -1048,8 +1048,8 @@ if the application actually accesses the User object,
         use Symfony\Config\SecurityConfig;
 
         return static function (SecurityConfig $security): void {
-            $mainFirewall = $security->firewall('main');
-            $mainFirewall->lazy(true);
+            $security->firewall('main')
+                ->lazy(true);
             // ...
         };
 
