@@ -1920,6 +1920,8 @@ named ``kernel.http_method_override``.
         $request = Request::createFromGlobals();
         // ...
 
+.. _reference-framework-ide:
+
 ide
 ~~~
 
