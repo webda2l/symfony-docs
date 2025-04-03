@@ -1865,9 +1865,9 @@ under the transport in ``messenger.yaml``:
     The Redis consumer group name
 
 ``consumer`` (default: ``consumer``)
-    Consumer name used in Redis. Allows to set explicit consumer name identifier.
-    Recommended for environments with multiple workers to prevent duplicate message processing.
-    Typically set via environment variable:
+    Consumer name used in Redis. Allows setting an explicit consumer name identifier.
+    Recommended in environments with multiple workers to prevent duplicate message
+    processing. Typically set via an environment variable:
 
     .. code-block:: yaml
 
