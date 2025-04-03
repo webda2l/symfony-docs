@@ -96,7 +96,7 @@ Returns an instance of ``ControllerReference`` to be used with functions
 like :ref:`render() <reference-twig-function-render>` and
 :ref:`render_esi() <reference-twig-function-render-esi>`.
 
-.. code-block:: html+twig
+.. code-block:: twig
 
     {{ render(controller('App\\Controller\\BlogController:latest', {max: 3})) }}
     {# output: the content returned by the controller method; e.g. a rendered Twig template #}
@@ -839,23 +839,21 @@ Consider the following as the content of ``file.txt``:
     d
     e
 
-.. code-block:: twig
+.. code-block:: html+twig
 
     {{ '/path/to/file.txt'|file_excerpt(line = 4, srcContext = 1) }}
-    {# output:
-        <ol start="3">
-            <li><a class="anchor" id="line3"></a><code>c</code></li>
-            <li class="selected"><a class="anchor" id="line4"></a><code>d</code></li>
-            <li><a class="anchor" id="line5"></a><code>e</code></li>
-        </ol>
-    #}
+    {# output: #}
+    <ol start="3">
+        <li><a class="anchor" id="line3"></a><code>c</code></li>
+        <li class="selected"><a class="anchor" id="line4"></a><code>d</code></li>
+        <li><a class="anchor" id="line5"></a><code>e</code></li>
+    </ol>
 
     {{ '/path/to/file.txt'|file_excerpt(line = 1, srcContext = 0) }}
-    {# output:
-        <ol start="1">
-            <li class="selected"><a class="anchor" id="line1"></a><code>a</code></li>
-        </ol>
-    #}
+    {# output: #}
+    <ol start="1">
+        <li class="selected"><a class="anchor" id="line1"></a><code>a</code></li>
+    </ol>
 
 format_file
 ~~~~~~~~~~~
@@ -875,21 +873,19 @@ Generates the file path inside an ``<a>`` element. If the path is inside
 the kernel root directory, the kernel root directory path is replaced by
 ``kernel.project_dir`` (showing the full path in a tooltip on hover).
 
-.. code-block:: twig
+.. code-block:: html+twig
 
     {{ '/path/to/file.txt'|format_file(line = 1, text = "my_text") }}
-    {# output:
-        <a href="/path/to/file.txt#L1"
-            title="Click to open this file" class="file_link">my_text at line 1
-        </a>
-    #}
+    {# output: #}
+    <a href="/path/to/file.txt#L1"
+        title="Click to open this file" class="file_link">my_text at line 1
+    </a>
 
     {{ "/path/to/file.txt"|format_file(line = 3) }}
-    {# output:
-        <a href="/path/to/file.txt&amp;line=3"
-            title="Click to open this file" class="file_link">/path/to/file.txt at line 3
-        </a>
-    #}
+    {# output: #}
+    <a href="/path/to/file.txt&amp;line=3"
+        title="Click to open this file" class="file_link">/path/to/file.txt at line 3
+    </a>
 
 .. tip::
 
