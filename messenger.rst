@@ -1865,7 +1865,21 @@ under the transport in ``messenger.yaml``:
     The Redis consumer group name
 
 ``consumer`` (default: ``consumer``)
-    Consumer name used in Redis
+    Consumer name used in Redis. Allows to set explicit consumer name identifier.
+    Recommended for environments with multiple workers to prevent duplicate message processing.
+    Typically set via environment variable:
+
+    .. code-block:: yaml
+
+        # config/packages/messenger.yaml
+        framework:
+            messenger:
+                transports:
+                    redis:
+                        dsn: '%env(MESSENGER_TRANSPORT_DSN)%'
+                        options:
+                            consumer: '%env(MESSENGER_CONSUMER_NAME)%'
+
 
 ``auto_setup`` (default: ``true``)
     Whether to create the Redis group automatically
