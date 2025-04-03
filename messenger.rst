@@ -1880,7 +1880,6 @@ under the transport in ``messenger.yaml``:
                         options:
                             consumer: '%env(MESSENGER_CONSUMER_NAME)%'
 
-
 ``auto_setup`` (default: ``true``)
     Whether to create the Redis group automatically
 
