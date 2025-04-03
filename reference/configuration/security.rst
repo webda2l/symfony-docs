@@ -989,6 +989,58 @@ the session must not be used when authenticating users:
             // ...
         };
 
+.. _reference-security-lazy:
+
+lazy
+~~~~
+
+Firewalls can configure a ``lazy`` boolean option to load the user and start the
+session only if the application actually accesses the User object, (e.g. calling
+``is_granted()`` in a template or ``isGranted()`` in a controller or service):
+
+.. configuration-block::
+
+    .. code-block:: yaml
+
+        # config/packages/security.yaml
+        security:
+            # ...
+
+            firewalls:
+                main:
+                    # ...
+                    lazy: true
+
+    .. code-block:: xml
+
+        <!-- config/packages/security.xml -->
+        <?xml version="1.0" encoding="UTF-8" ?>
+        <srv:container xmlns="http://symfony.com/schema/dic/security"
+            xmlns:srv="http://symfony.com/schema/dic/services"
+            xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+            xsi:schemaLocation="http://symfony.com/schema/dic/services
+                https://symfony.com/schema/dic/services/services-1.0.xsd
+                http://symfony.com/schema/dic/security
+                https://symfony.com/schema/dic/security/security-1.0.xsd">
+
+            <config>
+                <firewall name="main" lazy="true">
+                    <!-- ... -->
+                </firewall>
+            </config>
+        </srv:container>
+
+    .. code-block:: php
+
+        // config/packages/security.php
+        use Symfony\Config\SecurityConfig;
+
+        return static function (SecurityConfig $security): void {
+            $security->firewall('main')
+                ->lazy(true);
+            // ...
+        };
+
 User Checkers
 ~~~~~~~~~~~~~
 
