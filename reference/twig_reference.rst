@@ -96,22 +96,12 @@ Returns an instance of ``ControllerReference`` to be used with functions
 like :ref:`render() <reference-twig-function-render>` and
 :ref:`render_esi() <reference-twig-function-render-esi>`.
 
-.. _reference-twig-function-asset:
-
 .. code-block:: html+twig
 
-    {% set myArray = {'a': 'foo', 'b': 'bar'} %}
+    {{ render(controller('App\\Controller\\BlogController:latest', {max: 3})) }}
+    {# output: the content returned by the controller method; e.g. a rendered Twig template #}
 
-    <iframe src="{{ render(controller('App\\Controller\\MyController::baz', {'myArray': myArray})) }}"></iframe>
-
-Output:
-
-.. code-block:: html
-
-    <iframe src="<ul>
-        <li>foo</li>
-        <li>bar</li>
-    </ul>"></iframe>
+.. _reference-twig-function-asset:
 
 asset
 ~~~~~
@@ -188,8 +178,9 @@ in a regular HTML form not managed by the Symfony Form component.
 
 .. code-block:: twig
 
-	{{ csrf_token(intention = 'my_form') }}
-    {# output: generates a variable token #}
+    {{ csrf_token('my_form') }}
+    {# output: a random alphanumeric string like:
+       a.YOosAd0fhT7BEuUCFbROzrvgkW8kpEmBDQ_DKRMUi2o.Va8ZQKt5_2qoa7dLW-02_PLYwDBx9nnWOluUHUFCwC5Zo0VuuVfQCqtngg #}
 
 is_granted
 ~~~~~~~~~~
@@ -850,7 +841,7 @@ Generates an excerpt of a code file around the given ``line`` number. The
 ``srcContext`` argument defines the total number of lines to display around the
 given line number (use ``-1`` to display the whole file).
 
-Let's assume this is the content of a file :
+Consider the following as the content of ``file.txt``:
 
 .. code-block:: text
 
@@ -862,15 +853,21 @@ Let's assume this is the content of a file :
 
 .. code-block:: twig
 
-    {{ "/path/to/file/file.txt"|file_excerpt(line = 4, srcContext = 1) }}
+    {{ '/path/to/file.txt'|file_excerpt(line = 4, srcContext = 1) }}
     {# output:
-        3.c
-        4.d
-        5.e #}
+        <ol start="3">
+            <li><a class="anchor" id="line3"></a><code>c</code></li>
+            <li class="selected"><a class="anchor" id="line4"></a><code>d</code></li>
+            <li><a class="anchor" id="line5"></a><code>e</code></li>
+        </ol>
+    #}
 
-    {{ "/path/to/file/file.txt"|file_excerpt(line = 1, srcContext = 0) }}
+    {{ '/path/to/file.txt'|file_excerpt(line = 1, srcContext = 0) }}
     {# output:
-        1.a #}
+        <ol start="1">
+            <li class="selected"><a class="anchor" id="line1"></a><code>a</code></li>
+        </ol>
+    #}
 
 format_file
 ~~~~~~~~~~~
@@ -890,35 +887,28 @@ Generates the file path inside an ``<a>`` element. If the path is inside
 the kernel root directory, the kernel root directory path is replaced by
 ``kernel.project_dir`` (showing the full path in a tooltip on hover).
 
-Example 1
-
 .. code-block:: twig
 
-    {{ "path/to/file/file.txt"|format_file(line = 1, text = "my_text") }}
+    {{ '/path/to/file.txt'|format_file(line = 1, text = "my_text") }}
+    {# output:
+        <a href="/path/to/file.txt#L1"
+            title="Click to open this file" class="file_link">my_text at line 1
+        </a>
+    #}
 
-Output:
+    {{ "/path/to/file.txt"|format_file(line = 3) }}
+    {# output:
+        <a href="/path/to/file.txt&amp;line=3"
+            title="Click to open this file" class="file_link">/path/to/file.txt at line 3
+        </a>
+    #}
 
-.. code-block:: html
+.. tip::
 
-    <a href="path/to/file/file.txt#L1"
-        title="Click to open this file" class="file_link">my_text at line 1
-    </a>
-
-Example 2
-
-.. code-block:: twig
-
-    {{ "path/to/file/file.txt"|format_file(line = 3) }}
-
-Output:
-
-.. code-block:: html
-
-    <a href="path/to/file/file.txt#L3"
-        title="Click to open this file" class="file_link">
-        <abbr title="path/to/file/file.txt">file.txt</abbr>
-        / at line 3
-    </a>
+    If you set the :ref:`framework.ide <reference-framework-ide>` option, the
+    generated links will change to open the file in that IDE/editor. For example,
+    when using PhpStorm, the ``<a href="/path/to/file.txt&amp;line=3"`` link will
+    become ``<a href="phpstorm://open?file=/path/to/file.txt&amp;line=3"``.
 
 format_file_from_text
 ~~~~~~~~~~~~~~~~~~~~~
