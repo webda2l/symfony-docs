@@ -296,7 +296,7 @@ You can also define ``from`` and ``until`` times for your schedule::
     $from = new \DateTimeImmutable('13:00', new \DateTimeZone('Europe/Paris'));
     RecurringMessage::every('1 day', new Message(), $from);
 
-    // create a message every day until a specific date::
+    // create a message every day until a specific date
     $until = '2023-06-12';
     RecurringMessage::every('1 day', new Message(), null, $until);
 
