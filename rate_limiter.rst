@@ -461,9 +461,10 @@ simultaneous requests (e.g. three servers of a company hitting your API at the
 same time). Rate limiters use :doc:`locks </lock>` to protect their operations
 against these race conditions.
 
-By default, Symfony uses the global lock configured by ``framework.lock``, but
-you can use a specific :ref:`named lock <lock-named-locks>` via the
-``lock_factory`` option (or none at all):
+By default, if the :doc:`lock </lock>` component is installed, Symfony uses the
+global lock configured by ``framework.lock``, but you can use a specific
+:ref:`named lock <lock-named-locks>` via the ``lock_factory`` option (or none
+at all):
 
 .. configuration-block::
 
