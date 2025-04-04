@@ -272,13 +272,29 @@ defined by PHP datetime functions::
     RecurringMessage::every('3 weeks', new Message());
     RecurringMessage::every('first Monday of next month', new Message());
 
-    $from = new \DateTimeImmutable('13:47', new \DateTimeZone('Europe/Paris'));
-    $until = '2023-06-12';
-    RecurringMessage::every('first Monday of next month', new Message(), $from, $until);
-
 .. tip::
 
     You can also define periodic tasks using :ref:`the AsPeriodicTask attribute <scheduler-attributes-periodic-task>`.
+
+You can also define ``from`` and ``until`` times for your schedule::
+
+    // create a message every day at 13:00
+    $from = new \DateTimeImmutable('13:00', new \DateTimeZone('Europe/Paris'));
+    RecurringMessage::every('1 day', new Message(), $from);
+
+    // create a message every day until a specific date::
+    $until = '2023-06-12';
+    RecurringMessage::every('1 day', new Message(), null, $until);
+
+    // combine from and until for more precise control
+    $from = new \DateTimeImmutable('2023-01-01 13:47', new \DateTimeZone('Europe/Paris'));
+    $until = '2023-06-12';
+    RecurringMessage::every('first Monday of next month', new Message(), $from, $until);
+
+When starting the scheduler, the message isn't sent to the messenger immediately.
+If you don't set a ``from`` parameter, the first frequency period starts from the
+moment the scheduler runs. For example, if you start it at 8:33 and the message
+is scheduled hourly, it will run at 9:33, 10:33, 11:33, etc.
 
 Custom Triggers
 ~~~~~~~~~~~~~~~
