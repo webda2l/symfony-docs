@@ -290,32 +290,25 @@ defined by PHP datetime functions::
 
     You can also define periodic tasks using :ref:`the AsPeriodicTask attribute <scheduler-attributes-periodic-task>`.
 
-Be aware that the message isn't passed to the messenger when you start the
-scheduler. The message will only be executed after the first frequency period
-has passed.
+You can also define ``from`` and ``until`` times for your schedule::
 
-It's also possible to pass a from and until time for your schedule. For
-example, if you want to execute a command every day at 13:00::
-
+    // create a message every day at 13:00
     $from = new \DateTimeImmutable('13:00', new \DateTimeZone('Europe/Paris'));
-    RecurringMessage::every('1 day', new Message(), from: $from);
+    RecurringMessage::every('1 day', new Message(), $from);
 
-Or if you want to execute a message every day until a specific date::
-
+    // create a message every day until a specific date::
     $until = '2023-06-12';
-    RecurringMessage::every('1 day', new Message(), until: $until);
+    RecurringMessage::every('1 day', new Message(), null, $until);
 
-And you can even combine the from and until parameters for more granular
-control::
-
+    // combine from and until for more precise control
     $from = new \DateTimeImmutable('2023-01-01 13:47', new \DateTimeZone('Europe/Paris'));
     $until = '2023-06-12';
-    RecurringMessage::every('first Monday of next month', new Message(), from: $from, until: $until);
+    RecurringMessage::every('first Monday of next month', new Message(), $from, $until);
 
-If you don't pass a from parameter to your schedule, the first frequency period
-is counted from the moment the scheduler is started. So if you start your
-scheduler at 8:33 and the message is scheduled to perform every hour, it
-will be executed at 9:33, 10:33, 11:33 and so on.
+When starting the scheduler, the message isn't sent to the messenger immediately.
+If you don't set a ``from`` parameter, the first frequency period starts from the
+moment the scheduler runs. For example, if you start it at 8:33 and the message
+is scheduled hourly, it will run at 9:33, 10:33, 11:33, etc.
 
 Custom Triggers
 ~~~~~~~~~~~~~~~
