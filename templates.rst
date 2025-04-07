@@ -849,8 +849,8 @@ errors. It's useful to run it before deploying your application to production
     $ php bin/console lint:twig templates/email/
     $ php bin/console lint:twig templates/article/recent_list.html.twig
 
-    # you can also show the first deprecated feature used in your templates
-    # as it shows only the first one found, you may need to run it until no more deprecations are found
+    # you can also show the deprecated features used in your templates
+    # (only the first deprecation is shown, so run multiple times to catch all)
     $ php bin/console lint:twig --show-deprecations templates/email/
 
 When running the linter inside `GitHub Actions`_, the output is automatically
