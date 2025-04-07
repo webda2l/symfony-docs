@@ -546,6 +546,30 @@ and in XML:
     <!-- entries-per-page: This value is only used for the search results page. -->
     <config entries-per-page="25"/>
 
+You can also provide a URL to a full documentation page::
+
+    $rootNode
+        ->docUrl('Full documentation is available at https://example.com/docs/{version:major}.{version:minor}/reference.html')
+        ->children()
+            ->integerNode('entries_per_page')
+                ->defaultValue(25)
+            ->end()
+        ->end()
+    ;
+
+A few placeholders are available to customize the URL:
+
+* ``{version:major}``: The major version of the package currently installed
+* ``{version:minor}``: The minor version of the package currently installed
+* ``{package}``: The name of the package
+
+The placeholders will be replaced when printing the configuration tree with the
+``config:dump-reference`` command.
+
+.. versionadded:: 7.3
+
+    The ``docUrl()`` method was introduced in Symfony 7.3.
+
 Optional Sections
 -----------------
 
