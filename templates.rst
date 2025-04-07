@@ -870,7 +870,6 @@ errors. It's useful to run it before deploying your application to production
     $ php bin/console lint:twig templates/article/recent_list.html.twig
 
     # you can also show the deprecated features used in your templates
-    # (only the first deprecation is shown, so run multiple times to catch all)
     $ php bin/console lint:twig --show-deprecations templates/email/
 
     # you can also excludes directories
@@ -879,6 +878,11 @@ errors. It's useful to run it before deploying your application to production
 .. versionadded:: 7.1
 
     The option to exclude directories was introduced in Symfony 7.1.
+
+.. versionadded:: 7.3
+
+    Before Symfony 7.3, the ``--show-deprecations`` option only displayed the
+    first deprecation found, so you had to run the command repeatedly.
 
 When running the linter inside `GitHub Actions`_, the output is automatically
 adapted to the format required by GitHub, but you can force that format too:
