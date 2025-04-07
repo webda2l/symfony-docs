@@ -2526,10 +2526,9 @@ wherever you need a query bus behavior instead of the ``MessageBusInterface``::
     }
 
 You can also add new stamps when handling a message; they will be appended
-to the existing ones. For example, you can add a ``DoctrineFlushStamp`` to
-flush the entity manager after handling the message::
+to the existing ones::
 
-    $this->handle(new SomeMessage($data), [new DoctrineFlushStamp()]);
+    $this->handle(new SomeMessage($data), [new SomeStamp(), new AnotherStamp()]);
 
 .. versionadded:: 7.3
 
