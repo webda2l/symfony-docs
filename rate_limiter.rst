@@ -535,6 +535,12 @@ at all):
                 ;
         };
 
+.. versionadded:: 7.3
+
+    Before Symfony 7.3, configuring a rate limiter and using the default configured
+    lock factory (``lock.factory``) failed if the Symfony Lock component was not
+    installed in the application.
+
 .. _`DoS attacks`: https://cheatsheetseries.owasp.org/cheatsheets/Denial_of_Service_Cheat_Sheet.html
 .. _`Apache mod_ratelimit`: https://httpd.apache.org/docs/current/mod/mod_ratelimit.html
 .. _`NGINX rate limiting`: https://www.nginx.com/blog/rate-limiting-nginx/
