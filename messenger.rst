@@ -2525,6 +2525,20 @@ wherever you need a query bus behavior instead of the ``MessageBusInterface``::
         }
     }
 
+You also can also add stamps when handling a message. For example, you can
+add an ``DoctrineFlushStamp`` to flush the entity manager after handling the message::
+
+    $this->handle(new SomeMessage($data), [new DoctrineFlushStamp()]);
+
+.. note::
+
+    If adding a stamp of the same type that already exists in the envelope,
+    both stamps will be kept (see `Envelopes & Stamps`_).
+
+.. versionadded:: 7.3
+
+    The ``$stamps`` parameter on the handle method was introduced in Symfony 7.3.
+
 Customizing Handlers
 --------------------
 
