@@ -1160,6 +1160,67 @@ service argument with the :class:`Symfony\\Component\\Translation\\LocaleSwitche
 class to inject the locale switcher service. Otherwise, configure your services
 manually and inject the ``translation.locale_switcher`` service.
 
+.. _translation-global-variables:
+
+Global Variables
+~~~~~~~~~~~~~~~~
+
+The translator allows you to automatically configure global variables that will be available
+for the translation process. These global variables are defined in the ``translations.globals``
+option inside the main configuration file:
+
+.. configuration-block::
+
+    .. code-block:: yaml
+
+        # config/packages/translator.yaml
+        translator:
+            # ...
+            globals:
+                '%%app_name%%': 'My application'
+                '{app_version}': '1.2.3'
+                '{url}': { message: 'url', parameters: { scheme: 'https://' }, domain: 'global' }
+
+    .. code-block:: xml
+
+           <!-- config/packages/translation.xml -->
+           <?xml version="1.0" encoding="UTF-8" ?>
+           <container xmlns="http://symfony.com/schema/dic/services"
+               xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+               xmlns:framework="http://symfony.com/schema/dic/symfony"
+               xsi:schemaLocation="http://symfony.com/schema/dic/services
+                   https://symfony.com/schema/dic/services/services-1.0.xsd
+                   http://symfony.com/schema/dic/symfony
+                   https://symfony.com/schema/dic/symfony/symfony-1.0.xsd">
+
+               <framework:config>
+                   <framework:translator>
+                       <!-- ... -->
+                       <framework:global name="%%app_name%%">My application</framework:global>
+                       <framework:global name="{app_version}" value="1.2.3" />
+                       <framework:global name="{url}" message="url" domain="global">
+                            <framework:parameter name="scheme">https://</framework:parameter>
+                        </framework:global>
+                   </framework:translator>
+               </framework:config>
+           </container>
+
+    .. code-block:: php
+
+        // config/packages/translator.php
+        use Symfony\Config\TwigConfig;
+
+        return static function (TwigConfig $translator): void {
+            // ...
+            $translator->globals('%%app_name%%')->value('My application');
+            $translator->globals('{app_version}')->value('1.2.3');
+            $translator->globals('{url}')->value(['message' => 'url', 'parameters' => ['scheme' => 'https://']);
+        };
+
+.. versionadded:: 7.3
+
+    The ``translator:globals`` option was introduced in Symfony 7.3.
+
 .. _translation-debug:
 
 How to Find Missing or Unused Translation Messages
