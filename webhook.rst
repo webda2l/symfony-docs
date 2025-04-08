@@ -15,6 +15,11 @@ Installation
 Usage in Combination with the Mailer Component
 ----------------------------------------------
 
+.. admonition:: Screencast
+    :class: screencast
+
+    Like video tutorials? Check out the `Webhook Component for Email Events screencast`_.
+
 When using a third-party mailer provider, you can use the Webhook component to
 receive webhook calls from this provider.
 
@@ -207,3 +212,4 @@ Creating a Custom Webhook
     Webhook.
 
 .. _`MakerBundle`: https://symfony.com/doc/current/bundles/SymfonyMakerBundle/index.html
+.. _`Webhook Component for Email Events screencast`: https://symfonycasts.com/screencast/mailtrap/email-event-webhook
