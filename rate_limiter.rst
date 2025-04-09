@@ -230,6 +230,12 @@ prevents that number from being higher than 5,000).
 Rate Limiting in Action
 -----------------------
 
+.. versionadded:: 7.3
+
+    :class:`Symfony\\Component\\RateLimiter\\RateLimiterFactoryInterface` was
+    added and should now be used for autowiring instead of
+    :class:`Symfony\\Component\\RateLimiter\\RateLimiterFactory`.
+
 After having installed and configured the rate limiter, inject it in any service
 or controller and call the ``consume()`` method to try to consume a given number
 of tokens. For example, this controller uses the previous rate limiter to control
@@ -242,13 +248,13 @@ the number of requests to the API::
     use Symfony\Component\HttpFoundation\Request;
     use Symfony\Component\HttpFoundation\Response;
     use Symfony\Component\HttpKernel\Exception\TooManyRequestsHttpException;
-    use Symfony\Component\RateLimiter\RateLimiterFactory;
+    use Symfony\Component\RateLimiter\RateLimiterFactoryInterface;
 
     class ApiController extends AbstractController
     {
         // if you're using service autowiring, the variable name must be:
         // "rate limiter name" (in camelCase) + "Limiter" suffix
-        public function index(Request $request, RateLimiterFactory $anonymousApiLimiter): Response
+        public function index(Request $request, RateLimiterFactoryInterface $anonymousApiLimiter): Response
         {
             // create a limiter based on a unique identifier of the client
             // (e.g. the client's IP address, a username/email, an API key, etc.)
@@ -291,11 +297,11 @@ using the ``reserve()`` method::
     use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
     use Symfony\Component\HttpFoundation\Request;
     use Symfony\Component\HttpFoundation\Response;
-    use Symfony\Component\RateLimiter\RateLimiterFactory;
+    use Symfony\Component\RateLimiter\RateLimiterFactoryInterface;
 
     class ApiController extends AbstractController
     {
-        public function registerUser(Request $request, RateLimiterFactory $authenticatedApiLimiter): Response
+        public function registerUser(Request $request, RateLimiterFactoryInterface $authenticatedApiLimiter): Response
         {
             $apiKey = $request->headers->get('apikey');
             $limiter = $authenticatedApiLimiter->create($apiKey);
@@ -350,11 +356,11 @@ the :class:`Symfony\\Component\\RateLimiter\\Reservation` object returned by the
     use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
     use Symfony\Component\HttpFoundation\Request;
     use Symfony\Component\HttpFoundation\Response;
-    use Symfony\Component\RateLimiter\RateLimiterFactory;
+    use Symfony\Component\RateLimiter\RateLimiterFactoryInterface;
 
     class ApiController extends AbstractController
     {
-        public function index(Request $request, RateLimiterFactory $anonymousApiLimiter): Response
+        public function index(Request $request, RateLimiterFactoryInterface $anonymousApiLimiter): Response
         {
             $limiter = $anonymousApiLimiter->create($request->getClientIp());
             $limit = $limiter->consume();
