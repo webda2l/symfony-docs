@@ -1,6 +1,11 @@
 Scheduler
 =========
 
+.. admonition:: Screencast
+    :class: screencast
+
+    Like video tutorials? Check out this `Scheduler quick-start screencast`_.
+
 The scheduler component manages task scheduling within your PHP application, like
 running a task each night at 3 AM, every two weeks except for holidays or any
 other custom schedule you might need.
@@ -1008,3 +1013,4 @@ helping you identify those messages when needed.
 .. _`cron command-line utility`: https://en.wikipedia.org/wiki/Cron
 .. _`crontab.guru website`: https://crontab.guru/
 .. _`relative formats`: https://www.php.net/manual/en/datetime.formats.php#datetime.formats.relative
+.. _`Scheduler quick-start screencast`: https://symfonycasts.com/screencast/mailtrap/bonus-symfony-scheduler
