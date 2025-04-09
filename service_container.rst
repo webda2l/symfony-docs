@@ -162,10 +162,6 @@ each time you ask for it.
                 # this creates a service per class whose id is the fully-qualified class name
                 App\:
                     resource: '../src/'
-                    exclude:
-                        - '../src/DependencyInjection/'
-                        - '../src/Entity/'
-                        - '../src/Kernel.php'
 
                 # order is important in this file because service definitions
                 # always *replace* previous ones; add your own service configuration below
@@ -187,7 +183,7 @@ each time you ask for it.
 
                     <!-- makes classes in src/ available to be used as services -->
                     <!-- this creates a service per class whose id is the fully-qualified class name -->
-                    <prototype namespace="App\" resource="../src/" exclude="../src/{DependencyInjection,Entity,Kernel.php}"/>
+                    <prototype namespace="App\" resource="../src/"/>
 
                     <!-- order is important in this file because service definitions
                          always *replace* previous ones; add your own service configuration below -->
@@ -212,8 +208,7 @@ each time you ask for it.
 
                 // makes classes in src/ available to be used as services
                 // this creates a service per class whose id is the fully-qualified class name
-                $services->load('App\\', '../src/')
-                    ->exclude('../src/{DependencyInjection,Entity,Kernel.php}');
+                $services->load('App\\', '../src/');
 
                 // order is important in this file because service definitions
                 // always *replace* previous ones; add your own service configuration below
@@ -221,9 +216,7 @@ each time you ask for it.
 
     .. tip::
 
-        The value of the ``resource`` and ``exclude`` options can be any valid
-        `glob pattern`_. The value of the ``exclude`` option can also be an
-        array of glob patterns.
+        The value of the ``resource`` option can be any valid `glob pattern`_.
 
     Thanks to this configuration, you can automatically use any classes from the
     ``src/`` directory as a service, without needing to manually configure
