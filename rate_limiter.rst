@@ -552,7 +552,7 @@ Compound Rate Limiter
 
 .. versionadded:: 7.3
 
-    Configuring compound rate limiters was added in 7.3.
+    Support for configuring compound rate limiters was introduced in Symfony 7.3.
 
 You can configure multiple rate limiters to work together:
 
