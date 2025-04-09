@@ -547,6 +547,123 @@ at all):
     lock factory (``lock.factory``) failed if the Symfony Lock component was not
     installed in the application.
 
+Compound Rate Limiter
+---------------------
+
+.. versionadded:: 7.3
+
+    Configuring compound rate limiters was added in 7.3.
+
+You can configure multiple rate limiters to work together:
+
+.. configuration-block::
+
+    .. code-block:: yaml
+
+        # config/packages/rate_limiter.yaml
+        framework:
+            rate_limiter:
+                two_per_minute:
+                    policy: 'fixed_window'
+                    limit: 2
+                    interval: '1 minute'
+                five_per_hour:
+                    policy: 'fixed_window'
+                    limit: 5
+                    interval: '1 hour'
+                contact_form:
+                    policy: 'compound'
+                    limiters: [two_per_minute, five_per_hour]
+
+    .. code-block:: xml
+
+        <!-- config/packages/rate_limiter.xml -->
+        <?xml version="1.0" encoding="UTF-8" ?>
+        <container xmlns="http://symfony.com/schema/dic/services"
+            xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+            xmlns:framework="http://symfony.com/schema/dic/symfony"
+            xsi:schemaLocation="http://symfony.com/schema/dic/services
+                https://symfony.com/schema/dic/services/services-1.0.xsd
+                http://symfony.com/schema/dic/symfony
+                https://symfony.com/schema/dic/symfony/symfony-1.0.xsd">
+
+            <framework:config>
+                <framework:rate-limiter>
+                    <framework:limiter name="two_per_minute"
+                        policy="fixed_window"
+                        limit="2"
+                        interval="1 minute"
+                    />
+
+                    <framework:limiter name="five_per_hour"
+                        policy="fixed_window"
+                        limit="5"
+                        interval="1 hour"
+                    />
+
+                    <framework:limiter name="contact_form"
+                        policy="compound"
+                    >
+                        <limiter>two_per_minute</limiter>
+                        <limiter>five_per_hour</limiter>
+                    </framework:limiter>
+                </framework:rate-limiter>
+            </framework:config>
+        </container>
+
+    .. code-block:: php
+
+        // config/packages/rate_limiter.php
+        use Symfony\Config\FrameworkConfig;
+
+        return static function (FrameworkConfig $framework): void {
+            $framework->rateLimiter()
+                ->limiter('two_per_minute')
+                    ->policy('fixed_window')
+                    ->limit(2)
+                    ->interval('1 minute')
+                ;
+
+            $framework->rateLimiter()
+                ->limiter('two_per_minute')
+                    ->policy('fixed_window')
+                    ->limit(5)
+                    ->interval('1 hour')
+                ;
+
+            $framework->rateLimiter()
+                ->limiter('contact_form')
+                    ->policy('compound')
+                    ->limiters(['two_per_minute', 'five_per_hour'])
+                ;
+        };
+
+Then, inject and use as normal::
+
+    // src/Controller/ContactController.php
+    namespace App\Controller;
+
+    use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
+    use Symfony\Component\HttpFoundation\Request;
+    use Symfony\Component\HttpFoundation\Response;
+    use Symfony\Component\RateLimiter\RateLimiterFactory;
+
+    class ContactController extends AbstractController
+    {
+        public function registerUser(Request $request, RateLimiterFactoryInterface $contactFormLimiter): Response
+        {
+            $limiter = $contactFormLimiter->create($request->getClientIp());
+
+            if (false === $limiter->consume(1)->isAccepted()) {
+                // either of the two limiters has been reached
+            }
+
+            // ...
+        }
+
+        // ...
+    }
+
 .. _`DoS attacks`: https://cheatsheetseries.owasp.org/cheatsheets/Denial_of_Service_Cheat_Sheet.html
 .. _`Apache mod_ratelimit`: https://httpd.apache.org/docs/current/mod/mod_ratelimit.html
 .. _`NGINX rate limiting`: https://www.nginx.com/blog/rate-limiting-nginx/
