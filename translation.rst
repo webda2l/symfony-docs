@@ -461,7 +461,7 @@ of your main configuration file using either ``%...%`` or ``{...}`` syntax:
                        <!-- ... -->
                         <!-- when using the '%' wrapping characters, you must escape them -->
                        <framework:global name="%%app_name%%">My application</framework:global>
-                       <framework:global name="{app_version}" value="1.2.3" />
+                       <framework:global name="{app_version}" value="1.2.3"/>
                        <framework:global name="{url}" message="url" domain="global">
                             <framework:parameter name="scheme">https://</framework:parameter>
                         </framework:global>
