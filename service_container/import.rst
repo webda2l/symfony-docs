@@ -82,7 +82,6 @@ a relative or absolute path to the imported file:
 
             App\:
                 resource: '../src/*'
-                exclude: '../src/{DependencyInjection,Entity,Migrations,Tests,Kernel.php}'
 
             # ...
 
@@ -104,8 +103,7 @@ a relative or absolute path to the imported file:
             <services>
                 <defaults autowire="true" autoconfigure="true"/>
 
-                <prototype namespace="App\" resource="../src/*"
-                    exclude="../src/{DependencyInjection,Entity,Migrations,Tests,Kernel.php}"/>
+                <prototype namespace="App\" resource="../src/*"/>
 
                 <!-- ... -->
             </services>
@@ -127,8 +125,7 @@ a relative or absolute path to the imported file:
                     ->autoconfigure()
             ;
 
-            $services->load('App\\', '../src/*')
-                ->exclude('../src/{DependencyInjection,Entity,Migrations,Tests,Kernel.php}');
+            $services->load('App\\', '../src/*');
         };
 
 When loading a configuration file, Symfony loads first the imported files and

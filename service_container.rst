@@ -223,6 +223,50 @@ each time you ask for it.
     it. Later, you'll learn how to :ref:`import many services at once
     <service-psr4-loader>` with resource.
 
+    If some files or directories in your project should not become services, you
+    can exclude them using the ``exclude`` option:
+
+        .. configuration-block::
+
+        .. code-block:: yaml
+
+            # config/services.yaml
+            services:
+                # ...
+                App\:
+                    resource: '../src/'
+                    exclude:
+                        - '../src/SomeDirectory/'
+                        - '../src/AnotherDirectory/'
+                        - '../src/SomeFile.php'
+
+        .. code-block:: xml
+
+            <!-- config/services.xml -->
+            <?xml version="1.0" encoding="UTF-8" ?>
+            <container xmlns="http://symfony.com/schema/dic/services"
+                xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+                xsi:schemaLocation="http://symfony.com/schema/dic/services
+                    https://symfony.com/schema/dic/services/services-1.0.xsd">
+
+                <services>
+                    <prototype namespace="App\" resource="../src/" exclude="../src/{SomeDirectory,AnotherDirectory,Kernel.php}"/>
+                    <!-- ... -->
+                </services>
+            </container>
+
+        .. code-block:: php
+
+            // config/services.php
+            namespace Symfony\Component\DependencyInjection\Loader\Configurator;
+
+            return function(ContainerConfigurator $container): void {
+                // ...
+
+                $services->load('App\\', '../src/')
+                    ->exclude('../src/{SomeDirectory,AnotherDirectory,Kernel.php}');
+            };
+
     If you'd prefer to manually wire your service, you can
     :ref:`use explicit configuration <services-explicitly-configure-wire-services>`.
 
