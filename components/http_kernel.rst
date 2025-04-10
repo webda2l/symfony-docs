@@ -497,8 +497,8 @@ as possible to the client (e.g. sending emails).
 .. warning::
 
     Internally, the HttpKernel makes use of the :phpfunction:`fastcgi_finish_request`
-    PHP function. This means that at the moment, only the `PHP FPM`_ and `FrankenPHP`_ servers
-    API are able to send a response to the client while the server's PHP process
+    PHP function. This means that at the moment, only the `PHP FPM`_ API and the
+    `FrankenPHP`_ server are able to send a response to the client while the server's PHP process
     still performs some tasks. With all other server APIs, listeners to ``kernel.terminate``
     are still executed, but the response is not sent to the client until they
     are all completed.
