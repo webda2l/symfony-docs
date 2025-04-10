@@ -60,7 +60,6 @@ Topics
     web_link
     webhook
     workflow
-    twig_bridge
 
 Components
 ----------

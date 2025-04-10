@@ -34,6 +34,7 @@ String Constraints
 * :doc:`PasswordStrength </reference/constraints/PasswordStrength>`
 * :doc:`Regex </reference/constraints/Regex>`
 * :doc:`Slug </reference/constraints/Slug>`
+* :doc:`Twig </reference/constraints/Twig>`
 * :doc:`Ulid </reference/constraints/Ulid>`
 * :doc:`Url </reference/constraints/Url>`
 * :doc:`UserPassword </reference/constraints/UserPassword>`
