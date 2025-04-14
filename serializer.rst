@@ -1571,6 +1571,13 @@ to ``true``::
     ]);
     // $jsonContent contains {"name":"Jane Doe"}
 
+Preserving Empty Objetcs
+~~~~~~~~~~~~~~~~~~~~~~~~
+
+By default, the Serializer will transform an empty array to `[]`.
+You can change this behavior by setting the ``AbstractObjectNormalizer::PRESERVE_EMPTY_OBJECTS`` context option
+to ``true``, when the value is `\ArrayObject()` the serialization would be `{}`.
+
 Handling Uninitialized Properties
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
