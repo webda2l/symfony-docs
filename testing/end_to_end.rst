@@ -26,7 +26,7 @@ to install the needed dependencies:
 
 .. code-block:: terminal
 
-    $ composer require symfony/panther
+    $ composer require --dev symfony/panther
 
 .. include:: /components/require_autoload.rst.inc
 
