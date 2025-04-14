@@ -134,17 +134,18 @@ B) Configure your Environment Variables
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
 Most Symfony applications read their configuration from environment variables.
-While developing locally, you'll usually store these in ``.env`` and ``.env.local``
-(for local overrides). On production, you have two options:
+While developing locally, you'll usually store these in :ref:`.env files <configuration-env-var-in-dev>`.
+On production, you have two options:
 
 1. Create "real" environment variables. How you set environment variables, depends
    on your setup: they can be set at the command line, in your Nginx configuration,
    or via other methods provided by your hosting service;
 
-2. Or, create a ``.env.local`` file like your local development.
+2. Or, create a ``.env.prod.local`` file that contains values specific to your
+   production environment.
 
-There is no significant advantage to either of the two options: use whatever is
-most natural in your hosting environment.
+There is no significant advantage to either option: use whichever is most natural
+for your hosting environment.
 
 .. tip::
 
