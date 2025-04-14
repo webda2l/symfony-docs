@@ -852,7 +852,7 @@ Alternatively, if you are serving a static file, you can use a
 
 The ``BinaryFileResponse`` will automatically handle ``Range`` and
 ``If-Range`` headers from the request. It also supports ``X-Sendfile``
-(see for `nginx`_ and `Apache`_). To make use of it, you need to determine
+(see for `FrankenPHP`_, `nginx`_ and `Apache`_). To make use of it, you need to determine
 whether or not the ``X-Sendfile-Type`` header should be trusted and call
 :method:`Symfony\\Component\\HttpFoundation\\BinaryFileResponse::trustXSendfileTypeHeader`
 if it should::
@@ -1076,6 +1076,7 @@ Learn More
     /session
     /http_cache/*
 
+.. _FrankenPHP: https://frankenphp.dev/docs/x-sendfile/
 .. _nginx: https://mattbrictson.com/blog/accelerated-rails-downloads
 .. _Apache: https://tn123.org/mod_xsendfile/
 .. _`JSON Hijacking`: https://haacked.com/archive/2009/06/25/json-hijacking.aspx/
