@@ -15,6 +15,13 @@ use SymfonyDocsBuilder\DocBuilder;
     ->addOption('generate-fjson-files', null, InputOption::VALUE_NONE, 'Use this option to generate docs both in HTML and JSON formats')
     ->addOption('disable-cache', null, InputOption::VALUE_NONE, 'Use this option to force a full regeneration of all doc contents')
     ->setCode(function(InputInterface $input, OutputInterface $output) {
+        // the doc building app doesn't work on Windows
+        if ('\\' === DIRECTORY_SEPARATOR) {
+            $output->writeln('<error>ERROR: The application that builds Symfony Docs does not support Windows. You can try using a Linux distribution via WSL (Windows Subsystem for Linux).</error>');
+
+            return 1;
+        }
+
         $io = new SymfonyStyle($input, $output);
         $io->text('Building all Symfony Docs...');
 
