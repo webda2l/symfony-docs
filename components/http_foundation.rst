@@ -854,9 +854,10 @@ Alternatively, if you are serving a static file, you can use a
 
 The ``BinaryFileResponse`` will automatically handle ``Range`` and
 ``If-Range`` headers from the request. It also supports ``X-Sendfile``
-(see for `FrankenPHP`_, `nginx`_ and `Apache`_). To make use of it, you need to determine
-whether or not the ``X-Sendfile-Type`` header should be trusted and call
-:method:`Symfony\\Component\\HttpFoundation\\BinaryFileResponse::trustXSendfileTypeHeader`
+(see `FrankenPHP X-Sendfile and X-Accel-Redirect headers`_,
+`nginx X-Accel-Redirect header`_ and `Apache mod_xsendfile module`_). To make use
+of it, you need to determine whether or not the ``X-Sendfile-Type`` header should
+be trusted and call :method:`Symfony\\Component\\HttpFoundation\\BinaryFileResponse::trustXSendfileTypeHeader`
 if it should::
 
     BinaryFileResponse::trustXSendfileTypeHeader();
@@ -1061,9 +1062,9 @@ Learn More
     /session
     /http_cache/*
 
-.. _FrankenPHP: https://frankenphp.dev/docs/x-sendfile/
-.. _nginx: https://mattbrictson.com/blog/accelerated-rails-downloads
-.. _Apache: https://tn123.org/mod_xsendfile/
+.. _`FrankenPHP X-Sendfile and X-Accel-Redirect headers`: https://frankenphp.dev/docs/x-sendfile/
+.. _`nginx X-Accel-Redirect header`: https://nginx.org/en/docs/http/ngx_http_proxy_module.html#proxy_ignore_headers
+.. _`Apache mod_xsendfile module`: https://github.com/nmaier/mod_xsendfile
 .. _`JSON Hijacking`: https://haacked.com/archive/2009/06/25/json-hijacking.aspx/
 .. _`valid JSON top-level value`: https://www.json.org/json-en.html
 .. _OWASP guidelines: https://cheatsheetseries.owasp.org/cheatsheets/AJAX_Security_Cheat_Sheet.html#always-return-json-with-an-object-on-the-outside
