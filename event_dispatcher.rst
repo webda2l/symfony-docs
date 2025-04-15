@@ -246,14 +246,13 @@ methods could be called before or after the methods defined in other listeners
 and subscribers. To learn more about event subscribers, read :doc:`/components/event_dispatcher`.
 
 The following example shows an event subscriber that defines several methods which
-listen to the same ``kernel.exception`` event::
+listen to the same ``kernel.exception`` event which has an ``ExceptionEvent``::
 
     // src/EventSubscriber/ExceptionSubscriber.php
     namespace App\EventSubscriber;
 
     use Symfony\Component\EventDispatcher\EventSubscriberInterface;
     use Symfony\Component\HttpKernel\Event\ExceptionEvent;
-    use Symfony\Component\HttpKernel\KernelEvents;
 
     class ExceptionSubscriber implements EventSubscriberInterface
     {
@@ -261,7 +260,7 @@ listen to the same ``kernel.exception`` event::
         {
             // return the subscribed events, their methods and priorities
             return [
-                KernelEvents::EXCEPTION => [
+                ExceptionEvent::class => [
                     ['processException', 10],
                     ['logException', 0],
                     ['notifyException', -10],
