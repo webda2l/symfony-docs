@@ -246,7 +246,7 @@ methods could be called before or after the methods defined in other listeners
 and subscribers. To learn more about event subscribers, read :doc:`/components/event_dispatcher`.
 
 The following example shows an event subscriber that defines several methods which
-listen to the same :ref:`kernel.exception event <component-http-kernel-kernel-exception>`_
+listen to the same :ref:`kernel.exception event <component-http-kernel-kernel-exception>`
 via its ``ExceptionEvent`` class::
 
     // src/EventSubscriber/ExceptionSubscriber.php
