@@ -226,7 +226,7 @@ each time you ask for it.
     If some files or directories in your project should not become services, you
     can exclude them using the ``exclude`` option:
 
-        .. configuration-block::
+    .. configuration-block::
 
         .. code-block:: yaml
 
