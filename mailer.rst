@@ -1093,6 +1093,14 @@ the email contents:
     <h1>Welcome {{ email.toName }}!</h1>
     {# ... #}
 
+By default this will create an attachment using the file path as filename:
+``Content-Disposition: inline; name="cid..."; filename="@images/logo.png"``.
+This behavior can be overridden by passing a name (the third argument):
+
+.. code-block:: html+twig
+
+    <img src="{{ email.image('@images/logo.png', name: 'my-logo.png') }}" alt="My Logo">
+
 .. _mailer-inline-css:
 
 Inlining CSS Styles
