@@ -2815,6 +2815,16 @@ argument of :method:`Symfony\\Component\\HttpFoundation\\UriSigner::sign`::
     Starting with Symfony 7.3, signed URI hashes no longer include the ``/`` or
     ``+`` characters, as these may cause issues with certain clients.
 
+.. tip::
+
+    If ``symfony/clock`` is installed, it is used for creating and verifying the
+    expiration. This allows you to :ref:`mock the current time in your tests
+    <clock_writing-tests>`.
+
+.. versionadded:: 7.3
+
+    ``symfony/clock`` support was added to ``UriSigner`` in Symfony 7.3.
+
 Troubleshooting
 ---------------
 
