@@ -140,7 +140,7 @@ of the UUID value is specific to each implementation and no format should be ass
     use Symfony\Component\Uid\Uuid;
 
     // $uuid is an instance of Symfony\Component\Uid\UuidV8
-    $uuid = Uuid::v8();
+    $uuid = Uuid::v8('d9e7a184-5d5b-11ea-a62a-3499710062d0');
 
 .. versionadded:: 6.2
 
