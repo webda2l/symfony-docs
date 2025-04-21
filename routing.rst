@@ -2810,10 +2810,30 @@ argument of :method:`Symfony\\Component\\HttpFoundation\\UriSigner::sign`::
 
     The feature to add an expiration date for a signed URI was introduced in Symfony 7.1.
 
+If you need to know the reason why a signed URI is invalid, you can use the
+``verify()`` method which throws exceptions on failure::
+
+    use Symfony\Component\HttpFoundation\Exception\ExpiredSignedUriException;
+    use Symfony\Component\HttpFoundation\Exception\UnsignedUriException;
+    use Symfony\Component\HttpFoundation\Exception\UnverifiedSignedUriException;
+
+    // ...
+
+    try {
+        $uriSigner->verify($uri); // $uri can be a string or Request object
+
+        // the URI is valid
+    } catch (UnsignedUriException) {
+        // the URI isn't signed
+    } catch (UnverifiedSignedUriException) {
+        // the URI is signed but the signature is invalid
+    } catch (ExpiredSignedUriException) {
+        // the URI is signed but expired
+    }
+
 .. versionadded:: 7.3
 
-    Starting with Symfony 7.3, signed URI hashes no longer include the ``/`` or
-    ``+`` characters, as these may cause issues with certain clients.
+    The ``verify()`` method was introduced in Symfony 7.3.
 
 Troubleshooting
 ---------------
