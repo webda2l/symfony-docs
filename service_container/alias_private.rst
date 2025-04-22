@@ -181,6 +181,27 @@ This means that when using the container directly, you can access the
             # ...
             app.mailer: '@App\Mail\PhpMailer'
 
+The ``#[AsAlias]`` attribute also support per-environment configuration
+via the ``when`` argument::
+
+    // src/Mail/PhpMailer.php
+    namespace App\Mail;
+
+    // ...
+    use Symfony\Component\DependencyInjection\Attribute\AsAlias;
+
+    #[AsAlias(id: 'app.mailer', when: 'dev')]
+    class PhpMailer
+    {
+        // ...
+    }
+
+You can pass either a string or an array of strings to the ``when`` argument.
+
+.. versionadded:: 7.3
+
+    The ``when`` argument on the ``#[AsAlias]`` attribute was introduced in Symfony 7.3.
+
 .. tip::
 
     When using ``#[AsAlias]`` attribute, you may omit passing ``id`` argument
