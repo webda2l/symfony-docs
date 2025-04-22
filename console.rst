@@ -18,14 +18,14 @@ the ``list`` command to view all available commands in the application:
     ...
 
     Available commands:
-      about                                      Display information about the current project
-      completion                                 Dump the shell completion script
-      help                                       Display help for a command
-      list                                       List commands
+      about             Display information about the current project
+      completion        Dump the shell completion script
+      help              Display help for a command
+      list              List commands
      assets
-      assets:install                             Install bundle's web assets under a public directory
+      assets:install    Install bundle's web assets under a public directory
      cache
-      cache:clear                                Clear the cache
+      cache:clear       Clear the cache
     ...
 
 .. note::
