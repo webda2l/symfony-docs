@@ -2835,6 +2835,16 @@ If you need to know the reason why a signed URI is invalid, you can use the
 
     The ``verify()`` method was introduced in Symfony 7.3.
 
+.. tip::
+
+    If ``symfony/clock`` is installed, it is used for creating and verifying the
+    expiration. This allows you to :ref:`mock the current time in your tests
+    <clock_writing-tests>`.
+
+.. versionadded:: 7.3
+
+    ``symfony/clock`` support was added to ``UriSigner`` in Symfony 7.3.
+
 Troubleshooting
 ---------------
 
