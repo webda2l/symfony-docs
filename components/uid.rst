@@ -32,13 +32,13 @@ to create each type of UUID:
 **UUID v1** (time-based)
 
 Generates the UUID using a timestamp and the MAC address of your device
-(`read UUIDv1 spec <https://datatracker.ietf.org/doc/html/draft-ietf-uuidrev-rfc4122bis#name-uuid-version-1>`__).
+(`read the UUIDv1 spec <https://datatracker.ietf.org/doc/html/draft-ietf-uuidrev-rfc4122bis#name-uuid-version-1>`__).
 Both are obtained automatically, so you don't have to pass any constructor argument::
 
     use Symfony\Component\Uid\Uuid;
 
-    // $uuid is an instance of Symfony\Component\Uid\UuidV1
     $uuid = Uuid::v1();
+    // $uuid is an instance of Symfony\Component\Uid\UuidV1
 
 .. tip::
 
@@ -48,7 +48,7 @@ Both are obtained automatically, so you don't have to pass any constructor argum
 **UUID v2** (DCE security)
 
 Similar to UUIDv1 but with a very high likelihood of ID collision
-(`read UUIDv2 spec <https://datatracker.ietf.org/doc/html/draft-ietf-uuidrev-rfc4122bis#name-uuid-version-2>`__).
+(`read the UUIDv2 spec <https://datatracker.ietf.org/doc/html/draft-ietf-uuidrev-rfc4122bis#name-uuid-version-2>`__).
 It's part of the authentication mechanism of DCE (Distributed Computing Environment)
 and the UUID includes the POSIX UIDs (user/group ID) of the user who generated it.
 This UUID variant is **not implemented** by the Uid component.
@@ -56,7 +56,7 @@ This UUID variant is **not implemented** by the Uid component.
 **UUID v3** (name-based, MD5)
 
 Generates UUIDs from names that belong, and are unique within, some given namespace
-(`read UUIDv3 spec <https://datatracker.ietf.org/doc/html/draft-ietf-uuidrev-rfc4122bis#name-uuid-version-3>`__).
+(`read the UUIDv3 spec <https://datatracker.ietf.org/doc/html/draft-ietf-uuidrev-rfc4122bis#name-uuid-version-3>`__).
 This variant is useful to generate deterministic UUIDs from arbitrary strings.
 It works by populating the UUID contents with the``md5`` hash of concatenating
 the namespace and the name::
@@ -69,8 +69,8 @@ the namespace and the name::
     // $namespace = Uuid::v4();
 
     // $name can be any arbitrary string
-    // $uuid is an instance of Symfony\Component\Uid\UuidV3
     $uuid = Uuid::v3($namespace, $name);
+    // $uuid is an instance of Symfony\Component\Uid\UuidV3
 
 These are the default namespaces defined by the standard:
 
@@ -81,20 +81,20 @@ These are the default namespaces defined by the standard:
 
 **UUID v4** (random)
 
-Generates a random UUID (`read UUIDv4 spec <https://datatracker.ietf.org/doc/html/draft-ietf-uuidrev-rfc4122bis#name-uuid-version-4>`__).
+Generates a random UUID (`read the UUIDv4 spec <https://datatracker.ietf.org/doc/html/draft-ietf-uuidrev-rfc4122bis#name-uuid-version-4>`__).
 Because of its randomness, it ensures uniqueness across distributed systems
 without the need for a central coordinating entity. It's privacy-friendly
 because it doesn't contain any information about where and when it was generated::
 
     use Symfony\Component\Uid\Uuid;
 
-    // $uuid is an instance of Symfony\Component\Uid\UuidV4
     $uuid = Uuid::v4();
+    // $uuid is an instance of Symfony\Component\Uid\UuidV4
 
 **UUID v5** (name-based, SHA-1)
 
 It's the same as UUIDv3 (explained above) but it uses ``sha1`` instead of
-``md5`` to hash the given namespace and name (`read UUIDv5 spec <https://datatracker.ietf.org/doc/html/draft-ietf-uuidrev-rfc4122bis#name-uuid-version-5>`__).
+``md5`` to hash the given namespace and name (`read the UUIDv5 spec <https://datatracker.ietf.org/doc/html/draft-ietf-uuidrev-rfc4122bis#name-uuid-version-5>`__).
 This makes it more secure and less prone to hash collisions.
 
 .. _uid-uuid-v6:
@@ -103,12 +103,12 @@ This makes it more secure and less prone to hash collisions.
 
 It rearranges the time-based fields of the UUIDv1 to make it lexicographically
 sortable (like :ref:`ULIDs <ulid>`). It's more efficient for database indexing
-(`read UUIDv6 spec <https://datatracker.ietf.org/doc/html/draft-ietf-uuidrev-rfc4122bis#name-uuid-version-6>`__)::
+(`read the UUIDv6 spec <https://datatracker.ietf.org/doc/html/draft-ietf-uuidrev-rfc4122bis#name-uuid-version-6>`__)::
 
     use Symfony\Component\Uid\Uuid;
 
-    // $uuid is an instance of Symfony\Component\Uid\UuidV6
     $uuid = Uuid::v6();
+    // $uuid is an instance of Symfony\Component\Uid\UuidV6
 
 .. tip::
 
@@ -121,26 +121,28 @@ sortable (like :ref:`ULIDs <ulid>`). It's more efficient for database indexing
 
 Generates time-ordered UUIDs based on a high-resolution Unix Epoch timestamp
 source (the number of milliseconds since midnight 1 Jan 1970 UTC, leap seconds excluded)
-(`read UUIDv7 spec <https://datatracker.ietf.org/doc/html/draft-ietf-uuidrev-rfc4122bis#name-uuid-version-7>`__).
+(`read the UUIDv7 spec <https://datatracker.ietf.org/doc/html/draft-ietf-uuidrev-rfc4122bis#name-uuid-version-7>`__).
 It's recommended to use this version over UUIDv1 and UUIDv6 because it provides
 better entropy (and a more strict chronological order of UUID generation)::
 
     use Symfony\Component\Uid\Uuid;
 
-    // $uuid is an instance of Symfony\Component\Uid\UuidV7
     $uuid = Uuid::v7();
+    // $uuid is an instance of Symfony\Component\Uid\UuidV7
 
 **UUID v8** (custom)
 
-Provides an RFC-compatible format for experimental or vendor-specific use cases
-(`read UUIDv8 spec <https://datatracker.ietf.org/doc/html/draft-ietf-uuidrev-rfc4122bis#name-uuid-version-8>`__).
-The only requirement is to set the variant and version bits of the UUID. The rest
-of the UUID value is specific to each implementation and no format should be assumed::
+Provides an RFC-compatible format intended for experimental or vendor-specific use cases
+(`read the UUIDv8 spec <https://datatracker.ietf.org/doc/html/draft-ietf-uuidrev-rfc4122bis#name-uuid-version-8>`__).
+You must generate the UUID value yourself. The only requirement is to set the
+variant and version bits of the UUID correctly. The rest of the UUID content is
+implementation-specific, and no particular format should be assumed::
 
     use Symfony\Component\Uid\Uuid;
 
-    // $uuid is an instance of Symfony\Component\Uid\UuidV8
+    // pass your custom UUID value as the argument
     $uuid = Uuid::v8('d9e7a184-5d5b-11ea-a62a-3499710062d0');
+    // $uuid is an instance of Symfony\Component\Uid\UuidV8
 
 .. versionadded:: 6.2
 
