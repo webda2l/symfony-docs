@@ -878,7 +878,7 @@ Then declare it as a router for Panther server in ``phpunit.xml.dist`` using the
         <!-- ... -->
         <php>
             <!-- ... -->
-            <server name="PANTHER_WEB_SERVER_ROUTER" value="./tests/router.php"/>
+            <server name="PANTHER_WEB_SERVER_ROUTER" value="../tests/router.php"/>
         </php>
     </phpunit>
 
