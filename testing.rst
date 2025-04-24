@@ -875,8 +875,8 @@ Use the ``submitForm()`` method to submit the form that contains the given butto
         'comment_form[content]' => '...',
     ]);
 
-The first argument of ``submitForm()`` is the text content, ``id``, ``value`` or
-``name`` of any ``<button>`` or ``<input type="submit">`` included in the form.
+The first argument of ``submitForm()`` is the text content, ``id`` or ``name``
+of any ``<button>`` or ``<input type="submit">`` included in the form.
 The second optional argument is used to override the default form field values.
 
 .. note::
