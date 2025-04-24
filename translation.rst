@@ -487,11 +487,11 @@ your application:
 
 .. code-block:: twig
 
-    {{ 'Application version: {version}'|trans }}
+    {{ 'Application version: {app_version}'|trans }}
     {# output: "Application version: 1.2.3" #}
 
     {# parameters passed to the message override global parameters #}
-    {{ 'Package version: {version}'|trans({'{version}': '2.3.4'}) }}
+    {{ 'Package version: {app_version}'|trans({'{app_version}': '2.3.4'}) }}
     # Displays "Package version: 2.3.4"
 
 Forcing the Translator Locale
