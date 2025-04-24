@@ -176,7 +176,7 @@ that the ORM resolves to:
 
     doctrine:
         orm:
-            auto_mapping: true
+            auto_mapping: false
             # the standard distribution overrides this to be true in debug, false otherwise
             auto_generate_proxy_classes: false
             proxy_namespace: Proxies
