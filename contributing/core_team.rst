@@ -254,7 +254,7 @@ generate the CHANGELOG files when releasing new versions.
     #. A clone for their own contributions, which they use to push to their
        fork on GitHub. Clear out the push URL for the Symfony repository using
        ``git remote set-url --push origin dev://null`` (change ``origin``
-       to the Git remote poiting to the Symfony repository);
+       to the Git remote pointing to the Symfony repository);
     #. A clone for merging, which they use in combination with ``gh`` and
        allows them to push to the main repository.
 
