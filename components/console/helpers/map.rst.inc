@@ -1,6 +1,7 @@
 * :doc:`/components/console/helpers/formatterhelper`
 * :doc:`/components/console/helpers/processhelper`
 * :doc:`/components/console/helpers/progressbar`
+* :doc:`/components/console/helpers/progressindicator`
 * :doc:`/components/console/helpers/questionhelper`
 * :doc:`/components/console/helpers/table`
 * :doc:`/components/console/helpers/debug_formatter`
