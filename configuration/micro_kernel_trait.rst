@@ -297,8 +297,8 @@ Now it looks like this::
         {
             // import the WebProfilerRoutes, only if the bundle is enabled
             if (isset($this->bundles['WebProfilerBundle'])) {
-                $routes->import('@WebProfilerBundle/Resources/config/routing/wdt.xml')->prefix('/_wdt');
-                $routes->import('@WebProfilerBundle/Resources/config/routing/profiler.xml')->prefix('/_profiler');
+                $routes->import('@WebProfilerBundle/Resources/config/routing/wdt.php', 'php')->prefix('/_wdt');
+                $routes->import('@WebProfilerBundle/Resources/config/routing/profiler.php', 'php')->prefix('/_profiler');
             }
 
             // load the routes defined as PHP attributes
@@ -309,6 +309,12 @@ Now it looks like this::
         // optionally, you can define the getCacheDir() and getLogDir() methods
         // to override the default locations for these directories
     }
+
+
+.. versionadded:: 7.3
+
+    The ``wdt.php`` and ``profiler.php`` files were introduced in Symfony 7.3.
+    Previously, you had to import ``wdt.xml`` and ``profiler.xml``
 
 Before continuing, run this command to add support for the new dependencies:
 

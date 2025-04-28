@@ -154,7 +154,8 @@ automatically when installing ``symfony/framework-bundle``):
         # config/routes/framework.yaml
         when@dev:
             _errors:
-                resource: '@FrameworkBundle/Resources/config/routing/errors.xml'
+                resource: '@FrameworkBundle/Resources/config/routing/errors.php'
+                type:     php
                 prefix:   /_error
 
     .. code-block:: xml
@@ -167,7 +168,7 @@ automatically when installing ``symfony/framework-bundle``):
                 https://symfony.com/schema/routing/routing-1.0.xsd">
 
             <when env="dev">
-                <import resource="@FrameworkBundle/Resources/config/routing/errors.xml" prefix="/_error"/>
+                <import resource="@FrameworkBundle/Resources/config/routing/errors.php" type="php" prefix="/_error"/>
             </when>
         </routes>
 
@@ -178,7 +179,7 @@ automatically when installing ``symfony/framework-bundle``):
 
         return function (RoutingConfigurator $routes): void {
             if ('dev' === $routes->env()) {
-                $routes->import('@FrameworkBundle/Resources/config/routing/errors.xml')
+                $routes->import('@FrameworkBundle/Resources/config/routing/errors.php', 'php')
                     ->prefix('/_error')
                 ;
             }
@@ -190,6 +191,11 @@ need to replace ``http://localhost/`` by the host used in your local setup):
 
 * ``http://localhost/_error/{statusCode}`` for HTML
 * ``http://localhost/_error/{statusCode}.{format}`` for any other format
+
+.. versionadded:: 7.3
+
+    The ``errors.php`` file was introduced in Symfony 7.3.
+    Previously, you had to import ``errors.xml``
 
 .. _overriding-non-html-error-output:
 
