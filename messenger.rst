@@ -2754,7 +2754,7 @@ using the ``DispatchAfterCurrentBusMiddleware`` and adding a
     {
         public function __construct(
             private MailerInterface $mailer,
-            EntityManagerInterface $em,
+            private EntityManagerInterface $em,
         ) {
         }
 
