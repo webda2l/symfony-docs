@@ -20,8 +20,7 @@ stack Symfony application.
 Installation
 ------------
 
-In applications using :ref:`Symfony Flex <symfony-flex>`, run this command to
-install the scheduler component:
+Run this command to install the scheduler component:
 
 .. code-block:: terminal
 
@@ -29,8 +28,8 @@ install the scheduler component:
 
 .. note::
 
-    The Symfony Scheduler Flex recipe creates an initial schedule that's ready
-    to start adding your tasks.
+    In applications using :ref:`Symfony Flex <symfony-flex>`, installing the component
+    also creates an initial schedule that's ready to start adding your tasks.
 
 Symfony Scheduler Basics
 ------------------------
