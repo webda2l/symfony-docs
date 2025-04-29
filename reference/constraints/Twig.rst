@@ -24,7 +24,7 @@ Basic Usage
 -----------
 
 Apply the ``Twig`` constraint to validate the contents of any property or the
-returned value of any method:
+returned value of any method::
 
     use Symfony\Bridge\Twig\Validator\Constraints\Twig;
 
