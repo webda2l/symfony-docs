@@ -36,9 +36,9 @@ normalization process::
         ) {
         }
 
-        public function normalize(mixed $object, ?string $format = null, array $context = []): array
+        public function normalize(mixed $data, ?string $format = null, array $context = []): array
         {
-            $data = $this->normalizer->normalize($object, $format, $context);
+            $data = $this->normalizer->normalize($data, $format, $context);
 
             // Here, add, edit, or delete some data:
             $data['href']['self'] = $this->router->generate('topic_show', [
