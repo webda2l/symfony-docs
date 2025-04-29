@@ -147,7 +147,7 @@ field values, etc.) before submitting it::
     $crawler = $client->request('GET', 'https://github.com/login');
 
     // find the form with the 'Log in' button and submit it
-    // 'Log in' can be the text content, id, value or name of a <button> or <input type="submit">
+    // 'Log in' can be the text content, id or name of a <button> or <input type="submit">
     $client->submitForm('Log in');
 
     // the second optional argument lets you override the default form field values
