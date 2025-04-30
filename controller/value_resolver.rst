@@ -281,7 +281,7 @@ this argument) or an array with the resolved value(s). Usually arguments are
 resolved as a single value, but variadic arguments require resolving multiple
 values. That's why you must always return an array, even for single values::
 
-    // src/ValueResolver/IdentifierValueResolver.php
+    // src/ValueResolver/BookingIdValueResolver.php
     namespace App\ValueResolver;
 
     use App\IdentifierInterface;
@@ -332,6 +332,20 @@ This tag is automatically added to every service implementing ``ValueResolverInt
 but you can set it yourself to change its ``priority`` or ``name`` attributes.
 
 .. configuration-block::
+
+    .. code-block:: php-attributes
+
+        // src/ValueResolver/BookingIdValueResolver.php
+        namespace App\ValueResolver;
+
+        use Symfony\Component\DependencyInjection\Attribute\AsTaggedItem;
+        use Symfony\Component\HttpKernel\Controller\ValueResolverInterface;
+
+         #[AsTaggedItem(name: 'booking_id', priority: 150)]
+        class BookingIdValueResolver implements ValueResolverInterface
+        {
+            // ...
+        }
 
     .. code-block:: yaml
 
@@ -414,7 +428,7 @@ As an alternative, you can add the
 :class:`Symfony\\Component\\HttpKernel\\Attribute\\AsTargetedValueResolver` attribute
 to your resolver and pass your custom name as its first argument::
 
-    // src/ValueResolver/IdentifierValueResolver.php
+    // src/ValueResolver/BookingIdValueResolver.php
     namespace App\ValueResolver;
 
     use Symfony\Component\HttpKernel\Attribute\AsTargetedValueResolver;
