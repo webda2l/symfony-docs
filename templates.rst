@@ -1553,23 +1553,20 @@ as currency:
     {# pass in the 3 optional arguments #}
     {{ product.price|price(2, ',', '.') }}
 
-Create a class that extends ``AbstractExtension`` and fill in the logic::
+.. _templates-twig-filter-attribute:
+
+Create a class with a method that contains the filter logic, then add
+the ``#[AsTwigFilter]`` attribute to define the name and options of
+the Twig filter::
 
     // src/Twig/AppExtension.php
     namespace App\Twig;
 
-    use Twig\Extension\AbstractExtension;
-    use Twig\TwigFilter;
+    use Twig\Attribute\AsTwigFilter;
 
-    class AppExtension extends AbstractExtension
+    class AppExtension
     {
-        public function getFilters(): array
-        {
-            return [
-                new TwigFilter('price', [$this, 'formatPrice']),
-            ];
-        }
-
+        #[AsTwigFilter('price')]
         public function formatPrice(float $number, int $decimals = 0, string $decPoint = '.', string $thousandsSep = ','): string
         {
             $price = number_format($number, $decimals, $decPoint, $thousandsSep);
@@ -1579,24 +1576,19 @@ Create a class that extends ``AbstractExtension`` and fill in the logic::
         }
     }
 
-If you want to create a function instead of a filter, define the
-``getFunctions()`` method::
+.. _templates-twig-function-attribute:
+
+If you want to create a function instead of a filter, use the
+``#[AsTwigFunction]`` attribute::
 
     // src/Twig/AppExtension.php
     namespace App\Twig;
 
-    use Twig\Extension\AbstractExtension;
-    use Twig\TwigFunction;
+    use Twig\Attribute\AsTwigFunction;
 
-    class AppExtension extends AbstractExtension
+    class AppExtension
     {
-        public function getFunctions(): array
-        {
-            return [
-                new TwigFunction('area', [$this, 'calculateArea']),
-            ];
-        }
-
+        #[AsTwigFunction('area')]
         public function calculateArea(int $width, int $length): int
         {
             return $width * $length;
@@ -1607,6 +1599,16 @@ If you want to create a function instead of a filter, define the
 
     Along with custom filters and functions, you can also register
     `global variables`_.
+
+.. versionadded:: 7.3
+
+    Support for the ``#[AsTwigFilter]``, ``#[AsTwigFunction]`` and ``#[AsTwigTest]`` attributes was introduced in Symfony 7.3.
+    Previously, you had to extend the ``AbstractExtension`` class, and override the
+    ``getFilters()`` and ``getFunctions()`` methods.
+
+When using autoconfiguration, the tag ``twig.attribute_extension`` is added automatically
+when a Twig attribute is used on a method of a class. Otherwise, when autoconfiguration is not enabled,
+it needs to be added in the service definition.
 
 Register an Extension as a Service
 ..................................
@@ -1631,10 +1633,10 @@ this command to confirm that your new filter was successfully registered:
 Creating Lazy-Loaded Twig Extensions
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
-Including the code of the custom filters/functions in the Twig extension class
-is the simplest way to create extensions. However, Twig must initialize all
-extensions before rendering any template, even if the template doesn't use an
-extension.
+When using attributes to extend Twig, the services are initialized only when
+the functions or filters are used to render the template. But in case you use the
+classic approach by extending the ``AbstractExtension`` class, Twig initializes all the extensions before
+rendering any template, even if the extension is not used in the template.
 
 If extensions don't define dependencies (i.e. if you don't inject services in
 them) performance is not affected. However, if extensions define lots of complex
