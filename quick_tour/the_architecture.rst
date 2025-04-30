@@ -190,7 +190,7 @@ After creating just *one* file, you can use this immediately:
     {# templates/default/index.html.twig #}
     {# Will print something like "Hey Symfony!" #}
     <h1>{{ name|greet }}</h1>
-    
+
 How does this work? Symfony notices that your class uses the ``#[AsTwigFilter]`` attribute
 and so *automatically* registers it as a Twig extension. This is called autoconfiguration,
 and it works for *many* many things. Create a class and then extend a base class
