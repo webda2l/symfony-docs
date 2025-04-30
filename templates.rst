@@ -1555,8 +1555,8 @@ as currency:
 
 .. _templates-twig-filter-attribute:
 
-Create a class with a method that contains the filter logic, then add
-the ``#[AsTwigFilter]`` attribute to define the name and options of
+Create a regular PHP class with a method that contains the filter logic. Then,
+add the ``#[AsTwigFilter]`` attribute to define the name and options of
 the Twig filter::
 
     // src/Twig/AppExtension.php
@@ -1602,13 +1602,15 @@ If you want to create a function instead of a filter, use the
 
 .. versionadded:: 7.3
 
-    Support for the ``#[AsTwigFilter]``, ``#[AsTwigFunction]`` and ``#[AsTwigTest]`` attributes was introduced in Symfony 7.3.
-    Previously, you had to extend the ``AbstractExtension`` class, and override the
-    ``getFilters()`` and ``getFunctions()`` methods.
+    Support for the ``#[AsTwigFilter]``, ``#[AsTwigFunction]`` and ``#[AsTwigTest]``
+    attributes was introduced in Symfony 7.3. Previously, you had to extend the
+    ``AbstractExtension`` class, and override the ``getFilters()`` and ``getFunctions()``
+    methods.
 
-When using autoconfiguration, the tag ``twig.attribute_extension`` is added automatically
-when a Twig attribute is used on a method of a class. Otherwise, when autoconfiguration is not enabled,
-it needs to be added in the service definition.
+If you're using the :ref:`default services.yaml configuration <service-container-services-load-example>`,
+the :ref:`service autoconfiguration <services-autoconfigure>` feature will enable
+this class as a Twig extension. Otherwise, you need to define a service manually
+and :doc:`tag it </service_container/tags>` with the ``twig.attribute_extension`` tag.
 
 Register an Extension as a Service
 ..................................
@@ -1633,10 +1635,11 @@ this command to confirm that your new filter was successfully registered:
 Creating Lazy-Loaded Twig Extensions
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
-When using attributes to extend Twig, the services are initialized only when
-the functions or filters are used to render the template. But in case you use the
-classic approach by extending the ``AbstractExtension`` class, Twig initializes all the extensions before
-rendering any template, even if the extension is not used in the template.
+When :ref:`using attributes to extend Twig <templates-twig-filter-attribute>`,
+the **Twig extensions are already lazy-loaded** and you don't have to do anything
+else. However, if your Twig extensions follow the **legacy approach** of extending
+the ``AbstractExtension`` class, Twig initializes all the extensions before
+rendering any template, even if they are not used.
 
 If extensions don't define dependencies (i.e. if you don't inject services in
 them) performance is not affected. However, if extensions define lots of complex

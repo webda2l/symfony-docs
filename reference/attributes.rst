@@ -125,6 +125,7 @@ Twig
 * :ref:`Template <templates-template-attribute>`
 * :ref:`AsTwigFilter <templates-twig-filter-attribute>`
 * :ref:`AsTwigFunction <templates-twig-function-attribute>`
+* ``AsTwigTest``
 
 Symfony UX
 ~~~~~~~~~~
