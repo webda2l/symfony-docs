@@ -26,22 +26,17 @@ inside your console command::
     namespace App\Command;
 
     use Symfony\Component\Console\Attribute\AsCommand;
-    use Symfony\Component\Console\Command\Command;
     use Symfony\Component\Console\Helper\TreeHelper;
     use Symfony\Component\Console\Helper\TreeNode;
-    use Symfony\Component\Console\Input\InputInterface;
-    use Symfony\Component\Console\Output\OutputInterface;
     use Symfony\Component\Console\Style\SymfonyStyle;
 
-    #[AsCommand(name: 'app:some-command', description: '...')]
-    class SomeCommand extends Command
+    #[AsCommand(name: 'app:my-command', description: '...')]
+    class MyCommand
     {
         // ...
 
-        protected function execute(InputInterface $input, OutputInterface $output): int
+        public function __invoke(SymfonyStyle $io): int
         {
-            $io = new SymfonyStyle($input, $output);
-
             $node = TreeNode::fromValues([
                 'config/',
                 'public/',

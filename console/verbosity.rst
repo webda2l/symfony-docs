@@ -49,21 +49,22 @@ It is possible to print a message in a command for only a specific verbosity
 level. For example::
 
     // ...
+    use Symfony\Component\Console\Attribute\Argument;
+    use Symfony\Component\Console\Attribute\AsCommand;
     use Symfony\Component\Console\Command\Command;
     use Symfony\Component\Console\Input\InputInterface;
     use Symfony\Component\Console\Output\OutputInterface;
 
-    class CreateUserCommand extends Command
+    #[AsCommand(name: 'app:create-user')]
+    class CreateUserCommand
     {
-        // ...
-
-        public function execute(InputInterface $input, OutputInterface $output): int
+        public function __invoke(OutputInterface $output, #[Argument] string $username, #[Argument] string $password): int
         {
             $user = new User(...);
 
             $output->writeln([
-                'Username: '.$input->getArgument('username'),
-                'Password: '.$input->getArgument('password'),
+                'Username: '.$username,
+                'Password: '.$password,
             ]);
 
             // available methods: ->isSilent(), ->isQuiet(), ->isVerbose(), ->isVeryVerbose(), ->isDebug()

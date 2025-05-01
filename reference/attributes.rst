@@ -14,7 +14,7 @@ Doctrine Bridge
 Command
 ~~~~~~~
 
-* :ref:`AsCommand <console_registering-the-command>`
+* :ref:`AsCommand <console_creating-command>`
 
 Contracts
 ~~~~~~~~~

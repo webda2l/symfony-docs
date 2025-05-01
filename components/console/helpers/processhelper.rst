@@ -11,7 +11,7 @@ a very verbose verbosity (e.g. ``-vv``)::
 
     use Symfony\Component\Process\Process;
 
-    $helper = $this->getHelper('process');
+    $helper = new ProcessHelper();
     $process = new Process(['figlet', 'Symfony']);
 
     $helper->run($output, $process);

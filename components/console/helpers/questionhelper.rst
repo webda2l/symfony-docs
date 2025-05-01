@@ -2,11 +2,9 @@ Question Helper
 ===============
 
 The :class:`Symfony\\Component\\Console\\Helper\\QuestionHelper` provides
-functions to ask the user for more information. It is included in the default
-helper set and you can get it by calling
-:method:`Symfony\\Component\\Console\\Command\\Command::getHelper`::
+functions to ask the user for more information::
 
-    $helper = $this->getHelper('question');
+    $helper = new QuestionHelper();
 
 The Question Helper has a single method
 :method:`Symfony\\Component\\Console\\Helper\\QuestionHelper::ask` that needs an
@@ -27,18 +25,18 @@ Suppose you want to confirm an action before actually executing it. Add
 the following to your command::
 
     // ...
+    use Symfony\Component\Console\Attribute\AsCommand;
     use Symfony\Component\Console\Command\Command;
     use Symfony\Component\Console\Input\InputInterface;
     use Symfony\Component\Console\Output\OutputInterface;
     use Symfony\Component\Console\Question\ConfirmationQuestion;
 
-    class YourCommand extends Command
+    #[AsCommand(name: 'app:my-command')]
+    class MyCommand
     {
-        // ...
-
-        public function execute(InputInterface $input, OutputInterface $output): int
+        public function __invoke(InputInterface $input, OutputInterface $output): int
         {
-            $helper = $this->getHelper('question');
+            $helper = new QuestionHelper();
             $question = new ConfirmationQuestion('Continue with this action?', false);
 
             if (!$helper->ask($input, $output, $question)) {
@@ -91,7 +89,7 @@ if you want to know a bundle name, you can add this to your command::
     use Symfony\Component\Console\Question\Question;
 
     // ...
-    public function execute(InputInterface $input, OutputInterface $output): int
+    public function __invoke(InputInterface $input, OutputInterface $output): int
     {
         // ...
         $question = new Question('Please enter the name of the bundle', 'AcmeDemoBundle');
@@ -121,10 +119,10 @@ but ``red`` could be set instead (could be more explicit)::
     use Symfony\Component\Console\Question\ChoiceQuestion;
 
     // ...
-    public function execute(InputInterface $input, OutputInterface $output): int
+    public function __invoke(InputInterface $input, OutputInterface $output): int
     {
         // ...
-        $helper = $this->getHelper('question');
+        $helper = new QuestionHelper();
         $question = new ChoiceQuestion(
             'Please select your favorite color (defaults to red)',
             // choices can also be PHP objects that implement __toString() method
@@ -184,10 +182,10 @@ this use :method:`Symfony\\Component\\Console\\Question\\ChoiceQuestion::setMult
     use Symfony\Component\Console\Question\ChoiceQuestion;
 
     // ...
-    public function execute(InputInterface $input, OutputInterface $output): int
+    public function __invoke(InputInterface $input, OutputInterface $output): int
     {
         // ...
-        $helper = $this->getHelper('question');
+        $helper = new QuestionHelper();
         $question = new ChoiceQuestion(
             'Please select your favorite colors (defaults to red and blue)',
             ['red', 'blue', 'yellow'],
@@ -218,10 +216,10 @@ will be autocompleted as the user types::
     use Symfony\Component\Console\Question\Question;
 
     // ...
-    public function execute(InputInterface $input, OutputInterface $output): int
+    public function __invoke(InputInterface $input, OutputInterface $output): int
     {
         // ...
-        $helper = $this->getHelper('question');
+        $helper = new QuestionHelper();
 
         $bundles = ['AcmeDemoBundle', 'AcmeBlogBundle', 'AcmeStoreBundle'];
         $question = new Question('Please enter the name of a bundle', 'FooBundle');
@@ -241,9 +239,9 @@ provide a callback function to dynamically generate suggestions::
     use Symfony\Component\Console\Question\Question;
 
     // ...
-    public function execute(InputInterface $input, OutputInterface $output): int
+    public function __invoke(InputInterface $input, OutputInterface $output): int
     {
-        $helper = $this->getHelper('question');
+        $helper = new QuestionHelper();
 
         // This function is called whenever the input changes and new
         // suggestions are needed.
@@ -282,10 +280,10 @@ You can also specify if you want to not trim the answer by setting it directly w
     use Symfony\Component\Console\Question\Question;
 
     // ...
-    public function execute(InputInterface $input, OutputInterface $output): int
+    public function __invoke(InputInterface $input, OutputInterface $output): int
     {
         // ...
-        $helper = $this->getHelper('question');
+        $helper = new QuestionHelper();
 
         $question = new Question('What is the name of the child?');
         $question->setTrimmable(false);
@@ -308,10 +306,10 @@ the response to a question should allow multiline answers by passing ``true`` to
     use Symfony\Component\Console\Question\Question;
 
     // ...
-    public function execute(InputInterface $input, OutputInterface $output): int
+    public function __invoke(InputInterface $input, OutputInterface $output): int
     {
         // ...
-        $helper = $this->getHelper('question');
+        $helper = new QuestionHelper();
 
         $question = new Question('How do you solve world peace?');
         $question->setMultiline(true);
@@ -335,10 +333,10 @@ convenient for passwords::
     use Symfony\Component\Console\Question\Question;
 
     // ...
-    public function execute(InputInterface $input, OutputInterface $output): int
+    public function __invoke(InputInterface $input, OutputInterface $output): int
     {
         // ...
-        $helper = $this->getHelper('question');
+        $helper = new QuestionHelper();
 
         $question = new Question('What is the database password?');
         $question->setHidden(true);
@@ -372,10 +370,10 @@ convenient for passwords::
         use Symfony\Component\Console\Question\ChoiceQuestion;
 
         // ...
-        public function execute(InputInterface $input, OutputInterface $output): int
+        public function __invoke(InputInterface $input, OutputInterface $output): int
         {
             // ...
-            $helper = $this->getHelper('question');
+            $helper = new QuestionHelper();
             QuestionHelper::disableStty();
 
             // ...
@@ -396,10 +394,10 @@ method::
     use Symfony\Component\Console\Question\Question;
 
     // ...
-    public function execute(InputInterface $input, OutputInterface $output): int
+    public function __invoke(InputInterface $input, OutputInterface $output): int
     {
         // ...
-        $helper = $this->getHelper('question');
+        $helper = new QuestionHelper();
 
         $question = new Question('Please enter the name of the bundle', 'AcmeDemoBundle');
         $question->setNormalizer(function (string $value): string {
@@ -434,10 +432,10 @@ method::
     use Symfony\Component\Console\Question\Question;
 
     // ...
-    public function execute(InputInterface $input, OutputInterface $output): int
+    public function __invoke(InputInterface $input, OutputInterface $output): int
     {
         // ...
-        $helper = $this->getHelper('question');
+        $helper = new QuestionHelper();
 
         $question = new Question('Please enter the name of the bundle', 'AcmeDemoBundle');
         $question->setValidator(function (string $answer): string {
@@ -494,10 +492,10 @@ You can also use a validator with a hidden question::
     use Symfony\Component\Console\Question\Question;
 
     // ...
-    public function execute(InputInterface $input, OutputInterface $output): int
+    public function __invoke(InputInterface $input, OutputInterface $output): int
     {
         // ...
-        $helper = $this->getHelper('question');
+        $helper = new QuestionHelper();
 
         $question = new Question('Please enter your password');
         $question->setNormalizer(function (?string $value): string {

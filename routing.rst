@@ -2669,23 +2669,23 @@ The solution is to configure the ``default_uri`` option to define the
 
 Now you'll get the expected results when generating URLs in your commands::
 
-    // src/Command/SomeCommand.php
+    // src/Command/MyCommand.php
     namespace App\Command;
 
-    use Symfony\Component\Console\Command\Command;
-    use Symfony\Component\Console\Input\InputInterface;
-    use Symfony\Component\Console\Output\OutputInterface;
+    use Symfony\Component\Console\Attribute\AsCommand;
+    use Symfony\Component\Console\Style\SymfonyStyle;
     use Symfony\Component\Routing\Generator\UrlGeneratorInterface;
     // ...
 
-    class SomeCommand extends Command
+    #[AsCommand(name: 'app:my-command')]
+    class MyCommand
     {
-        public function __construct(private UrlGeneratorInterface $urlGenerator)
-        {
-            parent::__construct();
+        public function __construct(
+            private UrlGeneratorInterface $urlGenerator,
+        ) {
         }
 
-        protected function execute(InputInterface $input, OutputInterface $output): int
+        public function __invoke(SymfonyStyle $io): int
         {
             // generate a URL with no route arguments
             $signUpPage = $this->urlGenerator->generate('sign_up');
