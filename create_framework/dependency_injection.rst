@@ -227,16 +227,16 @@ object::
     $container->setParameter('charset', 'UTF-8');
 
 Instead of relying on the convention that the routes are defined by the
-``$routes`` variables, let's use a parameter again::
+``$routes`` variables, let's use a reference::
 
     // ...
     $container->register('matcher', Routing\Matcher\UrlMatcher::class)
-        ->setArguments(['%routes%', new Reference('context')])
+        ->setArguments([new Reference('routes'), new Reference('context')])
     ;
 
 And the related change in the front controller::
 
-    $container->setParameter('routes', include __DIR__.'/../src/app.php');
+    $container->set('routes', $routes);
 
 We have barely scratched the surface of what you can do with the
 container: from class names as parameters, to overriding existing object
