@@ -12,7 +12,7 @@ using `PHPUnit`_. At first, install PHPUnit as a development dependency:
 
 .. code-block:: terminal
 
-    $ composer require --dev phpunit/phpunit:^10.0
+    $ composer require --dev phpunit/phpunit:^11.0
 
 Then, create a PHPUnit configuration file in ``example.com/phpunit.xml.dist``:
 
@@ -21,7 +21,7 @@ Then, create a PHPUnit configuration file in ``example.com/phpunit.xml.dist``:
     <?xml version="1.0" encoding="UTF-8"?>
     <phpunit
         xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
-        xsi:noNamespaceSchemaLocation="https://schema.phpunit.de/10.0/phpunit.xsd"
+        xsi:noNamespaceSchemaLocation="https://schema.phpunit.de/11.0/phpunit.xsd"
         backupGlobals="false"
         colors="true"
         bootstrap="vendor/autoload.php"
@@ -212,6 +212,6 @@ Symfony code.
 Now that we are confident (again) about the code we have written, we can
 safely think about the next batch of features we want to add to our framework.
 
-.. _`PHPUnit`: https://docs.phpunit.de/en/10.0/
-.. _`test doubles`: https://docs.phpunit.de/en/10.0/test-doubles.html
+.. _`PHPUnit`: https://docs.phpunit.de/en/11.0/
+.. _`test doubles`: https://docs.phpunit.de/en/11.0/test-doubles.html
 .. _`XDebug`: https://xdebug.org/
