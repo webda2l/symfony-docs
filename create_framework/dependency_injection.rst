@@ -10,7 +10,6 @@ to it::
     namespace Simplex;
 
     use Symfony\Component\EventDispatcher\EventDispatcher;
-    use Symfony\Component\HttpFoundation;
     use Symfony\Component\HttpFoundation\RequestStack;
     use Symfony\Component\HttpKernel;
     use Symfony\Component\Routing;
@@ -199,6 +198,7 @@ Now, here is how you can register a custom listener in the front controller::
 
     // ...
     use Simplex\StringResponseListener;
+    use Symfony\Component\DependencyInjection\Reference;
 
     $container->register('listener.string_response', StringResponseListener::class);
     $container->getDefinition('dispatcher')
