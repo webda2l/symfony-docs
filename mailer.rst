@@ -1532,7 +1532,7 @@ encrypter that automatically applies to all outgoing messages:
         framework:
             mailer:
                 smime_encrypter:
-                    certificate: '%kernel.project_dir%/var/certificates/smime.crt'
+                    repository: app.my_smime_encrypter
 
     .. code-block:: xml
 
@@ -1549,7 +1549,7 @@ encrypter that automatically applies to all outgoing messages:
             <framework:config>
                 <framework:mailer>
                     <framework:smime-encrypter>
-                        <framework:certificate>%kernel.project_dir%/var/certificates/smime.crt</framework:certificate>
+                        <framework:repository>app.my_smime_encrypter</framework:repository>
                     </framework:smime-encrypter>
                 </framework:mailer>
             </framework:config>
@@ -1563,9 +1563,34 @@ encrypter that automatically applies to all outgoing messages:
         return static function (FrameworkConfig $framework): void {
             $mailer = $framework->mailer();
             $mailer->smimeEncrypter()
-                    ->certificate('%kernel.project_dir%/var/certificates/smime.crt')
+                    ->repository('app.my_smime_encrypter')
             ;
         };
+
+The ``repository`` option must be a service ID that implements
+:class:`Symfony\\Component\\Mailer\\EventListener\\SmimeCertificateRepositoryInterface`::
+
+    namespace App\Security;
+
+    use Symfony\Component\DependencyInjection\Attribute\Autowire;
+    use Symfony\Component\Mailer\EventListener\SmimeCertificateRepositoryInterface;
+
+    class LocalFileCertificateRepository implements SmimeCertificateRepositoryInterface
+    {
+        public function __construct(
+            #[Autowire(param: 'kernel.project_dir')]
+            private readonly string $projectDir
+        ){}
+
+        public function findCertificatePathFor(string $email): ?string
+        {
+            $hash = hash('sha256', strtolower(trim($email)));
+            $path = sprintf('%s/storage/%s.crt', $this->projectDir, $hash);
+
+            return file_exists($path) ? $path : null;
+        }
+    }
+
 
 .. versionadded:: 7.3
 
