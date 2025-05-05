@@ -195,8 +195,7 @@ Continuous Integration
 
 Testing bundle code continuously, including all its commits and pull requests,
 is a good practice called Continuous Integration. There are several services
-providing this feature for free for open source projects, like `GitHub Actions`_
-and `Travis CI`_.
+providing this feature for free for open source projects, like `GitHub Actions`_.
 
 A bundle should at least test:
 
