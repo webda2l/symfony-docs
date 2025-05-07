@@ -1243,7 +1243,7 @@ allow_reload
 
 Specifies whether the client can force a cache reload by including a
 Cache-Control "no-cache" directive in the request. Set it to ``true``
-for compliance with RFC 2616. (default: false)
+for compliance with RFC 2616.
 
 allow_revalidate
 ................
@@ -1252,7 +1252,7 @@ allow_revalidate
 
 Specifies whether the client can force a cache revalidate by including a
 Cache-Control "max-age=0" directive in the request. Set it to ``true``
-for compliance with RFC 2616. (default: false)
+for compliance with RFC 2616.
 
 debug
 .....
@@ -1265,11 +1265,11 @@ try to carry on and deliver a meaningful response.
 default_ttl
 ...........
 
-**type**: ``integer``
+**type**: ``integer`` **default**: ``0``
 
 The number of seconds that a cache entry should be considered fresh when no
 explicit freshness information is provided in a response. Explicit
-Cache-Control or Expires headers override this value. (default: 0)
+Cache-Control or Expires headers override this value.
 
 enabled
 .......
@@ -1279,11 +1279,11 @@ enabled
 private_headers
 ...............
 
-**type**: ``array``
+**type**: ``array`` **default**: ``['Authorization', 'Cookie']``
 
 Set of request headers that trigger "private" cache-control behavior on responses
 that don't explicitly state whether the response is public or private via a
-Cache-Control directive. (default: Authorization and Cookie)
+Cache-Control directive.
 
 skip_response_headers
 .....................
@@ -1296,30 +1296,30 @@ and public.
 stale_if_error
 ..............
 
-**type**: ``integer``
+**type**: ``integer`` **default**: ``60``
 
 Specifies the default number of seconds (the granularity is the second) during
-which the cache can serve a stale response when an error is encountered
-(default: 60). This setting is overridden by the stale-if-error HTTP
+which the cache can serve a stale response when an error is encountered.
+This setting is overridden by the stale-if-error HTTP
 Cache-Control extension (see RFC 5861).
 
 stale_while_revalidate
 ......................
 
-**type**: ``integer``
+**type**: ``integer`` **default**: ``2``
 
 Specifies the default number of seconds (the granularity is the second as the
 Response TTL precision is a second) during which the cache can immediately return
-a stale response while it revalidates it in the background (default: 2).
+a stale response while it revalidates it in the background.
 This setting is overridden by the stale-while-revalidate HTTP Cache-Control
 extension (see RFC 5861).
 
 trace_header
 ............
 
-**type**: ``string``
+**type**: ``string`` **default**: ``'X-Symfony-Cache'``
 
-Header name to use for traces. (default: X-Symfony-Cache)
+Header name to use for traces.
 
 trace_level
 ...........
@@ -1328,7 +1328,7 @@ trace_level
 
 For 'short', a concise trace of the main request will be added as an HTTP header.
 'full' will add traces for all requests (including ESI subrequests).
-(default: 'full' if in debug; 'none' otherwise)
+(default: ``'full'`` if in debug; ``'none'`` otherwise)
 
 .. _reference-http-client:
 
