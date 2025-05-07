@@ -73,7 +73,8 @@ Thanks to :doc:`the Docker integration of Symfony </setup/docker>`,
 Run ``docker-compose up`` to start the hub if you have chosen this option.
 
 If you use the :doc:`Symfony Local Web Server </setup/symfony_server>`,
-you must start it with the ``--no-tls`` option.
+you must start it with the ``--no-tls`` option to prevent mixed content and
+invalid TLS certificate issues:
 
 .. code-block:: terminal
 
