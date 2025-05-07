@@ -232,10 +232,10 @@ with Symfony Flex to install a specific Symfony version:
 
 .. code-block:: bash
 
-    # this requires Symfony 6.x for all Symfony packages
-    export SYMFONY_REQUIRE=6.*
+    # this requires Symfony 7.x for all Symfony packages
+    export SYMFONY_REQUIRE=7.*
     # alternatively you can run this command to update composer.json config
-    # composer config extra.symfony.require "6.*"
+    # composer config extra.symfony.require "7.*"
 
     # install Symfony Flex in the CI environment
     composer global config --no-plugins allow-plugins.symfony/flex true
