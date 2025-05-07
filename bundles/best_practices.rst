@@ -201,18 +201,18 @@ A bundle should at least test:
 
 * The lower bound of their dependencies (by running ``composer update --prefer-lowest``);
 * The supported PHP versions;
-* All supported major Symfony versions (e.g. both ``4.x`` and ``5.x`` if
+* All supported major Symfony versions (e.g. both ``6.4`` and ``7.x`` if
   support is claimed for both).
 
-Thus, a bundle supporting PHP 7.3, 7.4 and 8.0, and Symfony 4.4 and 5.x should
+Thus, a bundle supporting PHP 7.4, 8.3 and 8.4, and Symfony 6.4 and 7.x should
 have at least this test matrix:
 
 ===========  ===============  ===================
 PHP version  Symfony version  Composer flags
 ===========  ===============  ===================
-7.3          ``4.*``          ``--prefer-lowest``
-7.4          ``5.*``
-8.0          ``5.*``
+7.4          ``6.4``          ``--prefer-lowest``
+8.3          ``7.*``
+8.4          ``7.*``
 ===========  ===============  ===================
 
 .. tip::
@@ -232,10 +232,10 @@ with Symfony Flex to install a specific Symfony version:
 
 .. code-block:: bash
 
-    # this requires Symfony 5.x for all Symfony packages
-    export SYMFONY_REQUIRE=5.*
+    # this requires Symfony 6.x for all Symfony packages
+    export SYMFONY_REQUIRE=6.*
     # alternatively you can run this command to update composer.json config
-    # composer config extra.symfony.require "5.*"
+    # composer config extra.symfony.require "6.*"
 
     # install Symfony Flex in the CI environment
     composer global config --no-plugins allow-plugins.symfony/flex true
@@ -567,4 +567,3 @@ Learn more
 .. _`choose any license`: https://choosealicense.com/
 .. _`valid license identifier`: https://spdx.org/licenses/
 .. _`GitHub Actions`: https://docs.github.com/en/free-pro-team@latest/actions
-.. _`Travis CI`: https://docs.travis-ci.com/
