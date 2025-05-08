@@ -96,25 +96,51 @@ The above code will output the following tree:
     └── templates
         └── base.html.twig
 
-Building and Rendering a Tree
-~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+Building a Tree Programmatically
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
-You can build a tree by creating a new instance of the
-:class:`Symfony\\Component\\Console\\Helper\\Tree` class and adding nodes to it::
+If you don't know the tree elements beforehand, you can build the tree programmatically
+by creating a new instance of the :class:`Symfony\\Component\\Console\\Helper\\Tree`
+class and adding nodes to it::
 
     use Symfony\Component\Console\Helper\TreeHelper;
     use Symfony\Component\Console\Helper\TreeNode;
 
-    $node = TreeNode::fromValues([
-        'Command',
-        'Controller' => [
-            'DefaultController.php',
-        ],
-        'Kernel.php',
-    ]);
-    $node->addChild('templates');
-    $node->addChild('tests');
+    $root = new TreeNode('my-project/');
+    // you can pass a string directly or create a TreeNode object
+    $root->addChild('src/');
+    $root->addChild(new TreeNode('templates/'));
 
+    // create nested structures by adding child nodes to other nodes
+    $testsNode = new TreeNode('tests/');
+    $functionalTestsNode = new TreeNode('Functional/');
+    $testsNode->addChild($functionalTestsNode);
+    $root->addChild(testsNode);
+
+    $tree = TreeHelper::createTree($io, $root);
+    $tree->render();
+
+This example outputs:
+
+.. code-block:: terminal
+
+    my-project/
+    ├── src/
+    ├── templates/
+    └── tests/
+        └── Functional/
+
+If you prefer, you can build the array of elements programmatically and then
+create and render the tree like this::
+
+    $tree = TreeHelper::createTree($io, null, $array);
+    $tree->render();
+
+You can also build part of the tree from an array and then add other nodes::
+
+    $node = TreeNode::fromValues($array);
+    $node->addChild('templates');
+    // ...
     $tree = TreeHelper::createTree($io, $node);
     $tree->render();
 
@@ -125,15 +151,13 @@ Built-in Tree Styles
 ~~~~~~~~~~~~~~~~~~~~
 
 The tree helper provides a few built-in styles that you can use to customize the
-output of the tree::
+output of the tree.
 
-    use Symfony\Component\Console\Helper\TreeStyle;
-    // ...
+**Default**::
 
-    $tree = TreeHelper::createTree($io, $node, [], TreeStyle::compact());
-    $tree->render();
+    TreeHelper::createTree($io, $node, [], TreeStyle::default());
 
-``TreeHelper::createTree($io, $node, [], TreeStyle::default())`` (`details`_)
+This outputs:
 
 .. code-block:: terminal
 
@@ -150,7 +174,11 @@ output of the tree::
     └── templates
        └── base.html.twig
 
-``TreeHelper::createTree($io, $node, [], TreeStyle::box())`` (`details`_)
+**Box**::
+
+    TreeHelper::createTree($io, $node, [], TreeStyle::box());
+
+This outputs:
 
 .. code-block:: terminal
 
@@ -167,7 +195,11 @@ output of the tree::
     ┗╸ templates
        ┗╸ base.html.twig
 
-``TreeHelper::createTree($io, $node, [], TreeStyle::doubleBox())`` (`details`_)
+**Double box**::
+
+    TreeHelper::createTree($io, $node, [], TreeStyle::doubleBox());
+
+This outputs:
 
 .. code-block:: terminal
 
@@ -184,7 +216,11 @@ output of the tree::
     ╚═ templates
       ╚═ base.html.twig
 
-``TreeHelper::createTree($io, $node, [], TreeStyle::compact())`` (`details`_)
+**Compact**::
+
+    TreeHelper::createTree($io, $node, [], TreeStyle::compact());
+
+This outputs:
 
 .. code-block:: terminal
 
@@ -201,7 +237,11 @@ output of the tree::
     └ templates
       └ base.html.twig
 
-``TreeHelper::createTree($io, $node, [], TreeStyle::light())`` (`details`_)
+**Light**::
+
+    TreeHelper::createTree($io, $node, [], TreeStyle::light());
+
+This outputs:
 
 .. code-block:: terminal
 
@@ -218,7 +258,11 @@ output of the tree::
     `-- templates
         `-- base.html.twig
 
-``TreeHelper::createTree($io, $node, [], TreeStyle::minimal())`` (`details`_)
+**Minimal**::
+
+    TreeHelper::createTree($io, $node, [], TreeStyle::minimal());
+
+This outputs:
 
 .. code-block:: terminal
 
@@ -235,7 +279,11 @@ output of the tree::
     . templates
       . base.html.twig
 
-``TreeHelper::createTree($io, $node, [], TreeStyle::rounded())`` (`details`_)
+**Rounded**::
+
+    TreeHelper::createTree($io, $node, [], TreeStyle::rounded());
+
+This outputs:
 
 .. code-block:: terminal
 
@@ -291,5 +339,3 @@ The above code will output the following tree:
     🔵 🟢 🟠 🟡 Kernel.php
     🔵 🟠 🟡 templates
     🔵 🔴 🟠 🟡 base.html.twig
-
-.. _`details`: https://github.com/symfony/symfony/blob/7.3/src/Symfony/Component/Console/Helper/TreeStyle.php
