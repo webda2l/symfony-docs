@@ -1532,7 +1532,7 @@ encrypter that automatically applies to all outgoing messages:
         framework:
             mailer:
                 smime_encrypter:
-                    repository: app.my_smime_encrypter
+                    repository: App\Security\LocalFileCertificateRepository
 
     .. code-block:: xml
 
@@ -1549,7 +1549,7 @@ encrypter that automatically applies to all outgoing messages:
             <framework:config>
                 <framework:mailer>
                     <framework:smime-encrypter>
-                        <framework:repository>app.my_smime_encrypter</framework:repository>
+                        <framework:repository>App\Security\LocalFileCertificateRepository</framework:repository>
                     </framework:smime-encrypter>
                 </framework:mailer>
             </framework:config>
@@ -1558,17 +1558,20 @@ encrypter that automatically applies to all outgoing messages:
     .. code-block:: php
 
         // config/packages/mailer.php
+        use App\Security\LocalFileCertificateRepository;
         use Symfony\Config\FrameworkConfig;
 
         return static function (FrameworkConfig $framework): void {
             $mailer = $framework->mailer();
             $mailer->smimeEncrypter()
-                    ->repository('app.my_smime_encrypter')
+                    ->repository(LocalFileCertificateRepository::class)
             ;
         };
 
-The ``repository`` option must be a service ID that implements
-:class:`Symfony\\Component\\Mailer\\EventListener\\SmimeCertificateRepositoryInterface`::
+The ``repository`` option is the ID of a service that implements
+:class:`Symfony\\Component\\Mailer\\EventListener\\SmimeCertificateRepositoryInterface`.
+This interface requires only one method: ``findCertificatePathFor()``, which must
+return the file path to the certificate associated with the given email address::
 
     namespace App\Security;
 
@@ -1590,7 +1593,6 @@ The ``repository`` option must be a service ID that implements
             return file_exists($path) ? $path : null;
         }
     }
-
 
 .. versionadded:: 7.3
 
