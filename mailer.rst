@@ -420,6 +420,29 @@ setting the ``auto_tls`` option to ``false`` in the DSN::
 
     This setting only works when the ``smtp://`` protocol is used.
 
+Ensure TLS
+~~~~~~~~~~
+
+You may want to ensure TLS is used, either directly or via ``STARTTLS``,
+for sending mail over SMTP regardless of other options set or SMTP server
+support. You can set TLS as required by calling ``setRequireTls(true)``
+on the ``EsmtpTransport`` instance, or by setting the ``require_tls`` option
+to ``true`` in the DSN::
+
+    $dsn = 'smtp://user:pass@10.0.0.25?require_tls=true';
+
+When TLS is set as required, a :class:`Symfony\\Component\\Mailer\\Exception\\TransportException`
+will be thrown if a TLS connection cannot be achieved during initial communications
+with the SMTP server.
+
+.. note::
+
+    This setting only works when the ``smtp://`` protocol is used.
+
+.. versionadded:: 7.3
+
+    The ``require_tls`` option was introduced in Symfony 7.3.
+
 Binding to IPv4 or IPv6
 ~~~~~~~~~~~~~~~~~~~~~~~
 
