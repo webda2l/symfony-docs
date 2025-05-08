@@ -1,23 +1,11 @@
-Table
-=====
+Table Helper
+============
 
-When building a console application it may be useful to display tabular data:
-
-.. code-block:: terminal
-
-    +---------------+--------------------------+------------------+
-    | ISBN          | Title                    | Author           |
-    +---------------+--------------------------+------------------+
-    | 99921-58-10-7 | Divine Comedy            | Dante Alighieri  |
-    | 9971-5-0210-0 | A Tale of Two Cities     | Charles Dickens  |
-    | 960-425-059-0 | The Lord of the Rings    | J. R. R. Tolkien |
-    | 80-902734-1-6 | And Then There Were None | Agatha Christie  |
-    +---------------+--------------------------+------------------+
-
-.. note::
-
-    As an alternative, consider using the
-    :ref:`SymfonyStyle <symfony-style-content>` to display a table.
+When building console applications, Symfony provides several utilities for
+rendering tabular data. The simplest option is to use the table methods from
+:ref:`Symfony Style <symfony-style-content>`. While convenient, this approach
+doesn't allow customization of the table's design. For more control and advanced
+features, use the ``Table`` console helper explained in this article.
 
 To display a table, use :class:`Symfony\\Component\\Console\\Helper\\Table`,
 set the headers, set the rows and then render the table::
@@ -48,6 +36,22 @@ set the headers, set the rows and then render the table::
         }
     }
 
+This outputs:
+
+.. code-block:: terminal
+
+    +---------------+--------------------------+------------------+
+    | ISBN          | Title                    | Author           |
+    +---------------+--------------------------+------------------+
+    | 99921-58-10-7 | Divine Comedy            | Dante Alighieri  |
+    | 9971-5-0210-0 | A Tale of Two Cities     | Charles Dickens  |
+    | 960-425-059-0 | The Lord of the Rings    | J. R. R. Tolkien |
+    | 80-902734-1-6 | And Then There Were None | Agatha Christie  |
+    +---------------+--------------------------+------------------+
+
+Adding Table Separators
+-----------------------
+
 You can add a table separator anywhere in the output by passing an instance of
 :class:`Symfony\\Component\\Console\\Helper\\TableSeparator` as a row::
 
@@ -61,6 +65,8 @@ You can add a table separator anywhere in the output by passing an instance of
         ['80-902734-1-6', 'And Then There Were None', 'Agatha Christie'],
     ]);
 
+This outputs:
+
 .. code-block:: terminal
 
     +---------------+--------------------------+------------------+
@@ -73,12 +79,17 @@ You can add a table separator anywhere in the output by passing an instance of
     | 80-902734-1-6 | And Then There Were None | Agatha Christie  |
     +---------------+--------------------------+------------------+
 
+Adding Table Titles
+-------------------
+
 You can optionally display titles at the top and the bottom of the table::
 
     // ...
     $table->setHeaderTitle('Books');
     $table->setFooterTitle('Page 1/2');
     $table->render();
+
+This outputs:
 
 .. code-block:: terminal
 
@@ -91,6 +102,9 @@ You can optionally display titles at the top and the bottom of the table::
     | 960-425-059-0 | The Lord of the Rings    | J. R. R. Tolkien |
     | 80-902734-1-6 | And Then There Were None | Agatha Christie  |
     +---------------+--------- Page 1/2 -------+------------------+
+
+Setting the Column Widths Explicitly
+------------------------------------
 
 By default, the width of the columns is calculated automatically based on their
 contents. Use the :method:`Symfony\\Component\\Console\\Helper\\Table::setColumnWidths`
@@ -114,7 +128,7 @@ argument is the column width::
     $table->setColumnWidth(2, 30);
     $table->render();
 
-The output of this command will be:
+This outputs:
 
 .. code-block:: terminal
 
@@ -141,7 +155,7 @@ If you prefer to wrap long contents in multiple rows, use the
     $table->setColumnMaxWidth(1, 10);
     $table->render();
 
-The output of this command will be:
+This outputs:
 
 .. code-block:: terminal
 
@@ -154,6 +168,9 @@ The output of this command will be:
     |                (the rest of the rows...)            |
     +-------+------------+--------------------------------+
 
+Rendering Vertical Tables
+-------------------------
+
 By default, table contents are displayed horizontally. You can change this behavior
 via the :method:`Symfony\\Component\\Console\\Helper\\Table::setVertical` method::
 
@@ -161,7 +178,7 @@ via the :method:`Symfony\\Component\\Console\\Helper\\Table::setVertical` method
     $table->setVertical();
     $table->render();
 
-The output of this command will be:
+This outputs:
 
 .. code-block:: terminal
 
@@ -179,17 +196,24 @@ The output of this command will be:
 
     Support for vertical rendering was introduced in Symfony 6.1.
 
+Customizing the Table Style
+---------------------------
+
 The table style can be changed to any built-in styles via
 :method:`Symfony\\Component\\Console\\Helper\\Table::setStyle`::
 
-    // same as calling nothing
+    // this 'default' style is the one used when no style is specified
     $table->setStyle('default');
 
-    // changes the default style to compact
+Built-in Table Styles
+~~~~~~~~~~~~~~~~~~~~~
+
+**Compact**::
+
     $table->setStyle('compact');
     $table->render();
 
-This code results in:
+This outputs:
 
 .. code-block:: terminal
 
@@ -199,12 +223,12 @@ This code results in:
      960-425-059-0 The Lord of the Rings    J. R. R. Tolkien
      80-902734-1-6 And Then There Were None Agatha Christie
 
-You can also set the style to ``borderless``::
+**Borderless**::
 
     $table->setStyle('borderless');
     $table->render();
 
-which outputs:
+This outputs:
 
 .. code-block:: terminal
 
@@ -217,12 +241,12 @@ which outputs:
       80-902734-1-6   And Then There Were None   Agatha Christie
      =============== ========================== ==================
 
-You can also set the style to ``box``::
+**Box**::
 
     $table->setStyle('box');
     $table->render();
 
-which outputs:
+This outputs:
 
 .. code-block:: terminal
 
@@ -235,12 +259,12 @@ which outputs:
     │ 80-902734-1-6 │ And Then There Were None │ Agatha Christie  │
     └───────────────┴──────────────────────────┴──────────────────┘
 
-You can also set the style to ``box-double``::
+**Double box**::
 
     $table->setStyle('box-double');
     $table->render();
 
-which outputs:
+This outputs:
 
 .. code-block:: terminal
 
@@ -253,7 +277,10 @@ which outputs:
     ║ 80-902734-1-6 │ And Then There Were None │ Agatha Christie  ║
     ╚═══════════════╧══════════════════════════╧══════════════════╝
 
-If the built-in styles do not fit your need, define your own::
+Making a Custom Table Style
+~~~~~~~~~~~~~~~~~~~~~~~~~~~
+
+If the built-in styles do not fit your needs, define your own::
 
     use Symfony\Component\Console\Helper\TableStyle;
 
@@ -343,7 +370,7 @@ To make a table cell that spans multiple columns you can use a :class:`Symfony\\
     ;
     $table->render();
 
-This results in:
+This outputs:
 
 .. code-block:: terminal
 
@@ -366,7 +393,7 @@ This results in:
         ]);
         // ...
 
-    This generates:
+    This outputs:
 
     .. code-block:: terminal
 
@@ -445,7 +472,7 @@ The only requirement to append rows is that the table must be rendered inside a
         }
     }
 
-This will display the following table in the terminal:
+This outputs:
 
 .. code-block:: terminal
 
@@ -466,7 +493,7 @@ This will display the following table in the terminal:
         $table->render();
         // ...
 
-    This will display:
+    This outputs:
 
     .. code-block:: terminal
 
