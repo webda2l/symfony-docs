@@ -112,7 +112,7 @@ to do anything to be protected against CSRF attacks.
 
 .. _form-csrf-customization:
 
-By default Symfony adds the CSRF token in a hidden field called ``_token``, but
+By default Symfony adds the CSRF token in a hidden field called ``_csrf_token``, but
 this can be customized (1) globally for all forms and (2) on a form-by-form basis.
 Globally, you can configure it under the ``framework.form`` option:
 
