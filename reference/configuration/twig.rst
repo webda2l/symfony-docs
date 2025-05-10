@@ -71,7 +71,7 @@ application harder to maintain.
 cache
 ~~~~~
 
-**type**: ``string`` | ``false`` **default**: ``%kernel.cache_dir%/twig``
+**type**: ``string`` | ``boolean`` **default**: ``true``
 
 Before using the Twig templates to render some contents, they are compiled into
 regular PHP code. Compilation is a costly process, so the result is cached in
@@ -81,6 +81,16 @@ Set this option to ``false`` to disable Twig template compilation. However, this
 is not recommended; not even in the ``dev`` environment, because the
 ``auto_reload`` option ensures that cached templates which have changed get
 compiled again.
+
+Specify the path where the cache should be stored. If set to ``true``, the cache
+defaults to ``%kernel.cache_dir%/twig``. However, if the ``auto_reload`` option is
+disabled and ``%kernel.build_dir%`` is different from ``%kernel.cache_dir%``,
+the cache will instead be stored in ``%kernel.build_dir%/twig``.
+
+.. versionadded:: 7.3
+
+    Support for ``true`` value was added in Symfony 7.3, and it became the default
+    value for this option instead of ``%kernel.cache_dir%/twig``.
 
 charset
 ~~~~~~~
