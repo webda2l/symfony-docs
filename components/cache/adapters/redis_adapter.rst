@@ -21,6 +21,11 @@ to utilize a cluster of servers to provide redundancy and/or fail-over is also a
     adapter. Additionally, this adapter requires a compatible extension or library that implements
     ``\Redis``, ``\RedisArray``, ``RedisCluster``, ``\Relay\Relay`` or ``\Predis``.
 
+.. note::
+
+   This adapter also works with `Valkey`_ servers and as of Symfony 7.3, you can use the ``valkey[s]:`` schemes
+   instead of the ``redis[s]:`` ones in your DSNs.
+
 This adapter expects a `Redis`_, `RedisArray`_, `RedisCluster`_, `Relay`_ or `Predis`_ instance to be
 passed as the first parameter. A namespace and default cache lifetime can optionally be passed
 as the second and third parameters::
@@ -348,6 +353,7 @@ Supports key rotation, ensuring secure decryption with both old and new keys::
 
 .. _`Data Source Name (DSN)`: https://en.wikipedia.org/wiki/Data_source_name
 .. _`Redis server`: https://redis.io/
+.. _`Valkey`: https://valkey.io/
 .. _`Redis`: https://github.com/phpredis/phpredis
 .. _`RedisArray`: https://github.com/phpredis/phpredis/blob/develop/arrays.md
 .. _`RedisCluster`: https://github.com/phpredis/phpredis/blob/develop/cluster.md
