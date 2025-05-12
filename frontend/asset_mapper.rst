@@ -243,6 +243,26 @@ This adds the ``bootstrap`` package to your ``importmap.php`` file::
     `package.json configuration file`_. Try to contact the package maintainer to
     ask them to fix those issues.
 
+.. tip::
+
+    If you see a network error like *Connection was reset for "https://cdn.jsdelivr.net/npm/..."*,
+    it may be caused by a proxy or firewall restriction. In that case, you can
+    temporarily configure a proxy to connect to the ``jsDelivr`` CDN:
+
+    .. code-block:: yaml
+
+        # config/packages/framework.yaml
+        framework:
+            # ...
+            http_client:
+                default_options:
+                    proxy: '185.250.180.238:8080'
+                    # if you use CURL, add extra options:
+                    extra:
+                        curl:
+                            # 61 is value of constant CURLOPT_HTTPPROXYTUNNEL
+                            '61': true
+
 Now you can import the ``bootstrap`` package like usual:
 
 .. code-block:: javascript
