@@ -8,7 +8,8 @@ Redis Cache Adapter
     :ref:`Symfony Cache configuration <cache-configuration-with-frameworkbundle>`
     article if you are using it in a Symfony application.
 
-This adapter stores the values in-memory using one (or more) `Redis server`_ instances.
+This adapter stores the values in-memory using one (or more) `Redis server`_
+of `Valkey`_ server instances.
 
 Unlike the :doc:`APCu adapter </components/cache/adapters/apcu_adapter>`, and similarly to the
 :doc:`Memcached adapter </components/cache/adapters/memcached_adapter>`, it is not limited to the current server's
@@ -20,11 +21,6 @@ to utilize a cluster of servers to provide redundancy and/or fail-over is also a
     **Requirements:** At least one `Redis server`_ must be installed and running to use this
     adapter. Additionally, this adapter requires a compatible extension or library that implements
     ``\Redis``, ``\RedisArray``, ``RedisCluster``, ``\Relay\Relay`` or ``\Predis``.
-
-.. note::
-
-   This adapter also works with `Valkey`_ servers and as of Symfony 7.3, you can use the ``valkey[s]:`` schemes
-   instead of the ``redis[s]:`` ones in your DSNs.
 
 This adapter expects a `Redis`_, `RedisArray`_, `RedisCluster`_, `Relay`_ or `Predis`_ instance to be
 passed as the first parameter. A namespace and default cache lifetime can optionally be passed
@@ -65,6 +61,11 @@ helper method allows creating and configuring the Redis client class instance us
     $client = RedisAdapter::createConnection(
         'redis://localhost'
     );
+
+.. versionadded:: 7.3
+
+    Starting in Symfony 7.3, when using Valkey servers you can use the
+    ``valkey[s]:`` scheme instead of the ``redis[s]:`` one in your DSNs.
 
 The DSN can specify either an IP/host (and an optional port) or a socket path, as well as a
 password and a database index. To enable TLS for connections, the scheme ``redis`` must be
