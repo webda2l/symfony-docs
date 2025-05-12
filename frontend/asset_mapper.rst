@@ -227,8 +227,9 @@ This adds the ``bootstrap`` package to your ``importmap.php`` file::
 
 .. tip::
 
-    If you get a error like as ``Connection was reset for "https://cdn.jsdelivr.net/npm/...".``,
-    than you can temporaly configure the proxy for connection to the ``jsDelivr`` CDN:
+    If you see a network error like *Connection was reset for "https://cdn.jsdelivr.net/npm/..."*,
+    it may be caused by a proxy or firewall restriction. In that case, you can
+    temporarily configure a proxy to connect to the ``jsDelivr`` CDN:
 
     .. code-block:: yaml
 
@@ -238,7 +239,7 @@ This adds the ``bootstrap`` package to your ``importmap.php`` file::
             http_client:
                 default_options:
                     proxy: '185.250.180.238:8080'
-                    # If you use CURL, add extra options:
+                    # if you use CURL, add extra options:
                     extra:
                         curl:
                             # 61 is value of constant CURLOPT_HTTPPROXYTUNNEL
