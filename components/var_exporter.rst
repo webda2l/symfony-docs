@@ -177,8 +177,34 @@ populated by using the special ``"\0"`` property name to define their internal v
         "\0" => [$inputArray],
     ]);
 
-Creating Lazy Objects
----------------------
+Creating Lazy Objects on PHP ≥ 8.4
+----------------------------------
+
+Since version 8.4, PHP provides support for lazy objects via the reflection API.
+This native API works with concrete classes. It doesn't with abstracts nor with
+internal ones.
+
+This components provides helpers to generate lazy objects using the decorator
+pattern, which works with abstract or internal classes and with interfaces::
+
+    $proxyCode = ProxyHelper::generateLazyProxy(new \ReflectionClass(SomeInterface::class));
+    // $proxyCode should be dumped into a file in production envs
+    eval('class ProxyDecorator'.$proxyCode);
+
+    $proxy = ProxyDecorator::createLazyProxy(initializer: function (): SomeInterface {
+        // [...] Use whatever heavy logic you need here
+        // to compute the $dependencies of the proxied class
+        $instance = new SomeHeavyClass(...$dependencies);
+        // [...] Call setters, etc. if needed
+
+        return $instance;
+    });
+
+Use this mechanism only when native lazy objects cannot be leveraged
+(or you'll get a deprecation notice.)
+
+Creating Lazy Objects on PHP < 8.3
+----------------------------------
 
 Lazy-objects are objects instantiated empty and populated on-demand. This is
 particularly useful when you have for example properties in your classes that
@@ -192,6 +218,12 @@ you implement such mechanism easily in your classes.
 
 LazyGhostTrait
 ~~~~~~~~~~~~~~
+
+.. deprecated:: 7.3
+
+   ``LazyGhostTrait`` is deprecated since Symfony 7.3; use PHP 8.4's native lazy
+   objects instead (note that using the trait with PHP < 8.4 triggers no deprecation
+   to help with the transition.)
 
 Ghost objects are empty objects, which see their properties populated the first
 time any method is called. Thanks to :class:`Symfony\\Component\\VarExporter\\LazyGhostTrait`,
@@ -272,6 +304,12 @@ of :ref:`Virtual Proxies <var-exporter_virtual-proxies>`.
 
 LazyProxyTrait
 ~~~~~~~~~~~~~~
+
+.. deprecated:: 7.3
+
+   ``LazyProxyTrait`` is deprecated since Symfony 7.3; use PHP 8.4's native lazy
+   objects instead (note that using the trait with PHP < 8.4 triggers no deprecation
+   to help with the transition.)
 
 The purpose of virtual proxies in the same one as
 :ref:`ghost objects <var-exporter_ghost-objects>`, but their internal behavior is
