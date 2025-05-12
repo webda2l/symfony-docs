@@ -53,6 +53,11 @@ erase_credentials
 If ``true``, the ``eraseCredentials()`` method of the user object is called
 after authentication.
 
+.. deprecated:: 7.3
+
+   Since Symfony 7.3, ``eraseCredentials()`` methods are deprecated and are
+   not called if they have the ``#[\Deprecated]`` attribute.
+
 hide_user_not_found
 -------------------
 

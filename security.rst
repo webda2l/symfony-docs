@@ -193,14 +193,7 @@ from the `MakerBundle`_:
             return $this;
         }
 
-        /**
-         * @see UserInterface
-         */
-        public function eraseCredentials(): void
-        {
-            // If you store any temporary, sensitive data on the user, clear it here
-            // $this->plainPassword = null;
-        }
+        // [...]
     }
 
 .. tip::
@@ -2786,7 +2779,31 @@ object) are "compared" to see if they are "equal". By default, the core
 your user will be logged out. This is a security measure to make sure that malicious
 users can be de-authenticated if core user data changes.
 
-However, in some cases, this process can cause unexpected authentication problems.
+Note that storing the (plain or hashed) password in the session storage can be seen
+as a security risk. In order to address this risk, the ``__serialize()`` magic method
+can be implemented on the user class to filter out the password before storing the
+serialized user object in the session.
+Two strategies are supported while serializing:
+
+#. Removing the password entirely. In this case, ``getPassword()`` will return ``null``
+   after unserialization and Symfony will refresh the user without checking the
+   password. Use this strategy if you store plaintext passwords (not recommended.)
+#. Hashing the password using the ``crc32c`` algorithm. In this case Symfony will
+   compare the password of the refreshed user after crc32c-hashing it. This is a good
+   strategy if you use hashed passwords since it allows invalidating concurrent
+   sessions when a password changes without storing the password hash in the session.
+
+   Here is an example of how to implement this, assuming the password is found in a
+   private property named ``password``::
+
+       public function __serialize(): array
+       {
+           $data = (array) $this;
+           $data["\0".self::class."\0password"] = hash('crc32c', $this->password);
+
+           return $data;
+       }
+
 If you're having problems authenticating, it could be that you *are* authenticating
 successfully, but you immediately lose authentication after the first redirect.
 
