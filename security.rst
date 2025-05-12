@@ -2779,22 +2779,21 @@ object) are "compared" to see if they are "equal". By default, the core
 your user will be logged out. This is a security measure to make sure that malicious
 users can be de-authenticated if core user data changes.
 
-Note that storing the (plain or hashed) password in the session storage can be seen
-as a security risk. In order to address this risk, the ``__serialize()`` magic method
-can be implemented on the user class to filter out the password before storing the
-serialized user object in the session.
-Two strategies are supported while serializing:
+Storing the (plain or hashed) password in the session can be a security risk.
+To mitigate this, implement the ``__serialize()`` magic method in your user class
+to exclude or transform the password before storing the serialized user object
+in the session.
 
-#. Removing the password entirely. In this case, ``getPassword()`` will return ``null``
-   after unserialization and Symfony will refresh the user without checking the
-   password. Use this strategy if you store plaintext passwords (not recommended.)
-#. Hashing the password using the ``crc32c`` algorithm. In this case Symfony will
-   compare the password of the refreshed user after crc32c-hashing it. This is a good
-   strategy if you use hashed passwords since it allows invalidating concurrent
-   sessions when a password changes without storing the password hash in the session.
+Two strategies are supported:
 
-   Here is an example of how to implement this, assuming the password is found in a
-   private property named ``password``::
+#. Remove the password completely. After unserialization, ``getPassword()`` returns
+   ``null`` and Symfony refreshes the user without checking the password. Use this
+   only if you store plaintext passwords (not recommended).
+#. Hash the password using the ``crc32c`` algorithm. Symfony will hash the password
+   of the refreshed user and compare it to the session value. This approach avoids
+   storing the real hash and lets you invalidate sessions on password change.
+
+   Example (assuming the password is stored in a private property called ``password``)::
 
        public function __serialize(): array
        {
@@ -2803,6 +2802,11 @@ Two strategies are supported while serializing:
 
            return $data;
        }
+
+.. versionadded:: 7.3
+
+    Support for hashing passwords with ``crc32c`` in session serialization was
+    introduced in Symfony 7.3.
 
 If you're having problems authenticating, it could be that you *are* authenticating
 successfully, but you immediately lose authentication after the first redirect.
