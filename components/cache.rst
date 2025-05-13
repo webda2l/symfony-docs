@@ -87,14 +87,13 @@ generate and return the value::
 Creating Sub-Namespaces
 -----------------------
 
-All cache adapters provided by the component implement the
-:method:`Symfony\\Contracts\\Cache\\NamespacedPoolInterface::withSubNamespace` method
-from the :class:`Symfony\\Contracts\\Cache\\NamespacedPoolInterface`.
-
 .. versionadded:: 7.3
 
-   Support for ``NamespacedPoolInterface`` was added in Symfony 7.3.
+   Cache sub-namespaces were introduced in Symfony 7.3.
 
+All cache adapters provided by the component implement the
+:class:`Symfony\\Contracts\\Cache\\NamespacedPoolInterface` to provide the
+:method:`Symfony\\Contracts\\Cache\\NamespacedPoolInterface::withSubNamespace` method.
 This method allows namespacing cached items by transparently prefixing their keys::
 
     $subCache = $cache->withSubNamespace('foo');
@@ -105,11 +104,17 @@ This method allows namespacing cached items by transparently prefixing their key
         return '...';
     });
 
-In this example, cache item keyed ``my_cache_key`` will be transparently stored within
-the cache pool under a logical namespace called ``foo``.
+In this example, the cache item will use the ``my_cache_key`` key, but it will be
+stored internally under the ``foo`` namespace. This is handled transparently for
+you, so you **don't** need to manually prefix keys like ``foo.my_cache_key``.
 
-Sub-namespacing allows implementing namespace-based cache invalidation, where the name
-of a namespace is computed by hashing some context info.
+This is useful when using namespace-based cache invalidation to isolate or
+invalidate a subset of cached data based on some context. Typical examples
+include namespacing by user ID, locale, or entity ID and hash::
+
+    $userCache = $cache->withSubNamespace((string) $userId);
+    $localeCache = $cache->withSubNamespace($request->getLocale());
+    $productCache = $cache->withSubNamespace($productId.'_'.$productChecksum);
 
 .. _cache_stampede-prevention:
 
