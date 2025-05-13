@@ -84,6 +84,33 @@ generate and return the value::
     Use cache tags to delete more than one key at the time. Read more at
     :doc:`/components/cache/cache_invalidation`.
 
+Creating Sub-Namespaces
+-----------------------
+
+All cache adapters provided by the component implement the
+:method:`Symfony\\Contracts\\Cache\\NamespacedPoolInterface::withSubNamespace` method
+from the :class:`Symfony\\Contracts\\Cache\\NamespacedPoolInterface`.
+
+.. versionadded:: 7.3
+
+   Support for ``NamespacedPoolInterface`` was added in Symfony 7.3.
+
+This method allows namespacing cached items by transparently prefixing their keys::
+
+    $subCache = $cache->withSubNamespace('foo');
+
+    $subCache->get('my_cache_key', function (ItemInterface $item): string {
+        $item->expiresAfter(3600);
+
+        return '...';
+    });
+
+In this example, cache item keyed ``my_cache_key`` will be transparently stored within
+the cache pool under a logical namespace called ``foo``.
+
+Sub-namespacing allows implementing namespace-based cache invalidation, where the name
+of a namespace is computed by hashing some context info.
+
 .. _cache_stampede-prevention:
 
 Stampede Prevention
