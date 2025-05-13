@@ -34,6 +34,10 @@ unique tokens added to forms as hidden fields. The legit server validates them t
 ensure that the request originated from the expected source and not some other
 malicious website.
 
+Anti-CSRF tokens can be managed either in a stateful way: they're put in the
+session and are unique for each user and for each kind of action, or in a
+stateless way: they're generated on the client-side.
+
 Installation
 ------------
 
@@ -85,14 +89,14 @@ for more information):
             ;
         };
 
-The tokens used for CSRF protection are meant to be different for every user and
-they are stored in the session. That's why a session is started automatically as
-soon as you render a form with CSRF protection.
+By default, the tokens used for CSRF protection are stored in the session.
+That's why a session is started automatically as soon as you render a form
+with CSRF protection.
 
 .. _caching-pages-that-contain-csrf-protected-forms:
 
-Moreover, this means that you cannot fully cache pages that include CSRF
-protected forms. As an alternative, you can:
+This leads to many strategies to help with caching pages that include CSRF
+protected forms, among them:
 
 * Embed the form inside an uncached :doc:`ESI fragment </http_cache/esi>` and
   cache the rest of the page contents;
@@ -100,6 +104,9 @@ protected forms. As an alternative, you can:
 * Cache the entire page and use :ref:`hinclude.js <templates-hinclude>` to
   load the CSRF token with an uncached AJAX request and replace the form
   field value with it.
+
+The most effective way to cache pages that need CSRF protected forms is to use
+stateless CSRF tokens, see below.
 
 .. _csrf-protection-forms:
 
@@ -183,6 +190,7 @@ method of each form::
                 'csrf_field_name' => '_token',
                 // an arbitrary string used to generate the value of the token
                 // using a different string for each form improves its security
+                // when using stateful tokens (which is the default)
                 'csrf_token_id'   => 'task_item',
             ]);
         }
@@ -190,7 +198,7 @@ method of each form::
         // ...
     }
 
-You can also customize the rendering of the CSRF form field creating a custom
+You can also customize the rendering of the CSRF form field by creating a custom
 :doc:`form theme </form/form_themes>` and using ``csrf_token`` as the prefix of
 the field (e.g. define ``{% block csrf_token_widget %} ... {% endblock %}`` to
 customize the entire form field contents).
@@ -221,7 +229,7 @@ generate a CSRF token in the template and store it as a hidden form field:
 .. code-block:: html+twig
 
     <form action="{{ url('admin_post_delete', { id: post.id }) }}" method="post">
-        {# the argument of csrf_token() is an arbitrary string used to generate the token #}
+        {# the argument of csrf_token() is the ID of this token #}
         <input type="hidden" name="token" value="{{ csrf_token('delete-item') }}">
 
         <button type="submit">Delete item</button>
@@ -229,7 +237,7 @@ generate a CSRF token in the template and store it as a hidden form field:
 
 Then, get the value of the CSRF token in the controller action and use the
 :method:`Symfony\\Bundle\\FrameworkBundle\\Controller\\AbstractController::isCsrfTokenValid`
-method to check its validity::
+method to check its validity, passing the same token ID used in the template::
 
     use Symfony\Component\HttpFoundation\Request;
     use Symfony\Component\HttpFoundation\Response;
@@ -302,6 +310,166 @@ targeted parts of the plaintext. To mitigate these attacks, and prevent an
 attacker from guessing the CSRF tokens, a random mask is prepended to the token
 and used to scramble it.
 
+Stateless CSRF Tokens
+---------------------
+
+.. versionadded:: 7.2
+
+    Stateless anti-CSRF protection was introduced in Symfony 7.2.
+
+By default CSRF tokens are stateful, which means they're stored in the session.
+But some token ids can be declared as stateless using the ``stateless_token_ids``
+option:
+
+.. configuration-block::
+
+    .. code-block:: yaml
+
+        # config/packages/csrf.yaml
+        framework:
+            # ...
+            csrf_protection:
+                stateless_token_ids: ['submit', 'authenticate', 'logout']
+
+    .. code-block:: xml
+
+        <!-- config/packages/csrf.xml -->
+        <?xml version="1.0" encoding="UTF-8" ?>
+        <container xmlns="http://symfony.com/schema/dic/services"
+            xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+            xmlns:framework="http://symfony.com/schema/dic/symfony"
+            xsi:schemaLocation="http://symfony.com/schema/dic/services
+                https://symfony.com/schema/dic/services/services-1.0.xsd
+                http://symfony.com/schema/dic/symfony
+                https://symfony.com/schema/dic/symfony/symfony-1.0.xsd">
+
+            <framework:config>
+                <framework:csrf-protection>
+                    <framework:stateless-token-id>submit</framework:stateless-token-id>
+                    <framework:stateless-token-id>authenticate</framework:stateless-token-id>
+                    <framework:stateless-token-id>logout</framework:stateless-token-id>
+                </framework:csrf-protection>
+            </framework:config>
+        </container>
+
+    .. code-block:: php
+
+        // config/packages/csrf.php
+        use Symfony\Config\FrameworkConfig;
+
+        return static function (FrameworkConfig $framework): void {
+            $framework->csrfProtection()
+                ->statelessTokenIds(['submit', 'authenticate', 'logout'])
+            ;
+        };
+
+Stateless CSRF tokens use a CSRF protection that doesn't need the session. This
+means that you can cache the entire page and still have CSRF protection.
+
+When a stateless CSRF token is checked for validity, Symfony verifies the
+``Origin`` and the ``Referer`` headers of the incoming HTTP request.
+
+If either of these headers match the target origin of the application (its domain
+name), the CSRF token is considered valid. This relies on the app being able to
+know its own target origin. Don't miss configuring your reverse proxy if you're
+behind one. See :doc:`/deployment/proxies`.
+
+Using a Default Token ID
+~~~~~~~~~~~~~~~~~~~~~~~~
+
+While stateful CSRF tokens are better seggregated per form or action, stateless
+ones don't need many token identifiers. In the previous example, ``authenticate``
+and ``logout`` are listed because they're the default identifiers used by the
+Symfony Security component. The ``submit`` identifier is then listed so that
+form types defined by the application can use it by default. The following
+configuration - which applies only to form types declared using autofiguration
+(the default way to declare *your* services) - will make your form types use the
+``submit`` token identifier by default:
+
+.. configuration-block::
+
+    .. code-block:: yaml
+
+        # config/packages/csrf.yaml
+        framework:
+            form:
+                csrf_protection:
+                    token_id: 'submit'
+
+    .. code-block:: xml
+
+        <!-- config/packages/csrf.xml -->
+        <?xml version="1.0" encoding="UTF-8" ?>
+        <container xmlns="http://symfony.com/schema/dic/services"
+            xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+            xmlns:framework="http://symfony.com/schema/dic/symfony"
+            xsi:schemaLocation="http://symfony.com/schema/dic/services
+                https://symfony.com/schema/dic/services/services-1.0.xsd
+                http://symfony.com/schema/dic/symfony
+                https://symfony.com/schema/dic/symfony/symfony-1.0.xsd">
+
+            <framework:config>
+                <framework:form>
+                    <framework:csrf-protection token-id="submit"/>
+                </framework:form>
+            </framework:config>
+        </container>
+
+    .. code-block:: php
+
+        // config/packages/csrf.php
+        use Symfony\Config\FrameworkConfig;
+
+        return static function (FrameworkConfig $framework): void {
+            $framework->form()
+                ->csrfProtection()
+                    ->tokenId('submit')
+            ;
+        };
+
+Forms configured with a token identifier listed in the above ``stateless_token_ids``
+option will use the stateless CSRF protection.
+
+Generating CSRF Token Using Javascript
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+
+In addition to the ``Origin`` and ``Referer`` headers, stateless CSRF protection
+also checks a cookie and a header (named ``csrf-token`` by default, see the
+:ref:`CSRF configuration reference <reference-framework-csrf-protection>`).
+
+These extra checks are part of defense-in-depth strategies provided by the
+stateless CSRF protection. They are optional and they require
+`some JavaScript`_ to be activated. This JavaScript is responsible for generating
+a crypto-safe random token when a form is submitted, then putting the token in
+the hidden CSRF field of the form and submitting it also as a cookie and header.
+On the server-side, the CSRF token is validated by checking the cookie and header
+values. This "double-submit" protection relies on the same-origin policy
+implemented by browsers and is strengthened by regenerating the token at every
+form submission - which prevents cookie fixation issues - and by using
+``samesite=strict`` and ``__Host-`` cookies, which make them domain-bound and
+HTTPS-only.
+
+Note that the default snippet of JavaScript provided by Symfony requires that
+the hidden CSRF form field is either named ``_csrf_token``, or that it has the
+``data-controller="csrf-protection"`` attribute. You can of course take
+inspiration from this snippet to write your own, provided you follow the same
+protocol.
+
+As a last measure, a behavioral check is added on the server-side to ensure that
+the validation method cannot be downgraded: if and only if a session is already
+available, successful "double-submit" is remembered and is then required for
+subsequent requests. This prevents attackers from exploiting potentially reduced
+validation checks once cookie and/or header validation has been confirmed as
+effective (they're optional by default as explained above).
+
+.. note::
+
+    Enforcing successful "double-submit" for every requests is not recommended as
+    as it could lead to a broken user experience. The opportunistic approach
+    described above is preferred because it allows the application to gracefully
+    degrade to ``Origin`` / ``Referer`` checks when JavaScript is not available.
+
 .. _`Cross-site request forgery`: https://en.wikipedia.org/wiki/Cross-site_request_forgery
 .. _`BREACH`: https://en.wikipedia.org/wiki/BREACH
 .. _`CRIME`: https://en.wikipedia.org/wiki/CRIME
+.. _`some JavaScript`: https://github.com/symfony/recipes/blob/main/symfony/stimulus-bundle/2.20/assets/controllers/csrf_protection_controller.js
