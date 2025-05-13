@@ -672,7 +672,7 @@ you can override it by passing a ``DataPart``::
 
     $formData = new FormDataPart([
         ['json_data' => new DataPart(json_encode($json), null, 'application/json')]
-    ];
+    ]);
 
 By default, HttpClient streams the body contents when uploading them. This might
 not work with all servers, resulting in HTTP status code 411 ("Length Required")
