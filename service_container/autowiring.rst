@@ -862,6 +862,40 @@ typed properties:
             }
         }
 
+Autowiring Anonymous Services Inline
+------------------------------------
+
+.. versionadded:: 7.1
+
+   The ``#[AutowireInline]`` attribute was added in Symfony 7.1.
+
+Similar to how anonymous services can be defined inline in configuration files,
+the :class:`Symfony\\Component\\DependencyInjection\\Attribute\\AutowireInline`
+attribute allows you to declare anonymous services inline, directly next to their
+corresponding arguments::
+
+    public function __construct(
+        #[AutowireInline(
+            factory: [ScopingHttpClient::class, 'forBaseUri'],
+            arguments: [
+                '$baseUri' => 'https://api.example.com',
+                '$defaultOptions' => [
+                    'auth_bearer' => '%env(EXAMPLE_TOKEN)%',
+                ],
+            ]
+        )]
+        private HttpClientInterface $client,
+    ) {
+    }
+
+This example tells Symfony to inject an object created by calling the
+``ScopingHttpClient::forBaseUri()`` factory with the specified base URI and
+default options. This is just one example: you can use the ``#[AutowireInline]``
+attribute to define any kind of anonymous service.
+
+While this approach is convenient for simple service definitions, consider moving
+complex or heavily configured services to a configuration file to ease maintenance.
+
 Autowiring Controller Action Methods
 ------------------------------------
 
