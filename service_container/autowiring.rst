@@ -869,10 +869,10 @@ Autowiring Anonymous Services Inline
 
    The ``#[AutowireInline]`` attribute was added in Symfony 7.1.
 
-Similar to how one can define anonymous services inline using configuration files,
+Similar to how anonymous services can be defined inline in configuration files,
 the :class:`Symfony\\Component\\DependencyInjection\\Attribute\\AutowireInline`
-attribute allows declaring anonymous services inline next to their corresponding
-arguments::
+attribute allows you to declare anonymous services inline, directly next to their
+corresponding arguments::
 
     public function __construct(
         #[AutowireInline(
@@ -888,11 +888,13 @@ arguments::
     ) {
     }
 
-As you might have already figured out, this declaration instructs Symfony to inject an
-object created by calling the ``ScopingHttpClient::forBaseUri()`` factory with the
-configured base URI and default options.
+This example tells Symfony to inject an object created by calling the
+``ScopingHttpClient::forBaseUri()`` factory with the specified base URI and
+default options. This is just one example: you can use the ``#[AutowireInline]``
+attribute to define any kind of anonymous service.
 
-Of course, this is just an example and this attribute can be used to construct any kind of objects.
+While this approach is convenient for simple service definitions, consider moving
+complex or heavily configured services to a configuration file to ease maintenance.
 
 Autowiring Controller Action Methods
 ------------------------------------
