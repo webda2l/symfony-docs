@@ -3053,7 +3053,7 @@ php_errors
 log
 ...
 
-**type**: ``boolean|int|array<int, string>`` **default**: ``%kernel.debug%``
+**type**: ``boolean``, ``int`` or ``array<int, string>`` **default**: ``%kernel.debug%``
 
 Use the application logger instead of the PHP logger for logging PHP errors.
 When an integer value is used, it defines a bitmask of PHP errors that will
