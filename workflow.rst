@@ -1306,6 +1306,85 @@ In Twig templates, metadata is available via the ``workflow_metadata()`` functio
         </ul>
     </p>
 
+Adding Custom Definition Validators
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+
+Sometimes, you may want to add custom logics to validate your workflow definition.
+To do this, you need to implement the
+:class:`Symfony\\Component\\Workflow\\Validator\\DefinitionValidatorInterface`::
+
+    namespace App\Workflow\Validator;
+
+    use Symfony\Component\Workflow\Definition;
+    use Symfony\Component\Workflow\Exception\InvalidDefinitionException;
+    use Symfony\Component\Workflow\Validator\DefinitionValidatorInterface;
+
+    final class BlogPublishingValidator implements DefinitionValidatorInterface
+    {
+        public function validate(Definition $definition, string $name): void
+        {
+            if (!$definition->getMetadataStore()->getMetadata('title')) {
+                throw new InvalidDefinitionException(sprintf('The workflow metadata title is missing in Workflow "%s".', $name));
+            }
+        }
+    }
+
+Once your definition validator is implemented, you can configure your workflow to use
+it:
+
+.. configuration-block::
+
+    .. code-block:: yaml
+
+        # config/packages/workflow.yaml
+        framework:
+            workflows:
+                blog_publishing:
+                    # ... previous configuration
+
+                    definition_validators:
+                        - App\Workflow\Validator\BlogPublishingValidator
+
+    .. code-block:: xml
+
+        <!-- config/packages/workflow.xml -->
+        <?xml version="1.0" encoding="UTF-8" ?>
+        <container xmlns="http://symfony.com/schema/dic/services"
+            xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+            xmlns:framework="http://symfony.com/schema/dic/symfony"
+            xsi:schemaLocation="http://symfony.com/schema/dic/services https://symfony.com/schema/dic/services/services-1.0.xsd
+                http://symfony.com/schema/dic/symfony https://symfony.com/schema/dic/symfony/symfony-1.0.xsd"
+        >
+            <framework:config>
+                <framework:workflow name="blog_publishing">
+                    <!-- ... previous configuration -->
+                    <framework:definition-validators>App\Workflow\Validator\BlogPublishingValidator</framework:definition-validators>
+                </framework:workflow>
+            </framework:config>
+        </container>
+
+    .. code-block:: php
+
+        // config/packages/workflow.php
+        use Symfony\Config\FrameworkConfig;
+
+        return static function (FrameworkConfig $framework): void {
+            $blogPublishing = $framework->workflows()->workflows('blog_publishing');
+            // ... previous configuration
+
+            $blogPublishing->definitionValidators([
+                App\Workflow\Validator\BlogPublishingValidator::class
+            ]);
+
+            // ...
+        };
+
+The ``BlogPublishingValidator`` definition validator will be executed during the container compilation.
+
+.. versionadded:: 7.3
+
+    Support for defining custom workflow definition validators was introduced in Symfony 7.3.
+
 Learn more
 ----------
 
