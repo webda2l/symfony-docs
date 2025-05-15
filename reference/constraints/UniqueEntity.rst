@@ -277,7 +277,7 @@ each with a single field.
 ``ignoreNull``
 ~~~~~~~~~~~~~~
 
-**type**: ``boolean`` | ``string`` | ``array`` **default**: ``true``
+**type**: ``boolean``, ``string`` or ``array`` **default**: ``true``
 
 If this option is set to ``true``, then the constraint will allow multiple
 entities to have a ``null`` value for a field without failing validation.
