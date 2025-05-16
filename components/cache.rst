@@ -117,7 +117,7 @@ stored internally under a namespace based on the current user ID. This is handle
 automatically, so you **don't** need to manually prefix keys like ``user-27.dashboard_data``.
 
 There are no guidelines or restrictions on how to define cache namespaces.
-You can make them as granular or as generic as your application requires:
+You can make them as granular or as generic as your application requires::
 
     $localeCache = $cache->withSubNamespace($request->getLocale());
 
