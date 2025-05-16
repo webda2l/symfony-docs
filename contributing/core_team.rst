@@ -197,7 +197,7 @@ Pull Request Merging Policy
 
 A pull request **can be merged** if:
 
-* It is a :ref:`unsubstantial change <core-team_unsubstantial-changes>`;
+* It is an :ref:`unsubstantial change <core-team_unsubstantial-changes>`;
 * Enough time was given for peer reviews;
 * It is a bug fix and at least two **Mergers Team** members voted ``+1``
   (only one if the submitter is part of the Mergers team) and no Core
