@@ -898,7 +898,7 @@ in your requests::
         'extra' => ['trace_content' => false],
     ]);
 
-This setting won’t affect other clients.
+This setting won't affect other clients.
 
 Using URI Templates
 ~~~~~~~~~~~~~~~~~~~
