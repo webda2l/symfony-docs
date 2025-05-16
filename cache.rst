@@ -539,6 +539,8 @@ Symfony stores the item automatically in all the missing pools.
             ;
         };
 
+.. _cache-using-cache-tags:
+
 Using Cache Tags
 ----------------
 

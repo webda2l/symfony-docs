@@ -91,30 +91,61 @@ Creating Sub-Namespaces
 
    Cache sub-namespaces were introduced in Symfony 7.3.
 
-All cache adapters provided by the component implement the
-:class:`Symfony\\Contracts\\Cache\\NamespacedPoolInterface` to provide the
-:method:`Symfony\\Contracts\\Cache\\NamespacedPoolInterface::withSubNamespace` method.
-This method allows namespacing cached items by transparently prefixing their keys::
+Sometimes you need to create context-dependent variations of data that should be
+cached. For example, the data used to render a dashboard page may be expensive
+to generate and unique per user, so you can't cache the same data for everyone.
 
-    $subCache = $cache->withSubNamespace('foo');
+In such cases, Symfony allows you to create different cache contexts using
+namespaces. A cache namespace is an arbitrary string that identifies a set of
+related cache items. All cache adapters provided by the component implement the
+:class:`Symfony\\Contracts\\Cache\\NamespacedPoolInterface`, which provides the
+:method:`Symfony\\Contracts\\Cache\\NamespacedPoolInterface::withSubNamespace`
+method.
 
-    $subCache->get('my_cache_key', function (ItemInterface $item): string {
+This method allows you to namespace cached items by transparently prefixing their keys::
+
+    $userCache = $cache->withSubNamespace(sprintf('user-%d', $user->getId()));
+
+    $userCache->get('dashboard_data', function (ItemInterface $item): string {
         $item->expiresAfter(3600);
 
         return '...';
     });
 
-In this example, the cache item will use the ``my_cache_key`` key, but it will be
-stored internally under the ``foo`` namespace. This is handled transparently for
-you, so you **don't** need to manually prefix keys like ``foo.my_cache_key``.
+In this example, the cache item uses the ``dashboard_data`` key, but it will be
+stored internally under a namespace based on the current user ID. This is handled
+automatically, so you **don’t** need to manually prefix keys like ``user-27.dashboard_data``.
 
-This is useful when using namespace-based cache invalidation to isolate or
-invalidate a subset of cached data based on some context. Typical examples
-include namespacing by user ID, locale, or entity ID and hash::
+There are no guidelines or restrictions on how to define cache namespaces.
+You can make them as granular or as generic as your application requires:
 
-    $userCache = $cache->withSubNamespace((string) $userId);
     $localeCache = $cache->withSubNamespace($request->getLocale());
-    $productCache = $cache->withSubNamespace($productId.'_'.$productChecksum);
+
+    $flagCache = $cache->withSubNamespace(
+        $featureToggle->isEnabled('new_checkout') ? 'checkout-v2' : 'checkout-v1'
+    );
+
+    $channel = $request->attributes->get('_route')?->startsWith('api_') ? 'api' : 'web';
+    $channelCache = $cache->withSubNamespace($channel);
+
+.. tip::
+
+    You can even combine cache namespaces with :ref:`cache tags <cache-using-cache-tags>`
+    for more advanced needs.
+
+There is no built-in way to invalidate caches by namespace. Instead, the recommended
+approach is to change the namespace itself. For this reason, it's common to include
+static or dynamic versioning data in the cache namespace::
+
+    // for simple applications, an incrementing static version number may be enough
+    $userCache = $cache->withSubNamespace(sprintf('v1-user-%d', $user->getId()));
+
+    // other applications may use dynamic versioning based on the date (e.g. monthly)
+    $userCache = $cache->withSubNamespace(sprintf('%s-user-%d', date('Ym'), $user->getId()));
+
+    // or even invalidate the cache when the user data changes
+    $checksum = hash('xxh128', $user->getUpdatedAt()->format(DATE_ATOM));
+    $userCache = $cache->withSubNamespace(sprintf('user-%d-%s', $user->getId(), $checksum));
 
 .. _cache_stampede-prevention:
 
