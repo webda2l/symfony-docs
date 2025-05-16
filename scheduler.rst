@@ -603,7 +603,7 @@ In your handler, you can check a condition and, if affirmative, access the
     {
         public function getSchedule(): Schedule
         {
-            $this->removeOldReports = RecurringMessage::cron(‘3 8 * * 1’, new CleanUpOldSalesReport());
+            $this->removeOldReports = RecurringMessage::cron('3 8 * * 1', new CleanUpOldSalesReport());
 
             return $this->schedule ??= (new Schedule())
                 ->with(
