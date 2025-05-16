@@ -146,7 +146,8 @@ The WebLink component provides the following Twig functions to send those hints:
 * ``prefetch()``: "identifies a resource that might be required by the next
   navigation, and that the user agent *should* fetch, such that the user agent
   can deliver a faster response once the resource is requested in the future".
-* ``prerender()``: "identifies a resource that might be required by the next
+* ``prerender()``: " **deprecated** and superseded by the `Speculation Rules API`_,
+  identifies a resource that might be required by the next
   navigation, and that the user agent *should* fetch and execute, such that the
   user agent can deliver a faster response once the resource is requested later".
 
@@ -206,3 +207,4 @@ You can also add links to the HTTP response directly from controllers and servic
 .. _`Akamai`: https://http2.akamai.com/
 .. _`link defined in the HTML specification`: https://html.spec.whatwg.org/dev/links.html#linkTypes
 .. _`PSR-13`: https://www.php-fig.org/psr/psr-13/
+.. _`Speculation Rules API`: https://developer.mozilla.org/docs/Web/API/Speculation_Rules_API
