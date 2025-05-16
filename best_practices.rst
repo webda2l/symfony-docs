@@ -95,7 +95,7 @@ Use Secrets for Sensitive Information
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
 When your application has sensitive configuration, like an API key, you should
-store those securely via :doc:`Symfony’s secrets management system </configuration/secrets>`.
+store those securely via :doc:`Symfony's secrets management system </configuration/secrets>`.
 
 Use Parameters for Application Configuration
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
