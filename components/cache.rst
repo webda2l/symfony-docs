@@ -114,7 +114,7 @@ This method allows you to namespace cached items by transparently prefixing thei
 
 In this example, the cache item uses the ``dashboard_data`` key, but it will be
 stored internally under a namespace based on the current user ID. This is handled
-automatically, so you **don’t** need to manually prefix keys like ``user-27.dashboard_data``.
+automatically, so you **don't** need to manually prefix keys like ``user-27.dashboard_data``.
 
 There are no guidelines or restrictions on how to define cache namespaces.
 You can make them as granular or as generic as your application requires:
@@ -130,7 +130,7 @@ You can make them as granular or as generic as your application requires:
 
 .. tip::
 
-    You can even combine cache namespaces with :ref:`cache tags <cache-using-cache-tags>`
+    You can combine cache namespaces with :ref:`cache tags <cache-using-cache-tags>`
     for more advanced needs.
 
 There is no built-in way to invalidate caches by namespace. Instead, the recommended
