@@ -1372,7 +1372,7 @@ RabbitMQ. Install it by running:
 
     $ composer require symfony/amqp-messenger
 
-The AMQP transport DSN may looks like this:
+The AMQP transport DSN may look like this:
 
 .. code-block:: env
 
