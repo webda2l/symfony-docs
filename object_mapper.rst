@@ -149,7 +149,7 @@ You can apply the ``#[Map]`` attribute to properties to customize their mapping 
 
 * ``target``: Specifies the name of the property in the target object;
 * ``source``: Specifies the name of the property in the source object (useful
-    when mapping is defined on the target, see below);
+  when mapping is defined on the target, see below);
 * ``if``: Defines a condition for mapping the property;
 * ``transform``: Applies a transformation to the value before mapping.
 
