@@ -1020,6 +1020,25 @@ corresponding ``BlogPost`` object from the database using the slug.
 
     Route parameter mapping was introduced in Symfony 7.1.
 
+When mapping multiple entities from route parameters, name collisions can occur.
+In this example, the route tries to define two mappings: one for an author and one
+for a category; both using the same ``name`` parameter. This isn't allowed because
+the route ends up declaring ``name`` twice::
+
+    #[Route('/search-book/{name:author}/{name:category}')]
+
+Such routes should instead be defined using the following syntax::
+
+    #[Route('/search-book/{authorName:author.name}/{categoryName:category.name}')]
+
+This way, the route parameter names are unique (``authorName`` and ``categoryName``),
+and the "param converter" can correctly map them to controller arguments (``$author``
+and ``$category``), loading them both by their name.
+
+.. versionadded:: 7.3
+
+    This more advanced style of route parameter mapping was introduced in Symfony 7.3.
+
 More advanced mappings can be achieved using the ``#[MapEntity]`` attribute.
 Check out the :ref:`Doctrine param conversion documentation <doctrine-entity-value-resolver>`
 to learn how to customize the database queries used to fetch the object from the route
