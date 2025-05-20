@@ -1110,6 +1110,13 @@ just to run some code. Imagine a console command that renders Twig templates
 of emails in different languages. You need to change the locale only to
 render those templates.
 
+.. note::
+
+    The LocaleSwitcher will apply the locale at a request level
+    this means that it will be available only for that request. A
+    redirect, for example, will cancel the LocaleSwitcher's effect.
+    For a permanent locale switch between requests see https://symfony.com/doc/current/session.html#making-the-locale-sticky-during-a-user-s-session.
+
 The ``LocaleSwitcher`` class allows you to change at once the locale
 of:
 
