@@ -1006,31 +1006,12 @@ using the request parameters (``slug`` in this case). If no object is found,
 Symfony generates a 404 response automatically.
 
 The ``{slug:post}`` syntax maps the route parameter named ``slug`` to the controller
-argument named ``$post``. It also hints the "param converter" to lookup by slug
-when loading the corresponding ``BlogPost`` object from the database.
+argument named ``$post``. It also hints the "param converter" to look up the
+corresponding ``BlogPost`` object from the database using the slug.
 
 .. versionadded:: 7.1
 
     Route parameter mapping was introduced in Symfony 7.1.
-
-When more than one entity needs to be derived from route parameters, collisions can happen.
-In the following example, the route tries to define two mappings: one to load an author by
-name, two to load a category by name. But this is not allowed because from the side of the
-route definition, this declares a parameter named "name" twice::
-
-    #[Route('/search-book/{name:author}/{name:category}')]
-
-Such routes should instead be defined using the following syntax::
-
-    #[Route('/search-book/{authorName:author.name}/{categoryName:category.name}')]
-
-This way, the route parameter names are unique (``authorName`` and ``categoryName``) and
-the "param converter" can correctly map them to controller arguments (``$author`` and
-``$category``), loading them both by their name.
-
-.. versionadded:: 7.3
-
-    This more advanced style of route parameter mapping was introduced in Symfony 7.3.
 
 More advanced mappings can be achieved using the ``#[MapEntity]`` attribute.
 Check out the :ref:`Doctrine param conversion documentation <doctrine-entity-value-resolver>`

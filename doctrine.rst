@@ -695,16 +695,16 @@ Automatic fetching works in these situations:
   on your entity (non-properties are ignored).
 
 The ``{slug:product}`` syntax maps the route parameter named ``slug`` to the
-controller argument named ``$product``. It also hints the resolver to lookup
-by slug when loading the corresponding ``Product`` object from the database.
+controller argument named ``$product``. It also hints the resolver to look up
+the corresponding ``Product`` object from the database using the slug.
 
 .. versionadded:: 7.1
 
     Route parameter mapping was introduced in Symfony 7.1.
 
 You can also configure the mapping explicitly for any controller argument
-with the ``MapEntity`` attribute. You can even control the
-``EntityValueResolver`` behavior by using the `MapEntity options`_ ::
+using the ``MapEntity`` attribute. You can even control the behavior of the
+``EntityValueResolver`` by using the `MapEntity options`_ ::
 
     // src/Controller/ProductController.php
     namespace App\Controller;
