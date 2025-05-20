@@ -22,8 +22,7 @@ Creating Routes as Attributes
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
 PHP attributes allow to define routes next to the code of the
-:doc:`controllers </controller>` associated to those routes. Attributes are
-native in PHP 8 and higher versions, so you can use them right away.
+:doc:`controllers </controller>` associated to those routes.
 
 You need to add a bit of configuration to your project before using them. If your
 project uses :ref:`Symfony Flex <symfony-flex>`, this file is already created for you.
@@ -707,12 +706,6 @@ URL                       Route          Parameters
     matches any uppercase character in any language, ``\p{Greek}`` matches any
     Greek characters, etc.
 
-.. note::
-
-    When using regular expressions in route parameters, you can set the ``utf8``
-    route option to ``true`` to make any ``.`` character match any UTF-8
-    characters instead of just a single byte.
-
 If you prefer, requirements can be inlined in each parameter using the syntax
 ``{parameter_name<requirements>}``. This feature makes configuration more
 concise, but it can decrease route readability when requirements are complex:
@@ -998,7 +991,7 @@ controller action. Instead of ``string $slug``, add ``BlogPost $post``::
     {
         // ...
 
-        #[Route('/blog/{slug}', name: 'blog_show')]
+        #[Route('/blog/{slug:post}', name: 'blog_show')]
         public function show(BlogPost $post): Response
         {
             // $post is the object whose slug matches the routing parameter
@@ -1012,9 +1005,37 @@ this case), the "param converter" makes a database request to find the object
 using the request parameters (``slug`` in this case). If no object is found,
 Symfony generates a 404 response automatically.
 
+The ``{slug:post}`` syntax maps the route parameter named ``slug`` to the controller
+argument named ``$post``. It also hints the "param converter" to lookup by slug
+when loading the corresponding ``BlogPost`` object from the database.
+
+.. versionadded:: 7.1
+
+    Route parameter mapping was introduced in Symfony 7.1.
+
+When more than one entity needs to be derived from route parameters, collisions can happen.
+In the following example, the route tries to define two mappings: one to load an author by
+name, two to load a category by name. But this is not allowed because from the side of the
+route definition, this declares a parameter named "name" twice::
+
+    #[Route('/search-book/{name:author}/{name:category}')]
+
+Such routes should instead be defined using the following syntax::
+
+    #[Route('/search-book/{authorName:author.name}/{categoryName:category.name}')]
+
+This way, the route parameter names are unique (``authorName`` and ``categoryName``) and
+the "param converter" can correctly map them to controller arguments (``$author`` and
+``$category``), loading them both by their name.
+
+.. versionadded:: 7.3
+
+    This more advanced style of route parameter mapping was introduced in Symfony 7.3.
+
+More advanced mappings can be achieved using the ``#[MapEntity]`` attribute.
 Check out the :ref:`Doctrine param conversion documentation <doctrine-entity-value-resolver>`
-to learn about the ``#[MapEntity]`` attribute that can be used to customize the
-database queries used to fetch the object from the route parameter.
+to learn how to customize the database queries used to fetch the object from the route
+parameter.
 
 Backed Enum Parameters
 ~~~~~~~~~~~~~~~~~~~~~~

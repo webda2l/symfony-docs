@@ -680,7 +680,7 @@ will automatically fetch them::
     /**
      * Perform a findOneBy() where the slug property matches {slug}.
      */
-    #[Route('/product/{slug}')]
+    #[Route('/product/{slug:product}')]
     public function showBySlug(Product $product): Response
     {
     }
@@ -694,14 +694,17 @@ Automatic fetching works in these situations:
   *all* of the wildcards in your route that are actually properties
   on your entity (non-properties are ignored).
 
-This behavior is enabled by default on all controllers. If you prefer, you can
-restrict this feature to only work on route wildcards called ``id`` to look for
-entities by primary key. To do so, set the option
-``doctrine.orm.controller_resolver.auto_mapping`` to ``false``.
+The ``{slug:product}`` syntax maps the route parameter named ``slug`` to the
+controller argument named ``$product``. It also hints the resolver to lookup
+by slug when loading the corresponding ``Product`` object from the database.
 
-When ``auto_mapping`` is disabled, you can configure the mapping explicitly for
-any controller argument with the ``MapEntity`` attribute. You can even control
-the ``EntityValueResolver`` behavior by using the `MapEntity options`_ ::
+.. versionadded:: 7.1
+
+    Route parameter mapping was introduced in Symfony 7.1.
+
+You can also configure the mapping explicitly for any controller argument
+with the ``MapEntity`` attribute. You can even control the
+``EntityValueResolver`` behavior by using the `MapEntity options`_ ::
 
     // src/Controller/ProductController.php
     namespace App\Controller;
@@ -809,18 +812,6 @@ control behavior:
             Product $product,
             #[MapEntity(mapping: ['comment_slug' => 'slug'])]
             Comment $comment
-        ): Response {
-        }
-
-``exclude``
-    Configures the properties that should be used in the ``findOneBy()``
-    method by *excluding* one or more properties so that not *all* are used::
-
-        #[Route('/product/{slug}/{date}')]
-        public function show(
-            #[MapEntity(exclude: ['date'])]
-            Product $product,
-            \DateTime $date
         ): Response {
         }
 
