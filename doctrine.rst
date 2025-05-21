@@ -649,7 +649,7 @@ automatically! You can simplify the controller to::
         }
     }
 
-That's it! The bundle uses the ``{id}`` from the route to query for the ``Product``
+That's it! The attribute uses the ``{id}`` from the route to query for the ``Product``
 by the ``id`` column. If it's not found, a 404 page is generated.
 
 .. tip::
