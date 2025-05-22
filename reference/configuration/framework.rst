@@ -857,36 +857,38 @@ stateless_token_ids
 
 **type**: ``array`` **default**: ``[]``
 
-The list of CSRF token ids that will use stateless CSRF protection.
+The list of CSRF token ids that will use :ref:`stateless CSRF protection <csrf-stateless-tokens>`.
 
 .. versionadded:: 7.2
 
-    This option was added in Symfony 7.2 to aid in configuring stateless CSRF protection.
+    The ``stateless_token_ids`` option was introduced in Symfony 7.2.
 
 check_header
 ............
 
 **type**: ``integer`` or ``bool`` **default**: ``false``
 
-Whether to check the CSRF token in a header in addition to a cookie when using stateless protection.
-Can be set to ``2`` (the value of the ``CHECK_ONLY_HEADER`` constant on the
-:class:`Symfony\\Component\\Security\\Csrf\\SameOriginCsrfTokenManager` class) to check only the header
-and not the cookie.
+Whether to check the CSRF token in an HTTP header in addition to the cookie when
+using :ref:`stateless CSRF protection <csrf-stateless-tokens>`. You can also set
+this to ``2`` (the value of the ``CHECK_ONLY_HEADER`` constant on the
+:class:`Symfony\\Component\\Security\\Csrf\\SameOriginCsrfTokenManager` class)
+to check only the header and ignore the cookie.
 
 .. versionadded:: 7.2
 
-    This option was added in Symfony 7.2 to aid in configuring stateless CSRF protection.
+    The ``check_header`` option was introduced in Symfony 7.2.
 
 cookie_name
 ...........
 
 **type**: ``string`` **default**: ``csrf-token``
 
-The name of the cookie (and header) to use for the double-submit when using stateless protection.
+The name of the cookie (and HTTP header) to use for the double-submit when using
+:ref:`stateless CSRF protection <csrf-stateless-tokens>`.
 
 .. versionadded:: 7.2
 
-    This option was added in Symfony 7.2 to aid in configuring stateless CSRF protection.
+    The ``cookie_name`` option was introduced in Symfony 7.2.
 
 .. _config-framework-default_locale:
 
@@ -1213,16 +1215,16 @@ field_attr
 
 **type**: ``array`` **default**: ``['data-controller' => 'csrf-protection']``
 
-This is the HTML attributes that should be added to the CSRF token field of your forms.
+HTML attributes to add to the CSRF token field of your forms.
 
 token_id
 ''''''''
 
 **type**: ``string`` **default**: ``null``
 
-This is the CSRF token id that should be used for validating the CSRF tokens of your forms.
-Note that this setting applies only to autoconfigured form types, which usually means only
-to your own form types and not to form types registered by third-party bundles.
+The CSRF token ID used to validate the CSRF tokens of your forms. This setting
+applies only to form types that use :ref:`service autoconfiguration <services-autoconfigure>`,
+which typically means your own form types, not those registered by third-party bundles.
 
 fragments
 ~~~~~~~~~

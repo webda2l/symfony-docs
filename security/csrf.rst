@@ -34,9 +34,9 @@ unique tokens added to forms as hidden fields. The legit server validates them t
 ensure that the request originated from the expected source and not some other
 malicious website.
 
-Anti-CSRF tokens can be managed either in a stateful way: they're put in the
-session and are unique for each user and for each kind of action, or in a
-stateless way: they're generated on the client-side.
+Anti-CSRF tokens can be managed in two ways: using a **stateful** approach,
+where tokens are stored in the session and are unique per user and action; or a
+**stateless** approach, where tokens are generated on the client side.
 
 Installation
 ------------
@@ -106,7 +106,7 @@ protected forms, among them:
   field value with it.
 
 The most effective way to cache pages that need CSRF protected forms is to use
-stateless CSRF tokens, see below.
+:ref:`stateless CSRF tokens <csrf-stateless-tokens>`, as explained below.
 
 .. _csrf-protection-forms:
 
@@ -310,6 +310,8 @@ targeted parts of the plaintext. To mitigate these attacks, and prevent an
 attacker from guessing the CSRF tokens, a random mask is prepended to the token
 and used to scramble it.
 
+.. _csrf-stateless-tokens:
+
 Stateless CSRF Tokens
 ---------------------
 
@@ -363,28 +365,31 @@ option:
             ;
         };
 
-Stateless CSRF tokens use a CSRF protection that doesn't need the session. This
-means that you can cache the entire page and still have CSRF protection.
+Stateless CSRF tokens provide protection without relying on the session. This
+allows you to fully cache pages while still protecting against CSRF attacks.
 
-When a stateless CSRF token is checked for validity, Symfony verifies the
-``Origin`` and the ``Referer`` headers of the incoming HTTP request.
+When validating a stateless CSRF token, Symfony checks the ``Origin`` and
+``Referer`` headers of the incoming HTTP request. If either header matches the
+application's target origin (i.e. its domain), the token is considered valid.
 
-If either of these headers match the target origin of the application (its domain
-name), the CSRF token is considered valid. This relies on the app being able to
-know its own target origin. Don't miss configuring your reverse proxy if you're
-behind one. See :doc:`/deployment/proxies`.
+This mechanism relies on the application being able to determine its own origin.
+If you're behind a reverse proxy, make sure it's properly configured. See
+:doc:`/deployment/proxies`.
 
 Using a Default Token ID
 ~~~~~~~~~~~~~~~~~~~~~~~~
 
-While stateful CSRF tokens are better seggregated per form or action, stateless
-ones don't need many token identifiers. In the previous example, ``authenticate``
-and ``logout`` are listed because they're the default identifiers used by the
-Symfony Security component. The ``submit`` identifier is then listed so that
-form types defined by the application can use it by default. The following
-configuration - which applies only to form types declared using autofiguration
-(the default way to declare *your* services) - will make your form types use the
-``submit`` token identifier by default:
+Stateful CSRF tokens are typically scoped per form or action, while stateless
+tokens don't require many identifiers.
+
+In the example above, the ``authenticate`` and ``logout`` identifiers are listed
+because they are used by default in the Symfony Security component. The ``submit``
+identifier is included so that form types defined by the application can also use
+CSRF protection by default.
+
+The following configuration applies only to form types registered via
+:ref:`autoconfiguration <services-autoconfigure>` (which is the default for your
+own services), and it sets ``submit`` as their default token identifier:
 
 .. configuration-block::
 
@@ -433,41 +438,40 @@ option will use the stateless CSRF protection.
 Generating CSRF Token Using Javascript
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
-In addition to the ``Origin`` and ``Referer`` headers, stateless CSRF protection
-also checks a cookie and a header (named ``csrf-token`` by default, see the
-:ref:`CSRF configuration reference <reference-framework-csrf-protection>`).
+In addition to the ``Origin`` and ``Referer`` HTTP headers, stateless CSRF protection
+can also validate tokens using a cookie and a header (named ``csrf-token`` by
+default; see the :ref:`CSRF configuration reference <reference-framework-csrf-protection>`).
 
-These extra checks are part of defense-in-depth strategies provided by the
-stateless CSRF protection. They are optional and they require
-`some JavaScript`_ to be activated. This JavaScript is responsible for generating
-a crypto-safe random token when a form is submitted, then putting the token in
-the hidden CSRF field of the form and submitting it also as a cookie and header.
-On the server-side, the CSRF token is validated by checking the cookie and header
-values. This "double-submit" protection relies on the same-origin policy
-implemented by browsers and is strengthened by regenerating the token at every
-form submission - which prevents cookie fixation issues - and by using
-``samesite=strict`` and ``__Host-`` cookies, which make them domain-bound and
-HTTPS-only.
+These additional checks are part of the **defense-in-depth** strategy provided by
+stateless CSRF protection. They are optional and require `some JavaScript`_ to
+be enabled. This JavaScript generates a cryptographically secure random token
+when a form is submitted. It then inserts the token into the form's hidden CSRF
+field and sends it in both a cookie and a request header.
 
-Note that the default snippet of JavaScript provided by Symfony requires that
-the hidden CSRF form field is either named ``_csrf_token``, or that it has the
-``data-controller="csrf-protection"`` attribute. You can of course take
-inspiration from this snippet to write your own, provided you follow the same
-protocol.
+On the server side, CSRF token validation compares the values in the cookie and
+the header. This "double-submit" protection relies on the browser's same-origin
+policy and is further hardened by:
 
-As a last measure, a behavioral check is added on the server-side to ensure that
-the validation method cannot be downgraded: if and only if a session is already
-available, successful "double-submit" is remembered and is then required for
-subsequent requests. This prevents attackers from exploiting potentially reduced
-validation checks once cookie and/or header validation has been confirmed as
-effective (they're optional by default as explained above).
+* generating a new token for each submission (to prevent cookie fixation);
+* using ``samesite=strict`` and ``__Host-`` cookie attributes (to enforce HTTPS
+  and limit the cookie to the current domain).
+
+By default, the Symfony JavaScript snippet expects the hidden CSRF field to be
+named ``_csrf_token`` or to include the ``data-controller="csrf-protection"``
+attribute. You can adapt this logic to your needs as long as the same protocol
+is followed.
+
+To prevent validation from being downgraded, an extra behavioral check is performed:
+if (and only if) a session already exists, successful "double-submit" is remembered
+and becomes required for future requests. This ensures that once the optional cookie/header
+validation has been proven effective, it remains enforced for that session.
 
 .. note::
 
-    Enforcing successful "double-submit" for every requests is not recommended as
-    as it could lead to a broken user experience. The opportunistic approach
-    described above is preferred because it allows the application to gracefully
-    degrade to ``Origin`` / ``Referer`` checks when JavaScript is not available.
+    Enforcing "double-submit" validation on all requests is not recommended,
+    as it may lead to a broken user experience. The opportunistic approach
+    described above is preferred, allowing the application to gracefully
+    fall back to ``Origin`` / ``Referer`` checks when JavaScript is unavailable.
 
 .. _`Cross-site request forgery`: https://en.wikipedia.org/wiki/Cross-site_request_forgery
 .. _`BREACH`: https://en.wikipedia.org/wiki/BREACH
