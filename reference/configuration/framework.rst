@@ -805,8 +805,6 @@ csrf_protection
 
     For more information about CSRF protection, see :doc:`/security/csrf`.
 
-.. _reference-csrf_protection-enabled:
-
 enabled
 .......
 
@@ -853,6 +851,42 @@ can also :ref:`disable CSRF protection on individual forms <form-csrf-customizat
 If you're using forms, but want to avoid starting your session (e.g. using
 forms in an API-only website), ``csrf_protection`` will need to be set to
 ``false``.
+
+stateless_token_ids
+...................
+
+**type**: ``array`` **default**: ``[]``
+
+The list of CSRF token ids that will use stateless CSRF protection.
+
+.. versionadded:: 7.2
+
+    This option was added in Symfony 7.2 to aid in configuring stateless CSRF protection.
+
+check_header
+............
+
+**type**: ``integer`` or ``bool`` **default**: ``false``
+
+Whether to check the CSRF token in a header in addition to a cookie when using stateless protection.
+Can be set to ``2`` (the value of the ``CHECK_ONLY_HEADER`` constant on the
+:class:`Symfony\\Component\\Security\\Csrf\\SameOriginCsrfTokenManager` class) to check only the header
+and not the cookie.
+
+.. versionadded:: 7.2
+
+    This option was added in Symfony 7.2 to aid in configuring stateless CSRF protection.
+
+cookie_name
+...........
+
+**type**: ``string`` **default**: ``csrf-token``
+
+The name of the cookie (and header) to use for the double-submit when using stateless protection.
+
+.. versionadded:: 7.2
+
+    This option was added in Symfony 7.2 to aid in configuring stateless CSRF protection.
 
 .. _config-framework-default_locale:
 
@@ -1164,14 +1198,31 @@ settings is configured.
 
     For more details, see :doc:`/forms`.
 
-.. _reference-form-field-name:
+csrf_protection
+...............
 
 field_name
-..........
+''''''''''
 
 **type**: ``string`` **default**: ``_token``
 
 This is the field name that you should give to the CSRF token field of your forms.
+
+field_attr
+''''''''''
+
+**type**: ``array`` **default**: ``['data-controller' => 'csrf-protection']``
+
+This is the HTML attributes that should be added to the CSRF token field of your forms.
+
+token_id
+''''''''
+
+**type**: ``string`` **default**: ``null``
+
+This is the CSRF token id that should be used for validating the CSRF tokens of your forms.
+Note that this setting applies only to autoconfigured form types, which usually means only
+to your own form types and not to form types registered by third-party bundles.
 
 fragments
 ~~~~~~~~~
