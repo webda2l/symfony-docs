@@ -281,16 +281,16 @@ Suppose you want a CSRF token per item, so in the template you have something li
         <button type="submit">Delete item</button>
     </form>
 
-In addition :class:`Symfony\\Component\\Security\\Http\\Attribute\\IsCsrfTokenValid`
-attribute can be applied to a controller class.
-This will cause the CSRF token validation to be executed for all routes defined within the controller::
+This attribute can also be applied to a controller class. When used this way,
+the CSRF token validation will be applied to **all actions** defined in that
+controller::
 
     use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
     use Symfony\Component\Security\Http\Attribute\IsCsrfTokenValid;
     // ...
 
-    #[IsCsrfTokenValid('controller')]
-    final class FooController extends AbstractController
+    #[IsCsrfTokenValid('the token ID')]
+    final class SomeController extends AbstractController
     {
         // ...
     }
