@@ -1306,11 +1306,11 @@ In Twig templates, metadata is available via the ``workflow_metadata()`` functio
         </ul>
     </p>
 
-Adding Custom Definition Validators
-~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+Validating Workflow Definitions
+-------------------------------
 
-Sometimes, you may want to add custom logics to validate your workflow definition.
-To do this, you need to implement the
+Symfony allows you to validate workflow definitions using your own custom logic.
+To do so, create a class that implements the
 :class:`Symfony\\Component\\Workflow\\Validator\\DefinitionValidatorInterface`::
 
     namespace App\Workflow\Validator;
@@ -1326,11 +1326,12 @@ To do this, you need to implement the
             if (!$definition->getMetadataStore()->getMetadata('title')) {
                 throw new InvalidDefinitionException(sprintf('The workflow metadata title is missing in Workflow "%s".', $name));
             }
+
+            // ...
         }
     }
 
-Once your definition validator is implemented, you can configure your workflow to use
-it:
+After implementing your validator, configure your workflow to use it:
 
 .. configuration-block::
 
@@ -1340,7 +1341,7 @@ it:
         framework:
             workflows:
                 blog_publishing:
-                    # ... previous configuration
+                    # ...
 
                     definition_validators:
                         - App\Workflow\Validator\BlogPublishingValidator
@@ -1357,7 +1358,7 @@ it:
         >
             <framework:config>
                 <framework:workflow name="blog_publishing">
-                    <!-- ... previous configuration -->
+                    <!-- ... -->
                     <framework:definition-validators>App\Workflow\Validator\BlogPublishingValidator</framework:definition-validators>
                 </framework:workflow>
             </framework:config>
@@ -1370,7 +1371,7 @@ it:
 
         return static function (FrameworkConfig $framework): void {
             $blogPublishing = $framework->workflows()->workflows('blog_publishing');
-            // ... previous configuration
+            // ...
 
             $blogPublishing->definitionValidators([
                 App\Workflow\Validator\BlogPublishingValidator::class
@@ -1379,11 +1380,12 @@ it:
             // ...
         };
 
-The ``BlogPublishingValidator`` definition validator will be executed during the container compilation.
+The ``BlogPublishingValidator`` will be executed during container compilation
+to validate the workflow definition.
 
 .. versionadded:: 7.3
 
-    Support for defining custom workflow definition validators was introduced in Symfony 7.3.
+    Support for workflow definition validators was introduced in Symfony 7.3.
 
 Learn more
 ----------
