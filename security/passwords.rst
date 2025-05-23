@@ -500,13 +500,14 @@ the user provider::
     namespace App\Security;
 
     // ...
+    use Symfony\Component\Security\Core\User\PasswordAuthenticatedUserInterface;
     use Symfony\Component\Security\Core\User\PasswordUpgraderInterface;
 
     class UserProvider implements UserProviderInterface, PasswordUpgraderInterface
     {
         // ...
 
-        public function upgradePassword(UserInterface $user, string $newHashedPassword): void
+        public function upgradePassword(PasswordAuthenticatedUserInterface $user, string $newHashedPassword): void
         {
             // set the new hashed password on the User object
             $user->setPassword($newHashedPassword);
