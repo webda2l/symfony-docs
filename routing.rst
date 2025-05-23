@@ -18,6 +18,8 @@ your favorite.
 :ref:`Symfony recommends attributes <best-practice-controller-attributes>`
 because it's convenient to put the route and controller in the same place.
 
+.. _routing-route-attributes:
+
 Creating Routes as Attributes
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
