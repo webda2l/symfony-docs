@@ -40,13 +40,19 @@ or extend :class:`Symfony\\Component\\Security\\Core\\Authorization\\Voter\\Vote
 which makes creating a voter even easier::
 
     use Symfony\Component\Security\Core\Authentication\Token\TokenInterface;
+    use Symfony\Component\Security\Core\Authorization\Voter\Vote;
     use Symfony\Component\Security\Core\Authorization\Voter\VoterInterface;
 
     abstract class Voter implements VoterInterface
     {
         abstract protected function supports(string $attribute, mixed $subject): bool;
-        abstract protected function voteOnAttribute(string $attribute, mixed $subject, TokenInterface $token): bool;
+        abstract protected function voteOnAttribute(string $attribute, mixed $subject, TokenInterface $token, ?Vote $vote = null): bool;
     }
+
+.. versionadded:: 7.3
+    
+    The `$vote` parameter in the :method:`Symfony\\Component\\Security\\Core\\Authorization\\Voter\\VoterInterface::voteOnAttribute` method
+    was introduced in Symfony 7.3.
 
 .. _how-to-use-the-voter-in-a-controller:
 
@@ -140,6 +146,7 @@ would look like this::
     use App\Entity\Post;
     use App\Entity\User;
     use Symfony\Component\Security\Core\Authentication\Token\TokenInterface;
+    use Symfony\Component\Security\Core\Authorization\Voter\Vote;
     use Symfony\Component\Security\Core\Authorization\Voter\Voter;
 
     class PostVoter extends Voter
@@ -163,12 +170,14 @@ would look like this::
             return true;
         }
 
-        protected function voteOnAttribute(string $attribute, mixed $subject, TokenInterface $token): bool
+        protected function voteOnAttribute(string $attribute, mixed $subject, TokenInterface $token, ?Vote $vote = null): bool
         {
             $user = $token->getUser();
+            $vote ??= new Vote();
 
             if (!$user instanceof User) {
                 // the user must be logged in; if not, deny access
+                $vote->reasons[] = 'The user is not logged in.';
                 return false;
             }
 
@@ -197,7 +206,13 @@ would look like this::
         private function canEdit(Post $post, User $user): bool
         {
             // this assumes that the Post object has a `getOwner()` method
-            return $user === $post->getOwner();
+            if ($user === $post->getOwner()) {
+                return true;
+            }
+
+            $vote->reasons[] = 'You are not the owner of the Post.';
+
+            return false;
         }
     }
 
@@ -215,11 +230,12 @@ To recap, here's what's expected from the two abstract methods:
     return ``true`` if the attribute is ``view`` or ``edit`` and if the object is
     a ``Post`` instance.
 
-``voteOnAttribute(string $attribute, mixed $subject, TokenInterface $token)``
+``voteOnAttribute(string $attribute, mixed $subject, TokenInterface $token, ?Vote $vote = null)``
     If you return ``true`` from ``supports()``, then this method is called. Your
     job is to return ``true`` to allow access and ``false`` to deny access.
-    The ``$token`` can be used to find the current user object (if any). In this
-    example, all of the complex business logic is included to determine access.
+    The ``$token`` can be used to find the current user object (if any). The ``$vote``
+    argument can be used to add a reason to the vote. In this example, all of the
+    complex business logic is included to determine access.
 
 .. _declaring-the-voter-as-a-service:
 
@@ -256,7 +272,7 @@ with ``ROLE_SUPER_ADMIN``::
         ) {
         }
 
-        protected function voteOnAttribute($attribute, mixed $subject, TokenInterface $token): bool
+        protected function voteOnAttribute($attribute, mixed $subject, TokenInterface $token, ?Vote $vote = null): bool
         {
             // ...
 
