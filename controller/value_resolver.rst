@@ -382,7 +382,7 @@ but you can set it yourself to change its ``priority`` or ``name`` attributes.
         use Symfony\Component\DependencyInjection\Attribute\AsTaggedItem;
         use Symfony\Component\HttpKernel\Controller\ValueResolverInterface;
 
-         #[AsTaggedItem(name: 'booking_id', priority: 150)]
+         #[AsTaggedItem(index: 'booking_id', priority: 150)]
         class BookingIdValueResolver implements ValueResolverInterface
         {
             // ...
