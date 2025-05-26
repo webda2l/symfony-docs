@@ -192,11 +192,14 @@ directive to pass requests for PHP files to PHP FPM:
 
 .. note::
 
-    If you are doing some quick tests with Apache, you can also run
-    ``composer require symfony/apache-pack``. This package creates an ``.htaccess``
-    file in the ``public/`` directory with the necessary rewrite rules needed to serve
-    the Symfony application. However, in production, it's recommended to move these
-    rules to the main Apache configuration file (as shown above) to improve performance.
+    If you're running some quick tests with Apache, you can run
+    ``composer require symfony/apache-pack`` to create an ``.htaccess`` file in
+    the ``public/`` directory with the rewrite rules needed to serve the Symfony
+    application. Make sure Apache's ``AllowOverride`` setting is set to ``All``
+    for that directory; otherwise, the ``.htaccess`` file will be ignored.
+
+    In production, however, it's recommended to move these rules to the main
+    Apache configuration file (as shown above) to improve performance.
 
 Caddy
 -----

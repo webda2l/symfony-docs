@@ -149,7 +149,7 @@ Defining Event Listeners with PHP Attributes
 
 An alternative way to define an event listener is to use the
 :class:`Symfony\\Component\\EventDispatcher\\Attribute\\AsEventListener`
-PHP attribute. This allows to configure the listener inside its class, without
+PHP attribute. This allows you to configure the listener inside its class, without
 having to add any configuration in external files::
 
     namespace App\EventListener;
