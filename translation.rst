@@ -677,8 +677,7 @@ Translations of Doctrine Entities
 
 Unlike the contents of templates, it's not practical to translate the contents
 stored in Doctrine Entities using translation catalogs. Instead, use the
-Doctrine `Translatable Extension`_ or the `Translatable Behavior`_. For more
-information, read the documentation of those libraries.
+Doctrine `Translatable Extension`_.
 
 Custom Translation Resources
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~
@@ -1677,7 +1676,6 @@ Learn more
 .. _`ISO 3166-1 alpha-2`: https://en.wikipedia.org/wiki/ISO_3166-1#Current_codes
 .. _`ISO 639-1`: https://en.wikipedia.org/wiki/List_of_ISO_639-1_codes
 .. _`Translatable Extension`: https://github.com/doctrine-extensions/DoctrineExtensions/blob/main/doc/translatable.md
-.. _`Translatable Behavior`: https://github.com/KnpLabs/DoctrineBehaviors
 .. _`Custom Language Name setting`: https://docs.lokalise.com/en/articles/1400492-uploading-files#custom-language-codes
 .. _`ICU resource bundle`: https://github.com/unicode-org/icu-docs/blob/main/design/bnf_rb.txt
 .. _`Portable object format`: https://www.gnu.org/software/gettext/manual/html_node/PO-Files.html
