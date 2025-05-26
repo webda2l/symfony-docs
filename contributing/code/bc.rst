@@ -176,6 +176,13 @@ covered by our backward compatibility promise:
 | Use a public, protected or private method     | Yes                         |
 +-----------------------------------------------+-----------------------------+
 
+Using our Translations
+~~~~~~~~~~~~~~~~~~~~~~
+
+All translations provided by Symfony for security and validation errors are
+intended for internal use only. They may be changed or removed at any time.
+Symfony's Backward Compatibility Promise does not apply to internal translations.
+
 Working on Symfony Code
 -----------------------
 
