@@ -1342,6 +1342,23 @@ have been renamed. Let's say you have a route called ``product_show``:
 
 .. configuration-block::
 
+    .. code-block:: php-attributes
+
+        // src/Controller/ProductController.php
+        namespace App\Controller;
+
+        use Symfony\Component\HttpFoundation\Response;
+        use Symfony\Component\Routing\Attribute\Route;
+
+        class ProductController
+        {
+            #[Route('/product/{id}', name: 'product_show')]
+            public function show(): Response
+            {
+                // ...
+            }
+        }
+
     .. code-block:: yaml
 
         # config/routes.yaml
@@ -1377,6 +1394,25 @@ that acts exactly the same as ``product_show``.
 Instead of duplicating the original route, you can create an alias for it.
 
 .. configuration-block::
+
+    .. code-block:: php-attributes
+
+        // src/Controller/ProductController.php
+        namespace App\Controller;
+
+        use Symfony\Component\HttpFoundation\Response;
+        use Symfony\Component\Routing\Attribute\Route;
+
+        class ProductController
+        {
+            // "alias" named argument indicates the name of the alias you want to create.
+            // The alias will point to the actual route "product_show"
+            #[Route('/product/{id}', name: 'product_show', alias: ['product_details'])]
+            public function show(): Response
+            {
+                // ...
+            }
+        }
 
     .. code-block:: yaml
 
@@ -1418,6 +1454,15 @@ Instead of duplicating the original route, you can create an alias for it.
 In this example, both ``product_show`` and ``product_details`` routes can
 be used in the application and will produce the same result.
 
+.. note::
+
+    Using non-attributes formats (YAML, XML and PHP) is the only way
+    to define an alias pointing to a route that you don't own.
+
+    So that you can use your own route name for URL generation,
+    while actually using a route defined by a third-party bundle as the target of that URL generation,
+    as the 2 definitions are not required to be in the same config file (or even in the same format).
+
 .. _routing-alias-deprecation:
 
 Deprecating Route Aliases
@@ -1437,6 +1482,42 @@ The ``product_show`` become the alias, and will now point to the ``product_detai
 This way, the ``product_show`` alias could be deprecated.
 
 .. configuration-block::
+
+    .. code-block:: php-attributes
+
+        // src/Controller/ProductController.php
+        namespace App\Controller;
+
+        use Symfony\Component\HttpFoundation\Response;
+        use Symfony\Component\Routing\Attribute\Route;
+
+        class ProductController
+        {
+            // this outputs the following generic deprecation message:
+            // Since acme/package 1.2: The "product_show" route alias is deprecated. You should stop using it, as it will be removed in the future.
+            #[Route('/product/{id}',
+                name: 'product_details',
+                alias: new DeprecatedAlias(
+                    aliasName: 'product_show',
+                    package: 'acme/package',
+                    version: '1.2',
+                ),
+            )]
+            // Or, you can also define a custom deprecation message (%alias_id% placeholder is available)
+            #[Route('/product/{id}',
+                name: 'product_details',
+                alias: new DeprecatedAlias(
+                    aliasName: 'product_show',
+                    package: 'acme/package',
+                    version: '1.2',
+                    message: 'The "%alias_id%" route alias is deprecated. Please use "product_details" instead.',
+                ),
+            )]
+            public function show(): Response
+            {
+                // ...
+            }
+        }
 
     .. code-block:: yaml
 
