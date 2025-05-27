@@ -1645,7 +1645,7 @@ The transport has a number of options:
     Exchange flags
 
 ``exchange[name]``
-    Name of the exchange, an empty string can be used to use the default exchange
+    Name of the exchange. Use an empty string to use the default exchange.
 
 ``exchange[type]`` (default: ``fanout``)
     Type of exchange
