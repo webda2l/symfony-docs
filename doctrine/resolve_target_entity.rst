@@ -1,44 +1,45 @@
 Referencing Entities with Abstract Classes and Interfaces
 =========================================================
 
-In applications where functionality is segregated with minimal concrete dependencies
-between the various layers, such as monoliths which are split into multiple modules,
-it might be hard to prevent hard dependencies on entities between modules.
+In applications where functionality is organized in layers or modules with
+minimal concrete dependencies, such as monoliths split into multiple modules,
+it can be challenging to avoid tight coupling between entities.
 
-Doctrine 2.2 includes a new utility called the ``ResolveTargetEntityListener``,
-that functions by intercepting certain calls inside Doctrine and rewriting
-``targetEntity`` parameters in your metadata mapping at runtime. It means that
-you are able to use an interface or abstract class in your mappings and expect
-correct mapping to a concrete entity at runtime.
+Doctrine provides a utility called the ``ResolveTargetEntityListener`` to solve
+this issue. It works by intercepting certain calls within Doctrine and rewriting
+``targetEntity`` parameters in your metadata mapping at runtime. This allows you
+to reference an interface or abstract class in your mappings and have it resolved
+to a concrete entity at runtime.
 
-This functionality allows you to define relationships between different entities
-without making them hard dependencies.
+This makes it possible to define relationships between entities without
+creating hard dependencies. This feature also works with the ``EntityValueResolver``
+:ref:`as explained in the main Doctrine article <doctrine-entity-value-resolver-resolve-target-entities>`.
 
-.. tip::
+.. versionadded:: 7.3
 
-    Starting with Symfony 7.3, this functionality also works with the ``EntityValueResolver``.
-    See :ref:`doctrine-entity-value-resolver-resolve-target-entities` for more details.
+    Support for target entity resolution in the ``EntityValueResolver`` was
+    introduced Symfony 7.3
 
 Background
 ----------
 
-Suppose you have an application which provides two modules; an Invoice module which
-provides invoicing functionality, and a Customer module that contains customer management
-tools. You want to keep dependencies between these modules separated, because they should
-not be aware of the other module's implementation details.
+Suppose you have an application with two modules: an Invoice module that
+provides invoicing functionality, and a Customer module that handles customer
+management. You want to keep these modules decoupled, so that neither is aware
+of the other's implementation details.
 
-In this case, you have an ``Invoice`` entity with a relationship to the interface
-``InvoiceSubjectInterface``. This is not recognized as a valid entity by Doctrine.
-The goal is to get the ``ResolveTargetEntityListener`` to replace any mention of the interface
-with a real object that implements that interface.
+In this case, your ``Invoice`` entity has a relationship to the interface
+``InvoiceSubjectInterface``. Since interfaces are not valid Doctrine entities,
+the goal is to use the ``ResolveTargetEntityListener`` to replace all
+references to this interface with a concrete class that implements it.
 
 Set up
 ------
 
-This article uses the following two basic entities (which are incomplete for
-brevity) to explain how to set up and use the ``ResolveTargetEntityListener``.
+This article uses two basic (incomplete) entities to demonstrate how to set up
+and use the ``ResolveTargetEntityListener``.
 
-A Customer entity::
+A ``Customer`` entity::
 
     // src/Entity/Customer.php
     namespace App\Entity;
@@ -55,7 +56,7 @@ A Customer entity::
         // are already implemented in the BaseCustomer
     }
 
-An Invoice entity::
+An ``Invoice`` entity::
 
     // src/Entity/Invoice.php
     namespace App\Entity;
@@ -63,9 +64,6 @@ An Invoice entity::
     use App\Model\InvoiceSubjectInterface;
     use Doctrine\ORM\Mapping as ORM;
 
-    /**
-     * Represents an Invoice.
-     */
     #[ORM\Entity]
     #[ORM\Table(name: 'invoice')]
     class Invoice
@@ -74,7 +72,7 @@ An Invoice entity::
         protected InvoiceSubjectInterface $subject;
     }
 
-An InvoiceSubjectInterface::
+The interface representing the subject used in the invoice::
 
     // src/Model/InvoiceSubjectInterface.php
     namespace App\Model;
@@ -94,8 +92,8 @@ An InvoiceSubjectInterface::
         public function getName(): string;
     }
 
-Next, you need to configure the ``resolve_target_entities`` option, which tells the DoctrineBundle
-about the replacement:
+Now configure the ``resolve_target_entities`` option to tell Doctrine
+how to replace the interface with the concrete class:
 
 .. configuration-block::
 
@@ -145,7 +143,6 @@ about the replacement:
 Final Thoughts
 --------------
 
-With the ``ResolveTargetEntityListener``, you are able to decouple your
-modules, keeping them usable by themselves, but still being able to
-define relationships between different objects. By using this method,
-your modules will end up being easier to maintain independently.
+Using ``ResolveTargetEntityListener`` allows you to decouple your modules
+while still defining relationships between their entities. This makes your
+codebase more modular and easier to maintain over time.

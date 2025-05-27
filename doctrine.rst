@@ -789,22 +789,26 @@ variable. Let's say you want the first or the last comment of a product dependin
 Fetch via Interfaces
 ~~~~~~~~~~~~~~~~~~~~
 
-Suppose your ``Product`` object implements an interface called ``ProductInterface``.
-If you want to decouple your controllers from your entity implementations, you can instead reference entities via an interface.
-To do this, first you need to configure the :doc:`resolve_target_entities option </doctrine/resolve_target_entity>`.
-        
-Your controller can then reference the Product entity by its interface instead::
+Suppose your ``Product`` class implements an interface called ``ProductInterface``.
+If you want to decouple your controllers from the concrete entity implementation,
+you can reference the entity by its interface instead.
 
-        public function show(
-            #[MapEntity]
-            ProductInterface $product
-        ): Response {
-            // ...
-        }
+To enable this, first configure the
+:doc:`resolve_target_entities option </doctrine/resolve_target_entity>`.
+Then, your controller can type-hint the interface, and the entity will be
+resolved automatically::
+
+    public function show(
+        #[MapEntity]
+        ProductInterface $product
+    ): Response {
+        // ...
+    }
         
 .. versionadded:: 7.3
 
-    Support for ``resolve_target_entites`` in the ``EntityValueResolver`` was introduced in Symfony 7.3.
+    Support for target entity resolution in the ``EntityValueResolver`` was
+    introduced Symfony 7.3
 
 MapEntity Options
 ~~~~~~~~~~~~~~~~~
