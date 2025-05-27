@@ -411,15 +411,15 @@ and retrieve the user info:
             ;
         };
 
-To enable the `OpenID Connect Discovery`_, the ``OidcUserInfoTokenHandler``
+To enable `OpenID Connect Discovery`_, the ``OidcUserInfoTokenHandler``
 requires the ``symfony/cache`` package to store the OIDC configuration in
-cache. If you haven't installed it yet, run this command:
+the cache. If you haven't installed it yet, run the following command:
 
 .. code-block:: terminal
 
     $ composer require symfony/cache
 
-Then, configure the ``base_uri`` and ``discovery`` keys:
+Next, configure the ``base_uri`` and ``discovery`` options:
 
 .. configuration-block::
 
@@ -476,6 +476,10 @@ Then, configure the ``base_uri`` and ``discovery`` keys:
                                 ->cache('cache.app')
             ;
         };
+
+.. versionadded:: 7.3
+
+    Support for OpenID Connect Discovery was introduced in Symfony 7.3.
 
 Following the `OpenID Connect Specification`_, the ``sub`` claim is used as user
 identifier by default. To use another claim, specify it on the configuration:
@@ -691,16 +695,16 @@ it and retrieve the user info from it:
     The support of multiple algorithms to sign the JWS was introduced in Symfony 7.1.
     In previous versions, only the ``ES256`` algorithm was supported.
 
-To enable the `OpenID Connect Discovery`_, the ``OidcTokenHandler``
-requires the ``symfony/cache`` package to store the OIDC configuration in
-cache. If you haven't installed it yet, run this command:
+To enable `OpenID Connect Discovery`_, the ``OidcTokenHandler`` requires the
+``symfony/cache`` package to store the OIDC configuration in the cache. If you
+haven't installed it yet, run the following command:
 
 .. code-block:: terminal
 
     $ composer require symfony/cache
 
-Then, you can remove the ``keyset`` configuration key (it will be imported from
-the OpenID Connect Discovery), and configure the ``discovery`` key:
+Then, you can remove the ``keyset`` configuration option (it will be imported
+from the OpenID Connect Discovery), and configure the ``discovery`` option:
 
 .. configuration-block::
 
