@@ -137,33 +137,6 @@ Further in this article, you can find a
                             time_cost: 3 # Lowest possible value for argon
                             memory_cost: 10 # Lowest possible value for argon
 
-        .. code-block:: xml
-
-            <!-- config/packages/security.xml -->
-            <?xml version="1.0" encoding="UTF-8"?>
-            <srv:container xmlns="http://symfony.com/schema/dic/security"
-                xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
-                xmlns:srv="http://symfony.com/schema/dic/services"
-                xsi:schemaLocation="http://symfony.com/schema/dic/services
-                    https://symfony.com/schema/dic/services/services-1.0.xsd">
-
-                <when env="test">
-                    <config>
-                        <!-- class: Use your user class name here -->
-                        <!-- cost: Lowest possible value for bcrypt -->
-                        <!-- time_cost: Lowest possible value for argon -->
-                        <!-- memory_cost: Lowest possible value for argon -->
-                        <security:password-hasher
-                            class="App\Entity\User"
-                            algorithm="auto"
-                            cost="4"
-                            time_cost="3"
-                            memory_cost="10"
-                        />
-                    </config>
-                </when>
-            </srv:container>
-
         .. code-block:: php
 
             // config/packages/security.php
