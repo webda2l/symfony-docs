@@ -1405,8 +1405,8 @@ Instead of duplicating the original route, you can create an alias for it.
 
         class ProductController
         {
-            // "alias" named argument indicates the name of the alias you want to create.
-            // The alias will point to the actual route "product_show"
+            // the "alias" argument assigns an alternate name to this route;
+            // the alias will point to the actual route "product_show"
             #[Route('/product/{id}', name: 'product_show', alias: ['product_details'])]
             public function show(): Response
             {
@@ -1451,17 +1451,21 @@ Instead of duplicating the original route, you can create an alias for it.
             $routes->alias('product_details', 'product_show');
         };
 
+.. versionadded:: 7.3
+
+    Support for route aliases in PHP attributes was introduced in Symfony 7.3.
+
 In this example, both ``product_show`` and ``product_details`` routes can
 be used in the application and will produce the same result.
 
 .. note::
 
-    Using non-attributes formats (YAML, XML and PHP) is the only way
-    to define an alias pointing to a route that you don't own.
+    YAML, XML, and PHP configuration formats are the only ways to define an alias
+    for a route that you do not own. You can't do this when using PHP attributes.
 
-    So that you can use your own route name for URL generation,
-    while actually using a route defined by a third-party bundle as the target of that URL generation,
-    as the 2 definitions are not required to be in the same config file (or even in the same format).
+    This allows you for example to use your own route name for URL generation,
+    while still targeting a route defined by a third-party bundle. The alias and
+    the original route do not need to be declared in the same file or format.
 
 .. _routing-alias-deprecation:
 
