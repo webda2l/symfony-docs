@@ -186,7 +186,7 @@ would look like this::
 
             return match($attribute) {
                 self::VIEW => $this->canView($post, $user),
-                self::EDIT => $this->canEdit($post, $user),
+                self::EDIT => $this->canEdit($post, $user, $vote),
                 default => throw new \LogicException('This code should not be reached!')
             };
         }
@@ -202,7 +202,7 @@ would look like this::
             return !$post->isPrivate();
         }
 
-        private function canEdit(Post $post, User $user): bool
+        private function canEdit(Post $post, User $user, ?Vote $vote): bool
         {
             // this assumes that the Post object has a `getAuthor()` method
             if ($user === $post->getAuthor()) {
