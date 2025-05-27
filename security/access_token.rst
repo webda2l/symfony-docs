@@ -615,8 +615,8 @@ If you haven't installed it yet, run this command:
 
     $ composer require web-token/jwt-library
 
-Symfony provides a generic ``OidcTokenHandler`` to decode your token, validate
-it and retrieve the user info from it:
+Symfony provides a generic ``OidcTokenHandler`` that decodes the token, validates
+it, and retrieves the user information from it. Optionally, the token can be encrypted (JWE):
 
 .. configuration-block::
 
@@ -637,6 +637,11 @@ it and retrieve the user info from it:
                                 audience: 'api-example'
                                 # Issuers (`iss` claim): required for validation purpose
                                 issuers: ['https://oidc.example.com']
+                                encryption:
+                                    enabled: true # Default to false
+                                    enforce: false # Default to false, requires an encrypted token when true
+                                    algorithms: ['ECDH-ES', 'A128GCM']
+                                    keyset: '{"keys": [...]}' # Encryption private keyset
 
     .. code-block:: xml
 
@@ -662,6 +667,10 @@ it and retrieve the user info from it:
                                 <algorithm>ES256</algorithm>
                                 <algorithm>RS256</algorithm>
                                 <issuer>https://oidc.example.com</issuer>
+                                <encryption enabled="true" enforce="true" keyset="{'keys': [...]}">
+                                    <algorithm>ECDH-ES</algorithm>
+                                    <algorithm>A128GCM</algorithm>
+                                </encryption>
                             </oidc>
                         </token-handler>
                     </access-token>
@@ -681,12 +690,20 @@ it and retrieve the user info from it:
                         ->oidc()
                             // Algorithm used to sign the JWS
                             ->algorithms(['ES256', 'RS256'])
-                            // A JSON-encoded JWK
+                            // A JSON-encoded JWKSet (public keys)
                             ->keyset('{"keys":[{"kty":"...","k":"..."}]}')
                             // Audience (`aud` claim): required for validation purpose
                             ->audience('api-example')
                             // Issuers (`iss` claim): required for validation purpose
                             ->issuers(['https://oidc.example.com'])
+                            ->encryption()
+                                ->enabled(true) //Default to false
+                                ->enforce(false) //Default to false, requires an encrypted token when true
+                                // Algorithm used to decrypt the JWE
+                                ->algorithms(['ECDH-ES', 'A128GCM'])
+                                // A JSON-encoded JWKSet (private keys)
+                                ->keyset('{"keys":[...]}')
+
             ;
         };
 
@@ -694,6 +711,10 @@ it and retrieve the user info from it:
 
     The support of multiple algorithms to sign the JWS was introduced in Symfony 7.1.
     In previous versions, only the ``ES256`` algorithm was supported.
+
+.. versionadded:: 7.3
+
+    Support for encryption algorithms to decrypt JWEs was introduced in Symfony 7.3.
 
 To enable `OpenID Connect Discovery`_, the ``OidcTokenHandler`` requires the
 ``symfony/cache`` package to store the OIDC configuration in the cache. If you
