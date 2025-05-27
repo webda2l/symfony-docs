@@ -331,11 +331,12 @@ Stateless CSRF Tokens
 
 .. versionadded:: 7.2
 
-    Stateless anti-CSRF protection was introduced in Symfony 7.2, and set as default.
+    Stateless anti-CSRF protection was introduced in Symfony 7.2.
 
-Traditionally CSRF tokens are stateful, which means they're stored in the session.
-But some token ids can be declared as stateless using the ``stateless_token_ids``
-option:
+Traditionally, CSRF tokens are stateful, meaning they're stored in the session.
+However, some token IDs can be declared as stateless using the
+``stateless_token_ids`` option. Stateless CSRF tokens are enabled by default
+in applications using :ref:`Symfony Flex <symfony-flex>`.
 
 .. configuration-block::
 
