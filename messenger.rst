@@ -2468,7 +2468,8 @@ Possible options to configure with tags are:
     Name of the method that will process the message.
 
 ``priority``
-    Priority of the handler when multiple handlers can process the same message; higher values will be processed first.
+    Defines the order in which the handler is executed when multiple handlers
+    can process the same message; those with higher priority run first.
 
 .. _handler-subscriber-options:
 
