@@ -209,13 +209,20 @@ requires a user and some sort of "credentials" (e.g. a password).
 Use the
 :class:`Symfony\\Component\\Security\\Http\\Authenticator\\Passport\\Badge\\UserBadge`
 to attach the user to the passport. The ``UserBadge`` requires a user
-identifier (e.g. the username or email), which is used to load the user
-using :ref:`the user provider <security-user-providers>`::
+identifier (e.g. the username or email)::
 
     use Symfony\Component\Security\Http\Authenticator\Passport\Badge\UserBadge;
 
     // ...
-    $passport = new Passport(new UserBadge($email), $credentials);
+    $passport = new Passport(new UserBadge($userIdentifier), $credentials);
+
+User Identifier
+~~~~~~~~~~~~~~~
+
+The user identifier is a unique string that identifies the user. It is used
+to load the user using :ref:`the user provider <security-user-providers>`.
+This identifier is often something like the user's email address or username,
+but it could be any unique value associated with the user.
 
 .. note::
 
@@ -254,6 +261,91 @@ using :ref:`the user provider <security-user-providers>`::
                 );
             }
         }
+
+It is a good practice to normalize the user identifier before using it.
+For example, this ensures that variations such as "john.doe", "John.Doe",
+or "JOHN.DOE" refer to the same user.
+Normalization can include converting the identifier to lowercase
+and trimming unnecessary spaces.
+You can optionally pass a user identifier normalizer as third argument to the
+``UserBadge``. This callable receives the ``$userIdentifier``
+and must return a normalized user identifier as a string.
+
+.. versionadded:: 7.3
+
+    The support of the user identifier normalizer was introduced in Symfony 7.3.
+
+For instance, the example below uses a normalizer that converts usernames to a normalized, ASCII-only, lowercase format,
+suitable for consistent comparison and storage.
+
+    // src/Security/NormalizedUserBadge.php
+    namespace App\Security;
+
+    use Symfony\Component\Security\Http\Authenticator\Passport\Badge\UserBadge;
+    use Symfony\Component\String\UnicodeString;
+    use function Symfony\Component\String\u;
+
+    final class NormalizedUserBadge extends UserBadge
+    {
+        public function __construct(string $identifier)
+        {
+            $callback = static fn (string $identifier) => u($identifier)->normalize(UnicodeString::NFKC)->ascii()->lower()->toString();
+
+            parent::__construct($identifier, null, $callback);
+        }
+    }
+
+    // src/Security/PasswordAuthenticator.php
+    namespace App\Security;
+
+    final class PasswordAuthenticator extends AbstractLoginFormAuthenticator
+    {
+        // Simplified for brievety
+        public function authenticate(Request $request): Passport
+        {
+            $username = (string) $request->request->get('username', '');
+            $password = (string) $request->request->get('password', '');
+
+            $request->getSession()
+                ->set(SecurityRequestAttributes::LAST_USERNAME, $username);
+
+            return new Passport(
+                new NormalizedUserBadge($username),
+                new PasswordCredentials($password),
+                [
+                    //All other useful badges
+                ]
+            );
+        }
+    }
+
+.. note::
+
+    For example, Google treats the following email addresses as equivalent:
+    ``john.doe@gmail.com``, ``j.hon.d.oe@gmail.com``, and ``johndoe@gmail.com``.
+    This is because Google applies normalization rules that remove dots
+    and convert the address to lowercase (though behavior varies across services).
+
+.. note::
+
+    In enterprise environments, a user may authenticate using different formats
+    of their identifier, such as:
+
+    - ``john.doe@acme.com``
+    - ``acme.com\jdoe``
+    - ``https://acme.com/+jdoe``
+    - ``acct:jdoe@acme.com``
+
+    Applying normalization (e.g., trimming, lowercasing, or format unification)
+    helps ensure consistent identity recognition across systems and prevents
+    duplicates caused by format variations.
+
+User Credential
+~~~~~~~~~~~~~~~
+
+The user credential is used to authenticate the user i.e. to verify
+the validity of the provided information (such as a password, an API token,
+or other custom credentials).
 
 The following credential classes are supported by default:
 
