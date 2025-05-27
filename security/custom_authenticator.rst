@@ -219,10 +219,10 @@ identifier (e.g. the username or email)::
 User Identifier
 ~~~~~~~~~~~~~~~
 
-The user identifier is a unique string that identifies the user. It is used
-to load the user using :ref:`the user provider <security-user-providers>`.
-This identifier is often something like the user's email address or username,
-but it could be any unique value associated with the user.
+The user identifier is a unique string that identifies the user. It is often
+something like their email address or username, but it can be any unique value
+associated with the user. It allows loading the user through the configured
+:ref:`user provider <security-user-providers>`.
 
 .. note::
 
@@ -262,21 +262,39 @@ but it could be any unique value associated with the user.
             }
         }
 
-It is a good practice to normalize the user identifier before using it.
-For example, this ensures that variations such as "john.doe", "John.Doe",
-or "JOHN.DOE" refer to the same user.
-Normalization can include converting the identifier to lowercase
-and trimming unnecessary spaces.
-You can optionally pass a user identifier normalizer as third argument to the
-``UserBadge``. This callable receives the ``$userIdentifier``
-and must return a normalized user identifier as a string.
+It's a good practice to normalize the user identifier before using it. This
+ensures that variations like "john.doe", "John.Doe", or "JOHN.DOE" are treated
+as the same user.
+
+Normalization typically involves converting the identifier to lowercase and
+trimming extra spaces. For example, Google considers the following email
+addresses equivalent: ``john.doe@gmail.com``, ``j.hon.d.oe@gmail.com``, and
+``johndoe@gmail.com``. This is due to normalization rules that remove dots and
+lowercase the address.
+
+In enterprise environments, users might authenticate using different identifier
+formats, such as:
+
+* ``john.doe@acme.com``
+* ``acme.com\jdoe``
+* ``https://acme.com/+jdoe``
+* ``acct:jdoe@acme.com``
+
+Applying normalization (e.g. lowercasing, trimming, or unifying formats) helps
+ensure consistent identity resolution and prevents duplication caused by
+format differences.
+
+In Symfony applications, you can optionally pass a user identifier normalizer as
+the third argument to the ``UserBadge``. This callable receives the ``$userIdentifier``
+and must return a normalized string.
 
 .. versionadded:: 7.3
 
-    The support of the user identifier normalizer was introduced in Symfony 7.3.
+    Support for user identifier normalizers was introduced in Symfony 7.3.
 
-For instance, the example below uses a normalizer that converts usernames to a normalized, ASCII-only, lowercase format,
-suitable for consistent comparison and storage.
+For instance, the example below uses a normalizer that converts usernames to
+a normalized, ASCII-only, lowercase format suitable for consistent comparison
+and storage::
 
     // src/Security/NormalizedUserBadge.php
     namespace App\Security;
@@ -319,33 +337,12 @@ suitable for consistent comparison and storage.
         }
     }
 
-.. note::
-
-    For example, Google treats the following email addresses as equivalent:
-    ``john.doe@gmail.com``, ``j.hon.d.oe@gmail.com``, and ``johndoe@gmail.com``.
-    This is because Google applies normalization rules that remove dots
-    and convert the address to lowercase (though behavior varies across services).
-
-.. note::
-
-    In enterprise environments, a user may authenticate using different formats
-    of their identifier, such as:
-
-    - ``john.doe@acme.com``
-    - ``acme.com\jdoe``
-    - ``https://acme.com/+jdoe``
-    - ``acct:jdoe@acme.com``
-
-    Applying normalization (e.g., trimming, lowercasing, or format unification)
-    helps ensure consistent identity recognition across systems and prevents
-    duplicates caused by format variations.
-
 User Credential
 ~~~~~~~~~~~~~~~
 
-The user credential is used to authenticate the user i.e. to verify
+The user credential is used to authenticate the user; that is, to verify
 the validity of the provided information (such as a password, an API token,
-or other custom credentials).
+or custom credentials).
 
 The following credential classes are supported by default:
 
