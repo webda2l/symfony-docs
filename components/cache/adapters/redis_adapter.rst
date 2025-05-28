@@ -222,7 +222,7 @@ Available Options
 
 .. versionadded:: 7.1
 
-    The option `sentinel_master` as an alias for `redis_sentinel` was introduced
+    The option ``sentinel_master`` as an alias for ``redis_sentinel`` was introduced
     in Symfony 7.1.
 
 .. note::
