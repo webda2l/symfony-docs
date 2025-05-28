@@ -2407,7 +2407,7 @@ Combine it with the ``collect`` option to enable/disable the profiler on demand:
 collect_serializer_data
 .......................
 
-**type**: ``boolean`` **default**: ``true``
+**type**: ``boolean`` **default**: ``false``
 
 When this option is ``true``, all normalizers and encoders are
 decorated by traceable implementations that collect profiling information about them.
