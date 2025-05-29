@@ -131,7 +131,7 @@ class exposes public methods to extract several types of information:
         $propertyInfo->getProperties($awesomeObject);
 
         // Good!
-        $propertyInfo->getProperties(get_class($awesomeObject));
+        $propertyInfo->getProperties($awesomeObject::class);
         $propertyInfo->getProperties('Example\Namespace\YourAwesomeClass');
         $propertyInfo->getProperties(YourAwesomeClass::class);
 
