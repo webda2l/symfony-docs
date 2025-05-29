@@ -298,7 +298,7 @@ You can make it convert to a ``DateTime`` instance by using the ``PARSE_DATETIME
 flag::
 
     $date = Yaml::parse('2016-05-27', Yaml::PARSE_DATETIME);
-    var_dump(get_class($date)); // DateTime
+    var_dump($date::class); // DateTime
 
 Dumping Multi-line Literal Blocks
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
