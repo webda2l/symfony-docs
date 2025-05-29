@@ -612,9 +612,9 @@ RedisStore
 ~~~~~~~~~~
 
 The RedisStore saves locks on a Redis server, it requires a Redis connection
-implementing the ``\Redis``, ``\RedisArray``, ``\RedisCluster``, ``\Relay\Relay`` or
-``\Predis`` classes. This store does not support blocking, and expects a TTL to
-avoid stalled locks::
+implementing the ``\Redis``, ``\RedisArray``, ``\RedisCluster``, ``\Relay\Relay``,
+``\Relay\Cluster`` or ``\Predis`` classes. This store does not support blocking,
+and expects a TTL to avoid stalled locks::
 
     use Symfony\Component\Lock\Store\RedisStore;
 
@@ -622,6 +622,10 @@ avoid stalled locks::
     $redis->connect('localhost');
 
     $store = new RedisStore($redis);
+
+.. versionadded:: 7.3
+
+    Support for ``Relay\Cluster`` was introduced in Symfony 7.3.
 
 .. _lock-store-semaphore:
 
