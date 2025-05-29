@@ -895,12 +895,12 @@ Modifying the Schedule at Runtime
 
 .. versionadded:: 6.4
 
-    Modifying the schedule at runtime and recalculating the heap was introduced in Symfony 6.4.
+    Support for modifying the schedule at runtime and recalculating the heap
+    was introduced in Symfony 6.4.
 
 When a recurring message is added to or removed from the schedule,
 the scheduler automatically restarts and recalculates the internal trigger heap.
-This allows dynamic control over scheduled tasks during runtime.
-code::
+This enables dynamic control of scheduled tasks at runtime::
 
     // src/Scheduler/DynamicScheduleProvider.php
     namespace App\Scheduler;
@@ -921,7 +921,7 @@ code::
 
         public function clearAndAddMessages(): void
         {
-            // Clear the current schedule (if any) and add new recurring messages
+            // clear the current schedule and add new recurring messages
             $this->schedule?->clear();
             $this->schedule?->add(
                 RecurringMessage::cron('@hourly', new DoActionMessage()),
