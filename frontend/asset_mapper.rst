@@ -1101,8 +1101,10 @@ loads the ``app.js`` file *and* the ``checkout.js`` file. It's important
 to *not* call ``parent()`` in the ``importmap`` block. Each page can only
 have *one* importmap, so ``importmap()`` must be called exactly once.
 
-If, for some reason, you want to execute *only* ``checkout.js``
+If you want to execute *only* ``checkout.js``
 and *not* ``app.js``, pass only ``checkout`` to ``importmap()``.
+In this case, still **both** files are added to ``<script type="importmap">``,
+but only ``checkout`` is executed (via ``<script type="module">import 'checkout';</script>``).
 
 Using a Content Security Policy (CSP)
 -------------------------------------
