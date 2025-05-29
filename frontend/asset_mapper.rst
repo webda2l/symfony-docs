@@ -1095,16 +1095,19 @@ both ``app`` and ``checkout``:
         {{ importmap(['app', 'checkout']) }}
     {% endblock %}
 
-By passing both ``app`` and ``checkout``, the ``importmap()`` function will
-output the ``importmap`` and also add a ``<script type="module">`` tag that
-loads the ``app.js`` file *and* the ``checkout.js`` file. It's important
-to *not* call ``parent()`` in the ``importmap`` block. Each page can only
-have *one* importmap, so ``importmap()`` must be called exactly once.
+The ``importmap()`` function always includes the full import map to ensure all
+module definitions are available on the page. It also adds a ``<script type="module">``
+tag to load the specific JavaScript entry files you pass to it (in the example
+above, the ``app.js`` file *and* the ``checkout.js`` file).
 
-If you want to execute *only* ``checkout.js``
-and *not* ``app.js``, pass only ``checkout`` to ``importmap()``.
-In this case, still **both** files are added to ``<script type="importmap">``,
-but only ``checkout`` is executed (via ``<script type="module">import 'checkout';</script>``).
+.. warning::
+
+    Do not call ``parent()`` inside the ``{% block importmap %}`` Twig block. Each
+    page can include only one import map, so ``importmap()`` must be called exactly once.
+
+If you want to execute *only* ``checkout.js`` (and not ``app.js``), call
+``{{ importmap('checkout') }}``. In this case, the full import map will still be
+included in the page, but only the ``checkout.js`` file will actually be loaded.
 
 Using a Content Security Policy (CSP)
 -------------------------------------
