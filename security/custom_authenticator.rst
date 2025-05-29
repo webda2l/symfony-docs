@@ -300,14 +300,13 @@ and storage::
     namespace App\Security;
 
     use Symfony\Component\Security\Http\Authenticator\Passport\Badge\UserBadge;
-    use Symfony\Component\String\UnicodeString;
     use function Symfony\Component\String\u;
 
     final class NormalizedUserBadge extends UserBadge
     {
         public function __construct(string $identifier)
         {
-            $callback = static fn (string $identifier) => u($identifier)->normalize(UnicodeString::NFKC)->ascii()->lower()->toString();
+            $callback = static fn (string $identifier): string => u($identifier)->normalize(UnicodeString::NFKC)->ascii()->lower()->toString();
 
             parent::__construct($identifier, null, $callback);
         }
@@ -318,7 +317,7 @@ and storage::
 
     final class PasswordAuthenticator extends AbstractLoginFormAuthenticator
     {
-        // Simplified for brievety
+        // simplified for brevity
         public function authenticate(Request $request): Passport
         {
             $username = (string) $request->request->get('username', '');
@@ -331,7 +330,7 @@ and storage::
                 new NormalizedUserBadge($username),
                 new PasswordCredentials($password),
                 [
-                    //All other useful badges
+                    // all other useful badges
                 ]
             );
         }
