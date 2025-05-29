@@ -520,8 +520,8 @@ You can also specify a context specific to normalization or denormalization:
             attributes:
                 createdAt:
                     contexts:
-                        - normalizationContext: { datetime_format: 'Y-m-d' }
-                          denormalizationContext: { datetime_format: !php/const \DateTime::RFC3339 }
+                        - normalization_context: { datetime_format: 'Y-m-d' }
+                          denormalization_context: { datetime_format: !php/const \DateTime::RFC3339 }
 
     .. code-block:: xml
 
@@ -1371,7 +1371,7 @@ normalizers (in order of priority):
 
             $propertyInfo = new PropertyInfoExtractor([], [new PhpDocExtractor(), new ReflectionExtractor()]);
             $normalizers = [new ObjectNormalizer(new ClassMetadataFactory(new AttributeLoader()), null, null, $propertyInfo), new ArrayDenormalizer()];
-            
+
             $this->serializer = new Serializer($normalizers, [new JsonEncoder()]);
 
 :class:`Symfony\\Component\\Serializer\\Normalizer\\ObjectNormalizer`
