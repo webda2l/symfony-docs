@@ -312,6 +312,8 @@ and storage::
         }
     }
 
+::
+
     // src/Security/PasswordAuthenticator.php
     namespace App\Security;
 
