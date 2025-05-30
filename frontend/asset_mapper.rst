@@ -768,6 +768,7 @@ and which file extensions should be compressed:
             # ...
 
             precompress:
+                # possible values: 'brotli', 'zstandard', 'gzip'
                 format: 'zstandard'
                 # if you don't define the following option, AssetMapper will compress all
                 # the extensions considered safe (css, js, json, svg, xml, ttf, otf, wasm, etc.)
