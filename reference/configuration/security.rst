@@ -77,7 +77,7 @@ expose_security_errors
 
 **type**: ``string`` **default**: ``'none'``
 
-.. deprecated:: 7.3
+.. versionadded:: 7.3
 
     The ``expose_security_errors`` option was introduced in Symfony 7.3
 
