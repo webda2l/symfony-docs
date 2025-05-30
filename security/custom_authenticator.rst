@@ -1,18 +1,28 @@
 How to Write a Custom Authenticator
 ===================================
 
-Symfony comes with :ref:`many authenticators <security-authenticators>` and
-third party bundles also implement more complex cases like JWT and oAuth
-2.0. However, sometimes you need to implement a custom authentication
-mechanism that doesn't exist yet or you need to customize one. In such
-cases, you must create and use your own authenticator.
+Symfony comes with :ref:`many authenticators <security-authenticators>`, and
+third-party bundles also implement more complex cases like JWT and OAuth 2.0.
+However, sometimes you need to implement a custom authentication mechanism
+that doesn't exist yet, or you need to customize an existing one.
 
-Authenticators should implement the
-:class:`Symfony\\Component\\Security\\Http\\Authenticator\\AuthenticatorInterface`.
-You can also extend
-:class:`Symfony\\Component\\Security\\Http\\Authenticator\\AbstractAuthenticator`,
-which has a default implementation for the ``createToken()``
-method that fits most use-cases::
+To save time, you can install `Symfony Maker`_ and let Symfony generate a new
+authenticator by running the following command:
+
+.. code-block:: terminal
+
+    $ php bin/console make:security:custom
+
+      What is the class name of the authenticator (e.g. CustomAuthenticator):
+      > ApiKeyAuthenticator
+
+      updated: config/packages/security.yaml
+      created: src/Security/ApiKeyAuthenticator.php
+
+      Success!
+
+Open the ``src/Security/ApiKeyAuthenticator.php`` file created by this command,
+and you'll find something like the following::
 
     // src/Security/ApiKeyAuthenticator.php
     namespace App\Security;
@@ -77,13 +87,23 @@ method that fits most use-cases::
         }
     }
 
+Authenticators must implement the
+:class:`Symfony\\Component\\Security\\Http\\Authenticator\\AuthenticatorInterface`.
+You can also extend
+:class:`Symfony\\Component\\Security\\Http\\Authenticator\\AbstractAuthenticator`,
+which provides a default implementation of the ``createToken()`` method suitable
+for most use cases.
+
 .. tip::
 
-    If your custom authenticator is a login form, you can extend from the
+    If your custom authenticator is a login form, consider extending
     :class:`Symfony\\Component\\Security\\Http\\Authenticator\\AbstractLoginFormAuthenticator`
-    class instead to make your job easier.
+    to simplify your implementation.
 
-The authenticator can be enabled using the ``custom_authenticators`` setting:
+Custom authenticators must be explicitly enabled in the security configuration
+using the ``custom_authenticators`` setting of your firewall(s). If you used the
+``make:security:custom`` command, this configuration is already updated, but you
+should review it:
 
 .. configuration-block::
 
@@ -479,4 +499,5 @@ authenticator methods (e.g. ``createToken()``)::
         }
     }
 
+.. _`Symfony Maker`: https://symfony.com/doc/current/bundles/SymfonyMakerBundle/index.html
 .. _`session storage flooding`: https://symfony.com/blog/cve-2016-4423-large-username-storage-in-session
