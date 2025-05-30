@@ -485,7 +485,7 @@ target class's properties.
 Note that if both the ``source`` and the ``target`` classes define the ``#[Map]``
 attribute, the ``source`` takes precedence.
 
-Consider the following class that stores the data obtained form an external API
+Consider the following class that stores the data obtained from an external API
 that uses snake_case property names::
 
     // src/Api/Payload.php
