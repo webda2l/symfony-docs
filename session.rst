@@ -1843,8 +1843,8 @@ the example below:
                 https://symfony.com/schema/dic/services/services-1.0.xsd">
 
             <framework:config>
-                <framework:session storage-id="session.storage.php_bridge"
-                    handler-id="session.storage.native_file"
+                <framework:session storage-id="session.storage.factory.php_bridge"
+                    handler-id="session.handler.native_file"
                 />
             </framework:config>
         </container>
@@ -1857,7 +1857,7 @@ the example below:
         return static function (FrameworkConfig $framework): void {
             $framework->session()
                 ->storageFactoryId('session.storage.factory.php_bridge')
-                ->handlerId('session.storage.native_file')
+                ->handlerId('session.handler.native_file')
             ;
         };
 
