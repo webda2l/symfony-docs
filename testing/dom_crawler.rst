@@ -10,11 +10,11 @@ Traversing
 
 Like jQuery, the Crawler has methods to traverse the DOM of an HTML/XML
 document. For example, the following finds all ``input[type=submit]`` elements,
-selects the last one on the page, and then selects its immediate parent element::
+selects the last one on the page, and then selects its immediate ancestor element::
 
     $newCrawler = $crawler->filter('input[type=submit]')
         ->last()
-        ->parents()
+        ->ancestors()
         ->first()
     ;
 
@@ -36,8 +36,8 @@ Many other methods are also available:
     All following siblings.
 ``previousAll()``
     All preceding siblings.
-``parents()``
-    Returns the parent nodes.
+``ancestors()``
+    Returns the ancestor nodes.
 ``children()``
     Returns children nodes.
 ``reduce($lambda)``
