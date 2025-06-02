@@ -1645,10 +1645,14 @@ The transport has a number of options:
     Exchange flags
 
 ``exchange[name]``
-    Name of the exchange
+    Name of the exchange. Use an empty string to use the default exchange.
 
 ``exchange[type]`` (default: ``fanout``)
     Type of exchange
+
+.. versionadded:: 7.3
+
+    Empty string support for ``exchange[name]`` was introduced in Symfony 7.3.
 
 You can also configure AMQP-specific settings on your message by adding
 :class:`Symfony\\Component\\Messenger\\Bridge\\Amqp\\Transport\\AmqpStamp` to
@@ -2628,7 +2632,8 @@ Possible options to configure with tags are:
     Name of the method that will process the message.
 
 ``priority``
-    Priority of the handler when multiple handlers can process the same message.
+    Defines the order in which the handler is executed when multiple handlers
+    can process the same message; those with higher priority run first.
 
 .. _handler-subscriber-options:
 

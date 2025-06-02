@@ -124,75 +124,38 @@ Further in this article, you can find a
 
         .. code-block:: yaml
 
-            # config/packages/test/security.yaml
-            security:
-                # ...
+            # config/packages/security.yaml
+            when@test:
+                security:
+                    # ...
 
-                password_hashers:
-                    # Use your user class name here
-                    App\Entity\User:
-                        algorithm: plaintext # disable hashing (only do this in tests!)
-
-                    # or use the lowest possible values
-                    App\Entity\User:
-                        algorithm: auto # This should be the same value as in config/packages/security.yaml
-                        cost: 4 # Lowest possible value for bcrypt
-                        time_cost: 3 # Lowest possible value for argon
-                        memory_cost: 10 # Lowest possible value for argon
-
-        .. code-block:: xml
-
-            <!-- config/packages/test/security.xml -->
-            <?xml version="1.0" encoding="UTF-8"?>
-            <srv:container xmlns="http://symfony.com/schema/dic/security"
-                xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
-                xmlns:srv="http://symfony.com/schema/dic/services"
-                xsi:schemaLocation="http://symfony.com/schema/dic/services
-                    https://symfony.com/schema/dic/services/services-1.0.xsd">
-
-                <config>
-                    <!-- class: Use your user class name here -->
-                    <!-- algorithm: disable hashing (only do this in tests!) -->
-                    <security:password-hasher
-                        class="App\Entity\User"
-                        algorithm="plaintext"
-                    />
-
-                    <!-- or use the lowest possible values -->
-                    <!-- algorithm: This should be the same value as in config/packages/security.yaml -->
-                    <!-- cost: Lowest possible value for bcrypt -->
-                    <!-- time_cost: Lowest possible value for argon -->
-                    <!-- memory_cost: Lowest possible value for argon -->
-                    <security:password-hasher
-                        class="App\Entity\User"
-                        algorithm="auto"
-                        cost="4"
-                        time_cost="3"
-                        memory_cost="10"
-                    />
-                </config>
-            </srv:container>
+                    password_hashers:
+                        # Use your user class name here
+                        App\Entity\User:
+                            algorithm: auto
+                            cost: 4 # Lowest possible value for bcrypt
+                            time_cost: 3 # Lowest possible value for argon
+                            memory_cost: 10 # Lowest possible value for argon
 
         .. code-block:: php
 
-            // config/packages/test/security.php
+            // config/packages/security.php
             use App\Entity\User;
+            use Symfony\Component\DependencyInjection\Loader\Configurator\ContainerConfigurator;
             use Symfony\Config\SecurityConfig;
 
-            return static function (SecurityConfig $security): void {
+            return static function (SecurityConfig $security, ContainerConfigurator $container): void {
                 // ...
 
-                // Use your user class name here
-                $security->passwordHasher(User::class)
-                    ->algorithm('plaintext'); // disable hashing (only do this in tests!)
-
-                // or use the lowest possible values
-                $security->passwordHasher(User::class)
-                    ->algorithm('auto') // This should be the same value as in config/packages/security.yaml
-                    ->cost(4) // Lowest possible value for bcrypt
-                    ->timeCost(2) // Lowest possible value for argon
-                    ->memoryCost(10) // Lowest possible value for argon
-                ;
+                if ('test' === $container->env()) {
+                    // Use your user class name here
+                    $security->passwordHasher(User::class)
+                        ->algorithm('auto') // This should be the same value as in config/packages/security.yaml
+                        ->cost(4) // Lowest possible value for bcrypt
+                        ->timeCost(2) // Lowest possible value for argon
+                        ->memoryCost(10) // Lowest possible value for argon
+                    ;
+                }
             };
 
 Hashing the Password

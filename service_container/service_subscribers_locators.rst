@@ -36,7 +36,7 @@ to handle their respective command when it is asked for::
 
         public function handle(Command $command): mixed
         {
-            $commandClass = get_class($command);
+            $commandClass = $command::class;
 
             if (!$handler = $this->handlerMap[$commandClass] ?? null) {
                 return;
@@ -94,7 +94,7 @@ in the service subscriber::
 
         public function handle(Command $command): mixed
         {
-            $commandClass = get_class($command);
+            $commandClass = $command::class;
 
             if ($this->locator->has($commandClass)) {
                 $handler = $this->locator->get($commandClass);
@@ -350,7 +350,7 @@ attribute::
 
         public function handle(Command $command): mixed
         {
-            $commandClass = get_class($command);
+            $commandClass = $command::class;
 
             if ($this->handlers->has($commandClass)) {
                 $handler = $this->handlers->get($commandClass);

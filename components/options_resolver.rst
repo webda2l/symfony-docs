@@ -936,7 +936,7 @@ can change your code to do the configuration only once per class::
         public function __construct(array $options = [])
         {
             // What type of Mailer is this, a Mailer, a GoogleMailer, ... ?
-            $class = get_class($this);
+            $class = $this::class;
 
             // Was configureOptions() executed before for this class?
             if (!isset(self::$resolversByClass[$class])) {

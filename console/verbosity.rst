@@ -68,7 +68,7 @@ level. For example::
 
             // available methods: ->isSilent(), ->isQuiet(), ->isVerbose(), ->isVeryVerbose(), ->isDebug()
             if ($output->isVerbose()) {
-                $output->writeln('User class: '.get_class($user));
+                $output->writeln('User class: '.$user::class);
             }
 
             // alternatively you can pass the verbosity level PHP constant to writeln()

@@ -783,6 +783,32 @@ variable. Let's say you want the first or the last comment of a product dependin
         Comment $comment
     ): Response {
     }
+    
+.. _doctrine-entity-value-resolver-resolve-target-entities:
+    
+Fetch via Interfaces
+~~~~~~~~~~~~~~~~~~~~
+
+Suppose your ``Product`` class implements an interface called ``ProductInterface``.
+If you want to decouple your controllers from the concrete entity implementation,
+you can reference the entity by its interface instead.
+
+To enable this, first configure the
+:doc:`resolve_target_entities option </doctrine/resolve_target_entity>`.
+Then, your controller can type-hint the interface, and the entity will be
+resolved automatically::
+
+    public function show(
+        #[MapEntity]
+        ProductInterface $product
+    ): Response {
+        // ...
+    }
+        
+.. versionadded:: 7.3
+
+    Support for target entity resolution in the ``EntityValueResolver`` was
+    introduced Symfony 7.3
 
 MapEntity Options
 ~~~~~~~~~~~~~~~~~

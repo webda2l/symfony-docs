@@ -559,6 +559,7 @@ Learn more
 
 * :doc:`/bundles/extension`
 * :doc:`/bundles/configuration`
+* :doc:`/frontend/create_ux_bundle`
 
 .. _`PSR-4`: https://www.php-fig.org/psr/psr-4/
 .. _`Symfony Flex recipe`: https://github.com/symfony/recipes

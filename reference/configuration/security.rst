@@ -23,7 +23,8 @@ key in your application configuration.
 
 * `access_denied_url`_
 * `erase_credentials`_
-* `hide_user_not_found`_
+* `expose_security_errors`_
+* `hide_user_not_found`_ (deprecated)
 * `session_fixation_strategy`_
 
 **Advanced Options**:
@@ -71,10 +72,38 @@ after authentication::
    Since Symfony 7.3, ``eraseCredentials()`` methods are deprecated and are
    not called if they have the ``#[\Deprecated]`` attribute.
 
+expose_security_errors
+----------------------
+
+**type**: ``string`` **default**: ``'none'``
+
+.. versionadded:: 7.3
+
+    The ``expose_security_errors`` option was introduced in Symfony 7.3
+
+User enumeration is a common security issue where attackers infer valid usernames
+based on error messages. For example, a message like "This user does not exist"
+shown by your login form reveals whether a username exists.
+
+This option lets you hide some or all errors related to user accounts
+(e.g. blocked or expired accounts) to prevent this issue. Instead, these
+errors will trigger a generic ``BadCredentialsException``. The value of this
+option can be one of the following:
+
+* ``'none'``: hides all user-related security exceptions;
+* ``'account_status'``: shows account-related exceptions (e.g. blocked or expired
+  accounts) but only for users who provided the correct password;
+* ``'all'``: shows all security-related exceptions.
+
 hide_user_not_found
 -------------------
 
 **type**: ``boolean`` **default**: ``true``
+
+.. deprecated:: 7.3
+
+    The ``hide_user_not_found`` option was deprecated in favor of the
+    ``expose_security_errors`` option in Symfony 7.3.
 
 If ``true``, when a user is not found a generic exception of type
 :class:`Symfony\\Component\\Security\\Core\\Exception\\BadCredentialsException`

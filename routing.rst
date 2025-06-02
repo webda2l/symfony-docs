@@ -18,6 +18,8 @@ your favorite.
 :ref:`Symfony recommends attributes <best-practice-controller-attributes>`
 because it's convenient to put the route and controller in the same place.
 
+.. _routing-route-attributes:
+
 Creating Routes as Attributes
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
@@ -1340,6 +1342,23 @@ have been renamed. Let's say you have a route called ``product_show``:
 
 .. configuration-block::
 
+    .. code-block:: php-attributes
+
+        // src/Controller/ProductController.php
+        namespace App\Controller;
+
+        use Symfony\Component\HttpFoundation\Response;
+        use Symfony\Component\Routing\Attribute\Route;
+
+        class ProductController
+        {
+            #[Route('/product/{id}', name: 'product_show')]
+            public function show(): Response
+            {
+                // ...
+            }
+        }
+
     .. code-block:: yaml
 
         # config/routes.yaml
@@ -1375,6 +1394,25 @@ that acts exactly the same as ``product_show``.
 Instead of duplicating the original route, you can create an alias for it.
 
 .. configuration-block::
+
+    .. code-block:: php-attributes
+
+        // src/Controller/ProductController.php
+        namespace App\Controller;
+
+        use Symfony\Component\HttpFoundation\Response;
+        use Symfony\Component\Routing\Attribute\Route;
+
+        class ProductController
+        {
+            // the "alias" argument assigns an alternate name to this route;
+            // the alias will point to the actual route "product_show"
+            #[Route('/product/{id}', name: 'product_show', alias: ['product_details'])]
+            public function show(): Response
+            {
+                // ...
+            }
+        }
 
     .. code-block:: yaml
 
@@ -1413,8 +1451,21 @@ Instead of duplicating the original route, you can create an alias for it.
             $routes->alias('product_details', 'product_show');
         };
 
+.. versionadded:: 7.3
+
+    Support for route aliases in PHP attributes was introduced in Symfony 7.3.
+
 In this example, both ``product_show`` and ``product_details`` routes can
 be used in the application and will produce the same result.
+
+.. note::
+
+    YAML, XML, and PHP configuration formats are the only ways to define an alias
+    for a route that you do not own. You can't do this when using PHP attributes.
+
+    This allows you for example to use your own route name for URL generation,
+    while still targeting a route defined by a third-party bundle. The alias and
+    the original route do not need to be declared in the same file or format.
 
 .. _routing-alias-deprecation:
 
@@ -1435,6 +1486,42 @@ The ``product_show`` become the alias, and will now point to the ``product_detai
 This way, the ``product_show`` alias could be deprecated.
 
 .. configuration-block::
+
+    .. code-block:: php-attributes
+
+        // src/Controller/ProductController.php
+        namespace App\Controller;
+
+        use Symfony\Component\HttpFoundation\Response;
+        use Symfony\Component\Routing\Attribute\Route;
+
+        class ProductController
+        {
+            // this outputs the following generic deprecation message:
+            // Since acme/package 1.2: The "product_show" route alias is deprecated. You should stop using it, as it will be removed in the future.
+            #[Route('/product/{id}',
+                name: 'product_details',
+                alias: new DeprecatedAlias(
+                    aliasName: 'product_show',
+                    package: 'acme/package',
+                    version: '1.2',
+                ),
+            )]
+            // Or, you can also define a custom deprecation message (%alias_id% placeholder is available)
+            #[Route('/product/{id}',
+                name: 'product_details',
+                alias: new DeprecatedAlias(
+                    aliasName: 'product_show',
+                    package: 'acme/package',
+                    version: '1.2',
+                    message: 'The "%alias_id%" route alias is deprecated. Please use "product_details" instead.',
+                ),
+            )]
+            public function show(): Response
+            {
+                // ...
+            }
+        }
 
     .. code-block:: yaml
 
