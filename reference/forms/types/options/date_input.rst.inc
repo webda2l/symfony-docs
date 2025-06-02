@@ -9,6 +9,7 @@ on your underlying object. Valid values are:
 * ``string`` (e.g. ``2011-06-05``)
 * ``datetime`` (a ``DateTime`` object)
 * ``datetime_immutable`` (a ``DateTimeImmutable`` object)
+* ``date_point`` (a ``DatePoint`` object)
 * ``array`` (e.g. ``['year' => 2011, 'month' => 06, 'day' => 05]``)
 * ``timestamp`` (e.g. ``1307232000``)
 
