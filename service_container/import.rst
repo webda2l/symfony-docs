@@ -155,23 +155,23 @@ from auto-registering classes that are defined manually elsewhere:
 
 .. configuration-block::
 
-   .. code-block:: yaml
+    .. code-block:: yaml
 
-       # config/services.yaml
-       imports:
-           - { resource: services/mailer.yaml }
-           # ... other imports
+        # config/services.yaml
+        imports:
+            - { resource: services/mailer.yaml }
+            # ... other imports
 
-       services:
-           _defaults:
-               autowire: true
-               autoconfigure: true
+        services:
+            _defaults:
+                autowire: true
+                autoconfigure: true
 
-           App\:
-               resource: '../src/*'
-               exclude:
-                   - '../src/Mailer/'
-                   - '../src/SpecificClass.php'
+            App\:
+                resource: '../src/*'
+                exclude:
+                    - '../src/Mailer/'
+                    - '../src/SpecificClass.php'
 
     .. code-block:: xml
 
@@ -232,19 +232,19 @@ same file. These later definitions will override the auto-registered ones:
 
 .. configuration-block::
 
-   .. code-block:: yaml
+    .. code-block:: yaml
 
-       # config/services.yaml
-       services:
-           _defaults:
-               autowire: true
-               autoconfigure: true
+        # config/services.yaml
+        services:
+            _defaults:
+                autowire: true
+                autoconfigure: true
 
-           App\:
-               resource: '../src/*'
+            App\:
+                resource: '../src/*'
 
-           App\Mailer\MyMailer:
-               arguments: ['%env(MAILER_DSN)%']
+            App\Mailer\MyMailer:
+                arguments: ['%env(MAILER_DSN)%']
 
     .. code-block:: xml
 
