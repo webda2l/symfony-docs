@@ -740,6 +740,10 @@ Symfony will add a ``Link`` header in the response to preload the CSS files.
 Pre-Compressing Assets
 ----------------------
 
+.. versionadded:: 7.3
+
+    Support for pre-compressing assets was introduced in Symfony 7.3.
+
 Although most web servers (Caddy, Nginx, Apache, FrankenPHP) and services like Cloudflare
 provide asset compression features, AssetMapper also allows you to compress all
 your assets before serving them.
