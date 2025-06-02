@@ -9,9 +9,13 @@ on your underlying object. Valid values are:
 * ``string`` (e.g. ``2011-06-05``)
 * ``datetime`` (a ``DateTime`` object)
 * ``datetime_immutable`` (a ``DateTimeImmutable`` object)
-* ``date_point`` (a ``DatePoint`` object)
+* ``date_point`` (a :ref:`DatePoint <clock_date-point>` object)
 * ``array`` (e.g. ``['year' => 2011, 'month' => 06, 'day' => 05]``)
 * ``timestamp`` (e.g. ``1307232000``)
+
+.. versionadded:: 7.4
+
+    Support for ``date_point`` values was introduced in Symfony 7.4.
 
 The value that comes back from the form will also be normalized back into
 this format.
