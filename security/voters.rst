@@ -50,14 +50,6 @@ which makes creating a voter even easier::
 
 .. _how-to-use-the-voter-in-a-controller:
 
-.. tip::
-
-    Checking each voter several times can be time consuming for applications
-    that perform a lot of permission checks. To improve performance in those cases,
-    you can make your voters implement the :class:`Symfony\\Component\\Security\\Core\\Authorization\\Voter\\CacheableVoterInterface`.
-    This allows the access decision manager to remember the attribute and type
-    of subject supported by the voter, to only call the needed voters each time.
-
 Setup: Checking for Access in a Controller
 ------------------------------------------
 
@@ -296,6 +288,89 @@ If you're using the :ref:`default services.yaml configuration <service-container
 you're done! Symfony will automatically pass the ``security.helper``
 service when instantiating your voter (thanks to autowiring).
 
+Improving Voter Performance
+---------------------------
+
+If your application defines many voters and checks permissions on many objects
+during a single request, this can impact performance. Most of the time, voters
+only care about specific permissions (attributes), such as ``EDIT_BLOG_POST``,
+or specific object types, such as ``User`` or ``Invoice``. That's why Symfony
+can cache the voter resolution (i.e. the decision to apply or skip a voter for
+a given attribute or object).
+
+To enable this optimization, make your voter implement
+:class:`Symfony\\Component\\Security\\Core\\Authorization\\Voter\\CacheableVoterInterface`.
+This is already the case when extending the abstract ``Voter`` class shown above.
+Then, override one or both of the following methods::
+
+    use App\Entity\Post;
+    use Symfony\Component\Security\Core\Authorization\Voter\Voter;
+    // ...
+
+    class PostVoter extends Voter
+    {
+        const VIEW = 'view';
+        const EDIT = 'edit';
+
+        protected function supports(string $attribute, mixed $subject): bool
+        {
+            // ...
+        }
+
+        protected function voteOnAttribute(string $attribute, mixed $subject, TokenInterface $token): bool
+        {
+            // ...
+        }
+
+        // this method returns true if the voter applies to the given attribute;
+        // if it returns false, Symfony won't call it again for this attribute
+        public function supportsAttribute(string $attribute): bool
+        {
+            return in_array($attribute, [self::VIEW, self::EDIT], true);
+        }
+
+        // this method returns true if the voter applies to the given object class/type;
+        // if it returns false, Symfony won't call it again for that type of object
+        public function supportsAttribute(string $attribute): bool
+        {
+            // you can't use a simple Post::class === $subjectType comparison
+            // because the subject type might be a Doctrine proxy class
+            return is_a($subjectType, Post::class, true);
+        }
+    }
+
+.. _security-voters-change-message-and-status-code:
+
+Changing the message and status code returned
+---------------------------------------------
+
+By default, the ``#[IsGranted]`` attribute will throw a
+:class:`Symfony\\Component\\Security\\Core\\Exception\\AccessDeniedException`
+and return an http **403** status code with **Access Denied** as message.
+
+However, you can change this behavior by specifying the message and status code returned::
+
+    // src/Controller/PostController.php
+
+    // ...
+    use Symfony\Component\Security\Http\Attribute\IsGranted;
+
+    class PostController extends AbstractController
+    {
+        #[Route('/posts/{id}', name: 'post_show')]
+        #[IsGranted('show', 'post', 'Post not found', 404)]
+        public function show(Post $post): Response
+        {
+            // ...
+        }
+    }
+
+.. tip::
+
+    If the status code is different than 403, an
+    :class:`Symfony\\Component\\HttpKernel\\Exception\\HttpException`
+    will be thrown instead.
+
 .. _security-voters-change-strategy:
 
 Changing the Access Decision Strategy
@@ -467,35 +542,3 @@ must implement the :class:`Symfony\\Component\\Security\\Core\\Authorization\\Ac
                 // ...
             ;
         };
-
-.. _security-voters-change-message-and-status-code:
-
-Changing the message and status code returned
----------------------------------------------
-
-By default, the ``#[IsGranted]`` attribute will throw a
-:class:`Symfony\\Component\\Security\\Core\\Exception\\AccessDeniedException`
-and return an http **403** status code with **Access Denied** as message.
-
-However, you can change this behavior by specifying the message and status code returned::
-
-    // src/Controller/PostController.php
-
-    // ...
-    use Symfony\Component\Security\Http\Attribute\IsGranted;
-
-    class PostController extends AbstractController
-    {
-        #[Route('/posts/{id}', name: 'post_show')]
-        #[IsGranted('show', 'post', 'Post not found', 404)]
-        public function show(Post $post): Response
-        {
-            // ...
-        }
-    }
-
-.. tip::
-
-    If the status code is different than 403, an
-    :class:`Symfony\\Component\\HttpKernel\\Exception\\HttpException`
-    will be thrown instead.
