@@ -85,6 +85,14 @@ will contain an International Bank Account Number.
 
 .. include:: /reference/constraints/_empty-values-are-valid.rst.inc
 
+.. note::
+
+    The IBAN validator accepts various human-readable formats, including different
+    whitespace types (e.g., spaces, non-breaking spaces). This flexibility may
+    cause issues when storing IBANs or integrating with APIs expecting a strict
+    format. Consider normalizing IBANs (e.g., removing whitespace) before storage
+    or processing to ensure compatibility.
+
 Options
 -------
 
