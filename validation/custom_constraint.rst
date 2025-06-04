@@ -180,6 +180,16 @@ message as its argument and returns an instance of
 :class:`Symfony\\Component\\Validator\\Violation\\ConstraintViolationBuilderInterface`.
 The ``addViolation()`` method call finally adds the violation to the context.
 
+.. tip::
+
+    Validation error messages are automatically translated to the current application
+    locale. If your application doesn't use translations, you can disable this behavior
+    by calling the ``disableTranslation()`` method of ``ConstraintViolationBuilderInterface``.
+
+    .. versionadded:: 6.4
+
+        The ``disableTranslation()`` method was introduced in Symfony 6.4.
+
 Using the new Validator
 -----------------------
 
