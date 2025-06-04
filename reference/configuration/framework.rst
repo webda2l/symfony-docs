@@ -3200,8 +3200,8 @@ and also to configure the session handler with a DSN:
     .. code-block:: php
 
         // config/packages/framework.php
-        use function Symfony\Component\DependencyInjection\Loader\Configurator\env;
         use Symfony\Config\FrameworkConfig;
+        use function Symfony\Component\DependencyInjection\Loader\Configurator\env;
 
         return static function (FrameworkConfig $framework): void {
             // ...

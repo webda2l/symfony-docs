@@ -952,9 +952,9 @@ a message bus to compute values in a worker:
     .. code-block:: php
 
         // config/framework/framework.php
-        use function Symfony\Component\DependencyInjection\Loader\Configurator\env;
         use Symfony\Component\Cache\Messenger\EarlyExpirationMessage;
         use Symfony\Config\FrameworkConfig;
+        use function Symfony\Component\DependencyInjection\Loader\Configurator\env;
 
         return static function (FrameworkConfig $framework): void {
             $framework->cache()
