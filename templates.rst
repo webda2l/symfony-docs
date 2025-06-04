@@ -497,8 +497,8 @@ in container parameters <service-container-parameters>`:
     .. code-block:: php
 
         // config/packages/twig.php
-        use function Symfony\Component\DependencyInjection\Loader\Configurator\service;
         use Symfony\Config\TwigConfig;
+        use function Symfony\Component\DependencyInjection\Loader\Configurator\service;
 
         return static function (TwigConfig $twig): void {
             // ...
