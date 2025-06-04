@@ -135,8 +135,8 @@ this behavior by using the ``lock`` key like:
     .. code-block:: php
 
         // config/packages/lock.php
-        use function Symfony\Component\DependencyInjection\Loader\Configurator\env;
         use Symfony\Config\FrameworkConfig;
+        use function Symfony\Component\DependencyInjection\Loader\Configurator\env;
 
         return static function (FrameworkConfig $framework): void {
             $framework->lock()
