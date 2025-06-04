@@ -650,7 +650,21 @@ automatically! You can simplify the controller to::
     }
 
 That's it! The attribute uses the ``{id}`` from the route to query for the ``Product``
-by the ``id`` column. If it's not found, a 404 page is generated.
+by the ``id`` column. If it's not found, a 404 error is thrown.
+
+You can change this behavior by making the controller argument optional. In that
+case, no 404 is thrown automatically and you're free to handle the missing entity
+yourself::
+
+    #[Route('/product/{id}')]
+    public function show(?Product $product): Response
+    {
+        if (null === $product) {
+            // run your own logic to return a custom response
+        }
+
+        // ...
+    }
 
 .. tip::
 
