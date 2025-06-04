@@ -342,6 +342,12 @@ autoconfigure the HTTP client based on the requested URL:
 You can define several scopes, so that each set of options is added only if a
 requested URL matches one of the regular expressions set by the ``scope`` option.
 
+.. note::
+
+    The options passed to the ``request()`` method are merged with the default
+    options defined in the scoped client. The options passed to ``request()``
+    take precedence and override or extend the default ones.
+
 If you use scoped clients in the Symfony framework, you must use any of the
 methods defined by Symfony to :ref:`choose a specific service <services-wire-specific-service>`.
 Each client has a unique service named after its configuration.
