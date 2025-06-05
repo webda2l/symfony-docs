@@ -181,6 +181,7 @@ The ``addViolation()`` method call finally adds the violation to the context.
     Validation error messages are automatically translated to the current application
     locale. If your application doesn't use translations, you can disable this behavior
     by calling the ``disableTranslation()`` method of ``ConstraintViolationBuilderInterface``.
+    See also the :ref:`framework.validation.disable_translation option <reference-validation-disable_translation>`.
 
     .. versionadded:: 6.4
 
