@@ -183,10 +183,6 @@ The ``addViolation()`` method call finally adds the violation to the context.
     by calling the ``disableTranslation()`` method of ``ConstraintViolationBuilderInterface``.
     See also the :ref:`framework.validation.disable_translation option <reference-validation-disable_translation>`.
 
-    .. versionadded:: 6.4
-
-        The ``disableTranslation()`` method was introduced in Symfony 6.4.
-
 Using the new Validator
 -----------------------
 
