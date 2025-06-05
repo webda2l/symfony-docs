@@ -87,11 +87,12 @@ will contain an International Bank Account Number.
 
 .. note::
 
-    The IBAN validator accepts various human-readable formats, including different
-    whitespace types (e.g., spaces, non-breaking spaces). This flexibility may
-    cause issues when storing IBANs or integrating with APIs expecting a strict
-    format. Consider normalizing IBANs (e.g., removing whitespace) before storage
-    or processing to ensure compatibility.
+    For convenience, the IBAN validator accepts values with various types of
+    whitespace (e.g., regular, non-breaking, and narrow non-breaking spaces),
+    which are automatically removed before validation. However, this flexibility
+    can cause issues when storing IBANs or sending them to APIs that expect a
+    strict format. To ensure compatibility, normalize IBANs by removing
+    whitespace and converting them to uppercase before storing or processing.
 
 Options
 -------
