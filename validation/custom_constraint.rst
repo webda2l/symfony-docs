@@ -182,10 +182,6 @@ The ``addViolation()`` method call finally adds the violation to the context.
     locale. If your application doesn't use translations, you can disable this behavior
     by calling the ``disableTranslation()`` method of ``ConstraintViolationBuilderInterface``.
 
-    .. versionadded:: 6.4
-
-        The ``disableTranslation()`` method was introduced in Symfony 6.4.
-
 Using the new Validator
 -----------------------
 
