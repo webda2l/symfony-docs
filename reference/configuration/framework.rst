@@ -3660,6 +3660,22 @@ Defines the Doctrine entities that will be introspected to add
                     ]);
         };
 
+.. _reference-validation-disable_translation:
+
+disable_translation
+...................
+
+**type**: ``boolean`` **default**: ``false``
+
+Validation error messages are automatically translated to the current application
+locale. Set this option to ``true`` to disable translation of validation messages.
+This is useful to avoid "missing translation" errors in applications that use
+only a single language.
+
+.. versionadded:: 7.3
+
+    The ``disable_translation`` option was introduced in Symfony 7.3.
+
 .. _reference-validation-email_validation_mode:
 
 email_validation_mode
