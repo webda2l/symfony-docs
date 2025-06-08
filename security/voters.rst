@@ -331,7 +331,7 @@ Then, override one or both of the following methods::
 
         // this method returns true if the voter applies to the given object class/type;
         // if it returns false, Symfony won't call it again for that type of object
-        public function supportsType(string subjectType): bool
+        public function supportsType(string $subjectType): bool
         {
             // you can't use a simple Post::class === $subjectType comparison
             // because the subject type might be a Doctrine proxy class
