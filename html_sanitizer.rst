@@ -318,6 +318,8 @@ attributes from the `W3C Standard Proposal`_ are allowed.
                             img: 'src'
                             # allow the <h1> element with all safe attributes
                             h1: '*'
+                            # allow the <div> element with no attributes
+                            div: []
 
     .. code-block:: xml
 
