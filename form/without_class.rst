@@ -177,3 +177,41 @@ in your controller::
         ->add('firstName', TextType::class)
         ->add('lastName', TextType::class)
         ->getForm();
+
+Conditional Constraints
+~~~~~~~~~~~~~~~~~~~~~~~
+
+It's possible to define field constraints that depend on the value of other
+fields (e.g. a field must not be blank when another field has a certain value).
+To achieve this, use the ``expression`` option of the
+:doc:`When constraint </reference/constraints/When>` to reference the other field::
+
+    $builder
+        ->add('how_did_you_hear', ChoiceType::class, [
+            'required' => true,
+            'label' => 'How did you hear about us?',
+            'choices' => [
+                'Search engine' => 'search_engine',
+                'Friends' => 'friends',
+                'Other' => 'other',
+            ],
+            'expanded' => true,
+            'constraints' => [
+                new Assert\NotBlank(),
+            ]
+        ])
+
+        // this field is only required if the value of the 'how_did_you_hear' field is 'other'
+        ->add('other_text', TextType::class, [
+            'required' => false,
+            'label' => 'Please specify',
+            'constraints' => [
+                new Assert\When(
+                    expression: 'this.getParent().get("how_did_you_hear").getData() == "other"',
+                    constraints: [
+                        new Assert\NotBlank(),
+                    ],
+                )
+            ],
+        ])
+    ;
