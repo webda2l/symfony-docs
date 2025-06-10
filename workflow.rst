@@ -826,7 +826,7 @@ transition. The value of this option is any valid expression created with the
                             from: draft
                             to:   reviewed
                         publish:
-                            # or "is_anonymous", "is_remember_me", "is_fully_authenticated", "is_granted", "is_valid"
+                            # or "is_remember_me", "is_fully_authenticated", "is_granted", "is_valid"
                             guard: "is_authenticated"
                             from: reviewed
                             to:   published
@@ -861,7 +861,7 @@ transition. The value of this option is any valid expression created with the
                     </framework:transition>
 
                     <framework:transition name="publish">
-                        <!-- or "is_anonymous", "is_remember_me", "is_fully_authenticated", "is_granted" -->
+                        <!-- or "is_remember_me", "is_fully_authenticated", "is_granted" -->
                         <framework:guard>is_authenticated</framework:guard>
                         <framework:from>reviewed</framework:from>
                         <framework:to>published</framework:to>
@@ -897,7 +897,7 @@ transition. The value of this option is any valid expression created with the
 
             $blogPublishing->transition()
                 ->name('publish')
-                    // or "is_anonymous", "is_remember_me", "is_fully_authenticated", "is_granted"
+                    // or "is_remember_me", "is_fully_authenticated", "is_granted"
                     ->guard('is_authenticated')
                     ->from(['reviewed'])
                     ->to(['published']);
