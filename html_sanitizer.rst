@@ -349,9 +349,12 @@ attributes from the `W3C Standard Proposal`_ are allowed.
                         </framework:allow-element>
 
                         <!-- allow the <h1> element with all safe attributes -->
-                        <framework:allow-element name="img">
+                        <framework:allow-element name="h1">
                             <framework:attribute>*</framework:attribute>
                         </framework:allow-element>
+
+                        <!-- allow the <div> element with no attributes -->
+                        <framework:allow-element name="div"/>
                     </framework:sanitizer>
                 </framework:html-sanitizer>
             </framework:config>
@@ -373,6 +376,9 @@ attributes from the `W3C Standard Proposal`_ are allowed.
 
                     // allow the <h1> element with all safe attributes
                     ->allowElement('h1', '*')
+
+                    // allow the <div> element with no attributes
+                    ->allowElement('div', [])
             ;
         };
 
@@ -391,6 +397,9 @@ attributes from the `W3C Standard Proposal`_ are allowed.
 
                 // allow the <h1> element with all safe attributes
                 ->allowElement('h1')
+
+                // allow the <div> element with no attributes
+                ->allowElement('div', [])
         );
 
 Block and Drop Elements
