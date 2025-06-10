@@ -353,6 +353,12 @@ User Input Methods
 
         $io->choice('Select the queue to analyze', ['queue1', 'queue2', 'queue3'], 'queue1');
 
+    Choice questions display both the choice value and a numeric index, which
+    starts from ``0`` by default. To use custom indices, pass an array with
+    custom numeric keys as the choice values::
+
+        $io->choice('Select the queue to analyze', [5 => 'queue1', 6 => 'queue2', 7 => 'queue3']);
+
     Finally, you can allow users to select multiple choices. To do so, users must
     separate each choice with a comma (e.g. typing ``1, 2`` will select choice 1
     and 2)::
