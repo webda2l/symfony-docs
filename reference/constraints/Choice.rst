@@ -304,6 +304,7 @@ Parameter          Description
 =================  ============================================================
 ``{{ choices }}``  A comma-separated list of available choices
 ``{{ value }}``    The current (invalid) value
+``{{ limit }}``    The maximum number of selectable choices
 =================  ============================================================
 
 match
@@ -358,6 +359,7 @@ Parameter          Description
 =================  ============================================================
 ``{{ choices }}``  A comma-separated list of available choices
 ``{{ value }}``    The current (invalid) value
+``{{ limit }}``    The minimum number of selectable choices
 =================  ============================================================
 
 ``multiple``
@@ -381,11 +383,11 @@ is not in the array of valid choices.
 
 You can use the following parameters in this message:
 
-===============  ==============================================================
-Parameter        Description
-===============  ==============================================================
-``{{ value }}``  The current (invalid) value
-``{{ label }}``  Corresponding form field label
-===============  ==============================================================
+=================  ============================================================
+Parameter          Description
+=================  ============================================================
+``{{ choices }}``  A comma-separated list of available choices
+``{{ value }}``    The current (invalid) value
+=================  ============================================================
 
 .. include:: /reference/constraints/_payload-option.rst.inc
