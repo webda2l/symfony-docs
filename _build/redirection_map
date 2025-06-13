@@ -574,3 +574,4 @@
 /doctrine/reverse_engineering /doctrine#doctrine-adding-mapping
 /components/serializer /serializer
 /serializer/custom_encoder /serializer/encoders#serializer-custom-encoder
+/components/string /string
