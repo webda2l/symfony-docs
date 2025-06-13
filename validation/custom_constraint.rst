@@ -320,7 +320,7 @@ define those options as public properties on the constraint class::
     }
 
 Then, inside the validator class you can access these options directly via the
-constraint class passes to the ``validate()`` method::
+constraint class passed to the ``validate()`` method::
 
     class FooValidator extends ConstraintValidator
     {
