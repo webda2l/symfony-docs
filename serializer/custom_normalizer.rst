@@ -38,14 +38,14 @@ normalization process::
 
         public function normalize(mixed $data, ?string $format = null, array $context = []): array
         {
-            $data = $this->normalizer->normalize($data, $format, $context);
+            $normalizedData = $this->normalizer->normalize($data, $format, $context);
 
             // Here, add, edit, or delete some data:
-            $data['href']['self'] = $this->router->generate('topic_show', [
-                'id' => $object->getId(),
+            $normalizedData['href']['self'] = $this->router->generate('topic_show', [
+                'id' => $data->getId(),
             ], UrlGeneratorInterface::ABSOLUTE_URL);
 
-            return $data;
+            return $normalizedData;
         }
 
         public function supportsNormalization($data, ?string $format = null, array $context = []): bool
