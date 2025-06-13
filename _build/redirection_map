@@ -569,3 +569,4 @@
 /frontend/encore/server-data /frontend/server-data
 /components/serializer /serializer
 /serializer/custom_encoder /serializer/encoders#serializer-custom-encoder
+/components/string /string
