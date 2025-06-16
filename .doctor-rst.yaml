@@ -74,7 +74,6 @@ rules:
     versionadded_directive_should_have_version: ~
     yaml_instead_of_yml_suffix: ~
 
-    #   master
     versionadded_directive_major_version:
         major_version: 7
 
