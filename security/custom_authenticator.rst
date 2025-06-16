@@ -282,39 +282,17 @@ associated with the user. It allows loading the user through the configured
             }
         }
 
-It's a good practice to normalize the user identifier before using it. This
-ensures that variations like "john.doe", "John.Doe", or "JOHN.DOE" are treated
-as the same user.
-
-Normalization typically involves converting the identifier to lowercase and
-trimming extra spaces. For example, Google considers the following email
-addresses equivalent: ``john.doe@gmail.com``, ``j.hon.d.oe@gmail.com``, and
-``johndoe@gmail.com``. This is due to normalization rules that remove dots and
-lowercase the address.
-
-In enterprise environments, users might authenticate using different identifier
-formats, such as:
-
-* ``john.doe@acme.com``
-* ``acme.com\jdoe``
-* ``https://acme.com/+jdoe``
-* ``acct:jdoe@acme.com``
-
-Applying normalization (e.g. lowercasing, trimming, or unifying formats) helps
-ensure consistent identity resolution and prevents duplication caused by
-format differences.
-
-In Symfony applications, you can optionally pass a user identifier normalizer as
-the third argument to the ``UserBadge``. This callable receives the ``$userIdentifier``
-and must return a normalized string.
+You can normalize the user identifier before using it (e.g. to ensure that variations like
+"john.doe", "John.Doe", or "JOHN.DOE" are treated as the same user).
+In Symfony applications, you can optionally pass a user identifier normalizer as the
+third argument to the ``UserBadge``. This callable receives the ``$userIdentifier`` and must return a string.
 
 .. versionadded:: 7.3
 
     Support for user identifier normalizers was introduced in Symfony 7.3.
 
-For instance, the example below uses a normalizer that converts usernames to
-a normalized, ASCII-only, lowercase format suitable for consistent comparison
-and storage::
+The example below uses a normalizer that converts usernames to
+a normalized, ASCII-only, lowercase format::
 
     // src/Security/NormalizedUserBadge.php
     namespace App\Security;
