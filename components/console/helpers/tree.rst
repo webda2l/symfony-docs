@@ -115,7 +115,7 @@ class and adding nodes to it::
     $testsNode = new TreeNode('tests/');
     $functionalTestsNode = new TreeNode('Functional/');
     $testsNode->addChild($functionalTestsNode);
-    $root->addChild(testsNode);
+    $root->addChild($testsNode);
 
     $tree = TreeHelper::createTree($io, $root);
     $tree->render();
