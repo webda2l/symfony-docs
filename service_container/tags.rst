@@ -162,7 +162,7 @@ class, call this method in the ``loadExtension()`` method of the main bundle cla
     use Symfony\Component\DependencyInjection\ContainerBuilder;
     use Symfony\Component\DependencyInjection\Loader\Configurator\ContainerConfigurator;
     use Symfony\Component\HttpKernel\Bundle\AbstractBundle;
-    
+
     class MyBundle extends AbstractBundle
     {
         public function loadExtension(array $config, ContainerConfigurator $container, ContainerBuilder $builder): void
