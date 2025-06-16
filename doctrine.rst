@@ -797,9 +797,9 @@ variable. Let's say you want the first or the last comment of a product dependin
         Comment $comment
     ): Response {
     }
-    
+
 .. _doctrine-entity-value-resolver-resolve-target-entities:
-    
+
 Fetch via Interfaces
 ~~~~~~~~~~~~~~~~~~~~
 
@@ -818,7 +818,7 @@ resolved automatically::
     ): Response {
         // ...
     }
-        
+
 .. versionadded:: 7.3
 
     Support for target entity resolution in the ``EntityValueResolver`` was
