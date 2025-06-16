@@ -237,7 +237,7 @@ this will create a very long running list of schedules at that exact time.
 This may cause an issue if a task has a memory leak.
 
 You can add a hash symbol (``#``) in expressions to generate random values.
-Athough the values are random, they are predictable and consistent because they
+Although the values are random, they are predictable and consistent because they
 are generated based on the message. A message with string representation ``my task``
 and a defined frequency of ``# # * * *`` will have an idempotent frequency
 of ``56 20 * * *`` (every day at 8:56pm).
