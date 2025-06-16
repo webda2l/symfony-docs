@@ -240,7 +240,4 @@ The component will throw specific exceptions for invalid input or queries:
         // ... handle error
     }
 
-Learn more
-----------
-
 .. _`RFC 9535 - JSONPath`: https://datatracker.ietf.org/doc/html/rfc9535
