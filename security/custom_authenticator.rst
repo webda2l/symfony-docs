@@ -282,17 +282,19 @@ associated with the user. It allows loading the user through the configured
             }
         }
 
-You can normalize the user identifier before using it (e.g. to ensure that variations like
-"john.doe", "John.Doe", or "JOHN.DOE" are treated as the same user).
-In Symfony applications, you can optionally pass a user identifier normalizer as the
-third argument to the ``UserBadge``. This callable receives the ``$userIdentifier`` and must return a string.
+Some applications normalize user identifiers before processing them. For example,
+lowercasing identifiers helps treat values like "john.doe", "John.Doe", or
+"JOHN.DOE" as equivalent in systems where identifiers are case-insensitive.
+
+If needed, you can pass a normalizer as the third argument to ``UserBadge``.
+This callable receives the ``$userIdentifier`` and must return a string.
 
 .. versionadded:: 7.3
 
     Support for user identifier normalizers was introduced in Symfony 7.3.
 
-The example below uses a normalizer that converts usernames to
-a normalized, ASCII-only, lowercase format::
+The example below uses a normalizer that converts usernames to a normalized,
+ASCII-only, lowercase format::
 
     // src/Security/NormalizedUserBadge.php
     namespace App\Security;
