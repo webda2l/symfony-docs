@@ -252,14 +252,12 @@ Use the ``methods`` option to restrict the verbs each route should respond to:
     automatically for you when the :ref:`framework.http_method_override <configuration-framework-http_method_override>`
     option is ``true``.
 
-.. _routing-matching-expressions:
-
 Matching Environments
 ~~~~~~~~~~~~~~~~~~~~~
 
-The ``env`` option can be used to make a route conditional on the
-:ref:`configuration environment <configuration-environments>`, the route will
-only be registered if the environment matches.
+Use the ``env`` option to register a route only when the current
+:ref:`configuration environment <configuration-environments>` matches the
+given value:
 
 .. configuration-block::
 
@@ -274,11 +272,7 @@ only be registered if the environment matches.
 
         class DefaultController extends AbstractController
         {
-            #[Route(
-                '/tools',
-                name: 'tools',
-                env: 'dev',
-            )]
+            #[Route('/tools', name: 'tools', env: 'dev')]
             public function developerTools(): Response
             {
                 // ...
@@ -319,6 +313,8 @@ only be registered if the environment matches.
                 ->env('dev')
             ;
         };
+
+.. _routing-matching-expressions:
 
 Matching Expressions
 ~~~~~~~~~~~~~~~~~~~~
