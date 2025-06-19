@@ -97,9 +97,9 @@ of the document is represented by ``$``::
 
     // $titles is ['Sayings of the Century']
 
-Dot notation is the default, but JSONPath provides other syntaxes for cases where
-it doesn't work. Use bracket notation (``['...']``) when a key contains spaces
-or special characters::
+Dot notation is the default, but JSONPath provides other syntaxes for cases
+where it doesn't work. Use bracket notation (``['...']``) when a key contains
+spaces or special characters::
 
     // this is equivalent to the previous example
     $titles = $crawler->find('$["store"]["book"][0]["title"]');
@@ -178,7 +178,8 @@ methods to build your query:
 * :method:`Symfony\\Component\\JsonPath\\JsonPath::index`
   Adds an array index selector. Index numbers start at ``0``.
 
-* :method:`Symfony\\Component\\JsonPath\\JsonPath::first` / :method:`Symfony\\Component\\JsonPath\\JsonPath::last`
+* :method:`Symfony\\Component\\JsonPath\\JsonPath::first` /
+  :method:`Symfony\\Component\\JsonPath\\JsonPath::last`
   Shortcuts for ``index(0)`` and ``index(-1)`` respectively::
 
       // get the last book: '$["store"]["book"][-1]'
@@ -213,6 +214,86 @@ filters, refer to the `Querying with Expressions`_ section above. All these
 features are supported and can be combined with the programmatic builder when
 appropriate (e.g., inside a ``filter()`` expression).
 
+Testing with JSON Assertions
+----------------------------
+
+The component provides a set of PHPUnit assertions to make testing JSON data
+more convenient. Use the :class:`Symfony\\Component\\JsonPath\\Test\\JsonPathAssertionsTrait`
+in your test class::
+
+    use PHPUnit\Framework\TestCase;
+    use Symfony\Component\JsonPath\Test\JsonPathAssertionsTrait;
+
+    class MyTest extends TestCase
+    {
+        use JsonPathAssertionsTrait;
+
+        public function testSomething(): void
+        {
+            $json = '{"books": [{"title": "A"}, {"title": "B"}]}';
+
+            self::assertJsonPathCount(2, '$.books[*]', $json);
+        }
+    }
+
+The trait provides the following assertion methods:
+
+* :method:`Symfony\\Component\\JsonPath\\Test\\JsonPathAssertionsTrait::assertJsonPathCount`
+  Asserts that the number of elements found by the JSONPath expression matches
+  an expected count::
+
+      $json = '{"a": [1, 2, 3]}';
+      self::assertJsonPathCount(3, '$.a[*]', $json);
+
+* :method:`Symfony\\Component\\JsonPath\\Test\\JsonPathAssertionsTrait::assertJsonPathEquals`
+  Asserts that the result of a JSONPath expression is equal to an expected
+  value. The comparison uses ``==`` (type coercion) instead of ``===``::
+
+      $json = '{"a": [1, 2, 3]}';
+
+      // passes because "1" == 1
+      self::assertJsonPathEquals(['1'], '$.a[0]', $json);
+
+* :method:`Symfony\\Component\\JsonPath\\Test\\JsonPathAssertionsTrait::assertJsonPathNotEquals`
+  Asserts that the result of a JSONPath expression is not equal to an expected
+  value. The comparison uses ``!=`` (type coercion) instead of ``!==``::
+
+      $json = '{"a": [1, 2, 3]}';
+      self::assertJsonPathNotEquals([42], '$.a[0]', $json);
+
+* :method:`Symfony\\Component\\JsonPath\\Test\\JsonPathAssertionsTrait::assertJsonPathSame`
+  Asserts that the result of a JSONPath expression is identical (``===``) to an
+  expected value. This is a strict comparison and does not perform type
+  coercion::
+
+      $json = '{"a": [1, 2, 3]}';
+
+      // fails because "1" !== 1
+      // self::assertJsonPathSame(['1'], '$.a[0]', $json);
+
+      self::assertJsonPathSame([1], '$.a[0]', $json);
+
+* :method:`Symfony\\Component\\JsonPath\\Test\\JsonPathAssertionsTrait::assertJsonPathNotSame`
+  Asserts that the result of a JSONPath expression is not identical (``!==``) to
+  an expected value::
+
+      $json = '{"a": [1, 2, 3]}';
+      self::assertJsonPathNotSame(['1'], '$.a[0]', $json);
+
+* :method:`Symfony\\Component\\JsonPath\\Test\\JsonPathAssertionsTrait::assertJsonPathContains`
+  Asserts that a given value is found within the array of results from the
+  JSONPath expression::
+
+      $json = '{"tags": ["php", "symfony", "json"]}';
+      self::assertJsonPathContains('symfony', '$.tags[*]', $json);
+
+* :method:`Symfony\\Component\\JsonPath\\Test\\JsonPathAssertionsTrait::assertJsonPathNotContains`
+  Asserts that a given value is NOT found within the array of results from the
+  JSONPath expression::
+
+      $json = '{"tags": ["php", "symfony", "json"]}';
+      self::assertJsonPathNotContains('java', '$.tags[*]', $json);
+
 Error Handling
 --------------
 
@@ -223,7 +304,8 @@ The component throws specific exceptions for invalid input or queries:
 * :class:`Symfony\\Component\\JsonPath\\Exception\\InvalidJsonStringInputException`:
   Thrown during a ``find()`` call if the JSON string is malformed (e.g., syntax error);
 * :class:`Symfony\\Component\\JsonPath\\Exception\\JsonCrawlerException`:
-  Thrown for errors within the JsonPath expression itself, such as using an unknown function
+  Thrown for errors within the JsonPath expression itself, such as using an
+  unknown function
 
 Example of handling errors::
 
