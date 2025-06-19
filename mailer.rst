@@ -1765,7 +1765,7 @@ the HTTP calls made by the HTTP transports, which is useful for debugging errors
 
     public function onMessage(SentMessageEvent $event): void
     {
-        $message $event->getMessage();
+        $message = $event->getMessage();
 
         // do something with the message (e.g. get its id)
     }
