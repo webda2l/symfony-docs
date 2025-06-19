@@ -247,6 +247,68 @@ Use the ``methods`` option to restrict the verbs each route should respond to:
     automatically for you when the :ref:`framework.http_method_override <configuration-framework-http_method_override>`
     option is ``true``.
 
+Matching Environments
+~~~~~~~~~~~~~~~~~~~~~
+
+Use the ``env`` option to register a route only when the current
+:ref:`configuration environment <configuration-environments>` matches the
+given value:
+
+.. configuration-block::
+
+    .. code-block:: php-attributes
+
+        // src/Controller/DefaultController.php
+        namespace App\Controller;
+
+        use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
+        use Symfony\Component\HttpFoundation\Response;
+        use Symfony\Component\Routing\Attribute\Route;
+
+        class DefaultController extends AbstractController
+        {
+            #[Route('/tools', name: 'tools', env: 'dev')]
+            public function developerTools(): Response
+            {
+                // ...
+            }
+        }
+
+    .. code-block:: yaml
+
+        # config/routes.yaml
+        tools:
+            path:       /tools
+            controller: App\Controller\DefaultController::developerTools
+            env:        dev
+
+    .. code-block:: xml
+
+        <!-- config/routes.xml -->
+        <?xml version="1.0" encoding="UTF-8" ?>
+        <routes xmlns="http://symfony.com/schema/routing"
+            xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+            xsi:schemaLocation="http://symfony.com/schema/routing
+                https://symfony.com/schema/routing/routing-1.0.xsd">
+
+            <route id="tools" path="/tools" controller="App\Controller\DefaultController::developerTools">
+                <env>dev</env>
+            </route>
+        </routes>
+
+    .. code-block:: php
+
+        // config/routes.php
+        use App\Controller\DefaultController;
+        use Symfony\Component\Routing\Loader\Configurator\RoutingConfigurator;
+
+        return function (RoutingConfigurator $routes): void {
+            $routes->add('tools', '/tools')
+                ->controller([DefaultController::class, 'developerTools'])
+                ->env('dev')
+            ;
+        };
+
 .. _routing-matching-expressions:
 
 Matching Expressions
