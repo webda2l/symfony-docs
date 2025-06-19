@@ -30,9 +30,9 @@ You can install the component in your project using Composer:
 Usage
 -----
 
-To start querying a JSON document, first create a
-:class:`Symfony\\Component\\JsonPath\\JsonCrawler`object from a JSON string. The
-following examples use this sample "bookstore" JSON data::
+To start querying a JSON document, first create a :class:`Symfony\\Component\\JsonPath\\JsonCrawler`
+object from a JSON string. The following examples use this sample "bookstore"
+JSON data::
 
     use Symfony\Component\JsonPath\JsonCrawler;
 
@@ -77,9 +77,8 @@ following examples use this sample "bookstore" JSON data::
 
     $crawler = new JsonCrawler($json);
 
-Once you have the crawler instance, use its
-:method:`Symfony\\Component\\JsonPath\\JsonCrawler::find` method to start
-querying the data. This method returns an array of matching values.
+Once you have the crawler instance, use its :method:`Symfony\\Component\\JsonPath\\JsonCrawler::find`
+method to start querying the data. This method returns an array of matching values.
 
 Querying with Expressions
 -------------------------
@@ -120,12 +119,7 @@ you to find values without specifying the full path::
     // get all authors from anywhere in the document
     $authors = $crawler->find('$..author');
 
-    // $authors is equals to [
-        'Nigel Rees',
-        'Evelyn Waugh',
-        'Herman Melville',
-        'John Ronald Reuel Tolkien'
-    ]
+    // $authors is ['Nigel Rees', 'Evelyn Waugh', 'Herman Melville', 'John Ronald Reuel Tolkien']
 
 Filtering Results
 ~~~~~~~~~~~~~~~~~
@@ -141,9 +135,8 @@ Building Queries Programmatically
 
 For more dynamic or complex query building, use the fluent API provided
 by the :class:`Symfony\\Component\\JsonPath\\JsonPath` class. This lets you
-construct a query object step by step. The ``JsonPath`` object can then be
-passed to the crawler's
-:method:`Symfony\\Component\\JsonPath\\JsonCrawler::find` method.
+construct a query object step by step. The ``JsonPath`` object can then be passed
+to the crawler's :method:`Symfony\\Component\\JsonPath\\JsonCrawler::find` method.
 
 The main advantage of the programmatic builder is that it automatically handles
 escaping of keys and values, preventing syntax errors::
@@ -225,8 +218,7 @@ Testing with JSON Assertions
 ----------------------------
 
 The component provides a set of PHPUnit assertions to make testing JSON data
-more convenient. Use the
-:class:`Symfony\\Component\\JsonPath\\Test\\JsonPathAssertionsTrait`
+more convenient. Use the :class:`Symfony\\Component\\JsonPath\\Test\\JsonPathAssertionsTrait`
 in your test class::
 
     use PHPUnit\Framework\TestCase;
@@ -308,11 +300,9 @@ Error Handling
 The component throws specific exceptions for invalid input or queries:
 
 * :class:`Symfony\\Component\\JsonPath\\Exception\\InvalidArgumentException`:
-  Thrown if the input to the ``JsonCrawler`` constructor is not a valid JSON
-string;
+  Thrown if the input to the ``JsonCrawler`` constructor is not a valid JSON string;
 * :class:`Symfony\\Component\\JsonPath\\Exception\\InvalidJsonStringInputException`:
-  Thrown during a ``find()`` call if the JSON string is malformed
-(e.g., syntax error);
+  Thrown during a ``find()`` call if the JSON string is malformed (e.g., syntax error);
 * :class:`Symfony\\Component\\JsonPath\\Exception\\JsonCrawlerException`:
   Thrown for errors within the JsonPath expression itself, such as using an
   unknown function
