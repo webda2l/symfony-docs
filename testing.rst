@@ -714,6 +714,27 @@ stores in the session of the test client. If you need to define custom
 attributes in this token, you can use the ``tokenAttributes`` argument of the
 :method:`Symfony\\Bundle\\FrameworkBundle\\KernelBrowser::loginUser` method.
 
+You can also use :class:`Symfony\\Component\\Security\\Core\\User\\InMemoryUser` but you have to define those in the configuration first::
+
+.. code-block:: yaml
+
+    # config/packages/security.yaml
+    when@test:
+        security:
+            users_in_memory:
+                memory:
+                    users:
+                        admin: { password: password, roles: ROLE_ADMIN }
+
+and then log the user with::
+
+    // tests/Controller/ProfileControllerTest.php
+    use Symfony\Component\Security\Core\User\InMemoryUser;
+
+    $client = static::createClient();
+    $testUser = new InMemoryUser('admin', 'password', ['ROLE_ADMIN']);
+    $client->loginUser($testUser);
+
 To set a specific firewall (``main`` is set by default)::
 
     $client->loginUser($testUser, 'my_firewall');
