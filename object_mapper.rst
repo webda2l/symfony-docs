@@ -3,8 +3,7 @@ Object Mapper
 
 .. versionadded:: 7.3
 
-    The ObjectMapper component was introduced in Symfony 7.3 as an
-    :doc:`experimental feature </contributing/code/experimental>`.
+    The ObjectMapper component was introduced in Symfony 7.3.
 
 This component transforms one object into another, simplifying tasks such as
 converting DTOs (Data Transfer Objects) into entities or vice versa. It can also
