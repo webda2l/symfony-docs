@@ -117,7 +117,7 @@ webhook consumer code.
 The webhook routing name is part of the URL you need to configure at the
 third-party mailer provider. The URL is the concatenation of your domain name
 and the routing name you chose in the configuration (like
-``https://example.com/webhook/mailer_mailgun``.
+``https://example.com/webhook/mailer_mailgun``).
 
 For Mailgun, you will get a secret for the webhook. Store this secret as
 MAILER_MAILGUN_SECRET (in the :doc:`secrets management system
