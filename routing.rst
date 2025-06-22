@@ -1151,6 +1151,17 @@ special parameters created by Symfony:
     This is used for such things as setting the ``Content-Type`` of the response
     (e.g. a ``json`` format translates into a ``Content-Type`` of ``application/json``).
 
+``_query``
+    Used to add query parameters to the generated URL.
+
+    .. versionadded:: 7.4
+
+        The ``_query`` parameter was introduced in Symfony 7.4.
+
+    .. deprecated:: 7.4
+
+        Passing a value other than an array as the ``_query`` parameter was deprecated in Symfony 7.4.
+
 ``_fragment``
     Used to set the fragment identifier, which is the optional last part of a URL that
     starts with a ``#`` character and is used to identify a portion of a document.
