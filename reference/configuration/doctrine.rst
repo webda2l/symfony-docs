@@ -159,22 +159,22 @@ If you want to configure multiple connections in YAML, put them under the
 
     .. code-block:: yaml
 
-    doctrine:
-        dbal:
-            default_connection:       default
-            connections:
-                default:
-                    dbname:           Symfony
-                    user:             root
-                    password:         null
-                    host:             localhost
-                    server_version:   '8.0.37'
-                customer:
-                    dbname:           customer
-                    user:             root
-                    password:         null
-                    host:             localhost
-                    server_version:   '8.2.0'
+        doctrine:
+            dbal:
+                default_connection:       default
+                connections:
+                    default:
+                        dbname:           Symfony
+                        user:             root
+                        password:         null
+                        host:             localhost
+                        server_version:   '8.0.37'
+                    customer:
+                        dbname:           customer
+                        user:             root
+                        password:         null
+                        host:             localhost
+                        server_version:   '8.2.0'
 
     .. code-block:: php
 
@@ -231,18 +231,18 @@ that the ORM resolves to:
 
     .. code-block:: yaml
 
-    doctrine:
-        orm:
-            auto_mapping: false
-            # the standard distribution overrides this to be true in debug, false otherwise
-            auto_generate_proxy_classes: false
-            proxy_namespace: Proxies
-            proxy_dir: '%kernel.cache_dir%/doctrine/orm/Proxies'
-            default_entity_manager: default
-            metadata_cache_driver: array
-            query_cache_driver: array
-            result_cache_driver: array
-            naming_strategy: doctrine.orm.naming_strategy.default
+        doctrine:
+            orm:
+                auto_mapping: false
+                # the standard distribution overrides this to be true in debug, false otherwise
+                auto_generate_proxy_classes: false
+                proxy_namespace: Proxies
+                proxy_dir: '%kernel.cache_dir%/doctrine/orm/Proxies'
+                default_entity_manager: default
+                metadata_cache_driver: array
+                query_cache_driver: array
+                result_cache_driver: array
+                naming_strategy: doctrine.orm.naming_strategy.default
 
     .. code-block:: php
 
