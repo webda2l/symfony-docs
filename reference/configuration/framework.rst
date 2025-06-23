@@ -2064,7 +2064,7 @@ base_path
 
 **type**: ``string``
 
-This option allows you to define a base path to be used for assets:
+This option allows you to define a base path from where Twig's ``{{ asset() }}`` function is resolved:
 
 .. configuration-block::
 
