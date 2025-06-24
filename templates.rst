@@ -304,10 +304,10 @@ You can now use the ``asset()`` function:
 .. code-block:: html+twig
 
     {# the image lives at "public/images/logo.png" #}
-    <img src="{{ asset('images/logo.png') }}" alt="Symfony!"/>
+    <img src="{{ asset('images/logo.png') }}" alt="Symfony!">
 
     {# the CSS file lives at "public/css/blog.css" #}
-    <link href="{{ asset('css/blog.css') }}" rel="stylesheet"/>
+    <link href="{{ asset('css/blog.css') }}" rel="stylesheet">
 
     {# the JS file lives at "public/bundles/acme/js/loader.js" #}
     <script src="{{ asset('bundles/acme/js/loader.js') }}"></script>
@@ -332,7 +332,7 @@ as follows:
 
 .. code-block:: html+twig
 
-    <img src="{{ absolute_url(asset('images/logo.png')) }}" alt="Symfony!"/>
+    <img src="{{ absolute_url(asset('images/logo.png')) }}" alt="Symfony!">
 
     <link rel="shortcut icon" href="{{ absolute_url('favicon.png') }}">
 
@@ -969,7 +969,7 @@ following code to display the user information is repeated in several places:
 
     {# ... #}
     <div class="user-profile">
-        <img src="{{ user.profileImageUrl }}" alt="{{ user.fullName }}"/>
+        <img src="{{ user.profileImageUrl }}" alt="{{ user.fullName }}">
         <p>{{ user.fullName }} - {{ user.email }}</p>
     </div>
 
@@ -1254,7 +1254,7 @@ In practice, the ``base.html.twig`` template would look like this:
             <meta charset="UTF-8">
             <title>{% block title %}My Application{% endblock %}</title>
             {% block stylesheets %}
-                <link rel="stylesheet" type="text/css" href="/css/base.css"/>
+                <link rel="stylesheet" type="text/css" href="/css/base.css">
             {% endblock %}
         </head>
         <body>
