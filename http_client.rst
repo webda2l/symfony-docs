@@ -1355,6 +1355,10 @@ code waits only when necessary.
     or access to certificate files). To avoid hitting these limits, consider
     processing requests in batches.
 
+    There is however a maximum amount of concurrent connections that can be open
+    per host (6 by default). See
+    :doc:`max_host_connections </configuration/framework.html#max-host-connections>`.
+
 Multiplexing Responses
 ~~~~~~~~~~~~~~~~~~~~~~
 
