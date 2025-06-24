@@ -175,8 +175,9 @@ Some options are described in this guide:
 Check out the full :ref:`http_client config reference <reference-http-client>`
 to learn about all the options.
 
-The HTTP client also has one configuration option called
-``max_host_connections``, this option can not be overridden by a request:
+The HTTP client also has a configuration option called
+:ref:`max_host_connections <reference-http-client-max-host-connections>`.
+This option cannot be overridden per request:
 
 .. configuration-block::
 
@@ -1342,6 +1343,9 @@ code waits only when necessary.
     (e.g. the operating system might limit the number of simultaneous connections
     or access to certificate files). To avoid hitting these limits, consider
     processing requests in batches.
+
+    There is, however, a maximum amount of concurrent connections that can be open
+    per host (``6`` by default). See :ref:`max_host_connections <reference-http-client-max-host-connections>`.
 
 Multiplexing Responses
 ~~~~~~~~~~~~~~~~~~~~~~

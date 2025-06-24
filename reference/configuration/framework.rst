@@ -1733,6 +1733,8 @@ max_duration
 The maximum execution time, in seconds, that the request and the response are
 allowed to take. A value lower than or equal to 0 means it is unlimited.
 
+.. _reference-http-client-max-host-connections:
+
 max_host_connections
 ....................
 
