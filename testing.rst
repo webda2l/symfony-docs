@@ -1002,7 +1002,7 @@ each assert method. To set this verbosity level globally, use the
 
 .. versionadded:: 7.4
 
-    The ``setBrowserKitAssertionsAsVerbose()`` method ws introduced in Symfony 7.4.
+    The ``setBrowserKitAssertionsAsVerbose()`` method was introduced in Symfony 7.4.
 
 Request Assertions
 ..................
