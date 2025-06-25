@@ -963,11 +963,11 @@ However, Symfony provides useful shortcut methods for the most common cases:
 Response Assertions
 ...................
 
-``assertResponseIsSuccessful(string $message = '', bool $verbose = true)``
+``assertResponseIsSuccessful(string $message = '', ?bool $verbose = null)``
     Asserts that the response was successful (HTTP status is 2xx).
-``assertResponseStatusCodeSame(int $expectedCode, string $message = '', bool $verbose = true)``
+``assertResponseStatusCodeSame(int $expectedCode, string $message = '', ?bool $verbose = null)``
     Asserts a specific HTTP status code.
-``assertResponseRedirects(?string $expectedLocation = null, ?int $expectedCode = null, string $message = '', bool $verbose = true)``
+``assertResponseRedirects(?string $expectedLocation = null, ?int $expectedCode = null, string $message = '', ?bool $verbose = null)``
     Asserts the response is a redirect response (optionally, you can check
     the target location and status code). The excepted location can be either
     an absolute or a relative path.
@@ -985,12 +985,21 @@ Response Assertions
     Asserts the response format returned by the
     :method:`Symfony\\Component\\HttpFoundation\\Response::getFormat` method
     is the same as the expected value.
-``assertResponseIsUnprocessable(string $message = '', bool $verbose = true)``
+``assertResponseIsUnprocessable(string $message = '', bool ?$verbose = null)``
     Asserts the response is unprocessable (HTTP status is 422)
 
 .. versionadded:: 7.1
 
     The ``$verbose`` parameters were introduced in Symfony 7.1.
+
+.. versionadded:: 7.4
+
+    The ``$defaultVerboseMode = true;`` attribute was introduced in
+    :class:`Symfony\\Bundle\\FrameworkBundle\\Test\\BrowserKitAssertionsTrait`
+    in Symfony 7.4. This attribute allows you to define the default verbosity
+    for all applicable assertions within the trait, overriding the initial `null`
+    value of the `$verbose` parameter.
+
 
 Request Assertions
 ..................
