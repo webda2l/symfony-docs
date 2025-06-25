@@ -988,18 +988,21 @@ Response Assertions
 ``assertResponseIsUnprocessable(string $message = '', bool ?$verbose = null)``
     Asserts the response is unprocessable (HTTP status is 422)
 
+By default, these assert methods provide detailed error messages when they fail.
+You can control the verbosity level using the optional ``verbose`` argument in
+each assert method. To set this verbosity level globally, use the
+``setBrowserKitAssertionsAsVerbose()`` method from the
+:class:`Symfony\\Bundle\\FrameworkBundle\\Test\\BrowserKitAssertionsTrait`::
+
+    BrowserKitAssertionsTrait::setBrowserKitAssertionsAsVerbose(false);
+
 .. versionadded:: 7.1
 
     The ``$verbose`` parameters were introduced in Symfony 7.1.
 
 .. versionadded:: 7.4
 
-    The ``$defaultVerboseMode = true;`` attribute was introduced in
-    :class:`Symfony\\Bundle\\FrameworkBundle\\Test\\BrowserKitAssertionsTrait`
-    in Symfony 7.4. This attribute allows you to define the default verbosity
-    for all applicable assertions within the trait, overriding the initial `null`
-    value of the `$verbose` parameter.
-
+    The ``setBrowserKitAssertionsAsVerbose()`` method ws introduced in Symfony 7.4.
 
 Request Assertions
 ..................
