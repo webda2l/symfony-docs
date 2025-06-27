@@ -226,61 +226,6 @@ After configuring the correct algorithm, you can use the
             throw new \Exception('Bad credentials, cannot delete this user.');
         }
 
-Injecting a Specific Password Hasher
-~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
-
-In some cases, you might define a password hasher in your configuration that is
-not linked to a user entity but is instead identified by a unique key.
-For example, you might have a separate hasher for things like password recovery
-codes.
-
-With the following configuration:
-
-.. code-block:: yaml
-
-    # config/packages/security.yaml
-    security:
-        password_hashers:
-            recovery_code: 'auto'
-
-        firewalls:
-            main:
-                # ...
-
-It is possible to inject the recovery_code password hasher into any service.
-To do this, you can't rely on standard autowiring, as Symfony wouldn't know
-which specific hasher to provide.
-
-Instead, you can use the ``#[Target]`` attribute to request the hasher by its
-configuration key::
-
-    // src/Controller/HomepageController.php
-    namespace App\Controller;
-
-    use Symfony\Component\DependencyInjection\Attribute\Target;
-    use Symfony\Component\PasswordHasher\PasswordHasherInterface;
-
-    class HomepageController extends AbstractController
-    {
-        public function __construct(
-            #[Target('recovery_code')]
-            private readonly PasswordHasherInterface $passwordHasher,
-        ) {
-        }
-
-        #[Route('/')]
-        public function index(): Response
-        {
-            $plaintextToken = 'some-secret-token';
-
-            // Note: use hash(), not hashPassword(), as we are not using a UserInterface object
-            $hashedToken = $this->passwordHasher->hash($plaintextToken);
-        }
-    }
-
-When injecting a specific hasher by its name, you should type-hint the generic
-:class:`Symfony\\Component\\PasswordHasher\\PasswordHasherInterface`.
-
 Reset Password
 --------------
 
@@ -310,6 +255,64 @@ you'll see a success message and a list of any other steps you need to do.
 You can customize the reset password bundle's behavior by updating the
 ``reset_password.yaml`` file. For more information on the configuration,
 check out the `SymfonyCastsResetPasswordBundle`_  guide.
+
+Injecting a Specific Password Hasher
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+
+In some cases, you may define a password hasher in your configuration that is
+not tied to a user class. For example, you might use a separate hasher for
+password recovery codes or API tokens.
+
+With the following configuration:
+
+.. code-block:: yaml
+
+    # config/packages/security.yaml
+    security:
+        password_hashers:
+            recovery_code: 'auto'
+
+        firewalls:
+            main:
+                # ...
+
+You can inject the ``recovery_code`` password hasher into any service. However,
+you can't rely on standard autowiring, as Symfony doesn't know which specific
+hasher to provide.
+
+Instead, use the ``#[Target]`` attribute to explicitly request the hasher by
+its configuration key::
+
+    // src/Controller/HomepageController.php
+    namespace App\Controller;
+
+    use Symfony\Component\DependencyInjection\Attribute\Target;
+    use Symfony\Component\PasswordHasher\PasswordHasherInterface;
+
+    class HomepageController extends AbstractController
+    {
+        public function __construct(
+            #[Target('recovery_code')]
+            private readonly PasswordHasherInterface $passwordHasher,
+        ) {
+        }
+
+        #[Route('/')]
+        public function index(): Response
+        {
+            $plaintextToken = 'some-secret-token';
+
+            // Note: use hash(), not hashPassword(), as we are not using a UserInterface object
+            $hashedToken = $this->passwordHasher->hash($plaintextToken);
+        }
+    }
+
+When injecting a specific hasher by its name, you should type-hint the generic
+:class:`Symfony\\Component\\PasswordHasher\\PasswordHasherInterface`.
+
+.. versionadded:: 7.4
+
+    The feature to inject specific password hashers was introduced in Symfony 7.4.
 
 .. _security-password-migration:
 
