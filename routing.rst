@@ -1151,6 +1151,13 @@ special parameters created by Symfony:
     This is used for such things as setting the ``Content-Type`` of the response
     (e.g. a ``json`` format translates into a ``Content-Type`` of ``application/json``).
 
+``_fragment``
+    Used to set the fragment identifier, which is the optional last part of a URL that
+    starts with a ``#`` character and is used to identify a portion of a document.
+
+``_locale``
+    Used to set the :ref:`locale <translation-locale-url>` on the request.
+
 ``_query``
     Used to add query parameters to the generated URL.
 
@@ -1160,14 +1167,8 @@ special parameters created by Symfony:
 
     .. deprecated:: 7.4
 
-        Passing a value other than an array as the ``_query`` parameter was deprecated in Symfony 7.4.
-
-``_fragment``
-    Used to set the fragment identifier, which is the optional last part of a URL that
-    starts with a ``#`` character and is used to identify a portion of a document.
-
-``_locale``
-    Used to set the :ref:`locale <translation-locale-url>` on the request.
+        Passing a value other than an array as the ``_query`` parameter was
+        deprecated in Symfony 7.4.
 
 You can include these attributes (except ``_fragment``) both in individual routes
 and in route imports. Symfony defines some special attributes with the same name
@@ -1187,6 +1188,7 @@ and in route imports. Symfony defines some special attributes with the same name
                 path: '/articles/{_locale}/search.{_format}',
                 locale: 'en',
                 format: 'html',
+                query: ['page' => 1],
                 requirements: [
                     '_locale' => 'en|fr',
                     '_format' => 'html|xml',
@@ -1205,6 +1207,8 @@ and in route imports. Symfony defines some special attributes with the same name
           controller:  App\Controller\ArticleController::search
           locale:      en
           format:      html
+          query:
+              page:    1
           requirements:
               _locale: en|fr
               _format: html|xml
@@ -1242,6 +1246,7 @@ and in route imports. Symfony defines some special attributes with the same name
                 ->controller([ArticleController::class, 'search'])
                 ->locale('en')
                 ->format('html')
+                ->query(['page' => 1])
                 ->requirements([
                     '_locale' => 'en|fr',
                     '_format' => 'html|xml',
