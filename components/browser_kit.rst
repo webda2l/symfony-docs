@@ -329,6 +329,20 @@ history::
     // go forward to documentation page
     $crawler = $client->forward();
 
+    // check if the history position is on the first page
+    if (!$client->getHistory()->isFirstPage()) {
+        $crawler = $client->back();
+    }
+    
+    // check if the history position is on the last page
+    if (!$client->getHistory()->isLastPage()) {
+        $crawler = $client->forward();
+    }
+
+.. versionadded:: 7.4
+
+    The ``isFirstPage`` and ``isLastPage`` methods were introduced in Symfony 7.4.
+
 You can delete the client's history with the ``restart()`` method. This will
 also delete all the cookies::
 
