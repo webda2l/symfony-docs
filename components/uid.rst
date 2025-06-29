@@ -120,7 +120,7 @@ sortable (like :ref:`ULIDs <ulid>`). It's more efficient for database indexing
 **UUID v7** (UNIX timestamp)
 
 Generates time-ordered UUIDs based on a high-resolution Unix Epoch timestamp
-source (the number of milliseconds since midnight 1 Jan 1970 UTC, leap seconds excluded)
+source (the number of microseconds since midnight 1 Jan 1970 UTC, leap seconds excluded)
 (`read the UUIDv7 spec <https://datatracker.ietf.org/doc/html/draft-ietf-uuidrev-rfc4122bis#name-uuid-version-7>`__).
 It's recommended to use this version over UUIDv1 and UUIDv6 because it provides
 better entropy (and a more strict chronological order of UUID generation)::
@@ -129,6 +129,10 @@ better entropy (and a more strict chronological order of UUID generation)::
 
     $uuid = Uuid::v7();
     // $uuid is an instance of Symfony\Component\Uid\UuidV7
+
+.. versionadded:: 7.4
+
+    In Symfony 7.4, the precision was increased from milliseconds to microseconds.
 
 **UUID v8** (custom)
 
