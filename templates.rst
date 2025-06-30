@@ -1513,8 +1513,8 @@ Bundle Templates
 ~~~~~~~~~~~~~~~~
 
 If you :ref:`install packages/bundles <symfony-flex>` in your application, they
-may include their own Twig templates (in the ``Resources/views/`` directory of
-each bundle). To avoid messing with your own templates, Symfony adds bundle
+may include their own Twig templates (in the ``templates/`` directory of each
+bundle). To avoid messing with your own templates, Symfony adds bundle
 templates under an automatic namespace created after the bundle name.
 
 For example, the templates of a bundle called ``AcmeBlogBundle`` are available
