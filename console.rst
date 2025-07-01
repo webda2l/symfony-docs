@@ -206,6 +206,33 @@ After configuring and registering the command, you can run it in the terminal:
 As you might expect, this command will do nothing as you didn't write any logic
 yet. Add your own logic inside the ``__invoke()`` method.
 
+Command Aliases
+~~~~~~~~~~~~~~~
+
+You can define alternative names (aliases) for a command directly in its name
+using a pipe (``|``) separator. The first name in the list becomes the actual
+command name; the others are aliases that can also be used to run the command::
+
+    // src/Command/CreateUserCommand.php
+    namespace App\Command;
+
+    use Symfony\Component\Console\Attribute\AsCommand;
+    use Symfony\Component\Console\Command\Command;
+
+    #[AsCommand(
+        name: 'app:create-user|app:add-user|app:new-user',
+        description: 'Creates a new user.',
+    )]
+    class CreateUserCommand extends Command
+    {
+        // ...
+    }
+
+.. versionadded:: 7.4
+
+    The ability to define aliases through the command name was introduced in
+    Symfony 7.4.
+
 Console Output
 --------------
 
