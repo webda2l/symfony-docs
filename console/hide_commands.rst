@@ -22,8 +22,28 @@ the ``hidden`` property of the ``AsCommand`` attribute::
         // ...
     }
 
-Hidden commands behave the same as normal commands but they are no longer displayed
-in command listings, so end-users are not aware of their existence.
+You can also define a command as hidden using the pipe (``|``) syntax in the
+command name::
+
+    // src/Command/LegacyCommand.php
+    namespace App\Command;
+
+    use Symfony\Component\Console\Attribute\AsCommand;
+    use Symfony\Component\Console\Command\Command;
+
+    #[AsCommand(name: '|app:legacy')]
+    class LegacyCommand extends Command
+    {
+        // ...
+    }
+
+.. versionadded:: 7.4
+
+    The ability to define a command as hidden using the pipe syntax in the
+    command name was introduced in Symfony 7.4.
+
+Hidden commands behave the same as normal commands but they are no longer
+displayed in command listings, so end-users are not aware of their existence.
 
 .. note::
 
