@@ -483,7 +483,8 @@ The attribute takes more parameters to customize the trigger::
     // when applying this attribute to a Symfony console command, you can pass
     // arguments and options to the command using the 'arguments' option:
     #[AsCronTask('0 0 * * *', arguments: 'some_argument --some-option --another-option=some_value')]
-    class MyCommand extends Command
+    #[AsCommand(name: 'app:my-command')]
+    class MyCommand
 
 .. _scheduler-attributes-periodic-task:
 
@@ -532,7 +533,8 @@ The ``#[AsPeriodicTask]`` attribute takes many parameters to customize the trigg
     // when applying this attribute to a Symfony console command, you can pass
     // arguments and options to the command using the 'arguments' option:
     #[AsPeriodicTask(frequency: '1 day', arguments: 'some_argument --some-option --another-option=some_value')]
-    class MyCommand extends Command
+    #[AsCommand(name: 'app:my-command')]
+    class MyCommand
 
 Managing Scheduled Messages
 ---------------------------

@@ -15,10 +15,9 @@ the ``hidden`` property of the ``AsCommand`` attribute::
     namespace App\Command;
 
     use Symfony\Component\Console\Attribute\AsCommand;
-    use Symfony\Component\Console\Command\Command;
 
     #[AsCommand(name: 'app:legacy', hidden: true)]
-    class LegacyCommand extends Command
+    class LegacyCommand
     {
         // ...
     }

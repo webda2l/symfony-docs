@@ -107,26 +107,25 @@ completion (by default, by pressing the Tab key).
     installation instructions for your shell. The Symfony CLI will provide
     completion for the ``console`` and ``composer`` commands.
 
+.. _console_creating-command:
+
 Creating a Command
 ------------------
 
-Commands are defined in classes extending
-:class:`Symfony\\Component\\Console\\Command\\Command`. For example, you may
-want a command to create a user::
+Commands are defined in classes and auto-registered using the ``#[AsCommand]``
+attribute. For example, you may want a command to create a user::
 
     // src/Command/CreateUserCommand.php
     namespace App\Command;
 
     use Symfony\Component\Console\Attribute\AsCommand;
     use Symfony\Component\Console\Command\Command;
-    use Symfony\Component\Console\Input\InputInterface;
-    use Symfony\Component\Console\Output\OutputInterface;
 
     // the name of the command is what users type after "php bin/console"
     #[AsCommand(name: 'app:create-user')]
-    class CreateUserCommand extends Command
+    class CreateUserCommand
     {
-        protected function execute(InputInterface $input, OutputInterface $output): int
+        public function __invoke(): int
         {
             // ... put here the code to create the user
 
@@ -147,103 +146,53 @@ want a command to create a user::
         }
     }
 
-Configuring the Command
-~~~~~~~~~~~~~~~~~~~~~~~
-
-You can optionally define a description, help message and the
-:doc:`input options and arguments </console/input>` by overriding the
-``configure()`` method::
-
-    // src/Command/CreateUserCommand.php
-
-    // ...
-    class CreateUserCommand extends Command
-    {
-        // ...
-        protected function configure(): void
-        {
-            $this
-                // the command description shown when running "php bin/console list"
-                ->setDescription('Creates a new user.')
-                // the command help shown when running the command with the "--help" option
-                ->setHelp('This command allows you to create a user...')
-            ;
-        }
-    }
-
-.. tip::
-
-    Using the ``#[AsCommand]`` attribute to define a description instead of
-    using the ``setDescription()`` method allows to get the command description without
-    instantiating its class. This makes the ``php bin/console list`` command run
-    much faster.
-
-    If you want to always run the ``list`` command fast, add the ``--short`` option
-    to it (``php bin/console list --short``). This will avoid instantiating command
-    classes, but it won't show any description for commands that use the
-    ``setDescription()`` method instead of the attribute to define the command
-    description.
-
-The ``configure()`` method is called automatically at the end of the command
-constructor. If your command defines its own constructor, set the properties
-first and then call to the parent constructor, to make those properties
-available in the ``configure()`` method::
-
-    // ...
-    use Symfony\Component\Console\Command\Command;
-    use Symfony\Component\Console\Input\InputArgument;
-
-    class CreateUserCommand extends Command
-    {
-        // ...
-
-        public function __construct(bool $requirePassword = false)
-        {
-            // best practices recommend to call the parent constructor first and
-            // then set your own properties. That wouldn't work in this case
-            // because configure() needs the properties set in this constructor
-            $this->requirePassword = $requirePassword;
-
-            parent::__construct();
-        }
-
-        protected function configure(): void
-        {
-            $this
-                // ...
-                ->addArgument('password', $this->requirePassword ? InputArgument::REQUIRED : InputArgument::OPTIONAL, 'User password')
-            ;
-        }
-    }
-
-.. _console_registering-the-command:
-
-Registering the Command
-~~~~~~~~~~~~~~~~~~~~~~~
-
-You can register the command by adding the ``AsCommand`` attribute to it::
-
-    // src/Command/CreateUserCommand.php
-    namespace App\Command;
-
-    use Symfony\Component\Console\Attribute\AsCommand;
-    use Symfony\Component\Console\Command\Command;
-
-    #[AsCommand(
-        name: 'app:create-user',
-        description: 'Creates a new user.',
-        hidden: false,
-        aliases: ['app:add-user']
-    )]
-    class CreateUserCommand extends Command
-    {
-        // ...
-    }
-
 If you can't use PHP attributes, register the command as a service and
 :doc:`tag it </service_container/tags>` with the ``console.command`` tag. If you're using the
 :ref:`default services.yaml configuration <service-container-services-load-example>`,
 this is already done for you, thanks to :ref:`autoconfiguration <services-autoconfigure>`.
+
+You can also use ``#[AsCommand]`` to add a description and longer help text for the command::
+
+    #[AsCommand(
+        name: 'app:create-user',
+        description: 'Creates a new user.', // the command description shown when running "php bin/console list"
+        help: 'This command allows you to create a user...', // the command help shown when running the command with the "--help" option
+    )]
+    class CreateUserCommand
+    {
+        public function __invoke(): int
+        {
+            // ...
+        }
+    }
+
+Additionally, you can extend the :class:`Symfony\\Component\\Console\\Command\\Command` class to
+leverage advanced features like lifecycle hooks (e.g. :method:`Symfony\\Component\\Console\\Command\\Command::initialize` and
+and :method:`Symfony\\Component\\Console\\Command\\Command::interact`)::
+
+    use Symfony\Component\Console\Attribute\AsCommand;
+    use Symfony\Component\Console\Command\Command;
+    use Symfony\Component\Console\Input\InputInterface;
+    use Symfony\Component\Console\Output\OutputInterface;
+
+    #[AsCommand(name: 'app:create-user')]
+    class CreateUserCommand extends Command
+    {
+        public function initialize(InputInterface $input, OutputInterface $output): void
+        {
+            // ...
+        }
+
+        public function interact(InputInterface $input, OutputInterface $output): void
+        {
+            // ...
+        }
+
+        public function __invoke(): int
+        {
+            // ...
+        }
+    }
 
 Running the Command
 ~~~~~~~~~~~~~~~~~~~
@@ -255,16 +204,16 @@ After configuring and registering the command, you can run it in the terminal:
     $ php bin/console app:create-user
 
 As you might expect, this command will do nothing as you didn't write any logic
-yet. Add your own logic inside the ``execute()`` method.
+yet. Add your own logic inside the ``__invoke()`` method.
 
 Console Output
 --------------
 
-The ``execute()`` method has access to the output stream to write messages to
+The ``__invoke()`` method has access to the output stream to write messages to
 the console::
 
     // ...
-    protected function execute(InputInterface $input, OutputInterface $output): int
+    public function __invoke(OutputInterface $output): int
     {
         // outputs multiple lines to the console (adding "\n" at the end of each line)
         $output->writeln([
@@ -315,9 +264,10 @@ method, which returns an instance of
     // ...
     use Symfony\Component\Console\Output\ConsoleOutputInterface;
 
-    class MyCommand extends Command
+    #[AsCommand(name: 'app:my-command')]
+    class MyCommand
     {
-        protected function execute(InputInterface $input, OutputInterface $output): int
+        public function __invoke(OutputInterface $output): int
         {
             if (!$output instanceof ConsoleOutputInterface) {
                 throw new \LogicException('This command accepts only an instance of "ConsoleOutputInterface".');
@@ -376,20 +326,12 @@ Console Input
 
 Use input options or arguments to pass information to the command::
 
-    use Symfony\Component\Console\Input\InputArgument;
+    use Symfony\Component\Console\Attribute\Argument;
 
-    // ...
-    protected function configure(): void
-    {
-        $this
-            // configure an argument
-            ->addArgument('username', InputArgument::REQUIRED, 'The username of the user.')
-            // ...
-        ;
-    }
-
-    // ...
-    public function execute(InputInterface $input, OutputInterface $output): int
+    // The #[Argument] attribute configures $username as a
+    // required input argument and its value is automatically
+    // passed to this parameter
+    public function __invoke(#[Argument('The username of the user.')] string $username, OutputInterface $output): int
     {
         $output->writeln([
             'User Creator',
@@ -397,8 +339,7 @@ Use input options or arguments to pass information to the command::
             '',
         ]);
 
-        // retrieve the argument value using getArgument()
-        $output->writeln('Username: '.$input->getArgument('username'));
+        $output->writeln('Username: '.$username);
 
         return Command::SUCCESS;
     }
@@ -428,23 +369,22 @@ as a service, you can use normal dependency injection. Imagine you have a
 
     // ...
     use App\Service\UserManager;
-    use Symfony\Component\Console\Command\Command;
+    use Symfony\Component\Console\Attribute\Argument;
+    use Symfony\Component\Console\Attribute\AsCommand;
 
-    class CreateUserCommand extends Command
+    #[AsCommand(name: 'app:create-user')]
+    class CreateUserCommand
     {
         public function __construct(
-            private UserManager $userManager,
-        ){
-            parent::__construct();
+            private UserManager $userManager
+        ) {
         }
 
-        // ...
-
-        protected function execute(InputInterface $input, OutputInterface $output): int
+        public function __invoke(#[Argument] string $username, OutputInterface $output): int
         {
             // ...
 
-            $this->userManager->create($input->getArgument('username'));
+            $this->userManager->create($username);
 
             $output->writeln('User successfully generated!');
 
@@ -472,7 +412,7 @@ command:
     Note that it will not be called when the command is run without interaction
     (e.g. when passing the ``--no-interaction`` global option flag).
 
-:method:`Symfony\\Component\\Console\\Command\\Command::execute` *(required)*
+``__invoke()`` (or :method:`Symfony\\Component\\Console\\Command\\Command::execute`) *(required)*
     This method is executed after ``interact()`` and ``initialize()``.
     It contains the logic you want the command to execute and it must
     return an integer which will be used as the command `exit status`_.
