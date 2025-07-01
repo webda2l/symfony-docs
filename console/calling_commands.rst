@@ -14,20 +14,18 @@ arguments and options you want to pass to the command. The command name must be
 the first argument.
 
 Eventually, calling the ``doRun()`` method actually runs the command and returns
-the returned code from the command (return value from command ``execute()``
+the returned code from the command (return value from command ``__invoke()``
 method)::
 
     // ...
-    use Symfony\Component\Console\Command;
+    use Symfony\Component\Console\Attribute\AsCommand;
     use Symfony\Component\Console\Input\ArrayInput;
-    use Symfony\Component\Console\Input\InputInterface;
     use Symfony\Component\Console\Output\OutputInterface;
 
-    class CreateUserCommand extends Command
+    #[AsCommand(name: 'app:create-user')]
+    class CreateUserCommand
     {
-        // ...
-
-        protected function execute(InputInterface $input, OutputInterface $output): int
+        public function __invoke(OutputInterface $output): int
         {
             $greetInput = new ArrayInput([
                 // the command name is passed as first argument

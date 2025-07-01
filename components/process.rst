@@ -430,11 +430,14 @@ However, if you run the command via the Symfony ``Process`` class, PHP will use
 the settings defined in the ``php.ini`` file. You can solve this issue by using
 the :class:`Symfony\\Component\\Process\\PhpSubprocess` class to run the command::
 
+    use Symfony\Component\Console\Attribute\AsCommand;
+    use Symfony\Component\Console\Style\SymfonyStyle;
     use Symfony\Component\Process\Process;
 
-    class MyCommand extends Command
+    #[AsCommand(name: 'app:my-command')]
+    class MyCommand
     {
-        protected function execute(InputInterface $input, OutputInterface $output): int
+        public function __invoke(SymfonyStyle $io): int
         {
             // the memory_limit (and any other config option) of this command is
             // the one defined in php.ini instead of the new values (optionally)
@@ -444,6 +447,8 @@ the :class:`Symfony\\Component\\Process\\PhpSubprocess` class to run the command
             // the memory_limit (and any other config option) of this command takes
             // into account the values (optionally) passed via the '-d' command option
             $childProcess = new PhpSubprocess(['bin/console', 'cache:pool:prune']);
+
+            return 0;
         }
     }
 

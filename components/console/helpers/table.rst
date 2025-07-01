@@ -10,15 +10,16 @@ features, use the ``Table`` console helper explained in this article.
 To display a table, use :class:`Symfony\\Component\\Console\\Helper\\Table`,
 set the headers, set the rows and then render the table::
 
+    use Symfony\Component\Console\Attribute\AsCommand;
     use Symfony\Component\Console\Command\Command;
     use Symfony\Component\Console\Helper\Table;
-    use Symfony\Component\Console\Input\InputInterface;
     use Symfony\Component\Console\Output\OutputInterface;
     // ...
 
-    class SomeCommand extends Command
+    #[AsCommand(name: 'app:my-command')]
+    class MyCommand
     {
-        public function execute(InputInterface $input, OutputInterface $output): int
+        public function __invoke(OutputInterface $output): int
         {
             $table = new Table($output);
             $table
@@ -472,9 +473,10 @@ The only requirement to append rows is that the table must be rendered inside a
     use Symfony\Component\Console\Helper\Table;
     // ...
 
-    class SomeCommand extends Command
+    #[AsCommand(name: 'app:my-command')]
+    class MyCommand
     {
-        public function execute(InputInterface $input, OutputInterface $output): int
+        public function __invoke(OutputInterface $output): int
         {
             $section = $output->section();
             $table = new Table($section);
