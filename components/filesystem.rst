@@ -321,7 +321,8 @@ Dealing with file paths usually involves some difficulties:
 - Platform differences: file paths look different on different platforms. UNIX
   file paths start with a slash ("/"), while Windows file paths start with a
   system drive ("C:"). UNIX uses forward slashes, while Windows uses backslashes
-  by default.
+  by default. However, Windows also accepts forward slashes, so both types of
+  separators generally work.
 - Absolute/relative paths: web applications frequently need to deal with absolute
   and relative paths. Converting one to the other properly is tricky and repetitive.
 
@@ -371,20 +372,21 @@ string concatenation for building file paths::
 
     echo Path::join('C:\\Program Files', 'PHP', 'php.ini');
     // => C:/Program Files/PHP/php.ini
+    // (both forward slashes and backslashes work on Windows)
 
-The method handles multiple scenarios correctly:
+The ``join()`` method handles multiple scenarios correctly:
 
-- Empty parts are ignored::
+Empty parts are ignored::
 
     echo Path::join('/var/www', '', 'config.ini');
     // => /var/www/config.ini
 
-- Leading slashes in subsequent arguments are removed::
+Leading slashes in subsequent arguments are removed::
 
     echo Path::join('/var/www', '/etc', 'config.ini');
     // => /var/www/etc/config.ini
 
-- Trailing slashes are preserved only for root paths::
+Trailing slashes are preserved only for root paths::
 
     echo Path::join('/var/www', 'vhost/');
     // => /var/www/vhost
@@ -392,7 +394,7 @@ The method handles multiple scenarios correctly:
     echo Path::join('/', '');
     // => /
 
-- Works with any number of arguments::
+Works with any number of arguments::
 
     echo Path::join('/var', 'www', 'vhost', 'symfony', 'config', 'config.ini');
     // => /var/www/vhost/symfony/config/config.ini
