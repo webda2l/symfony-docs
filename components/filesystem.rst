@@ -359,6 +359,44 @@ Malformed paths are returned unchanged::
     echo Path::canonicalize('C:Programs/PHP/php.ini');
     // => C:Programs/PHP/php.ini
 
+Joining Paths
+~~~~~~~~~~~~~
+
+The :method:`Symfony\\Component\\Filesystem\\Path::join` method concatenates
+the given paths and normalizes separators. It's a cleaner alternative to
+string concatenation for building file paths::
+
+    echo Path::join('/var/www', 'vhost', 'config.ini');
+    // => /var/www/vhost/config.ini
+
+    echo Path::join('C:\\Program Files', 'PHP', 'php.ini');
+    // => C:/Program Files/PHP/php.ini
+
+The method handles multiple scenarios correctly:
+
+- Empty parts are ignored::
+
+    echo Path::join('/var/www', '', 'config.ini');
+    // => /var/www/config.ini
+
+- Leading slashes in subsequent arguments are removed::
+
+    echo Path::join('/var/www', '/etc', 'config.ini');
+    // => /var/www/etc/config.ini
+
+- Trailing slashes are preserved only for root paths::
+
+    echo Path::join('/var/www', 'vhost/');
+    // => /var/www/vhost
+
+    echo Path::join('/', '');
+    // => /
+
+- Works with any number of arguments::
+
+    echo Path::join('/var', 'www', 'vhost', 'symfony', 'config', 'config.ini');
+    // => /var/www/vhost/symfony/config/config.ini
+
 Converting Absolute/Relative Paths
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
