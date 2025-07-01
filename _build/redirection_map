@@ -435,6 +435,7 @@
 /setup/composer /setup
 /security/security_checker /setup
 /setup/built_in_web_server /setup/symfony_server
+/setup/symfony_server /setup/symfony_cli
 /service_container/parameters /configuration
 /routing/generate_url_javascript /routing
 /routing/slash_in_parameter /routing

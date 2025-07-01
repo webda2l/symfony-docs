@@ -131,7 +131,7 @@ Next, create an ``index.php`` file that defines the kernel class and runs it:
     options inside the ``configureContainer()`` method).
 
 That's it! To test it, start the :doc:`Symfony Local Web Server
-</setup/symfony_server>`:
+</setup/symfony_cli>`:
 
 .. code-block:: terminal
 
@@ -470,7 +470,7 @@ this:
     └─ composer.lock
 
 As before you can use the :doc:`Symfony Local Web Server
-</setup/symfony_server>`:
+</setup/symfony_cli>`:
 
 .. code-block:: terminal
 
