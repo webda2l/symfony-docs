@@ -121,7 +121,7 @@ development.
 .. _symfony-binary-web-server:
 
 However for local development, the most convenient way of running Symfony is by
-using the :doc:`local web server </setup/symfony_server>` provided by the
+using the :doc:`local web server </setup/symfony_cli>` provided by the
 ``symfony`` binary. This local server provides among other things support for
 HTTP/2, concurrent requests, TLS/SSL and automatic generation of security
 certificates.
