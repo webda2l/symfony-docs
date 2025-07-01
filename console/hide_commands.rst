@@ -22,8 +22,9 @@ the ``hidden`` property of the ``AsCommand`` attribute::
         // ...
     }
 
-You can also define a command as hidden using the pipe (``|``) syntax in the
-command name::
+You can also define a command as hidden using the pipe (``|``) syntax of
+:ref:`command aliases <command-aliases>`. To do this, use the command name as one
+of the aliases and leave the main command name (the part before the ``|``) empty::
 
     // src/Command/LegacyCommand.php
     namespace App\Command;
@@ -39,11 +40,7 @@ command name::
 
 .. versionadded:: 7.4
 
-    The ability to define a command as hidden using the pipe syntax in the
-    command name was introduced in Symfony 7.4.
-
-Hidden commands behave the same as normal commands but they are no longer
-displayed in command listings, so end-users are not aware of their existence.
+    Support for hidding commands using the pipe syntax was introduced in Symfony 7.4.
 
 .. note::
 

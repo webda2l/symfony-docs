@@ -206,6 +206,8 @@ After configuring and registering the command, you can run it in the terminal:
 As you might expect, this command will do nothing as you didn't write any logic
 yet. Add your own logic inside the ``__invoke()`` method.
 
+.. _command-aliases:
+
 Command Aliases
 ~~~~~~~~~~~~~~~
 
