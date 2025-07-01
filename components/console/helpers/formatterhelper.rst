@@ -3,7 +3,7 @@ Formatter Helper
 
 The :class:`Symfony\\Component\\Console\\Helper\\FormatterHelper` helper provides
 functions to format the output with colors. You can do more advanced things with
-this helper than you can in :doc:`/console/coloring`::
+this helper than you can with the :doc:`basic colors and styles </console/coloring>`::
 
     $formatter = new FormatterHelper();
 

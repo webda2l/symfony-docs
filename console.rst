@@ -112,8 +112,8 @@ completion (by default, by pressing the Tab key).
 Creating a Command
 ------------------
 
-Commands are defined in classes, for example, you may want a command to create a user. Use
-the ``#[AsCommand]`` attribute to auto-register it::
+Commands are defined in classes and auto-registered using the ``#[AsCommand]``
+attribute. For example, you may want a command to create a user::
 
     // src/Command/CreateUserCommand.php
     namespace App\Command;
@@ -412,7 +412,7 @@ command:
     Note that it will not be called when the command is run without interaction
     (e.g. when passing the ``--no-interaction`` global option flag).
 
-``__invoke()`` *(required)*
+``__invoke()`` (or :method:`Symfony\\Component\\Console\\Command\\Command::execute`) *(required)*
     This method is executed after ``interact()`` and ``initialize()``.
     It contains the logic you want the command to execute and it must
     return an integer which will be used as the command `exit status`_.
