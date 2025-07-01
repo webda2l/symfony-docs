@@ -2,7 +2,7 @@ Configuring a Web Server
 ========================
 
 The preferred way to develop your Symfony application is to use
-:doc:`Symfony Local Web Server </setup/symfony_server>`.
+:doc:`Symfony Local Web Server </setup/symfony_cli>`.
 
 However, when running the application in the production environment, you'll need
 to use a fully-featured web server. This article describes how to use Symfony

@@ -72,7 +72,7 @@ Thanks to :doc:`the Docker integration of Symfony </setup/docker>`,
 :ref:`Flex <symfony-flex>` proposes to install a Mercure hub for development.
 Run ``docker-compose up`` to start the hub if you have chosen this option.
 
-If you use the :doc:`Symfony Local Web Server </setup/symfony_server>`,
+If you use the :doc:`Symfony Local Web Server </setup/symfony_cli>`,
 you must start it with the ``--no-tls`` option to prevent mixed content and
 invalid TLS certificate issues:
 

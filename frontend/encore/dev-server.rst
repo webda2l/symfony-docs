@@ -53,7 +53,7 @@ method in your ``webpack.config.js`` file:
 Enabling HTTPS using the Symfony Web Server
 -------------------------------------------
 
-If you're using the :doc:`Symfony web server </setup/symfony_server>` locally with HTTPS,
+If you're using the :doc:`Symfony web server </setup/symfony_cli>` locally with HTTPS,
 you'll need to also tell the dev-server to use HTTPS. To do this, you can reuse the Symfony web
 server SSL certificate:
 
