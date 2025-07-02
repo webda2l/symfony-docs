@@ -646,4 +646,4 @@ variables are properly exposed:
 .. _`Proxy settings in macOS`: https://support.apple.com/guide/mac-help/enter-proxy-server-settings-on-mac-mchlp2591/mac
 .. _`Proxy settings in Ubuntu`: https://help.ubuntu.com/stable/ubuntu-help/net-proxy.html.en
 .. _`is treated differently`: https://superuser.com/a/1799209
-.. _`Docker compose CLI env var reference`: https://docs.docker.com/compose/reference/envvars/
+.. _`Docker Compose CLI env var reference`: https://docs.docker.com/compose/reference/envvars/
