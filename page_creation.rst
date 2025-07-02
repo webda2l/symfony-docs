@@ -80,7 +80,7 @@ metadata to code):
           }
       }
 
-That's it! If you are using :doc:`the Symfony web server </setup/symfony_cli>`,
+That's it! If you are using :ref:`the Symfony web server <symfony-cli-server>`,
 try it out by going to: http://localhost:8000/lucky/number
 
 .. tip::
