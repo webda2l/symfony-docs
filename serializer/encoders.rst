@@ -265,7 +265,7 @@ Creating a Custom Encoder
 Imagine you want to serialize and deserialize `NEON`_. For that you'll have to
 create your own encoder::
 
-    // src/Serializer/YamlEncoder.php
+    // src/Serializer/NeonEncoder.php
     namespace App\Serializer;
 
     use Nette\Neon\Neon;
