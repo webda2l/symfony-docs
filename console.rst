@@ -100,12 +100,8 @@ completion (by default, by pressing the Tab key).
 
 .. tip::
 
-    If you are using the :doc:`Symfony local web server
-    </setup/symfony_cli>`, it is recommended to use the built-in completion
-    script that will ensure the right PHP version and configuration are used when
-    running the Console Completion. Run ``symfony completion --help`` for the
-    installation instructions for your shell. The Symfony CLI will provide
-    completion for the ``console`` and ``composer`` commands.
+    If you are using the :doc:`Symfony CLI </setup/symfony_cli>` tool, follow
+    :ref:`these instructions <symfony-cli-autocompletion>` to enable autocompletion.
 
 Creating a Command
 ------------------

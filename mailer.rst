@@ -1805,8 +1805,8 @@ Enabling an Email Catcher
 
 When developing locally, it is recommended to use an email catcher. If you have
 enabled Docker support via Symfony recipes, an email catcher is automatically
-configured. In addition, if you are using the :doc:`Symfony local web server
-</setup/symfony_cli>`, the mailer DSN is automatically exposed via the
+configured. In addition, if you are using the :doc:`Symfony CLI </setup/symfony_cli>`
+tool, the mailer DSN is automatically exposed via the
 :ref:`symfony binary Docker integration <symfony-server-docker>`.
 
 Sending Test Emails
