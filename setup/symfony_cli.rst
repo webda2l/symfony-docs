@@ -21,6 +21,8 @@ The Symfony CLI is available as a standalone executable that supports Linux,
 macOS, and Windows. Download and install it following the instructions on
 `symfony.com/download`_.
 
+.. _symfony-cli-autocompletion:
+
 Shell Autocompletion
 ~~~~~~~~~~~~~~~~~~~~
 
@@ -74,6 +76,8 @@ projects quickly:
 
     Pass the ``--cloud`` option to initialize a Symfony Cloud project at the same
     time the Symfony project is created.
+
+.. _symfony-cli-server:
 
 Running the Local Web Server
 ----------------------------

@@ -100,8 +100,7 @@ Next, create an ``index.php`` file that defines the kernel class and runs it:
             return new Kernel($context['APP_ENV'], (bool) $context['APP_DEBUG']);
         };
 
-That's it! To test it, start the :doc:`Symfony Local Web Server
-</setup/symfony_cli>`:
+That's it! To test it, start the :ref:`Symfony local web server <symfony-cli-server>`:
 
 .. code-block:: terminal
 
@@ -471,8 +470,7 @@ this:
     ├─ composer.json
     └─ composer.lock
 
-As before you can use the :doc:`Symfony Local Web Server
-</setup/symfony_cli>`:
+As before you can use the :ref:`Symfony local web server <symfony-cli-server>`:
 
 .. code-block:: terminal
 
