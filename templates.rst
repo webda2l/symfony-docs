@@ -312,8 +312,12 @@ You can now use the ``asset()`` function:
     {# the JS file lives at "public/bundles/acme/js/loader.js" #}
     <script src="{{ asset('bundles/acme/js/loader.js') }}"></script>
 
-The ``asset()`` function's main purpose is to make your application more portable.
-If your application lives at the root of your host (e.g. ``https://example.com``),
+Using the ``asset()`` function is recommended for two reasons:
+
+* It automatically takes care of versioning your assets with
+  :doc:`Symfony's AssetMapper </frontend>`
+
+* If your application lives at the root of your host (e.g. ``https://example.com``),
 then the rendered path should be ``/images/logo.png``. But if your application
 lives in a subdirectory (e.g. ``https://example.com/my_app``), each asset path
 should render with the subdirectory (e.g. ``/my_app/images/logo.png``). The
