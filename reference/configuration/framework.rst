@@ -57,6 +57,8 @@ file_cache_dir
 The directory to store cache files for annotations, in case
 ``annotations.cache`` is set to ``'file'``.
 
+.. _reference-assets:
+
 assets
 ~~~~~~
 
