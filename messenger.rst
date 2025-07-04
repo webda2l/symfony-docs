@@ -1672,7 +1672,7 @@ The transport has a number of options:
 
     .. note::
 
-        Set ``redeliver_timeout`` to a greater value than your slowest message
+        Set ``redeliver_timeout`` to a greater value than your longest message
         duration. Otherwise, some messages will start a second time while the
         first one is still being handled.
 
