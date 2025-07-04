@@ -2061,6 +2061,9 @@ Whether to enable or not SSI support in your application.
 assets
 ~~~~~~
 
+The following options configure the behavior of the
+:ref:`Twig asset() function <reference-twig-function-asset>`.
+
 .. _reference-assets-base-path:
 
 base_path
@@ -2068,7 +2071,7 @@ base_path
 
 **type**: ``string``
 
-This option allows you to define a base path from where Twig's ``{{ asset() }}`` function is resolved:
+This option allows you to prepend a base path to the URLs generated for assets:
 
 .. configuration-block::
 
@@ -2106,6 +2109,9 @@ This option allows you to define a base path from where Twig's ``{{ asset() }}``
             $framework->assets()
                 ->basePath('/images');
         };
+
+With this configuration, a call to ``asset('logo.png')`` will generate
+``/images/logo.png`` instead of ``/logo.png``.
 
 .. _reference-templating-base-urls:
 .. _reference-assets-base-urls:
