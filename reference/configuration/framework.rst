@@ -2056,6 +2056,8 @@ enabled
 
 Whether to enable or not SSI support in your application.
 
+.. _reference-assets:
+
 assets
 ~~~~~~
 

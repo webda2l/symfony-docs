@@ -312,24 +312,18 @@ You can now use the ``asset()`` function:
     {# the JS file lives at "public/bundles/acme/js/loader.js" #}
     <script src="{{ asset('bundles/acme/js/loader.js') }}"></script>
 
-Using the ``asset()`` function is recommended for two reasons:
+Using the ``asset()`` function is recommended for these reasons:
 
-* It automatically takes care of versioning your assets with
-  :doc:`Symfony's AssetMapper </frontend>`
+* **Asset versioning**: ``asset()`` appends a version hash to asset URLs for
+  cache busting. This works both via :doc:`AssetMapper </frontend>` and the
+  :doc:`Asset component </components/asset>` (see also the
+  :ref:`assets configuration options <reference-assets>`, such as ``version``
+  and ``version_format``).
 
-* If your application lives at the root of your host (e.g. ``https://example.com``),
-then the rendered path should be ``/images/logo.png``. But if your application
-lives in a subdirectory (e.g. ``https://example.com/my_app``), each asset path
-should render with the subdirectory (e.g. ``/my_app/images/logo.png``). The
-``asset()`` function takes care of this by determining how your application is
-being used and generating the correct paths accordingly.
-
-.. tip::
-
-    The ``asset()`` function supports various cache busting techniques via the
-    :ref:`version <reference-framework-assets-version>`,
-    :ref:`version_format <reference-assets-version-format>`, and
-    :ref:`json_manifest_path <reference-assets-json-manifest-path>` configuration options.
+* **Application portability**: whether your app is hosted at the root
+  (e.g. ``https://example.com``) or in a subdirectory (e.g. ``https://example.com/my_app``),
+  ``asset()`` generates the correct path (e.g. ``/images/logo.png`` vs ``/my_app/images/logo.png``)
+  automatically based on your app's base URL.
 
 If you need absolute URLs for assets, use the ``absolute_url()`` Twig function
 as follows:
