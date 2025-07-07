@@ -10,7 +10,7 @@ You can even ignore them completely and continue using your own best practices
 and methodologies. Symfony is flexible enough to adapt to your needs.
 
 This article assumes that you already have experience developing Symfony
-applications. If you don't, read first the :doc:`Getting Started </setup>`
+applications. If you don't, first read the :doc:`Getting Started </setup>`
 section of the documentation.
 
 .. tip::
@@ -118,7 +118,7 @@ Use Short and Prefixed Parameter Names
 
 Consider using ``app.`` as the prefix of your :ref:`parameters <configuration-parameters>`
 to avoid collisions with Symfony and third-party bundles/libraries parameters.
-Then, use just one or two words to describe the purpose of the parameter:
+Then, use only one or two words to describe the purpose of the parameter:
 
 .. code-block:: yaml
 

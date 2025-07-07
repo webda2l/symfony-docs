@@ -509,7 +509,7 @@ A ``kernel.controller`` (aka ``KernelEvents::CONTROLLER``) listener gets notifie
 on *every* request, right before the controller is executed. So, first, you need
 some way to identify if the controller that matches the request needs token validation.
 
-A clean and easy way is to create an empty interface and make the controllers
+A clean and simple way is to create an empty interface and make the controllers
 implement it::
 
     namespace App\Controller;

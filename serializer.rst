@@ -10,7 +10,7 @@ to a PHP object that is consumed by your application. Then, when generating
 the response, you can use the serializer to transform the PHP objects back
 to a JSON response.
 
-It can also be used to for instance load CSV configuration data as PHP
+It can also be used to, for instance, load CSV configuration data as PHP
 objects, or even to transform between formats (e.g. YAML to XML).
 
 .. _activating_the_serializer:

@@ -153,7 +153,7 @@ You'll now have a new line in your ``.env`` file that you can uncomment:
 
 The ``MAILER_DSN`` isn't a *real* address: it's a convenient format that
 offloads most of the configuration work to mailer. The ``sendgrid`` scheme
-activates the SendGrid provider that you just installed, which knows all about
+activates the SendGrid provider that you installed, which knows all about
 how to deliver messages via SendGrid. The *only* part you need to change is the
 ``KEY`` placeholder.
 

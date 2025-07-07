@@ -1,7 +1,7 @@
 Dealing with Concurrency with Locks
 ===================================
 
-When a program runs concurrently, some part of code which modify shared
+When a program runs concurrently, some parts of code that modify shared
 resources should not be accessed by multiple processes at the same time.
 Symfony's :doc:`Lock component </components/lock>` provides a locking mechanism to ensure
 that only one process is running the critical section of code at any point of
