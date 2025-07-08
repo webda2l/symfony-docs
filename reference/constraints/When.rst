@@ -173,8 +173,9 @@ in your expression:
 ``this``
     The object being validated (e.g. an instance of Discount).
 ``value``
-    The value of the property being validated (only available when
-    the constraint is applied to a property).
+    Either the object being validated (when the constraint is applied to a class),
+    the value of the property being validated (when applied to a property),
+    or the :doc:`raw value </validation/raw_values>`.
 
 The ``value`` variable can be used when you want to execute more complex
 validation based on its value:
