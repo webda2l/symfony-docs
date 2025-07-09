@@ -32,12 +32,11 @@ You can read more about these at the :doc:`component documentation </components/
 Configuring Cache with FrameworkBundle
 --------------------------------------
 
-When configuring the cache component there are a few concepts you should know
-of:
+When configuring the cache component there are a few concepts you should know:
 
 **Pool**
     This is a service that you will interact with. Each pool will always have
-    its own namespace and cache items. There is never a conflict between pools.
+    its own namespace and cache items. There are never conflicts between pools.
 **Adapter**
     An adapter is a *template* that you use to create pools.
 **Provider**
