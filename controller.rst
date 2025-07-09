@@ -41,7 +41,7 @@ class::
 The controller is the ``number()`` method, which lives inside the
 controller class ``LuckyController``.
 
-This controller is pretty straightforward:
+This controller is quite simple:
 
 * *line 2*: Symfony takes advantage of PHP's namespace functionality to
   namespace the entire controller class.

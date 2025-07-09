@@ -11,7 +11,7 @@ The Bundle System
 
 A bundle is similar to a plugin in other software, but even better. The core
 features of Symfony framework are implemented with bundles (FrameworkBundle,
-SecurityBundle, DebugBundle, etc.) They are also used to add new features in
+SecurityBundle, DebugBundle, etc.) Bundles are also used to add new features in
 your application via `third-party bundles`_.
 
 Bundles used in your applications must be enabled per
@@ -42,7 +42,7 @@ file::
 Creating a Bundle
 -----------------
 
-This section creates and enables a new bundle to show there are only a few steps required.
+This section creates and enables a new bundle to show that only a few steps are required.
 The new bundle is called AcmeBlogBundle, where the ``Acme`` portion is an example
 name that should be replaced by some "vendor" name that represents you or your
 organization (e.g. AbcBlogBundle for some company named ``Abc``).

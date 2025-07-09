@@ -655,7 +655,7 @@ You'll now have a new line in your ``.env`` file that you can uncomment:
 
 The ``LOCO_DSN`` isn't a *real* address: it's a convenient format that offloads
 most of the configuration work to Symfony. The ``loco`` scheme activates the
-Loco provider that you just installed, which knows all about how to push and
+Loco provider that you installed, which knows all about how to push and
 pull translations via Loco. The *only* part you need to change is the
 ``API_KEY`` placeholder.
 

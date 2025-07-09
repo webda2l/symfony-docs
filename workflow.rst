@@ -1,7 +1,7 @@
 Workflow
 ========
 
-Using the Workflow component inside a Symfony application requires knowing first
+Using the Workflow component inside a Symfony application requires first knowing
 some basic theory and concepts about workflows and state machines.
 :doc:`Read this article </workflow/workflow-and-state-machine>` for a quick overview.
 

@@ -37,7 +37,7 @@ example, this is the default file created by the "API Platform" bundle:
         mapping:
             paths: ['%kernel.project_dir%/src/Entity']
 
-Splitting the configuration into lots of small files might appear intimidating for some
+Splitting the configuration into lots of small files might seem intimidating to some
 Symfony newcomers. However, you'll get used to them quickly and you rarely need
 to change these files after package installation.
 
