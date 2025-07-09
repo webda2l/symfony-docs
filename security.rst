@@ -43,7 +43,7 @@ creates a ``security.yaml`` configuration file for you:
                 # https://symfony.com/doc/current/security/impersonating_user.html
                 # switch_user: true
 
-        # Easy way to control access for large sections of your site
+        # An easy way to control access for large sections of your site
         # Note: Only the *first* access control that matches will be used
         access_control:
             # - { path: ^/admin, roles: ROLE_ADMIN }
