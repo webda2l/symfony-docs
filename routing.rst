@@ -21,7 +21,7 @@ because it's convenient to put the route and controller in the same place.
 Creating Routes as Attributes
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
-PHP attributes allow to define routes next to the code of the
+PHP attributes allow you to define routes next to the code of the
 :doc:`controllers </controller>` associated to those routes. Attributes are
 native in PHP 8 and higher versions, so you can use them right away.
 

@@ -16,7 +16,7 @@ Types of Tests
 There are many types of automated tests and precise definitions often
 differ from project to project. In Symfony, the following definitions are
 used. If you have learned something different, that is not necessarily
-wrong, just different from what the Symfony documentation is using.
+wrong, merely different from what the Symfony documentation is using.
 
 `Unit Tests`_
     These tests ensure that *individual* units of source code (e.g. a single
@@ -407,11 +407,11 @@ test finishes to undo all changes. Read more in the documentation of the
 
 .. _doctrine-fixtures:
 
-Load Dummy Data Fixtures
+Load Test Data Fixtures
 ........................
 
 Instead of using the real data from the production database, it's common to
-use fake or dummy data in the test database. This is usually called
+use fake or test data in the test database. This is usually called
 *"fixtures data"* and Doctrine provides a library to create and load them.
 Install it with:
 

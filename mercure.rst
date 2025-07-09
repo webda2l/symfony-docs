@@ -11,7 +11,7 @@ notifying the user when :doc:`an asynchronous job </messenger>` has been
 completed or creating chat applications are among the typical use cases
 requiring "push" capabilities.
 
-Symfony provides a straightforward component, built on top of
+Symfony provides a simple component, built on top of
 `the Mercure protocol`_, specifically designed for this class of use cases.
 
 Mercure is an open protocol designed from the ground up to publish updates from
