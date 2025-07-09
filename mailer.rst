@@ -1926,8 +1926,9 @@ a specific address, instead of the *real* address:
             ;
         };
 
-Use the ``allowed_recipients`` option to specify a "whitelist": this will allow emails directed to these specific recipients
-to maintain their original destination, as well as being sent to the destinations defined in ``recipients``:
+Use the ``allowed_recipients`` option to define specific addresses that should
+still receive their original emails. These messages will also be sent to the
+address(es) defined in ``recipients``, as with all other emails:
 
 .. configuration-block::
 
@@ -1986,9 +1987,9 @@ to maintain their original destination, as well as being sent to the destination
             ;
         };
 
-With this configuration, all emails will be sent to ``youremail@example.com``,
-and in addition, those sent to ``internal@example.com``, ``internal-monitoring@example.fr``,
-etc., will receive emails as usual.
+With this configuration, all emails will be sent to ``youremail@example.com``.
+Additionally, emails sent to ``internal@example.com``, ``internal-monitoring@example.fr``,
+etc., will also be delivered to those addresses.
 
 .. versionadded:: 7.1
 
