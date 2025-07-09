@@ -408,7 +408,7 @@ test finishes to undo all changes. Read more in the documentation of the
 .. _doctrine-fixtures:
 
 Load Test Data Fixtures
-........................
+.......................
 
 Instead of using the real data from the production database, it's common to
 use fake or test data in the test database. This is usually called
