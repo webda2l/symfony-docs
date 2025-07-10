@@ -10,7 +10,7 @@ to boost your productivity with smart features like:
 
 * **Web server** optimized for development, with **HTTPS support**
 * **Docker** integration and automatic environment variable management
-* Management of muktiple **PHP versions**
+* Management of multiple **PHP versions**
 * Support for background **workers**
 * Seamless integration with **Symfony Cloud**
 
