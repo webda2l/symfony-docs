@@ -416,15 +416,16 @@ The Console component adds some predefined options to all commands:
 
 * ``--verbose``: sets the verbosity level (e.g. ``1`` the default, ``2`` and
   ``3``, or you can use respective shortcuts ``-v``, ``-vv`` and ``-vvv``)
-* ``--quiet``: disables output and interaction
-* ``--no-interaction``: disables interaction
-* ``--version``: outputs the version number of the console application
-* ``--help``: displays the command help
+* ``--quiet|-q``: disables output and interaction
+* ``--no-interaction|-n``: disables interaction
+* ``--version|-V``: outputs the version number of the console application
+* ``--help|-h``: displays the command help
 * ``--ansi|--no-ansi``: whether to force of disable coloring the output
+* ``--profile``: enables the Symfony profiler
 
 When using the ``FrameworkBundle``, two more options are predefined:
 
-* ``--env``: sets the Kernel configuration environment (defaults to ``APP_ENV``)
+* ``--env|-e``: sets the Kernel configuration environment (defaults to ``APP_ENV``)
 * ``--no-debug``: disables Kernel debug (defaults to ``APP_DEBUG``)
 
 So your custom commands can use them too out-of-the-box.
