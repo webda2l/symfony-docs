@@ -195,6 +195,12 @@ You can also add links to the HTTP response directly from controllers and servic
         }
     }
 
+.. tip::
+
+    The possible values of link relations (``'preload'``, ``'preconnect'``, etc.)
+    are also defined as constants in the :class:`Symfony\\Component\\WebLink\\Link`
+    class (e.g. ``Link::REL_PRELOAD``, ``Link::REL_PRECONNECT``, etc.).
+
 Parsing Link Headers
 --------------------
 
