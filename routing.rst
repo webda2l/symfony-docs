@@ -908,6 +908,10 @@ other configuration formats they are defined with the ``defaults`` option:
 Now, when the user visits ``/blog``, the ``blog_list`` route will match and
 ``$page`` will default to a value of ``1``.
 
+.. tip::
+
+    The default value is allowed to not match the requirement.
+
 .. warning::
 
     You can have more than one optional parameter (e.g. ``/blog/{slug}/{page}``),
