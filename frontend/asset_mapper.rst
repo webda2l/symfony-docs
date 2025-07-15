@@ -279,6 +279,35 @@ You can update your third-party packages to their current versions by running:
     The ``importmap:install`` and ``importmap:outdated`` commands were introduced
     in Symfony 6.4.
 
+Removing Packages from importmap
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+
+If you need to remove a JavaScript package that was previously added to your ``importmap.php`` file, you can use the ``importmap:remove`` command.
+
+.. code-block:: terminal
+
+    $ php bin/console importmap:remove <package>
+
+For example, to remove the ``lodash`` package from your importmap:
+
+.. code-block:: terminal
+
+    $ php bin/console importmap:remove lodash
+
+This will update your ``importmap.php`` file and remove the specified package (and any dependencies added along with it).
+After running this command, it is recommended to also run:
+
+.. code-block:: terminal
+
+    $ php bin/console importmap:install
+
+This ensures your ``assets/vendor/`` directory is in sync with the updated importmap configuration.
+
+.. tip::
+
+    Removing a package from the importmap does not automatically remove any references to it in your JavaScript files.
+    Make sure to update your code to remove any ``import`` statements that reference the removed package.
+
 How does the importmap Work?
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
