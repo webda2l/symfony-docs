@@ -279,34 +279,32 @@ You can update your third-party packages to their current versions by running:
     The ``importmap:install`` and ``importmap:outdated`` commands were introduced
     in Symfony 6.4.
 
-Removing Packages from importmap
-~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+Removing JavaScript Packages
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
-If you need to remove a JavaScript package that was previously added to your ``importmap.php`` file, you can use the ``importmap:remove`` command.
-
-.. code-block:: terminal
-
-    $ php bin/console importmap:remove <package>
-
-For example, to remove the ``lodash`` package from your importmap:
+If you need to remove a JavaScript package that was previously added to your
+``importmap.php`` file, use the ``importmap:remove`` command. For example, to
+remove the ``lodash`` package:
 
 .. code-block:: terminal
 
     $ php bin/console importmap:remove lodash
 
-This will update your ``importmap.php`` file and remove the specified package (and any dependencies added along with it).
-After running this command, it is recommended to also run:
+This updates your ``importmap.php`` file and removes the specified package
+(along with any dependencies that were added with it).
+
+After running this command, it's recommended to also run the following to ensure
+that your ``assets/vendor/`` directory is in sync with the updated import map:
 
 .. code-block:: terminal
 
     $ php bin/console importmap:install
 
-This ensures your ``assets/vendor/`` directory is in sync with the updated importmap configuration.
-
 .. tip::
 
-    Removing a package from the importmap does not automatically remove any references to it in your JavaScript files.
-    Make sure to update your code to remove any ``import`` statements that reference the removed package.
+    Removing a package from the import map does not automatically remove any
+    references to it in your JavaScript files. Make sure to update your code and
+    remove any ``import`` statements that reference the removed package.
 
 How does the importmap Work?
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~
