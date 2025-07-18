@@ -672,7 +672,7 @@ of the opened file, but you can configure both with the PHP streaming configurat
         $formData->getParts(); // Returns two instances of TextPart both
                                // with the name "array_field"
 
-Usually, the ``Content-Type`` of each form's part is detected automatically. However,
+The ``Content-Type`` of each form's part is detected automatically. However,
 you can override it by passing a ``DataPart``::
 
     use Symfony\Component\Mime\Part\DataPart;
