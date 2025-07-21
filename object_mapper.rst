@@ -592,19 +592,19 @@ Using it in practice::
 Decorating the ObjectMapper
 ---------------------------
 
-The ``object_mapper`` service can be decorated to add custom logic and state
-management around the mapping process.
+The ``object_mapper`` service can be decorated to add custom logic or manage
+state around the mapping process.
 
-One can use the
-:class:`Symfony\\Component\\ObjectMapper\\ObjectMapperAwareInterface`. When a
-decorator is applied, it can pass itself to the decorated service (if it implements
-this interface). This allows the underlying services, like the ``ObjectMapper``,
-to use the top-level decorator's ``map()`` method for recursive mapping, ensuring
-that the decorator's state is consistently used.
+You can use the :class:`Symfony\\Component\\ObjectMapper\\ObjectMapperAwareInterface`
+to enable the decorated service to access the outermost decorator. If the
+decorated service implements this interface, the decorator can pass itself to
+it. This allows underlying services, like the ``ObjectMapper``, to call the
+decorator's ``map()`` method during recursive mapping, ensuring that the
+decorator's state is used consistently throughout the process.
 
-Here is an example of a decorator that preserves object identity across calls.
+Here's an example of a decorator that preserves object identity across calls.
 It uses the ``AsDecorator`` attribute to automatically configure itself as a
-decorator for the ``object_mapper`` service::
+decorator of the ``object_mapper`` service::
 
     // src/ObjectMapper/StatefulObjectMapper.php
     namespace App\ObjectMapper;
@@ -618,7 +618,7 @@ decorator for the ``object_mapper`` service::
     {
         public function __construct(private ObjectMapperInterface $decorated)
         {
-            // Pass this decorator to the decorated service if it's aware
+            // pass this decorator to the decorated service if it's aware
             if ($this->decorated instanceof ObjectMapperAwareInterface) {
                 $this->decorated = $this->decorated->withObjectMapper($this);
             }
@@ -630,6 +630,9 @@ decorator for the ``object_mapper`` service::
         }
     }
 
+.. versionadded:: 7.4
+
+    The feature to decorate the ObjetMapper was introduced in Symfony 7.4.
 
 .. _objectmapper-custom-mapping-logic:
 
