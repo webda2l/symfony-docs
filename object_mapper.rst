@@ -589,6 +589,48 @@ Using it in practice::
     // $employeeDto->manager->name === 'Alice'
     // $employeeDto->manager->manager === $employeeDto
 
+Decorating the ObjectMapper
+---------------------------
+
+The ``object_mapper`` service can be decorated to add custom logic and state
+management around the mapping process.
+
+One can use the
+:class:`Symfony\\Component\\ObjectMapper\\ObjectMapperAwareInterface`. When a
+decorator is applied, it can pass itself to the decorated service (if it implements
+this interface). This allows the underlying services, like the ``ObjectMapper``,
+to use the top-level decorator's ``map()`` method for recursive mapping, ensuring
+that the decorator's state is consistently used.
+
+Here is an example of a decorator that preserves object identity across calls.
+It uses the ``AsDecorator`` attribute to automatically configure itself as a
+decorator for the ``object_mapper`` service::
+
+    // src/ObjectMapper/StatefulObjectMapper.php
+    namespace App\ObjectMapper;
+
+    use Symfony\Component\DependencyInjection\Attribute\AsDecorator;
+    use Symfony\Component\ObjectMapper\ObjectMapperAwareInterface;
+    use Symfony\Component\ObjectMapper\ObjectMapperInterface;
+
+    #[AsDecorator(decorates: ObjectMapperInterface::class)]
+    final class StatefulObjectMapper implements ObjectMapperInterface
+    {
+        public function __construct(private ObjectMapperInterface $decorated)
+        {
+            // Pass this decorator to the decorated service if it's aware
+            if ($this->decorated instanceof ObjectMapperAwareInterface) {
+                $this->decorated = $this->decorated->withObjectMapper($this);
+            }
+        }
+
+        public function map(object $source, object|string|null $target = null): object
+        {
+            return $this->decorated->map($source, $target);
+        }
+    }
+
+
 .. _objectmapper-custom-mapping-logic:
 
 Custom Mapping Logic
