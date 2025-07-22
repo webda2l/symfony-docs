@@ -608,3 +608,25 @@ have the cache will be considered stale.
 
     In the full-stack framework the compilation and caching of the container
     is taken care of for you.
+
+.. _resolving-env-vars-at-compile-time:
+
+Resolving Environment Variable At Compile Time
+----------------------------------------------
+
+.. caution::
+
+    **This practice is discouraged**. Use it only if you fully understand the implications.
+
+By default, environment variables are resolved at runtime. However, you can
+force their resolution at compile time using the following code::
+
+    $parameterValue = $container->resolveEnvPlaceholders(
+        $container->getParameter('%env(ENV_VAR_NAME)%'),
+        true // resolve to actual values
+    );
+
+However, a **major drawback** of this approach is that you must manually clear
+the cache when changing the value of an environment variable. This goes
+against the typical behavior of environment variables, which are designed
+to be dynamic and not require cache invalidation.
