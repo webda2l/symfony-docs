@@ -618,15 +618,19 @@ have the cache will be considered stale.
 Resolving Environment Variable At Compile Time
 ----------------------------------------------
 
-Environment variables value can be resolved at compile time by using the following code::
+.. caution::
+
+    **This practice is discouraged**. Use it only if you fully understand the implications.
+
+By default, environment variables are resolved at runtime. However, you can
+force their resolution at compile time using the following code::
 
     $parameterValue = $container->resolveEnvPlaceholders(
         $container->getParameter('%env(ENV_VAR_NAME)%'),
-        true // Resolve to actual values
+        true // resolve to actual values
     );
 
-.. warning::
-
-    Environment variables are usually a runtime concern. One of the major drawbacks of resolving them
-    at compile time is that you'll need to manually clear the cache when changing their value (which is exactly
-    what you don't have to do for env vars under normal circumstances).
+However, a **major drawback** of this approach is that you must manually clear
+the cache when changing the value of an environment variable. This goes
+against the typical behavior of environment variables, which are designed
+to be dynamic and not require cache invalidation.

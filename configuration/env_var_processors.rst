@@ -916,5 +916,5 @@ this is already done for you, thanks to :ref:`autoconfiguration <services-autoco
 Resolving Environment Variable At Compile Time
 ----------------------------------------------
 
-Although environment variables are usually a runtime concept, you can also resolve them
+Environment variables are resolved at runtime, but you can also resolve them
 :ref:`at compile time <resolving-env-vars-at-compile-time>`.
