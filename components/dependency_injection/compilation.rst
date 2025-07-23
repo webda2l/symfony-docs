@@ -614,7 +614,7 @@ have the cache will be considered stale.
 Resolving Environment Variable At Compile Time
 ----------------------------------------------
 
-.. caution::
+.. warning::
 
     **This practice is discouraged**. Use it only if you fully understand the implications.
 
