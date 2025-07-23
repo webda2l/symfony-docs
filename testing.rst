@@ -757,8 +757,10 @@ a shortcut to make AJAX requests::
     // the required HTTP_X_REQUESTED_WITH header is added automatically
     $client->xmlHttpRequest('POST', '/submit', ['name' => 'Fabien']);
 
-Sending Custom Headers
-......................
+.. _sending-custom-headers:
+
+Sending Custom HTTP Headers
+...........................
 
 If your application behaves according to some HTTP headers, pass them as the
 second argument of ``createClient()``::
