@@ -629,37 +629,34 @@ all the properties of the class::
         // ...
     }
 
-Serializing JSON using streams
+Serializing JSON Using Streams
 ------------------------------
 
-Symfony is able of encoding PHP data structures to JSON streams and decoding
-JSON streams back into PHP data structures.
+Symfony can encode PHP data structures to JSON streams and decode JSON streams
+back into PHP data structures.
 
-To do so, it relies on the JsonStreamer component, which is designed for high
-efficiency and can process large JSON data incrementally without needing to
-load the entire content into memory.
+To do this, it relies on the :doc:`JsonStreamer component </serializer/streaming_json>`,
+which is designed for high efficiency and can process large JSON data incrementally,
+without needing to load the entire content into memory.
 
-When deciding between the :doc:`Serializer component <serializer>` and the
-JsonStreamer component, consider the following:
+When deciding between the Serializer component and the JsonStreamer component,
+consider the following:
 
-- **Serializer Component**: Ideal for scenarios requiring flexibility, such as
-  dynamically manipulating object shapes using normalizers and denormalizers,
-  or handling complex objects which multiple serialization representation.
-  Plus, it allows working with formats beyond JSON (and even with a custom
-  format of yours).
+* **Serializer Component**: Best suited for use cases that require flexibility,
+  such as dynamically manipulating object structures using normalizers and
+  denormalizers, or handling complex objects with multiple serialization
+  formats. It also supports output formats beyond JSON (including your own
+  custom ones).
+* **JsonStreamer Component**: Best suited for simple objects and scenarios that
+  demand high performance and low memory usage. It's particularly effective
+  for processing very large JSON datasets or when streaming JSON in real-time
+  without loading the entire dataset into memory.
 
-- **JsonStreamer Component**: Ideal for simple objects and tasks that
-  demand high performance and minimal memory usage. It's particularly
-  effective when processing very large JSON datasets or in scenarios that
-  require streaming JSON in real-time without loading the entire dataset
-  into memory.
+The choice depends on your specific use case. The JsonStreamer component is
+tailored for performance and memory efficiency, whereas the Serializer
+component provides greater flexibility and broader format support.
 
-Choosing between the two depends on your specific use case requirements.
-The JsonStreamer component is tailored to optimize for performance and memory
-efficiency, while the Serializer component offers flexibility and broader
-format support.
-
-Read more about streaming JSON in :doc:`/serializer/streaming_json`.
+Read more about :doc:`streaming JSON </serializer/streaming_json>`.
 
 Serializing to or from PHP Arrays
 ---------------------------------

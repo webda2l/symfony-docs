@@ -1,25 +1,28 @@
 Streaming JSON
 ==============
 
-Symfony is able of encoding PHP data structures to JSON streams and decoding
-JSON streams back into PHP data structures.
+.. versionadded:: 7.3
 
-To do so, it relies on the JsonStreamer component, which is designed for high
-efficiency and can process large JSON data incrementally without needing to
-load the entire content into memory.
+    The JsonStreamer component was introduced in Symfony 7.3 as an
+    :doc:`experimental feature </contributing/code/experimental>`.
 
-.. tip::
+Symfony can encode PHP data structures to JSON streams and decode JSON streams
+back into PHP data structures.
 
-    This component is ideal for handling APIs or interacting with third-party
-    APIs. It transforms incoming JSON request payloads into PHP objects that
-    your application can work with. Similarly, it converts processed PHP
-    objects into a JSON stream for outgoing responses.
+To do so, it relies on the **JsonStreamer** component, which is designed for
+high efficiency and can process large JSON data incrementally without needing
+to load the entire content into memory.
+
+This component is ideal for handling APIs or interacting with third-party APIs.
+It transforms incoming JSON request payloads into PHP objects that your
+application can work with. Similarly, it converts processed PHP objects into a
+JSON stream for outgoing responses.
 
 Installation
 ------------
 
-To install the JsonStreamer component in applications that use
-:ref:`Symfony Flex <symfony-flex>`, run this command:
+In applications using :ref:`Symfony Flex <symfony-flex>`, run this command to
+install the JsonStreamer component:
 
 .. code-block:: terminal
 
@@ -27,17 +30,27 @@ To install the JsonStreamer component in applications that use
 
 .. include:: /components/require_autoload.rst.inc
 
-.. warning::
-
-    The JsonStreamer component is :doc:`experimental </contributing/code/experimental>`
-    and could be changed at any time without prior notice.
-
-Encoding objects
+Encoding Objects
 ----------------
 
-Let's say that we have the following ``Cat`` class::
+JsonStreamer only works with PHP classes that have **no constructor** and are
+composed solely of **public properties**, like `DTO classes`_. Consider the
+following ``Cat`` class::
 
     // src/Dto/Cat.php
+    namespace App\Dto;
+
+    class Cat
+    {
+        public string $name;
+        public string $age;
+    }
+
+To encode ``Cat`` objects into a JSON stream (e.g., to send them in an API
+response), first apply the ``#[JsonStreamable]`` attribute to the class. This
+attribute is optional, but it :ref:`improves performance <json-streamer-streamable-attribute>`
+by pre-generating encoding and decoding files during cache warm-up::
+
     namespace App\Dto;
 
     use Symfony\Component\JsonStreamer\Attribute\JsonStreamable;
@@ -45,20 +58,15 @@ Let's say that we have the following ``Cat`` class::
     #[JsonStreamable]
     class Cat
     {
-        public string $name;
-        public string $age;
+        // ...
     }
 
-.. warning::
+Next, inject the JSON stream writer into your service. The service ``id`` is
+``json_streamer.stream_writer``, but you can also get it by type-hinting a
+``$jsonStreamWriter`` argument with :class:`Symfony\\Component\\JsonStreamer\\StreamWriterInterface`.
 
-    The JsonStreamer only works with PHP classes without constructor and
-    composed by public properties only.
-
-If you want to encode ``Cat`` objects to a JSON stream (e.g. to send them
-via an API response), you can get the ``json_streamer.stream_writer`` service by using
-the :class:`Symfony\\Component\\JsonStreamer\\StreamWriterInterface` parameter type
-with the ``$jsonStreamWriter`` name, and use the :method:`Symfony\\Component\\JsonStreamer\\StreamWriterInterface::write`
-method:
+Use the :method:`Symfony\\Component\\JsonStreamer\\StreamWriterInterface::write`
+method of the service to perform the actual JSON conversion:
 
 .. configuration-block::
 
@@ -107,20 +115,21 @@ method:
 
         // ...
 
-.. note::
+.. tip::
 
     You can explicitly inject the ``json_streamer.stream_writer`` service by
     using the ``#[Target('json_streamer.stream_writer')]`` autowire attribute.
 
-Decoding objects
+Decoding Objects
 ----------------
 
-Besides encoding objects to JSON, you can decode JSON to objects.
+In addition to encoding, you can decode JSON into PHP objects.
 
-To do so, you can get the ``json_streamer.stream_reader`` service by using the
-:class:`Symfony\\Component\\JsonStreamer\\StreamReaderInterface` parameter type
-with the ``$jsonStreamReader`` name, and use the :method:`Symfony\\Component\\JsonStreamer\\StreamReaderInterface::read`
-method:
+To do this, inject the JSON stream reader into your service. The service ``id`` is
+``json_streamer.stream_reader``, but you can also get it by type-hinting a
+``$jsonStreamReader`` argument with :class:`Symfony\\Component\\JsonStreamer\\StreamReaderInterface`.
+Next, use the :method:`Symfony\\Component\\JsonStreamer\\StreamReaderInterface::read`
+method to perform the actual JSON parsing:
 
 .. configuration-block::
 
@@ -237,71 +246,56 @@ method:
             }
         }
 
-.. note::
+.. tip::
 
     You can explicitly inject the ``json_streamer.stream_reader`` service by
     using the ``#[Target('json_streamer.stream_reader')]`` autowire attribute.
 
-The upper code demonstrates two different approaches to decoding JSON data
-using the JsonStreamer:
+The examples above demonstrate two different approaches to decoding JSON data
+using JsonStreamer:
 
 * decoding from a stream (``pickTheTenthCat``)
-* decoding from a string (``listEligibleCatNames``).
+* decoding from a string (``listEligibleCatNames``)
 
-Both methods work with the same JSON data but differ in memory usage and
-speed optimization.
+Both methods handle the same JSON data but differ in memory usage and performance.
+Use streams if optimizing memory usage is more important. Use strings if
+performance is more important.
 
-
-Decoding from a stream
+Decoding from a Stream
 ~~~~~~~~~~~~~~~~~~~~~~
 
 In the ``pickTheTenthCat`` method, the JSON data is read as a stream using
-:phpfunction:`fopen`. Streams are useful when working with large files
-because the data is processed incrementally rather than loading the entire
-file into memory.
+:phpfunction:`fopen`. This is useful for large files, as the data is processed
+incrementally rather than being fully loaded into memory.
 
-To improve memory efficiency, the JsonStreamer creates `ghost objects`_
-instead of fully instantiating objects. Ghosts objects are lightweight
-placeholders that represent the objects but don't fully load their data
-into memory until it's needed. This approach reduces memory usage, especially
-for large datasets.
+To optimize memory usage, JsonStreamer creates `ghost objects`_ instead of
+fully instantiating them. These lightweight placeholders delay object creation
+until the data is actually needed.
 
-* Advantage: Efficient memory usage, suitable for very large JSON files.
-* Disadvantage: Slightly slower than decoding a full string because data is
-  loaded on-demand.
+* Advantage: Efficient memory usage, ideal for very large JSON files.
+* Disadvantage: Slightly slower due to lazy loading.
 
-Decoding from a string
+Decoding from a String
 ~~~~~~~~~~~~~~~~~~~~~~
 
-In the ``listEligibleCatNames`` method, the entire JSON file is read into
-a string using :phpfunction:`file_get_contents`. This string is then passed
-to the decoder, which fully instantiates all the objects in the JSON data
-upfront.
+In the ``listEligibleCatNames`` method, the entire JSON file is read into a
+string using :phpfunction:`file_get_contents`. The decoder then instantiates
+all the objects immediately.
 
-This approach is faster because all the objects are created immediately,
-making subsequent operations on the data quicker. However, it uses more
-memory since the entire file content and all objects are loaded at once.
+This approach is faster because all objects are created immediately, but it
+requires more memory.
 
-* Advantage: Faster processing, suitable for small to medium-sized JSON files.
-* Disadvantage: Higher memory usage, not ideal for large JSON files.
+* Advantage: Faster, ideal for small to medium JSON files.
+* Disadvantage: Higher memory usage, unsuitable for large files.
 
-.. tip::
-
-    Prefer stream decoding when working with large JSON files to conserve
-    memory.
-
-    Prefer string decoding instead when performance is more critical and the
-    JSON file size is manageable.
-
-Enabling PHPDoc reading
+Enabling PHPDoc Reading
 -----------------------
 
-The JsonStreamer component can be able to process advanced PHPDoc type
-definitions, such as generics, and read/generate JSON for complex PHP
-objects.
+The JsonStreamer component can read advanced PHPDoc type definitions (e.g.,
+generics) and process complex PHP objects accordingly.
 
-For example, let's consider this ``Shelter`` class that defines a generic
-``TAnimal`` type, which can be a ``Cat`` or a ``Dog``::
+Consider the ``Shelter`` class that defines a generic ``TAnimal`` type, which
+can be a ``Cat`` or a ``Dog``::
 
     // src/Dto/Shelter.php
     namespace App\Dto;
@@ -320,16 +314,15 @@ For example, let's consider this ``Shelter`` class that defines a generic
         public array $animals;
     }
 
-
-To enable PHPDoc interpretation, run the following command:
+To enable PHPDoc parsing, run:
 
 .. code-block:: terminal
 
     $ composer require phpstan/phpdoc-parser
 
-Then, when encoding/decoding an instance of the ``Shelter`` class, you can
-specify the concrete type information, and the JsonStreamer will deal with the
-correct JSON structure::
+Then, when encoding/decoding a ``Shelter`` instance, you can specify the
+concrete type information, and JsonStreamer will correctly interpret the JSON
+structure::
 
     use App\Dto\Cat;
     use App\Dto\Shelter;
@@ -349,18 +342,17 @@ correct JSON structure::
 
     $catShelter = $jsonStreamReader->read($json, $type); // will be populated with Cat instances
 
-Configuring encoding/decoding
+Configuring Encoding/Decoding
 -----------------------------
 
-While it's not recommended to change to object shape and values during
-encoding and decoding, it is sometimes unavoidable.
+While it's usually best not to alter the shape or values of objects during
+serialization, sometimes it's necessary.
 
-Configuring the encoded name
+Configuring the Encoded Name
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
-It is possible to configure the JSON key associated to a property thanks to
-the :class:`Symfony\\Component\\JsonStreamer\\Attribute\\StreamedName`
-attribute::
+You can configure the JSON key for a property using the
+:class:`Symfony\\Component\\JsonStreamer\\Attribute\\StreamedName` attribute::
 
     // src/Dto/Duck.php
     namespace App\Dto;
@@ -375,7 +367,7 @@ attribute::
         public string $id;
     }
 
-By doing so, the ``Duck::$id`` property will be mapped to the ``@id`` JSON key::
+This maps the ``Duck::$id`` property to the ``@id`` JSON key::
 
     use App\Dto\Duck;
     use Symfony\Component\TypeInfo\Type;
@@ -392,19 +384,20 @@ By doing so, the ``Duck::$id`` property will be mapped to the ``@id`` JSON key::
     //   "@id": "/ducks/daffy"
     // }
 
-Configuring the encoded value
+Configuring the Encoded Value
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
-If you need to manipulate the value related to a property during the encoding
-process, you can use the :class:`Symfony\\Component\\JsonStreamer\\Attribute\\ValueTransformer`
-attribute. Its ``nativeToStream`` property takes a callable, or a :ref:`value transformer service id <json-streamer-transform-with-services>`.
+To transform a property's value during encoding, use the
+:class:`Symfony\\Component\\JsonStreamer\\Attribute\\ValueTransformer`
+attribute. Its ``nativeToStream`` option accepts a callable or a
+:ref:`value transformer service id <json-streamer-transform-with-services>`.
 
-When a callable is specified, it must either be a public static method or
-non-anonymous function with the following signature::
+The callable must be a public static method or non-anonymous function with this
+signature::
 
     $transformer = function (mixed $data, array $options = []): mixed { /* ... */ };
 
-Then, you just have to specify the function identifier in the attribute::
+Then specify it in the attribute::
 
     // src/Dto/Duck.php
     namespace App\Dto;
@@ -427,8 +420,8 @@ Then, you just have to specify the function identifier in the attribute::
         }
     }
 
-For example, by configuring the ``Duck`` class like above, the ``name`` and
-``height`` values will be transformed during encoding::
+The following example transforms the ``name`` and ``height`` properties during
+encoding::
 
     use App\Dto\Duck;
     use Symfony\Component\TypeInfo\Type;
@@ -447,19 +440,20 @@ For example, by configuring the ``Duck`` class like above, the ``name`` and
     //   "height": "50.83cm"
     // }
 
-Configuring the decoded value
+Configuring the Decoded Value
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
-You can as well manipulate the value related to a property during decoding
-using the :class:`Symfony\\Component\\JsonStreamer\\Attribute\\ValueTransformer`
-attribute. Its ``streamToNative`` property can take either a callable or a :ref:`value transformer service id <json-streamer-transform-with-services>`.
+To transform a property's value during decoding, use the
+:class:`Symfony\\Component\\JsonStreamer\\Attribute\\ValueTransformer`
+attribute. Its ``streamToNative`` option accepts a callable or a
+:ref:`value transformer service id <json-streamer-transform-with-services>`.
 
-When a callable is specified, it must either be a public static method or
-a non-anonymous function with the following signature::
+The callable must be a public static method or non-anonymous function with this
+signature::
 
     $valueTransformer = function (mixed $data, array $options = []): mixed { /* ... */ };
 
-You can specify a function identifier in the attribute as follows::
+Then specify it in the attribute::
 
     // src/Dto/Duck.php
     namespace App\Dto;
@@ -487,8 +481,7 @@ You can specify a function identifier in the attribute as follows::
         }
     }
 
-For instance, the above configuration for the ``Duck`` class will transform
-the `name` property from the input JSON during decoding::
+This will extract first and last names from a full name in the input JSON::
 
     use App\Dto\Duck;
     use Symfony\Component\TypeInfo\Type;
@@ -508,13 +501,11 @@ the `name` property from the input JSON during decoding::
 
 .. _json-streamer-transform-with-services:
 
-Transform value using services
-~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+Transforming Value Using Services
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
-When static methods or functions are not enough, you can transform the value
-thanks to a value transformer service.
-
-To do so, create a service implementing the :class:`Symfony\\Component\\JsonStreamer\\ValueTransformer\\ValueTransformerInterface`::
+When callables are not enough, you can use a service implementing the
+:class:`Symfony\\Component\\JsonStreamer\\ValueTransformer\\ValueTransformerInterface`::
 
     // src/Transformer/DogUrlTransformer.php
     namespace App\Transformer;
@@ -547,11 +538,10 @@ To do so, create a service implementing the :class:`Symfony\\Component\\JsonStre
 
 .. note::
 
-    The ``getStreamValueType`` method should return the type of what the value
-    will be in the JSON stream.
+    The ``getStreamValueType()`` method must return the value's type as it will
+    appear in the JSON stream.
 
-And then, configure the :class:`Symfony\\Component\\JsonStreamer\\Attribute\\ValueTransformer`
-attribute to use that service::
+To use this transformer in a class, configure the ``#[ValueTransformer]`` attribute::
 
     // src/Dto/Dog.php
     namespace App\Dto;
@@ -571,18 +561,18 @@ attribute to use that service::
 
 .. tip::
 
-    The value transformers will be intensively called during the
-    decoding and encoding. So be sure to keep them as fast as possible
-    (avoid calling external APIs or the database for example).
+    Value transformers are called frequently during encoding and decoding. Keep
+    them lightweight and avoid calls to external APIs or the database.
 
-Configure keys and values dynamically
-~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+Configuring Keys and Values Dynamically
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
-The JsonStreamer leverages services implementing the :class:`Symfony\\Component\\JsonStreamer\\Mapping\\PropertyMetadataLoaderInterface`
-to determine the shape and values of objects during encoding/decoding.
+JsonStreamer uses services that implement the
+:class:`Symfony\\Component\\JsonStreamer\\Mapping\\PropertyMetadataLoaderInterface`
+to control the shape and values of objects during encoding/decoding.
 
-These services are highly flexible and can be decorated to handle dynamic
-configurations, offering much greater power compared to using attributes::
+These services are highly flexible and can be decorated to support dynamic
+configurations, providing more flexibility than attributes::
 
     namespace App\Streamer\SensitivePropertyMetadataLoader;
 
@@ -644,25 +634,23 @@ configurations, offering much greater power compared to using attributes::
         }
     }
 
-However, this flexibility comes with complexity. Decorating property metadata
-loaders requires a deep understanding of the system.
+Although powerful, this approach introduces complexity. Decorating property
+metadata loaders requires a deep understanding of the internals.
 
-For most use cases, the attributes approach is sufficient, and the dynamic
-capabilities of property metadata loaders should be reserved for scenarios
-where their additional power is genuinely necessary.
+For most use cases, attribute-based configuration is sufficient. Reserve
+dynamic loaders for advanced scenarios.
 
-Marking objects as streamable
+.. _json-streamer-streamable-attribute:
+
+Marking Objects as Streamable
 -----------------------------
 
-The ``JsonStreamable`` attribute is used to mark a class as streamable.
-While this attribute is not mandatory, it is highly recommended because it
-plays a crucial role during the cache warm-up process by generating the
-files necessary for encoding and decoding operations, and thereby improving
-performance.
+The ``JsonStreamable`` attribute marks a class as streamable. While not strictly
+required, it's highly recommended because it enables cache warm-up to pre-generate
+encoding/decoding files, improving performance.
 
-It includes two properties: ``asObject`` and ``asList``. These properties
-define the structure in which the marked class should be prepared during the
-cache warm-up process::
+It includes two optional properties: ``asObject`` and ``asList``, which define
+how the class should be prepared during cache warm-up::
 
     use Symfony\Component\JsonStreamer\Attribute\JsonStreamable;
 
@@ -672,4 +660,5 @@ cache warm-up process::
         // ...
     }
 
+.. _`DTO classes`: https://en.wikipedia.org/wiki/Data_transfer_object
 .. _ghost objects: https://en.wikipedia.org/wiki/Lazy_loading#Ghost
