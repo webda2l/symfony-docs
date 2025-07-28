@@ -575,6 +575,7 @@
 /doctrine/reverse_engineering /doctrine#doctrine-adding-mapping
 /components/serializer /serializer
 /serializer/custom_encoder /serializer/encoders#serializer-custom-encoder
+/components/string /string
 /form/button_based_validation /form/validation_groups
 /form/data_based_validation /form/validation_groups
 /form/validation_group_service_resolver /form/validation_groups
