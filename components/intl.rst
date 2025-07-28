@@ -202,6 +202,16 @@ numeric country codes::
     $exists = Countries::numericCodeExists('250');
     // => true
 
+.. note::
+
+    When the ``SYMFONY_INTL_WITH_USER_ASSIGNED`` environment variable is set,
+    the Symfony Intl component will also recognize user-assigned codes: ``XK``, ``XKK``, and ``983``.
+    This allows applications to handle these codes, which is useful for supporting regions that need to use them.
+
+.. versionadded:: 7.4
+
+    Support for ``SYMFONY_INTL_WITH_USER_ASSIGNED`` was introduced in Symfony 7.4.
+
 Locales
 ~~~~~~~
 
