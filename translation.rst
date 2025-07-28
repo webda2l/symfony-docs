@@ -337,18 +337,24 @@ Templates are now much simpler because you can pass translatable objects to the
     There's also a :ref:`function called t() <reference-twig-function-t>`,
     available both in Twig and PHP, as a shortcut to create translatable objects.
 
-On the contrary, if you want your message to never be translated, you can
-ensure this behavior with the
+Non-Translatable Messages
+~~~~~~~~~~~~~~~~~~~~~~~~~
+
+In some cases, you may want to explicitly prevent a message from being
+translated. You can ensure this behavior by using the
 :class:`Symfony\\Component\\Translation\\StaticMessage` class::
 
     use Symfony\Component\Translation\StaticMessage;
 
     $message = new StaticMessage('This message will never be translated.');
 
+This can be useful when rendering user-defined content or other strings
+that must remain exactly as given.
+
 .. versionadded:: 7.4
 
-    The :class:`Symfony\\Component\\Translation\\StaticMessage` class was introduced in Symfony
-    7.4.
+    The :class:`Symfony\\Component\\Translation\\StaticMessage` class was
+    introduced in Symfony 7.4.
 
 .. _translation-in-templates:
 
