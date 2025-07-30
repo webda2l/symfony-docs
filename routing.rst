@@ -1559,6 +1559,7 @@ This way, the ``product_show`` alias could be deprecated.
         namespace App\Controller;
 
         use Symfony\Component\HttpFoundation\Response;
+        use Symfony\Component\Routing\Attribute\DeprecatedAlias;
         use Symfony\Component\Routing\Attribute\Route;
 
         class ProductController
