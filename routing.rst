@@ -1575,6 +1575,7 @@ This way, the ``product_show`` alias could be deprecated.
         namespace App\Controller;
 
         use Symfony\Component\HttpFoundation\Response;
+        use Symfony\Component\Routing\Attribute\DeprecatedAlias;
         use Symfony\Component\Routing\Attribute\Route;
 
         class ProductController
@@ -1675,6 +1676,10 @@ This way, the ``product_show`` alias could be deprecated.
                 'The "%alias_id%" route alias is deprecated. Please use "product_details" instead.'
             )
         ;
+
+.. versionadded:: 7.3
+
+    The ``DeprecatedAlias`` class for PHP attributes was introduced in Symfony 7.3.
 
 In this example, every time the ``product_show`` alias is used, a deprecation
 warning is triggered, advising you to stop using this route and prefer using ``product_details``.
