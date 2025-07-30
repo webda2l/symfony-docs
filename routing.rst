@@ -1661,6 +1661,10 @@ This way, the ``product_show`` alias could be deprecated.
             )
         ;
 
+.. versionadded:: 7.3
+
+    The ``DeprecatedAlias`` class for PHP attributes was introduced in Symfony 7.3.
+
 In this example, every time the ``product_show`` alias is used, a deprecation
 warning is triggered, advising you to stop using this route and prefer using ``product_details``.
 
