@@ -113,7 +113,7 @@ to use the Symfony Kernel to fetch a service from the dependency injection
 container.
 
 Symfony provides a :class:`Symfony\\Bundle\\FrameworkBundle\\Test\\KernelTestCase`
-class to help you creating and booting the kernel in your tests using
+class to help you create and boot the kernel in your tests using
 ``bootKernel()``::
 
     // tests/Service/NewsletterGeneratorTest.php
