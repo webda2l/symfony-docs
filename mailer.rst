@@ -135,7 +135,7 @@ Service               Install with                                        Webhoo
 
 .. versionadded:: 7.4
 
-    The Microsoft Graph integration was introduced in Symfony 7.4.
+    The Microsoft Graph integration and support for Mailtrap's sandbox environment were introduced in Symfony 7.4.
 
 .. note::
 
@@ -235,7 +235,8 @@ party provider:
 +------------------------+-------------------------------------------------------------------------------------------+
 | `Mailtrap`_            | - SMTP ``mailtrap+smtp://PASSWORD@default``                                               |
 |                        | - HTTP n/a                                                                                |
-|                        | - API ``mailtrap+api://API_TOKEN@default``                                                |
+|                        | - API (Live) ``mailtrap+api://API_TOKEN@default``                                         |
+|                        | - API (Sandbox) ``mailtrap+sandbox://API_TOKEN@default/?inboxId=INBOX_ID``                |
 +------------------------+-------------------------------------------------------------------------------------------+
 | `Microsoft Graph`_     | - SMTP n/a                                                                                |
 |                        | - HTTP n/a                                                                                |
