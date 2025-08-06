@@ -391,6 +391,9 @@ Now, enable it as a PHPUnit extension:
         <!-- ... -->
 
         <extensions>
+            <!-- use this with PHPUnit 10 or newer -->
+            <bootstrap class="DAMA\DoctrineTestBundle\PHPUnit\PHPUnitExtension"/>
+            <!-- use this with legacy PHPUnit versions older than 10 -->
             <extension class="DAMA\DoctrineTestBundle\PHPUnit\PHPUnitExtension"/>
         </extensions>
     </phpunit>
