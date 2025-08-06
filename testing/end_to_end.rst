@@ -872,12 +872,12 @@ Another option is to create a file called ``tests/router.php`` and add the follo
 
     require $script;
 
-Then declare it as a router for Panther server in ``phpunit.xml.dist`` using the
+Then declare it as a router for Panther server in ``phpunit.dist.xml`` using the
 ``PANTHER_WEB_SERVER_ROUTER`` environment variable:
 
 .. code-block:: xml
 
-    <!-- phpunit.xml.dist -->
+    <!-- phpunit.dist.xml -->
     <phpunit>
         <!-- ... -->
         <php>
