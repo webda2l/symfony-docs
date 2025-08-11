@@ -97,28 +97,29 @@ Using a 3rd Party Transport
 Instead of using your own SMTP server or sendmail binary, you can send emails
 via a third-party provider:
 
-===================== =============================================== ===============
-Service               Install with                                    Webhook support
-===================== =============================================== ===============
-`AhaSend`_            ``composer require symfony/aha-send-mailer``    yes
+===================== =================================================== ===============
+Service               Install with                                        Webhook support
+===================== =================================================== ===============
+`AhaSend`_            ``composer require symfony/aha-send-mailer``        yes
 `Amazon SES`_         ``composer require symfony/amazon-mailer``
 `Azure`_              ``composer require symfony/azure-mailer``
-`Brevo`_              ``composer require symfony/brevo-mailer``       yes
+`Brevo`_              ``composer require symfony/brevo-mailer``           yes
 `Infobip`_            ``composer require symfony/infobip-mailer``
-`Mailgun`_            ``composer require symfony/mailgun-mailer``     yes
-`Mailjet`_            ``composer require symfony/mailjet-mailer``     yes
-`Mailomat`_           ``composer require symfony/mailomat-mailer``    yes
+`Mailgun`_            ``composer require symfony/mailgun-mailer``         yes
+`Mailjet`_            ``composer require symfony/mailjet-mailer``         yes
+`Mailomat`_           ``composer require symfony/mailomat-mailer``        yes
 `MailPace`_           ``composer require symfony/mail-pace-mailer``
-`MailerSend`_         ``composer require symfony/mailer-send-mailer`` yes
-`Mailtrap`_           ``composer require symfony/mailtrap-mailer``    yes
-`Mandrill`_           ``composer require symfony/mailchimp-mailer``   yes
+`MailerSend`_         ``composer require symfony/mailer-send-mailer``     yes
+`Mailtrap`_           ``composer require symfony/mailtrap-mailer``        yes
+`Mandrill`_           ``composer require symfony/mailchimp-mailer``       yes
+`Microsoft Graph`_    ``composer require symfony/microsoft-graph-mailer``
 `Postal`_             ``composer require symfony/postal-mailer``
-`Postmark`_           ``composer require symfony/postmark-mailer``    yes
-`Resend`_             ``composer require symfony/resend-mailer``      yes
+`Postmark`_           ``composer require symfony/postmark-mailer``        yes
+`Resend`_             ``composer require symfony/resend-mailer``          yes
 `Scaleway`_           ``composer require symfony/scaleway-mailer``
-`SendGrid`_           ``composer require symfony/sendgrid-mailer``    yes
-`Sweego`_             ``composer require symfony/sweego-mailer``      yes
-===================== =============================================== ===============
+`SendGrid`_           ``composer require symfony/sendgrid-mailer``        yes
+`Sweego`_             ``composer require symfony/sweego-mailer``          yes
+===================== =================================================== ===============
 
 .. versionadded:: 7.1
 
@@ -131,6 +132,10 @@ Service               Install with                                    Webhook su
 .. versionadded:: 7.3
 
     The AhaSend integration was introduced in Symfony 7.3.
+
+.. versionadded:: 7.4
+
+    The Microsoft Graph integration was introduced in Symfony 7.4.
 
 .. note::
 
@@ -177,83 +182,87 @@ transport, but you can force to use one:
 This table shows the full list of available DSN formats for each third
 party provider:
 
-+------------------------+---------------------------------------------------------+
-| Provider               | Formats                                                 |
-+========================+=========================================================+
-| `AhaSend`_             | - API ``ahasend+api://KEY@default``                     |
-|                        | - HTTP n/a                                              |
-|                        | - SMTP ``ahasend+smtp://USERNAME:PASSWORD@default``     |
-+------------------------+---------------------------------------------------------+
-| `Amazon SES`_          | - SMTP ``ses+smtp://USERNAME:PASSWORD@default``         |
-|                        | - HTTP ``ses+https://ACCESS_KEY:SECRET_KEY@default``    |
-|                        | - API ``ses+api://ACCESS_KEY:SECRET_KEY@default``       |
-+------------------------+---------------------------------------------------------+
-| `Azure`_               | - API ``azure+api://ACS_RESOURCE_NAME:KEY@default``     |
-+------------------------+---------------------------------------------------------+
-| `Brevo`_               | - SMTP ``brevo+smtp://USERNAME:PASSWORD@default``       |
-|                        | - HTTP n/a                                              |
-|                        | - API ``brevo+api://KEY@default``                       |
-+------------------------+---------------------------------------------------------+
-| `Google Gmail`_        | - SMTP ``gmail+smtp://USERNAME:APP-PASSWORD@default``   |
-|                        | - HTTP n/a                                              |
-|                        | - API n/a                                               |
-+------------------------+---------------------------------------------------------+
-| `Infobip`_             | - SMTP ``infobip+smtp://KEY@default``                   |
-|                        | - HTTP n/a                                              |
-|                        | - API ``infobip+api://KEY@BASE_URL``                    |
-+------------------------+---------------------------------------------------------+
-| `Mandrill`_            | - SMTP ``mandrill+smtp://USERNAME:PASSWORD@default``    |
-|                        | - HTTP ``mandrill+https://KEY@default``                 |
-|                        | - API ``mandrill+api://KEY@default``                    |
-+------------------------+---------------------------------------------------------+
-| `MailerSend`_          | - SMTP ``mailersend+smtp://KEY@default``                |
-|                        | - HTTP n/a                                              |
-|                        | - API ``mailersend+api://KEY@BASE_URL``                 |
-+------------------------+---------------------------------------------------------+
-| `Mailgun`_             | - SMTP ``mailgun+smtp://USERNAME:PASSWORD@default``     |
-|                        | - HTTP ``mailgun+https://KEY:DOMAIN@default``           |
-|                        | - API ``mailgun+api://KEY:DOMAIN@default``              |
-+------------------------+---------------------------------------------------------+
-| `Mailjet`_             | - SMTP ``mailjet+smtp://ACCESS_KEY:SECRET_KEY@default`` |
-|                        | - HTTP n/a                                              |
-|                        | - API ``mailjet+api://ACCESS_KEY:SECRET_KEY@default``   |
-+------------------------+---------------------------------------------------------+
-| `Mailomat`_            | - SMTP ``mailomat+smtp://USERNAME:PASSWORD@default``    |
-|                        | - HTTP n/a                                              |
-|                        | - API ``mailomat+api://KEY@default``                    |
-+------------------------+---------------------------------------------------------+
-| `MailPace`_            | - SMTP ``mailpace+api://API_TOKEN@default``             |
-|                        | - HTTP n/a                                              |
-|                        | - API ``mailpace+api://API_TOKEN@default``              |
-+------------------------+---------------------------------------------------------+
-| `Mailtrap`_            | - SMTP ``mailtrap+smtp://PASSWORD@default``             |
-|                        | - HTTP n/a                                              |
-|                        | - API ``mailtrap+api://API_TOKEN@default``              |
-+------------------------+---------------------------------------------------------+
-| `Postal`_              | - SMTP n/a                                              |
-|                        | - HTTP n/a                                              |
-|                        | - API ``postal+api://API_KEY@BASE_URL``                 |
-+------------------------+---------------------------------------------------------+
-| `Postmark`_            | - SMTP ``postmark+smtp://ID@default``                   |
-|                        | - HTTP n/a                                              |
-|                        | - API ``postmark+api://KEY@default``                    |
-+------------------------+---------------------------------------------------------+
-| `Resend`_              | - SMTP ``resend+smtp://resend:API_KEY@default``         |
-|                        | - HTTP n/a                                              |
-|                        | - API ``resend+api://API_KEY@default``                  |
-+------------------------+---------------------------------------------------------+
-| `Scaleway`_            | - SMTP ``scaleway+smtp://PROJECT_ID:API_KEY@default``   |
-|                        | - HTTP n/a                                              |
-|                        | - API ``scaleway+api://PROJECT_ID:API_KEY@default``     |
-+------------------------+---------------------------------------------------------+
-| `Sendgrid`_            | - SMTP ``sendgrid+smtp://KEY@default``                  |
-|                        | - HTTP n/a                                              |
-|                        | - API ``sendgrid+api://KEY@default``                    |
-+------------------------+---------------------------------------------------------+
-| `Sweego`_              | - SMTP ``sweego+smtp://LOGIN:PASSWORD@HOST:PORT``       |
-|                        | - HTTP n/a                                              |
-|                        | - API ``sweego+api://API_KEY@default``                  |
-+------------------------+---------------------------------------------------------+
++------------------------+-------------------------------------------------------------------------------------------+
+| Provider               | Formats                                                                                   |
++========================+===========================================================================================+
+| `AhaSend`_             | - API ``ahasend+api://KEY@default``                                                       |
+|                        | - HTTP n/a                                                                                |
+|                        | - SMTP ``ahasend+smtp://USERNAME:PASSWORD@default``                                       |
++------------------------+-------------------------------------------------------------------------------------------+
+| `Amazon SES`_          | - SMTP ``ses+smtp://USERNAME:PASSWORD@default``                                           |
+|                        | - HTTP ``ses+https://ACCESS_KEY:SECRET_KEY@default``                                      |
+|                        | - API ``ses+api://ACCESS_KEY:SECRET_KEY@default``                                         |
++------------------------+-------------------------------------------------------------------------------------------+
+| `Azure`_               | - API ``azure+api://ACS_RESOURCE_NAME:KEY@default``                                       |
++------------------------+-------------------------------------------------------------------------------------------+
+| `Brevo`_               | - SMTP ``brevo+smtp://USERNAME:PASSWORD@default``                                         |
+|                        | - HTTP n/a                                                                                |
+|                        | - API ``brevo+api://KEY@default``                                                         |
++------------------------+-------------------------------------------------------------------------------------------+
+| `Google Gmail`_        | - SMTP ``gmail+smtp://USERNAME:APP-PASSWORD@default``                                     |
+|                        | - HTTP n/a                                                                                |
+|                        | - API n/a                                                                                 |
++------------------------+-------------------------------------------------------------------------------------------+
+| `Infobip`_             | - SMTP ``infobip+smtp://KEY@default``                                                     |
+|                        | - HTTP n/a                                                                                |
+|                        | - API ``infobip+api://KEY@BASE_URL``                                                      |
++------------------------+-------------------------------------------------------------------------------------------+
+| `Mandrill`_            | - SMTP ``mandrill+smtp://USERNAME:PASSWORD@default``                                      |
+|                        | - HTTP ``mandrill+https://KEY@default``                                                   |
+|                        | - API ``mandrill+api://KEY@default``                                                      |
++------------------------+-------------------------------------------------------------------------------------------+
+| `MailerSend`_          | - SMTP ``mailersend+smtp://KEY@default``                                                  |
+|                        | - HTTP n/a                                                                                |
+|                        | - API ``mailersend+api://KEY@BASE_URL``                                                   |
++------------------------+-------------------------------------------------------------------------------------------+
+| `Mailgun`_             | - SMTP ``mailgun+smtp://USERNAME:PASSWORD@default``                                       |
+|                        | - HTTP ``mailgun+https://KEY:DOMAIN@default``                                             |
+|                        | - API ``mailgun+api://KEY:DOMAIN@default``                                                |
++------------------------+-------------------------------------------------------------------------------------------+
+| `Mailjet`_             | - SMTP ``mailjet+smtp://ACCESS_KEY:SECRET_KEY@default``                                   |
+|                        | - HTTP n/a                                                                                |
+|                        | - API ``mailjet+api://ACCESS_KEY:SECRET_KEY@default``                                     |
++------------------------+-------------------------------------------------------------------------------------------+
+| `Mailomat`_            | - SMTP ``mailomat+smtp://USERNAME:PASSWORD@default``                                      |
+|                        | - HTTP n/a                                                                                |
+|                        | - API ``mailomat+api://KEY@default``                                                      |
++------------------------+-------------------------------------------------------------------------------------------+
+| `MailPace`_            | - SMTP ``mailpace+api://API_TOKEN@default``                                               |
+|                        | - HTTP n/a                                                                                |
+|                        | - API ``mailpace+api://API_TOKEN@default``                                                |
++------------------------+-------------------------------------------------------------------------------------------+
+| `Mailtrap`_            | - SMTP ``mailtrap+smtp://PASSWORD@default``                                               |
+|                        | - HTTP n/a                                                                                |
+|                        | - API ``mailtrap+api://API_TOKEN@default``                                                |
++------------------------+-------------------------------------------------------------------------------------------+
+| `Microsoft Graph`_     | - SMTP n/a                                                                                |
+|                        | - HTTP n/a                                                                                |
+|                        | - API ``microsoftgraph+api://CLIENT_APP_ID:CLIENT_APP_SECRET@default?tenantId=TENANT_ID`` |
++------------------------+-------------------------------------------------------------------------------------------+
+| `Postal`_              | - SMTP n/a                                                                                |
+|                        | - HTTP n/a                                                                                |
+|                        | - API ``postal+api://API_KEY@BASE_URL``                                                   |
++------------------------+-------------------------------------------------------------------------------------------+
+| `Postmark`_            | - SMTP ``postmark+smtp://ID@default``                                                     |
+|                        | - HTTP n/a                                                                                |
+|                        | - API ``postmark+api://KEY@default``                                                      |
++------------------------+-------------------------------------------------------------------------------------------+
+| `Resend`_              | - SMTP ``resend+smtp://resend:API_KEY@default``                                           |
+|                        | - HTTP n/a                                                                                |
+|                        | - API ``resend+api://API_KEY@default``                                                    |
++------------------------+-------------------------------------------------------------------------------------------+
+| `Scaleway`_            | - SMTP ``scaleway+smtp://PROJECT_ID:API_KEY@default``                                     |
+|                        | - HTTP n/a                                                                                |
+|                        | - API ``scaleway+api://PROJECT_ID:API_KEY@default``                                       |
++------------------------+-------------------------------------------------------------------------------------------+
+| `Sendgrid`_            | - SMTP ``sendgrid+smtp://KEY@default``                                                    |
+|                        | - HTTP n/a                                                                                |
+|                        | - API ``sendgrid+api://KEY@default``                                                      |
++------------------------+-------------------------------------------------------------------------------------------+
+| `Sweego`_              | - SMTP ``sweego+smtp://LOGIN:PASSWORD@HOST:PORT``                                         |
+|                        | - HTTP n/a                                                                                |
+|                        | - API ``sweego+api://API_KEY@default``                                                    |
++------------------------+-------------------------------------------------------------------------------------------+
 
 .. warning::
 
@@ -2289,6 +2298,7 @@ the :class:`Symfony\\Bundle\\FrameworkBundle\\Test\\MailerAssertionsTrait`::
 .. _`Markdown syntax`: https://commonmark.org/
 .. _`Mailomat`: https://github.com/symfony/symfony/blob/{version}/src/Symfony/Component/Mailer/Bridge/Mailomat/README.md
 .. _`MailPace`: https://github.com/symfony/symfony/blob/{version}/src/Symfony/Component/Mailer/Bridge/MailPace/README.md
+.. _`Microsoft Graph`: https://github.com/symfony/symfony/blob/{version}/src/Symfony/Component/Mailer/Bridge/MicrosoftGraph/README.md
 .. _`OpenSSL PHP extension`: https://www.php.net/manual/en/book.openssl.php
 .. _`PEM encoded`: https://en.wikipedia.org/wiki/Privacy-Enhanced_Mail
 .. _`Postal`: https://github.com/symfony/symfony/blob/{version}/src/Symfony/Component/Mailer/Bridge/Postal/README.md
