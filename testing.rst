@@ -55,16 +55,16 @@ This command automatically runs your application tests. Each test is a
 PHP class ending with "Test" (e.g. ``BlogControllerTest``) that lives in
 the ``tests/`` directory of your application.
 
-PHPUnit is configured by the ``phpunit.xml.dist`` file in the root of your
-application. The default configuration provided by Symfony Flex will be
-enough in most cases. Read the `PHPUnit documentation`_ to discover all
-possible configuration options (e.g. to enable code coverage or to split
-your test into multiple "test suites").
+PHPUnit is configured by the ``phpunit.dist.xml`` file in the root of your
+application (in PHPUnit versions older than 10, the file is named ``phpunit.xml.dist``).
+The default configuration provided by Symfony Flex will be enough in most cases.
+Read the `PHPUnit documentation`_ to discover all possible configuration options
+(e.g. to enable code coverage or to split your test into multiple "test suites").
 
 .. note::
 
     :ref:`Symfony Flex <symfony-flex>` automatically creates
-    ``phpunit.xml.dist`` and ``tests/bootstrap.php``. If these files are
+    ``phpunit.dist.xml`` and ``tests/bootstrap.php``. If these files are
     missing, you can try running the recipe again using
     ``composer recipes:install phpunit/phpunit --force -v``.
 
@@ -81,7 +81,7 @@ By convention, the ``tests/`` directory should replicate the directory
 of your application for unit tests. So, if you're testing a class in the
 ``src/Form/`` directory, put the test in the ``tests/Form/`` directory.
 Autoloading is automatically enabled via the ``vendor/autoload.php`` file
-(as configured by default in the ``phpunit.xml.dist`` file).
+(as configured by default in the ``phpunit.dist.xml`` file).
 
 You can run tests using the ``bin/phpunit`` command:
 
@@ -386,7 +386,7 @@ Now, enable it as a PHPUnit extension:
 
 .. code-block:: xml
 
-    <!-- phpunit.xml.dist -->
+    <!-- phpunit.dist.xml -->
     <phpunit>
         <!-- ... -->
 
