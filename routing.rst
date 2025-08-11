@@ -282,10 +282,10 @@ given value:
     .. code-block:: yaml
 
         # config/routes.yaml
-        tools:
-            path:       /tools
-            controller: App\Controller\DefaultController::developerTools
-            env:        dev
+        when@dev:
+            tools:
+                path: /tools
+                controller: App\Controller\DefaultController::developerTools
 
     .. code-block:: xml
 
@@ -296,9 +296,9 @@ given value:
             xsi:schemaLocation="http://symfony.com/schema/routing
                 https://symfony.com/schema/routing/routing-1.0.xsd">
 
-            <route id="tools" path="/tools" controller="App\Controller\DefaultController::developerTools">
-                <env>dev</env>
-            </route>
+            <when env="dev">
+                <route id="tools" path="/tools" controller="App\Controller\DefaultController::developerTools"/>
+            </when>
         </routes>
 
     .. code-block:: php
@@ -308,10 +308,11 @@ given value:
         use Symfony\Component\Routing\Loader\Configurator\RoutingConfigurator;
 
         return function (RoutingConfigurator $routes): void {
-            $routes->add('tools', '/tools')
-                ->controller([DefaultController::class, 'developerTools'])
-                ->env('dev')
-            ;
+            if('dev' === $routes->env()) {
+                $routes->add('tools', '/tools')
+                    ->controller([DefaultController::class, 'developerTools'])
+                ;
+            }
         };
 
 .. _routing-matching-expressions:
