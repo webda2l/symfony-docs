@@ -541,6 +541,16 @@ When callables are not enough, you can use a service implementing the
     The ``getStreamValueType()`` method must return the value's type as it will
     appear in the JSON stream.
 
+.. tip::
+
+    The ``$options`` argument of the ``transform()`` method includes a special
+    option called ``_current_object`` which gives access to the object holding
+    the current property (or ``null`` if there's none).
+
+    .. versionadded:: 7.4
+
+        The ``_current_object`` option was introduced in Symfony 7.4.
+
 To use this transformer in a class, configure the ``#[ValueTransformer]`` attribute::
 
     // src/Dto/Dog.php
