@@ -185,15 +185,17 @@ party provider:
 +------------------------+-------------------------------------------------------------------------------------------+
 | Provider               | Formats                                                                                   |
 +========================+===========================================================================================+
-| `AhaSend`_             | - API ``ahasend+api://KEY@default``                                                       |
+| `AhaSend`_             | - SMTP ``ahasend+smtp://USERNAME:PASSWORD@default``                                       |
 |                        | - HTTP n/a                                                                                |
-|                        | - SMTP ``ahasend+smtp://USERNAME:PASSWORD@default``                                       |
+|                        | - API ``ahasend+api://KEY@default``                                                       |
 +------------------------+-------------------------------------------------------------------------------------------+
 | `Amazon SES`_          | - SMTP ``ses+smtp://USERNAME:PASSWORD@default``                                           |
 |                        | - HTTP ``ses+https://ACCESS_KEY:SECRET_KEY@default``                                      |
 |                        | - API ``ses+api://ACCESS_KEY:SECRET_KEY@default``                                         |
 +------------------------+-------------------------------------------------------------------------------------------+
-| `Azure`_               | - API ``azure+api://ACS_RESOURCE_NAME:KEY@default``                                       |
+| `Azure`_               | - SMTP n/a                                                                                |
+|                        | - HTTP n/a                                                                                |
+|                        | - API ``azure+api://ACS_RESOURCE_NAME:KEY@default``                                       |
 +------------------------+-------------------------------------------------------------------------------------------+
 | `Brevo`_               | - SMTP ``brevo+smtp://USERNAME:PASSWORD@default``                                         |
 |                        | - HTTP n/a                                                                                |
