@@ -274,6 +274,13 @@ given value:
             {
                 // ...
             }
+
+            // You can also pass an array of environments
+            #[Route('/tools', name: 'tools', env: ['dev', 'test'])]
+            public function developerTools(): Response
+            {
+                // ...
+            }
         }
 
     .. code-block:: yaml
@@ -311,6 +318,10 @@ given value:
                 ;
             }
         };
+
+.. versionadded:: 7.4
+
+    The ability to pass an array of environments to the ``env`` argument was introduced in Symfony 7.4.
 
 .. _routing-matching-expressions:
 
