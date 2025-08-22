@@ -147,12 +147,13 @@ If you can't use PHP attributes, register the command as a service and
 :ref:`default services.yaml configuration <service-container-services-load-example>`,
 this is already done for you, thanks to :ref:`autoconfiguration <services-autoconfigure>`.
 
-You can also use ``#[AsCommand]`` to add a description and longer help text for the command::
+You can also use ``#[AsCommand]`` to add a description, usages, and longer help text for the command::
 
     #[AsCommand(
         name: 'app:create-user',
         description: 'Creates a new user.', // the command description shown when running "php bin/console list"
         help: 'This command allows you to create a user...', // the command help shown when running the command with the "--help" option
+        usages: ['app:create-user alice'],
     )]
     class CreateUserCommand
     {
@@ -161,6 +162,10 @@ You can also use ``#[AsCommand]`` to add a description and longer help text for 
             // ...
         }
     }
+
+.. versionadded:: 7.4
+
+    The ability to add usages via a ``$usages`` property was introduced in Symfony 7.4.
 
 Additionally, you can extend the :class:`Symfony\\Component\\Console\\Command\\Command` class to
 leverage advanced features like lifecycle hooks (e.g. :method:`Symfony\\Component\\Console\\Command\\Command::initialize` and
