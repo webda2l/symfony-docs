@@ -125,11 +125,11 @@ You should see your ``app_lucky_number`` route in the list:
 
 .. code-block:: terminal
 
-    ----------------  -------  -------  -----  --------------
-    Name              Method   Scheme   Host   Path
-    ----------------  -------  -------  -----  --------------
-    app_lucky_number  ANY      ANY      ANY    /lucky/number
-    ----------------  -------  -------  -----  --------------
+    ----------------  -------  --------------
+    Name              Method   Path
+    ----------------  -------  --------------
+    app_lucky_number  ANY      /lucky/number
+    ----------------  -------  --------------
 
 You will also see debugging routes besides ``app_lucky_number`` -- more on
 the debugging routes in the next section.
