@@ -3,8 +3,7 @@ Streaming JSON
 
 .. versionadded:: 7.3
 
-    The JsonStreamer component was introduced in Symfony 7.3 as an
-    :doc:`experimental feature </contributing/code/experimental>`.
+    The JsonStreamer component was introduced in Symfony 7.3.
 
 Symfony can encode PHP data structures to JSON streams and decode JSON streams
 back into PHP data structures.
