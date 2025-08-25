@@ -3,8 +3,7 @@ The JsonPath Component
 
 .. versionadded:: 7.3
 
-    The JsonPath component was introduced in Symfony 7.3 as an
-    :doc:`experimental feature </contributing/code/experimental>`.
+    The JsonPath component was introduced in Symfony 7.3.
 
 The JsonPath component lets you query and extract data from JSON structures.
 It implements the `RFC 9535 – JSONPath`_ standard, allowing you to navigate
