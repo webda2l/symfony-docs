@@ -302,15 +302,22 @@ Using Options
 ~~~~~~~~~~~~~
 
 Some behavior of the Runtimes can be modified through runtime options. They
-can be set using the ``APP_RUNTIME_OPTIONS`` environment variable::
+can be set using the ``APP_RUNTIME_OPTIONS`` environment variable as an array
+or a JSON encoded value::
 
     $_SERVER['APP_RUNTIME_OPTIONS'] = [
         'project_dir' => '/var/task',
     ];
+    // Which is the same than
+    // $_SERVER['APP_RUNTIME_OPTIONS'] = '{"project_dir":"\/var\/task"}';
 
     require_once dirname(__DIR__).'/vendor/autoload_runtime.php';
 
     // ...
+
+.. versionadded:: 7.4
+
+    The support for JSON encoded APP_RUNTIME_OPTIONS value was introduced in Symfony 7.4.
 
 You can also configure ``extra.runtime`` in ``composer.json``:
 
