@@ -125,7 +125,7 @@ There are also some specialized constructors::
 
     // ByteString can create a random string of the given length
     $foo = ByteString::fromRandom(12);
-    // by default, random strings use A-Za-z0-9 characters; you can restrict
+    // by default, random strings use base58 characters; you can set
     // the characters to use with the second optional argument
     $foo = ByteString::fromRandom(6, 'AEIOU0123456789');
     $foo = ByteString::fromRandom(10, 'qwertyuiop');
