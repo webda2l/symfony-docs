@@ -3040,7 +3040,7 @@ If not set, ``php.ini``'s `session.cookie_path`_ directive will be relied on.
 cookie_samesite
 ...............
 
-**type**: ``string`` or ``null`` **default**: ``null``
+**type**: ``string`` or ``null`` **default**: ``'lax'``
 
 It controls the way cookies are sent when the HTTP request did not originate
 from the same domain that is associated with the cookies. Setting this option is
