@@ -487,19 +487,22 @@ evaluates them:
 
     $ php bin/console debug:router
 
-    ----------------  -------  -------  -----  --------------------------------------------
-    Name              Method   Scheme   Host   Path
-    ----------------  -------  -------  -----  --------------------------------------------
-    homepage          ANY      ANY      ANY    /
-    contact           GET      ANY      ANY    /contact
-    contact_process   POST     ANY      ANY    /contact
-    article_show      ANY      ANY      ANY    /articles/{_locale}/{year}/{title}.{_format}
-    blog              ANY      ANY      ANY    /blog/{page}
-    blog_show         ANY      ANY      ANY    /blog/{slug}
-    ----------------  -------  -------  -----  --------------------------------------------
+    ----------------  -------  --------------------------------------------
+    Name              Method   Path
+    ----------------  -------  --------------------------------------------
+    homepage          ANY      /
+    contact           GET      /contact
+    contact_process   POST     /contact
+    article_show      ANY      /articles/{_locale}/{year}/{title}.{_format}
+    blog              ANY      /blog/{page}
+    blog_show         ANY      /blog/{slug}
+    ----------------  -------  --------------------------------------------
 
     # pass this option to also display all the defined route aliases
     $ php bin/console debug:router --show-aliases
+
+    # pass this option to also display the associated controllers with the routes
+    $ php bin/console debug:router --show-controllers
 
     # pass this option to only display routes that match the given HTTP method
     # (you can use the special value ANY to see routes that match any method)
@@ -509,6 +512,24 @@ evaluates them:
 .. versionadded:: 7.3
 
     The ``--method`` option was introduced in Symfony 7.3.
+
+.. versionadded:: 7.4
+
+    For sites that don't have routes with schemes or hosts defined those columns are
+    hidden. They will be displayed if some routes configure the schema or host properties
+    of the route
+
+    .. code-block:: terminal
+
+        $ php bin/console debug:router
+
+        ------------  -------  -------  ---------  ---------
+        Name          Method   Scheme   Host       Path
+        ------------  -------  -------  ---------  ---------
+        homepage      ANY      http     ANY        /homapage
+        contact       GET      https    ANY        /contact
+        contact_post  POST     ANY      localhost  /contact
+        ------------  -------  -------  ---------  ---------
 
 Pass the name (or part of the name) of some route to this argument to print the
 route details:
