@@ -165,7 +165,7 @@ Use the following command to find the right service:
 
 .. code-block:: terminal
 
-    $ php bin/console console debug:container entrypoint_lookup
+    $ php bin/console debug:container entrypoint_lookup
 
     # You will see a result similar to this:
     Select one of the following services to display its information:
