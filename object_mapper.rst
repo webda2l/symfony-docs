@@ -431,8 +431,9 @@ And the related target object must define the ``createFromLegacy()`` method::
 Mapping Collections
 -------------------
 
-By default, ObjectMapper does not map arrays or traversable collections.
-To map each item in a collection (such as an array of DTOs to an array of entities), you **must** use the `MapCollection` transformer explicitly:
+By default, ObjectMapper does not map arrays or traversable collections. To map
+each item in a collection (for example, mapping an array of DTOs to an array of
+entities), you **must** explicitly use the ``MapCollection`` transformer:
 
 Example::
 
@@ -446,13 +447,13 @@ Example::
         public array $products;
     }
 
-This configuration tells ObjectMapper to map each item in the `products` array using the usual mapping rules.
-
-If you do not add `transform: new MapCollection()`, the array will be mapped as-is.
+With this configuration, ObjectMapper maps each item in the ``products`` array
+according to the usual mapping rules. Without ``transform: new MapCollection()``,
+the array is left unchanged.
 
 .. versionadded:: 7.4
 
-    The MapCollection component was introduced in Symfony 7.4.
+    The ``MapCollection`` transformer was introduced in Symfony 7.4.
 
 Mapping Multiple Targets
 ------------------------
