@@ -2543,6 +2543,29 @@ You can also extend the ``IsGranted`` attribute to create meaningful shortcuts::
     The :class:`Symfony\\Component\\Security\\Http\\Attribute\\IsGranted`
     attribute is extendable since Symfony 7.4.
 
+You can restrict access validation to specific HTTP methods
+by using the ``methods`` argument::
+
+    // src/Controller/AdminController.php
+    // ...
+
+    use Symfony\Component\Security\Http\Attribute\IsGranted;
+
+    #[IsGranted('ROLE_ADMIN', methods: 'POST')]
+    class AdminController extends AbstractController
+    {
+        // You can also specify an array of methods
+        #[IsGranted('ROLE_SUPER_ADMIN', methods: ['GET', 'PUT'])]
+        public function adminDashboard(): Response
+        {
+            // ...
+        }
+    }
+
+.. versionadded:: 7.4
+
+    The ``methods`` argument was introduced in Symfony 7.4.
+
 .. _security-template:
 
 Access Control in Templates
