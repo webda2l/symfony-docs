@@ -580,8 +580,9 @@ The ``.symfony.local.yaml`` file provides advanced configuration options:
         p12: path/to/custom-cert.p12
         # toggle GZIP compression
         use_gzip: true
-        # run the server in the background
-        daemon: true
+
+    # run the server in the background
+    daemon: true
 
 .. warning::
 
