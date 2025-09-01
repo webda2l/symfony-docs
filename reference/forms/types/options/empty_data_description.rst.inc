@@ -12,8 +12,8 @@ when no value is selected, you can do it like this::
     ]);
 
 This will still render an empty text box, but upon submission the ``John Doe``
-value will be set. Use the ``data`` or ``placeholder`` options to show this
-initial value in the rendered form.
+value will be set. Use the ``data`` option or the ``placeholder`` key of the
+``attr`` option to show this initial value in the rendered form.
 
 .. note::
 
