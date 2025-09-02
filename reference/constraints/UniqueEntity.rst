@@ -402,4 +402,10 @@ blank, ``findBy()`` will be used. The method receives as its argument a
 fields configured in the ``fields`` option). The method should return a
 :phpfunction:`countable PHP variable <is_countable>`.
 
+.. note::
+
+    For ``binary`` and ``blob`` fields, instead of comparing large files directly,
+    consider storing and comparing a hash (e.g., MD5) of the content in your
+    custom ``repositoryMethod``.
+
 .. _`race conditions`: https://en.wikipedia.org/wiki/Race_condition
