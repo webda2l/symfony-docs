@@ -544,8 +544,7 @@ command with the ``--all`` option:
     The ``--all`` option was introduced in Symfony 7.1.
 
 When using ``--all``, you can exclude specific receivers using the ``--exclude-receivers``
-option (shortcut ``-eq``). This is useful when you want to consume from all receivers
-except certain ones (e.g., the failed transport):
+option (shortcut ``-eq``):
 
 .. code-block:: terminal
 
