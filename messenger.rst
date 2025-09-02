@@ -543,6 +543,23 @@ command with the ``--all`` option:
 
     The ``--all`` option was introduced in Symfony 7.1.
 
+When using ``--all``, you can exclude specific receivers using the ``--exclude-receivers``
+option (shortcut ``-eq``). This is useful when you want to consume from all receivers
+except certain ones (e.g., the failed transport):
+
+.. code-block:: terminal
+
+    $ php bin/console messenger:consume --all --exclude-receivers=async_priority_low --exclude-receivers=failed
+
+.. versionadded:: 7.4
+
+    The ``--exclude-receivers`` option was introduced in Symfony 7.4.
+
+.. note::
+
+    The ``--exclude-receivers`` option can only be used together with ``--all``.
+    Also, you cannot exclude all receivers.
+
 Messages that take a long time to process may be redelivered prematurely because
 some transports assume that an unacknowledged message is lost. To prevent this
 issue, use the ``--keepalive`` command option to specify an interval (in seconds;
