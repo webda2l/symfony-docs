@@ -545,8 +545,8 @@ from the command line, you need to set the inputs that the command expects::
         // additional input saying "yes" will work
         $commandTester->setInputs(['yes']);
 
-        // Answers to multiline questions need to be suffixed by
-        // an end-of-transmission control character
+        // \x04 is the End of Transmission (EOT) control character,
+        // required to mark the end of input when the answer contains \n characters
         $commandTester->setInputs([<<<INPUT
             First line
             Second line
