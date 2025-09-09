@@ -545,6 +545,14 @@ from the command line, you need to set the inputs that the command expects::
         // additional input saying "yes" will work
         $commandTester->setInputs(['yes']);
 
+        // Answers to multiline questions need to be suffixed by
+        // an end-of-transmission control character
+        $commandTester->setInputs([<<<INPUT
+            First line
+            Second line
+            \x04
+            INPUT]);
+
         $commandTester->execute(['command' => $command->getName()]);
 
         // $this->assertRegExp('/.../', $commandTester->getDisplay());
