@@ -543,6 +543,14 @@ from the command line, you need to set the inputs that the command expects::
         // additional input saying "yes" will work
         $commandTester->setInputs(['yes']);
 
+        // \x04 is the End of Transmission (EOT) control character,
+        // required to mark the end of input when the answer contains \n characters
+        $commandTester->setInputs([<<<INPUT
+            First line
+            Second line
+            \x04
+            INPUT]);
+
         $commandTester->execute(['command' => $command->getName()]);
 
         // $this->assertRegExp('/.../', $commandTester->getDisplay());
