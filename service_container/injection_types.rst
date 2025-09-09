@@ -1,9 +1,9 @@
 Types of Injection
 ==================
 
-Making a class's dependencies explicit and requiring that they must be injected
-into it is a good way of making a class more reusable, testable and decoupled
-from other parts of the code.
+Making a class's dependencies explicit and requiring that they are injected
+into it is a good way to make a class more reusable, testable, and decoupled
+from the rest of the code.
 
 There are several ways that the dependencies can be injected. Each injection
 point has advantages and disadvantages to consider, as well as different
