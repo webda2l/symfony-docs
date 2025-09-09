@@ -311,6 +311,43 @@ to catching the exception, you can also check if a given currency code is valid:
 
     $isValidCurrency = Currencies::exists($currencyCode);
 
+If the currencies need to be filtered, there are also helpers to query and
+validate currencies in relation to countries. These methods use ICU metadata
+(``tender``, ``from`` and ``to`` dates) to determine whether a currency is
+`legal tender`_ and/or active at a given point in time::
+
+    use Symfony\Component\Intl\Currencies;
+
+    // Get the list of legal and active currencies for a country (defaults to "today")
+    $codes = Currencies::forCountry('FR');
+    // ['EUR']
+
+    // Include non-legal currencies too, and check them at a given date
+    $codesAll = Currencies::forCountry(
+        'ES',
+        legalTender: null,
+        active: true,
+        date: new \DateTimeImmutable('1982-01-01')
+    );
+    // ['ESP', 'ESB']
+
+    // Validate a currency for a given country
+    $isOk = Currencies::isValidInCountry('CH', 'CHF');
+    // true
+
+    // Check if a currency is valid in *any* country on a specific date
+    $isGlobal = Currencies::isValidInAnyCountry(
+        'USD',
+        legalTender: true,
+        active: true,
+        date: new \DateTimeImmutable('2005-01-01')
+    );
+    // true
+
+Note that some currencies (especially non-legal-tender ones) do not have validity ranges defined.
+In such cases, a ``RuntimeException`` will be thrown.
+In addition, an ``InvalidArgumentException`` will be thrown if the specified currency is invalid.
+
 .. _component-intl-timezones:
 
 Timezones
@@ -429,6 +466,7 @@ Learn more
 .. _`ISO 3166-1 alpha-2`: https://en.wikipedia.org/wiki/ISO_3166-1_alpha-2
 .. _`ISO 3166-1 alpha-3`: https://en.wikipedia.org/wiki/ISO_3166-1_alpha-3
 .. _`ISO 3166-1 numeric`: https://en.wikipedia.org/wiki/ISO_3166-1_numeric
+.. _`legal tender`: https://en.wikipedia.org/wiki/Legal_tender
 .. _`UTC/GMT time offsets`: https://en.wikipedia.org/wiki/List_of_UTC_time_offsets
 .. _`daylight saving time (DST)`: https://en.wikipedia.org/wiki/Daylight_saving_time
 .. _`ISO 639-1 alpha-2`: https://en.wikipedia.org/wiki/ISO_639-1
