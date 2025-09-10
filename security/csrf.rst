@@ -321,6 +321,27 @@ array, the attribute is ignored for that request, and no CSRF validation occurs:
         // ... delete the object
     }
 
+You can also choose where the CSRF token is read from using the ``tokenSource`` parameter
+This is a bitfield allowing you to combine these sources:
+
+* ``IsCsrfTokenValid::SOURCE_PAYLOAD`` (default): request payload (POST body / json)
+* ``IsCsrfTokenValid::SOURCE_QUERY``: query string
+* ``IsCsrfTokenValid::SOURCE_HEADER``: request headers
+
+Example::
+
+    #[IsCsrfTokenValid(
+        'delete-item',
+        tokenKey: 'token',
+        tokenSource: IsCsrfTokenValid::SOURCE_PAYLOAD | IsCsrfTokenValid::SOURCE_QUERY
+    )]
+    public function delete(Post $post): Response
+    {
+        // ... delete the object
+    }
+
+The token will be checked in each selected source, and validation fails if none match.
+
 .. versionadded:: 7.1
 
     The :class:`Symfony\\Component\\Security\\Http\\Attribute\\IsCsrfTokenValid`
@@ -329,6 +350,10 @@ array, the attribute is ignored for that request, and no CSRF validation occurs:
 .. versionadded:: 7.3
 
     The ``methods`` parameter was introduced in Symfony 7.3.
+
+.. versionadded:: 7.4
+
+    The ``tokenSource`` parameter was introduced in Symfony 7.4.
 
 CSRF Tokens and Compression Side-Channel Attacks
 ------------------------------------------------
